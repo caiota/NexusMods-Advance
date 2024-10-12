@@ -21,3 +21,7 @@
 
 ![image](https://github.com/user-attachments/assets/903e8bef-8474-4f9c-ad45-0765f065aa96)
 
+
+# [Donate with Paypal](https://www.paypal.com/donate/?hosted_button_id=ZCJ7S9ZK42ZS2) 
+- thank you!
+
