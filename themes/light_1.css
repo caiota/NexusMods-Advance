@@ -1,0 +1,182 @@
+body {
+    background-color:#ffddfb!important;
+    color:#471d3d!important
+    }
+    
+    a {
+    color:#cf164e!important
+    }
+    
+    #title3 {
+    color:#022749!important
+    }
+    
+    #creds {
+    color:#000!important
+    }
+    
+    .tabItem {
+    background-color:#ff659e!important;
+    color:#ffffe0;
+    display:inline;
+    font-weight:bolder
+    }
+    
+    #selected {
+    background-color:#d50351!important
+    }
+    
+    .updated {
+    background-color:#e445b4;
+    border:2px solid #e445b4
+    }
+    
+    .updated:hover {
+    background-color:#ac3692;
+    border:2px solid #ac3692
+    }
+    
+    .outdated {
+    background-color:#be6614!important;
+    border:2px solid #be6614!important
+    }
+    
+    .outdated:hover {
+    background-color:#c23f03!important;
+    border:2px solid #c23f03!important
+    }
+    
+    .oldFile {
+    background-color:#d81b1b!important;
+    border:2px solid #d81b1b!important
+    }
+    
+    label #msgPopup {
+    background-color:#d1176d!important;
+    color:#fff
+    }
+    
+    #loadTimeout,.message {
+    background:#d1176d
+    }
+    
+    #timeoutPanel {
+    color:#faebd7!important
+    }
+    
+    #userName {
+    color:red;
+    font-weight:bolder;
+    text-wrap:wrap;
+    word-wrap:break-word
+    }
+    
+    .Premium {
+    -webkit-animation:flicker 1s infinite alternate;
+            animation:flicker 1s infinite alternate;
+    color:#813706!important;
+    font-size:15px
+    }
+    
+    select {
+    background-color:#ff659e!important;
+    border:1px solid #d4119a!important;
+    color:#fff!important
+    }
+    
+    option {
+    background-color:#d50351!important;
+    color:#fff
+    }
+    
+    .custom-checkbox {
+    background-color:#cf164e!important
+    }
+    
+    input[type="checkbox"]:checked + .custom-checkbox {
+    background-color:#ff1aae!important
+    }
+    
+    #modViewDiv {
+    background-color:#febdff!important;
+    border:6px solid #ff90ec!important
+    }
+    
+    #NotifyMessage {
+    background-color:#ff23b1!important;
+    color:#fff
+    }
+    
+    #moreOptions {
+    background-color:#b953b4
+    }
+    
+    #moreOptions>span:hover {
+    background-color:#eb30d2
+    }
+    
+    .section-title {
+    background-color:#5f2461!important;
+    color:#fff!important
+    }
+    
+    #modView_menu > div {
+    background:#ff23b1;
+    color:#fff
+    }
+    
+    li.comment {
+    background:#e576cd
+    }
+    
+    #Posts div.comment-head,#Bugs div.comment-head {
+    background:#8b3e7b;
+    color:#fff
+    }
+    
+    #Posts div.comment-head a,#Bugs div.comment-head a {
+    color:#d68fe7!important
+    }
+    
+    #Posts time,#Bugs time {
+    color:#dce2e2
+    }
+    
+    ol.comment-kids {
+    border-left:4px solid #860380
+    }
+    
+    ol.comment-kids > li.comment {
+    background:#860380
+    }
+    
+    tr {
+    background:#a51a8e;
+    color:#f0f8ff
+    }
+    
+    tr#tr_Reply {
+    background:#890e91!important
+    }
+    #PleaseEndorse{      
+background-color: #890e91;
+color:#f0f8ff
+    }
+    #PleaseEndorse a{
+        color:#e77cd0 !important;
+    }
+    #PremiumDownload,#CDN_speed_PopUp {
+    
+        background: #e77cd0;
+    
+    }
+    
+    #cdnLink {
+        background: #890e91;
+        color: beige !important;
+    }
+    
+    #cdnLink:hover {
+        background: #911075;
+        color: rgb(235, 157, 54) !important;
+    }

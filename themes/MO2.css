@@ -1,0 +1,156 @@
+body {
+    background-color:#3a3939!important;
+    color:#dddada!important
+    }
+    
+    a {
+    color:#ec9039!important
+    }
+    
+    #title3 {
+    color:#e0e0e0!important
+    }
+    
+    #creds {
+    color:#dddada!important
+    }
+    
+    .tabItem {
+    background-color:#404953!important;
+    color:#ffffe0;
+    display:inline;
+    font-weight:bolder
+    }
+    
+    #selected {
+    background-color:#2e353d!important
+    }
+    
+    .updated {
+    background-color:#2e3336!important;
+    border:2px solid #2e3336!important
+    }
+    
+    .updated:hover {
+    background-color:#12181d!important;
+    border:2px solid #12181d!important
+    }
+    
+    .outdated {
+    background-color:#8d4808!important;
+    border:2px solid #8d4808!important
+    }
+    
+    .outdated:hover {
+    background-color:#a85c15!important;
+    border:2px solid #a85c15!important
+    }
+    
+    .oldFile {
+    background-color:#d81b1b!important;
+    border:2px solid #d81b1b!important
+    }
+    
+    #loadTimeout,.message {
+    background:#524740
+    }
+    
+    #userName {
+    color:#97fd11;
+    font-weight:bolder;
+    text-wrap:wrap;
+    word-wrap:break-word
+    }
+    
+    .Premium {
+    -webkit-animation:flicker 1s infinite alternate;
+            animation:flicker 1s infinite alternate;
+    color:#fd6f11!important;
+    font-size:15px
+    }
+    
+    .custom-checkbox {
+    background-color:#470505!important
+    }
+    
+    input[type="checkbox"]:checked + .custom-checkbox {
+    background-color:#0c2747!important
+    }
+    
+    #modViewDiv {
+    background-color:#1e1d2b!important;
+    border:6px solid #6d7175!important
+    }
+    
+    #NotifyMessage {
+    background-color:#900!important;
+    color:#fff
+    }
+    
+    #moreOptions {
+    background-color:#182f36
+    }
+    
+    #moreOptions>span:hover {
+    background-color:#3cbee966
+    }
+    
+    .section-title {
+    background-color:#270000!important
+    }
+    
+    #modView_menu > div {
+    background:#4b484b;
+    color:#fff
+    }
+    
+    li.comment {
+    background:#383a49
+    }
+    
+    #Posts div.comment-head,#Bugs div.comment-head {
+    background:#24252b;
+    color:#fff
+    }
+    
+    #Posts div.comment-head a,#Bugs div.comment-head a {
+    color:#5a7f97!important
+    }
+    
+    #Posts time,#Bugs time {
+    color:#dce2e2
+    }
+    
+    ol.comment-kids {
+    border-left:4px solid #6e6d6e
+    }
+    
+    ol.comment-kids > li.comment {
+    background:#2b313d
+    }
+    
+    tr {
+    background:#434749;
+    color:#f0f8ff
+    }
+    
+    tr#tr_Reply {
+    background:#373737!important
+    }
+    #PleaseEndorse{      
+background-color: #19201e;
+    } #PremiumDownload ,#CDN_speed_PopUp{
+    
+        background: #19201e;
+    
+    }
+    
+    #cdnLink {
+        background: #373737;
+        color: beige !important;
+    }
+    
+    #cdnLink:hover {
+        background: #6e6d6e;
+        color: rgb(235, 157, 54) !important;
+    }

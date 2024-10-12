@@ -1,0 +1,52 @@
+{
+    "manifest_version": 3,
+    "name": "__MSG_extensionName__",
+    "description": "__MSG_description__",
+    "default_locale": "en",
+    "version": "0.20.0.1",
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "storage",
+        "notifications",
+        "webNavigation",
+        "declarativeNetRequest",
+        "declarativeNetRequestWithHostAccess"
+    ],
+    "host_permissions": [
+        "http://*.nexusmods.com/*",
+        "https://*.nexusmods.com/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.nexusmods.com/*"
+            ],
+            "js": [
+                "script/var.js",
+                "script/utils.js",
+                "script/NEXUSMODS.js"
+            ],
+            "css": [
+                "script/NEXUSMODS.css"
+            ],
+            "run_at": "document_start"
+        }
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "action": {
+        "default_popup": "config.html"
+    },
+    "icons": {
+        "16": "icon_16.png",
+        "19": "icon_19.png",
+        "32": "icon_32.png",
+        "38": "icon_38.png",
+        "48": "icon_48.png",
+        "128": "icon_128.png",
+        "512": "icon.png"
+    }
+}

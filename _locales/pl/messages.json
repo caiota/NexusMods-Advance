@@ -1,0 +1,508 @@
+{
+  "extensionName": {
+    "message": "NexusMods Advance",
+    "description": "Wzbogać swoje doświadczenie z serfowania po stronie NexusMods i zarządzaj swoimi modami bezpośrednio przez przeglądarkę!"
+  },
+  "translateBy": {
+    "message": "Przetłumaczone na język polski przez JMaxPlayZ"
+  },
+  "description": {
+    "message": "Wzbogać swoje doświadczenie z serfowania po stronie NexusMods i zarządzaj swoimi modami bezpośrednio przez przeglądarkę!"
+  },
+  "siteSettings_Settings": {
+    "message": "Ustawienia"
+  },
+  "siteSettings_Mods": {
+    "message": "Śledzone pliki"
+  },
+  "fastButtons_title": {
+    "message": "Ulepszenia NexusMods"
+  },
+  "hideContent_title": {
+    "message": "Ukryj zawartość"
+  },
+  "changeContent_title": {
+    "message": "Stylizacja treści"
+  },
+  "hiddenMods_field": {
+    "message": "Ukryte mody",
+    "description": "Ukryte mody ze strony NexusMods, kliknij nazwę, aby usunąć ją z listy ignorowanych."
+  },
+  "themeLight_title": {
+    "message": "Motyw Jasno Różowy"
+  },
+  "themeDark_title": {
+    "message": "Motyw Ciemno Niebieski"
+  },
+  "themeMO2_title": {
+    "message": "Motyw Szary MO2"
+  },
+  "NexusModsAdvance_addFile": {
+    "message": "Śledź Plik w NexusMods Advance"
+  },
+  "TrackMod_Error": {
+    "message": "Możesz dodawać tylko pliki, które zostały zaktualizowane mniej niż 1 rok temu, aby uniknąć niepotrzebnego zużycia klucza API.<br> Możesz jednak aktywować opcję „Nie aktualizuj plików listy” w ustawieniach obserwowanych plików, aby móc dodawać Stare pliki."
+  },
+  "TrackMod_Success": {
+    "message": "Mod Pomyślnie Dodany do Twojej Listy Modów!"
+  },
+  "NeedApi": {
+    "message": "Wymagane Konto NexusMods",
+    "description": "Konto NexusMods jest wymagane aby używać tę Funkcję.<br><br> Naciśnij <a href='#' id='nexusConnect'>TUTAJ</a> aby udać się do Strony Autoryzacji NexusMods i zalogować się na swoje konto.<br>Autoryzacja używana będzie do wczytywania informacji dla modów, które tutaj dodasz."
+  },
+  "ApiPendente": {
+    "message": "Łączenie z NexusMods... Za chwilę zostaniesz zabrany do strony Autoryzacji!"
+  },
+  "NeedApi_Success": {
+    "message": "Pomyślnie Połączono z NexusMods Advance!",
+    "description": "Pomyślnie Połączono z NexusModss! Teraz, <a href='config.html?popup=true&tab=myMods'>ODŚWIEŻ STRONĘ</a>"
+  },
+  "button_showGallery": {
+    "message": "Pokaż przycisk do wyskakującego okna galerii obrazów w blokach modów",
+    "description": "Wyświetla przycisk 'Obraz' w blokach modów na stronach głównych witryny, aby wyświetlić galerię moda w wyskakującym oknie. Użyj ESC, aby zamknąć okno, oraz Ctrl+przewijanie myszką, aby zwiększyć lub zmniejszyć rozmiar."
+  },
+  "button_showFiles": {
+    "message": "Pokaż Przycisk dla Plików Moda",
+    "description": "Wyświetla przycisk 'Pobierz' w blokach modów na głownych stronach strony do przeglądania i pobierania plików danego moda w Wyskakującym Okienku. Użyj ESC aby zamknąć to wyskakujące okienko."
+  },
+  "button_infiniteScroll": {
+    "message": "Włącz Nieskończone Przewijanie",
+    "description": "Automatycznie ładuje zawartość następnej strony, gdy zbliża się koniec bieżącej strony, dzięki czemu nawigacja jest nieskończona i szybsza. Zastępuje stronę witryny i działa na prawie wszystkich stronach!"
+  },
+  "remove_RequerimentsTab": {
+    "message": "Usuń Kartę Wymaganych w Opisie Moda (Nie Zalecane)",
+    "description": "Usuwa Kartę Wymaganych z opisu przeglądanego Moda. Nie jest zalecane używanie tej opcji, ponieważ mody bez prawidłowo zainstalowanymi wymaganiami nie będą poprawnie działać."
+  },
+  "remove_TranslationsTab": {
+    "message": "Usuń Kartę Tłumaczeń w Opisie Moda",
+    "description": "Usuwa Kartę Tłumaczeń z opisu przeglądanego moda."
+  },
+  "remove_PermissionsTab": {
+    "message": "Usuń Kartę Uprawnień w Opisie Moda",
+    "description": "Usuwa Kartę Uprawnień z opisu przeglądanego moda."
+  },
+  "remove_ChangelogsTab": {
+    "message": "Usuń Kartę Dziennika Zmian w Opisie Moda.",
+    "description": "Usuwa Kartę Dziennika Zmian z opisu przeglądanego moda."
+  },
+  "remove_DonationsTab": {
+    "message": "Usuń Kartę Dotacji w Opisie Moda",
+    "description": "Usuwa Kartę Dotacji z opisu przeglądanego moda."
+  },
+  "hide_StickyPosts": {
+    "message": "Automatycznie Chowaj Przypięte Posty z Karty Postów Moda",
+    "description": "Automatycznie chowa Przypięte Posty na Karcie Postów Moda"
+  },
+  "BetterModBlocks": {
+    "message": "Ulepsz Renderowanie Bloku-Moda",
+    "description": "Lepsze Renderowanie Bloków Modów poprzez lekkie zwiększenie ich wielkości, dodanie paska przewijania do Mini-Opisu Modów jak i pokazywanie więcej informacji takich jak Łączna Liczba Wyświetleń"
+  },
+  "button_AutoTrackDownloaded": {
+    "message": "Automatycznie Dodaj Pliki Oznaczone jako 'Pobrane' do NexusMods Advance",
+    "description": "Wykrywa pobrane pliki i automatycznie dodaje pliki oznaczone jako pobrane (<i class='fa-solid fa-cloud-download' aria-hidden='true'></i>) na stronach modów do listy NexusMods Advance. Konieczne jest przejście do strony plików każdego modu, aby dodać je do listy. Przycisk zmieni kolor na zielony, jeśli mod zostanie dodany do listy. Plik zostanie dodany do listy po prostu po załadowaniu strony, nie jest wymagane klikanie."
+}
+,
+  "button_showDescription": {
+    "message": "Pokaż przycisk do wyskakującego okna opisu moda w blokach modów",
+    "description": "Wyświetla przycisk 'Opis' w blokach modów na stronach głównych witryny, aby wyświetlić opis moda w wyskakującym oknie. Użyj ESC, aby zamknąć okno, oraz Ctrl+przewijanie myszką, aby zwiększyć lub zmniejszyć rozmiar."
+  },
+  "button_ignoreMod": {
+    "message": "Pokaż przycisk pominięcia modu w blokach modów",
+    "description": "Jeśli masz co najmniej 1 ukryty mod, w NexusMods Advance pojawi się lista, w której możesz zarządzać tą listą, rozdzieloną według gier."
+  },
+  "button_fastDownloadTranslate": {
+    "message": "Pokaż Przycisk Szybkiego Pobierania dla linków do Tłumaczeń (Dla modów z Tłumaczeniami)",
+    "description": "Wyświetla przycisk Szybkiego Pobierania z przodu linków do tłumaczeń modów (jeśli dostępne). Naciśnięcie go pobierze pierwszy dostępny plik tego Tłumaczenia."
+  },
+  "alwaysLoad_Changelogs": {
+    "message": "Zawsze Wczytuj Notatki Dotyczące Patchów w opisie plików (jeśli to możliwe)",
+    "description": "Wczytuje i Pokazuje (jeśli to możliwe) blok z Notatkami Dotyczącymi Patchów pod opisem plików. Duże Notatki Dotyczące Patchów często potrzebują 1 lub 2 sekundy aby się wczytały."
+  },
+  "autoClick_SlowDownload": {
+    "message": "Pomiń Wyskakujące Okieno z Wymaganiami Moda i Automatycznie naciśnij przycisk 'Wolne Pobieranie'",
+    "description": "TTa funkcja pominie wyskakujące okienko z wymaganiami modyfikacji i automatycznie kliknie przycisk „Powolne pobieranie”, a następnie cofnie się o 1 stronę w oparciu o historię, oszczędzając czas. Ta funkcja działa również dla użytkowników Premium!"
+  },
+  "mousePopup": {
+    "message": "Pokaż opisy w wyskakującym oknie po najechaniu kursorem na link do moda",
+    "description": "Załaduje i wyświetli opis moda w wyskakującym oknie, gdy najedziesz kursorem na link do moda. Użyj ESC, aby zamknąć okno, oraz Ctrl+przewijanie myszką, aby zwiększyć lub zmniejszyć rozmiar."
+  },
+  "ArticlesPopup": {
+    "message": "Pokaż artykuły w wyskakującym oknie po najechaniu kursorem na link do artykułu",
+    "description": "Załaduje i wyświetli artykuł z linku w wyskakującym oknie. Użyj ESC, aby zamknąć okno, oraz Ctrl+przewijanie myszką, aby zwiększyć lub zmniejszyć rozmiar."
+  },
+  "mouseProfilePopup": {
+    "message": "Pokaż Profil Użytkownika w Wyskakującym Okienku po najechaniu myszką na link profilu użytkownika",
+    "description": "Wczytuje i Pokazuje Profil Użytkownika po najechaniu myszką na jego link."
+  },
+  "LargerYoutube": {
+    "message": "Zwiększ rozmiar wideo YouTube i zezwól na pełny ekran",
+    "description": "Powiększa filmy YouTube na stronie do 100% szerokości i 600 pikseli wysokości oraz włącza funkcję YouTube Full Screen."
+  },
+  "PopupImages": {
+    "message": "Pokaż Obrazy w Wyskakującym Okienku on Najechaniu",
+    "description": "Pokazuje oryginalny obraz po najechaniu myszką na obraz, działa w sesji medialnej i na stronie obrazu modów. Użyj Ctrl+Scroll, aby zwiększyć lub zmniejszyć rozmiar obrazu i naciśnij 1, aby potwierdzić!"
+  },
+  "PopupVideos": {
+    "message": "Załaduj filmy z YouTube w wyskakującym oknie po kliknięciu bloku wideo",
+    "description": "Ładuje film z bloku wideo w wyskakującym oknie po kliknięciu, zamiast ładować nową stronę, oszczędzając czas. Użyj ESC, aby zamknąć wyskakujące okno, klawisza 1, aby zatwierdzić (może być konieczne kliknięcie szarego obszaru nad filmem, aby zatwierdzić) oraz Ctrl+przewijanie myszką, aby zwiększyć lub zmniejszyć rozmiar."
+  },
+  "modSettings_button": {
+    "message": "Ustawienia",
+    "description": ""
+  },
+  "modSettings_notifications": {
+    "message": "Pokaż Powiadomienie gdy Mody otrzymają Aktualizację",
+    "description": "Pokazuje powiadomienie w Windowsie gdy nowa wersja moda jest dostępna. Ta funkcja działa tylko raz na 5 godzin."
+  },
+  "modSettings_simpleMode": {
+    "message": "Pokaż Mody w Prostej Liście",
+    "description": "Pokazuje Mody w twojej Liście w bardziej kompaktowy i prosty sposób bez obrazów i szczegółów."
+  },
+  "modTab_title": {
+    "message": "Pobrane pliki modów pojawią się tutaj",
+    "description": "Po pobraniu moda, pobrany plik zostanie dodany do listy tutaj! W tej zakładce możesz sprawdzić aktualizacje, przeczytać opis i zobaczyć najnowsze zmiany wersji, klikając na kartę moda! Możesz także zobaczyć błędy i posty użytkowników dotyczące tego moda."
+  },
+  "MODS_DELAY_MESSAGE": {
+    "message": "Opóźnienie Przeładownia Modów: ",
+    "description": "Wczytywanie Modów jest ograniczone do jednego na 5 godzin, gdyż NexusMods API ma limit 500 próźb na godzinę. Kiedy dodasz nowy mod lub zmodyfikujesz już istniejący na liście, zostanie on normalnie zaktualizowany."
+  },
+  "MODS_DELAY_USAGE": {
+    "message": " pozostałe proźby na dzień.",
+    "description": " pozostałe proźby na godzinę."
+  },
+  "modOption_delete": {
+    "message": "Usuń plik"
+  },
+  "modOption_update": {
+    "message": "Pobierz aktualizację"
+  },
+  "modStatus_updated": {
+    "message": "ZAKTUALIZOWANE"
+  },
+  "modStatus_outdated": {
+    "message": "NIEZAKTUALIZOWANE"
+  },
+  "modStatus_error": {
+    "message": "NIE ZNALEZIONO AKTUALIZACJI"
+  },
+  "modStatus_ApiLimit": {
+    "message": "BŁĄD NEXUSAPI"
+  },
+  "version": {
+    "message": "Wersja: "
+  },
+  "size": {
+    "message": "Rozmiar: "
+  },
+  "mod_description": {
+    "message": "Opis: ",
+    "description": "DziennikZmian: "
+  },
+  "updated": {
+    "message": "Updated: "
+  },
+  "category": {
+    "message": "Kategoria: "
+  },
+  "main_name": {
+    "message": "Mod: "
+  },
+  "new_update": {
+    "message": "Dostępna Aktualizacja!"
+  },
+  "not_found": {
+    "message": " - NIE ZNALEZIONO AKTUALIZACJI, PRAWDOPODOBNIE, ŻE PLIK ZMIENIŁ NAZWĘ!"
+  },
+  "mod_changelogFailure": {
+    "message": " Nie Znaleziono."
+  },
+  "mod_descriptionFailure": {
+    "message": " Nie Znaleziono."
+  },
+  "temporaryBan": {
+    "message": " BŁĄD: NEXUS API NIEDOSTĘPNY!"
+  },
+  "filter_placeHolder": {
+    "message": "Filtr (Tytuł, Wersja, Data...)"
+  },
+  "popupTip_Image": {
+    "message": "Obejrzyj Galerię w Wyskakującym Okienku"
+  },
+  "popupTip_Description": {
+    "message": "Obejrzyj Opis w Wyskakującym Okienku"
+  },
+  "popupTip_Files": {
+    "message": "Obejrzyj Pliki w Wyskakującym Okienku"
+  },
+  "popupTip_Ignore": {
+    "message": "Ukryj tego moda"
+  },
+  "loadOriginalImages": {
+    "message": "Zawsze Wczytuj Obrazy w Wysokiej Rozdzielczości",
+    "description": "Zawsze wczytuje obrazy moda w ich oryginalnych rozdzielczościach jeśli możliwe, użyteczna funkcja dla użytkowników z bardzo dużymi ekranami, którym przeszkadzają rozmyte obrazy. (Zwiększa zużycie sieci, niektóre obrazy mogą mieć ponad 5 MB). Nie wpływa na szybkość wczytywania strony gdyż ta funkcja jest aktywowana dopiero po pełnym wczytaniu strony."
+  },
+  "ImagePopup": {
+    "message": "Użyj klawiszy strzałek lub A/D, aby poruszać się między obrazami, ESC, aby zamknąć wyskakujące okienko i Ctrl+S, aby zapisać bieżący obraz.",
+    "description": "Możesz użyć Ctrl+S, aby zapisać ten obraz, oraz klawisza 1, aby go poprzeć!"
+  },
+  "NotRenderTrackMods_Button": {
+    "message": "Ukryj przycisk „Dodaj plik do NexusMods Advance”.",
+    "description": "Ukrywa Przycisk 'Śledź Plik w NexusMods Advance Button' który znajduje się obok przycisków do pobierania plików moda w jego Karcie Plików, niemniej jednak kiedy pobierzesz moda on wciąż pojawi się w Liście Śledzenia Modów Rozszerzenia tak jak powinien."
+  },
+  "HideContent": {
+    "message": "Ukryj zawartość"
+  },
+  "HideContent_Enable": {
+    "message": "Rozmycie obrazów na podstawie słów",
+    "description": "Rozmywa obrazy, stosując efekt rozmycia zgodnie ze słowami zdefiniowanymi poniżej, linia po linii. Zdefiniowane słowa są wyszukiwane w kategoriach modów, nazwach autorów oraz tytułach modów i obrazach. Ma to wpływ na całą witrynę i stronę Mod Images."
+  },
+  "Notification": {
+    "message": " Nieprzeczytane powiadomienia"
+  },
+  "AllNotifications": {
+    "message": "Włącz rozszerzone powiadomienia",
+    "description": "Monitoruje i powiadamia Cię o wszelkich powiadomieniach otrzymywanych w NexusMods; ikona rozszerzenia pokaże liczbę nieprzeczytanych powiadomień, jeśli ta funkcja jest aktywna."
+  },
+  "WideWebsite": {
+    "message": "Rozszerz szerokość witryny",
+    "description": "Rozszerza szerokość witryny, aby zająć całą dostępną przestrzeń pierwotnie zarezerwowaną dla reklam."
+  },
+  "HideHiddenMods": {
+    "message": "Ukryj „ukryte” mody na mojej stronie z treścią",
+    "description": "Ukrywa mody oznaczone jako „Ukryte” w sekcji Twoja zawartość. Pojawi się przycisk, który umożliwi wyświetlenie tych ukrytych plików."
+  },
+  "HideMods_button": {
+    "message": "Pokaż ukryte mody",
+    "description": "Ukryj ukryte mody"
+  },
+  "more_OfficialPost": {
+    "message": "<i class='fa-solid fa-comments' aria-hidden='true'></i> Oficjalna strona na NexusMods"
+  },
+  "more_DonatePls": {
+    "message": "<i class='fa-solid fa-hand-holding-heart' aria-hidden='true'></i> Przekaż darowiznę za pośrednictwem PayPal"
+  },
+  "more_EndorsePls": {
+    "message": "<i class='fa-solid fa-trophy' aria-hidden='true'></i> Popieram rozszerzenie",
+    "description": "<i class='fa-solid fa-trophy' aria-hidden='true'></i> Dziękuję!!"
+  },
+  "modViewPopup_changelog": {
+    "message": "Opis"
+  },
+  "modViewPopup_posts": {
+    "message": "Posty"
+  },
+  "modViewPopup_bugs": {
+    "message": "Błędy"
+  },
+  "modViewPopup_logs": {
+    "message": "Zmiany"
+  },
+  "bugsPage": {
+    "message": "<h3>Nie ma jeszcze żadnych raportów ani postów o błędach</h3>"
+  },
+  "FixedModMenu": {
+    "message": "Włącz pływające menu na stronie internetowej",
+    "description": "Sprawia, że ​​menu opcji witryny pozostają na górze ekranu podczas przewijania w dół, dzięki czemu są zawsze widoczne. Działa ze wszystkimi menu, wiadomościami, obrazami i filmami na stronie modów."
+  },
+  "BetterSearch_TranslationsOnly": {
+    "message": "Tylko tłumaczenia?"
+  },
+  "BetterSearch_SearchLanguage": {
+    "message": "Mod w Dowolnym Języku"
+  },
+  "BetterSearch_SearchEndorsements": {
+    "message": "Bez Filtru Poleceń"
+  },
+  "BetterSearch_SearchDownloads": {
+    "message": "Dowolna Liczba Pobrania"
+  },
+  "BetterSearch_SearchSize": {
+    "message": "Dowolny Rozmiar"
+  },
+  "BetterSearch_EndorsementsSub_Low": {
+    "message": "Mało Polecane Mody"
+  },
+  "BetterSearch_EndorsementsSub_Medium": {
+    "message": "Umiarkowanie Polecane Mody"
+  },
+  "BetterSearch_EndorsementsSub_High": {
+    "message": "Mocno Polecane Mody"
+  },
+  "BetterSearch_EndorsementsSub_VeryHigh": {
+    "message": "Bardzo Mocno Polecane Mody"
+  },
+  "BetterSearch_DownloadsSub_Low": {
+    "message": "Niska liczba pobrań"
+  },
+  "BetterSearch_DownloadsSub_Medium": {
+    "message": "Średnia liczba pobrań"
+  },
+  "BetterSearch_DownloadsSub_High": {
+    "message": "Wysoka liczba pobrań"
+  },
+  "BetterSearch_DownloadsSub_VeryHigh": {
+    "message": "Bardzo wysoka liczba pobrań"
+  },
+  "BetterSearch_SearchType": {
+    "message": "Wszystkie Mody",
+    "description": "Tylko Tłumaczenia Modów"
+  },
+  "BetterSearch": {
+    "message": "Włącz filtry szybkiego wyszukiwania",
+    "description": "Wyświetla Małe Menu Filtrów Wyszukiwania podczas przeszukiwania Modów w Pasek Wyszukiwania na Stronie"
+  },
+  "SharePostsLinks": {
+    "message": "Włącz przycisk do udostępniania linku komentarza",
+    "description": "Pokaż przycisk na postach (na stronie Posty modyfikacji), aby skopiować link do bieżącego komentarza<br><hr>BŁĄD: Obecnie istnieje błąd samej strony dotyczący stron komentarzy, linki udostępnione działają normalnie, POD WARUNKIEM, że komentarz pochodzi z strony 1; jeśli komentarz pochodzi z strony 2 lub dalszej, strona nie będzie w stanie przewinąć do komentarza, ponieważ technicznie rzecz biorąc, on nie istnieje. Udało mi się naprawić to za pomocą rozszerzenia, ale pamiętaj: <i>Udostępnianie linków komentarzy z strony 2 i dalej osobom, które nie używają rozszerzenia, nie będzie działać.</i>"
+  },
+  "FastCopy_Comment": {
+    "message": "Kopiuj link do komentarza",
+    "description": "Link skopiowany!"
+  },
+ "BlockYoutube": {
+    "message": "Zablokuj Ładowanie Iframe YouTube",
+    "description": "Zapobiega ładowaniu Iframe YouTube, blokując żądania witryny do momentu, gdy wideo stanie się <b>WIDOCZNE</b>. Może to znacznie poprawić czas ładowania witryny, ponieważ wiele zasobów YouTube zużywa dużo procesora, blokując renderowanie strony."
+}
+,
+  "RenderMods_AlfabeticoFile": {
+    "message": "Według Nazwy Pliku"
+  },
+  "RenderMods_AlfabeticoMod": {
+    "message": "Według Nazwy Moda"
+  },
+  "RenderMods_Categoria": {
+    "message": "Według Kategorii"
+  },
+  "RenderMods_Game": {
+    "message": "Według Nazwy Gry"
+  },
+  "RenderMods_Default": {
+    "message": "Organizuj pliki według"
+  },
+  "HideModStatus": {
+    "message": "Ukryj status modów w blokach modów",
+    "description": "Ukrywa status modyfikacji na stronach, taki jak 'Pobrano' i 'Dostępna aktualizacja'. Statusy nadal są wyświetlane po najechaniu kursorem na modyfikację."
+  },
+  "EndorseAndVote": {
+    "message": "Podoba Ci się rozszerzenie?",
+    "description": "Jeśli podoba Ci się rozszerzenie, <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Głosuj</a> na nie w NexusMods i nie zapomnij <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Pochwalaj</a> też! Pomaga to w rozpowszechnieniu rozszerzenia wśród tych, którzy go potrzebują, i motywuje mnie do dalszej pracy nad nim! Dziękuję :D"
+  },
+  "fastDownloadTranslate_tip": {
+    "message": "Kliknij, aby szybko pobrać to tłumaczenie"
+  },
+  "GameDetails_downloads": {
+    "message": " Pobrania"
+  },
+  "GameDetails_mods": {
+    "message": " Mody"
+  },
+  "GameDetails_files": {
+    "message": " Pliki"
+  },
+  "GameDetails_date": {
+    "message": "Dodano: "
+  },
+  "GameDetails_collections": {
+    "message": " Kolekcje"
+  },
+  "GameDetails_genre": {
+    "message": "Gatunek "
+  },
+  "DetailGameBlocks": {
+    "message": "Pokaż więcej szczegółów w blokach gier",
+    "description": "Na stronie gier NexusMods (https://www.nexusmods.com/games), w blokach gier zostaną wyświetlone dodatkowe szczegóły, takie jak liczba kolekcji, mody, pobrania i gatunek gry.<hr><span style='color: #ffffff;font-weight: 700;'>WYMAGA opcji (Ulepszona lista gier) Bądź aktywny.</span>"
+  },
+  "ModBlock_Render": {
+    "message": "Włącz niestandardowy rozmiar bloków modów",
+    "description": "Na stronach modów możesz dostosować rozmiar bloków modów. Możesz używać wartości CSS, takich jak procenty (%) lub stałych wartości, takich jak (px, vw, %...). Możesz wprowadzać wartości, na przykład: 200px, 10%, 10vw. Domyślna wartość na stronie to 20%. Ta funkcja może być używana do zwiększania lub zmniejszania liczby bloków modów w jednym wierszu."
+  },
+  "GameBlock_Render": {
+    "message": "Ulepszona lista gier",
+    "description": "Na stronie głównej witryny (strona gier), przebudowuje całą listę w znacznie bardziej efektywny sposób dla CPU, bez zawieszania przeglądarki."
+  },
+  "BlockSize_input": {
+    "message": "Rozmiar bloków modów: "
+  },
+  "GameBlockSize_input": {
+    "message": "Rozmiar Bloków Gier: ",
+    "description": "Określ indywidualnie rozmiar Bloków Gry, możesz użyć wartości CSS takich jak (px, vw, % lub dowolnej innej wartości dowolnego typu)."
+  },
+  "EndorsePopup_done": {
+    "message": "Zatwierdzona treść!"
+  },
+  "EndorsePopup_undone": {
+    "message": "Potwierdzenie złamane!"
+  },
+  "EndorsePopup_cant": {
+    "message": "Nie można zatwierdzić tego (nieprawidłowy element)"
+  },
+  "MemoryMode": {
+    "message": "Nie Aktualizuj Plików na Liście",
+    "description": "Ta opcja zapewni, że pliki na tej liście nigdy nie zostaną zaktualizowane, jeśli chcesz jej używać tylko jako listy do zapisywania plików, które chcesz. <br><br>(Z włączoną tą opcją możesz normalnie dodawać starsze pliki do tej listy, a one będą normalnie aktualizowane, jeśli później wyłączysz tę opcję, co spowoduje niepotrzebne zużycie Twojego klucza API. Ponadto status aktualizacji plików nie będzie wyświetlany.)<br><br>Nowe pliki nadal będą aktualizowane raz, aby upewnić się, że żadna informacja nie jest niepoprawna."
+  },
+  "PauseExternalGifs": {
+    "message": "Wstrzymaj zewnętrzne GIFy",
+    "description": "Zablokuje odtwarzanie zewnętrznych GIFów (jak imgur lub inne serwery GIF); GIF będzie nadal odtwarzany po najechaniu na niego myszą."
+  },
+  "PremiumDownload": {
+    "message": "Wybierz serwer pobierania",
+    "description": "Użyj klawisza Ctrl na klawiaturze wraz z kliknięciem, aby pobrać spakowany plik normalnie, lub kliknij normalnie, aby pobrać plik za pomocą menedżera modów, takiego jak Vortex lub Mod Organizer 2."
+  },
+  "SimpleSiteNotifications": {
+    "message": "Powiadomienia witryny po prawej",
+    "description": "Wyświetla powiadomienia witryny podczas wykonywania czynności, takich jak obserwowanie moda, w prostszy sposób po prawej stronie ekranu. Bez irytującego wyskakującego okienka z przyciskiem zamykania."
+  },
+  "CDNTest_legend": {
+    "message": "Test prędkości serwerów",
+    "description": "Ta funkcja służy do pomiaru prędkości pobierania serwerów Premium CDN NexusMods. Przed rozpoczęciem testu upewnij się, że w tym momencie nie są pobierane inne pliki, nie jest odtwarzane wideo, stream lub muzyka przez Internet, ponieważ wszystko, co korzysta z sieci, może wpłynąć na wynik. Pamiętaj, że ten test nigdy nie jest w 100% dokładny. Aby anulować test, wystarczy ponownie załadować tę stronę.<br> Test zostanie przeprowadzony poprzez pobranie pliku o rozmiarze 105 MB z każdego z 6 serwerów i zmierzenie czasu, jaki to zajmuje, aby określić średnią prędkość pobierania.<br><br>Kredyty: <a href='https://www.nexusmods.com/site/mods/423' target='_blank'>https://www.nexusmods.com/site/mods/423</a>"
+  },
+  "CDNTest_start": {
+    "message": "Rozpocznij test"
+  },
+  "timeMeansure": {
+    "message": "Sekundy",
+    "description": "Minuty,"
+  },
+  "meansureResponse": {
+    "message": "Test trwał: ",
+    "description": " aby pobrać plik o rozmiarze 105MB"
+  },
+  "cdnTest_responseSpeed": {
+    "message": "Prędkość pobierania: ~"
+  },
+  "cdnTest_inlineButton": {
+    "message": "Test prędkości serwerów CDN na NexusMods Advance"
+  },
+  "CustomGameSize": {
+    "message": "Ulepszenia strony gier",
+    "description": "Dostosowania związane z stroną gier NexusMods (nexusmods.com/games).<br>Pole tekstowe dla rozmiaru bloków gier akceptuje wartości CSS, takie jak px, vw lub %. Na przykład: 100px, 33vw lub 30%. Domyślna wartość strony wynosi zazwyczaj 11,111%."
+  },
+  "Following_EditMenu": {
+    "message": "Przekształć menu opcji pól tekstowych w pływające menu",
+    "description": "Przekształca menu opcji pól tekstowych (takie jak podczas publikowania artykułu lub odpowiadania na komentarz) w pływające menu, które podąża za myszą po kliknięciu, co znacznie ułatwia edytowanie długich tekstów. Po prostu kliknij, a menu pojawi się obok ciebie."
+  },
+  "Favorite_Game": {
+    "message": "Dodano do Ulubionych Gier!",
+    "description": "Usunięto z Ulubionych Gier!"
+  },
+  "Filter_Dropdown_1": {
+    "message": "Sortuj według Nazwy",
+    "description": "Sortuj według Daty"
+  },
+  "Filter_Dropdown_2": {
+    "message": "Sortuj według Pobierań",
+    "description": "Sortuj według Modów"
+  },
+  "Filter_Dropdown_3": {
+    "message": "Sortuj według gatunku",
+    "description": "Sortuj według kolekcji"
+  },
+  "NewTab_ExternalURL": {
+    "message": "Zawsze otwieraj linki zewnętrzne w nowej karcie",
+    "description": "Linki zewnętrzne z innych stron niż NexusMods.com będą domyślnie otwierane w nowej karcie."
+  },
+  "Prevent_TrackOnDownload": {
+    "message": "Nie dodawaj plików do swojej listy po kliknięciu przycisków pobierania",
+    "description": "Zapobiega dodawaniu plików do Twojej listy przez rozszerzenie po kliknięciu dowolnego przycisku pobierania na stronie plików modów. Tylko pomarańczowy przycisk dodawania plików do NexusMods Advance będzie działać."
+  }
+}

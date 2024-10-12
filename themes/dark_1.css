@@ -1,0 +1,166 @@
+body {
+    background-color: #070707 !important;
+    color: #dddada !important
+}
+
+a {
+    color: #ec9039 !important
+}
+
+#title3 {
+    color: #2673bb !important
+}
+
+#creds {
+    color: #dddada !important
+}
+
+.tabItem {
+    background-color: #0b53a5 !important;
+    color: #ffffe0;
+    display: inline;
+    font-weight: bolder
+}
+
+#selected {
+    background-color: #032042 !important
+}
+
+.updated {
+    background-color: #004679 !important;
+    border: 2px solid #004679 !important
+}
+
+.outdated {
+    background-color: #be6614;
+    border: 2px solid #be6614
+}
+
+.outdated:hover {
+    background-color: #c23f03 !important;
+    border: 2px solid #c23f03 !important
+}
+
+.oldFile {
+    background-color: #d81b1b !important;
+    border: 2px solid #d81b1b !important
+}
+
+.updated:hover {
+    background-color: #0a3d61 !important
+}
+
+#loadTimeout,
+.message {
+    background: #5a2502
+}
+
+#userName {
+    color: #97fd11;
+    font-weight: bolder;
+    text-wrap: wrap;
+    word-wrap: break-word
+}
+
+.Premium {
+    -webkit-animation: flicker 1s infinite alternate;
+    animation: flicker 1s infinite alternate;
+    color: #fd6f11 !important;
+    font-size: 15px
+}
+
+select {
+    background-color: #0b53a5 !important;
+    border: 1px solid #022853 !important;
+    color: #fff !important
+}
+
+option {
+    background-color: #042e5e !important;
+    color: #fff
+}
+
+.custom-checkbox {
+    background-color: #f83f3f !important
+}
+
+input[type="checkbox"]:checked+.custom-checkbox {
+    background-color: #074a9d !important
+}
+
+#modViewDiv {
+    background-color: #0b53a5 !important;
+    border: 6px solid #3f93f3 !important
+}
+
+#NotifyMessage {
+    background-color: #e74b00 !important
+}
+
+.section-title {
+    background-color: #235385 !important
+}
+
+#moreOptions {
+    background-color: #043c57
+}
+
+#moreOptions>span:hover {
+    background-color: #3cbee966
+}
+
+#modView_menu>div {
+    background: #2a8aed;
+    color: #fff
+}
+
+li.comment {
+    background: #114463
+}
+
+#Posts div.comment-head,
+#Bugs div.comment-head {
+    background: #0a3047
+}
+
+#Posts time,
+#Bugs time {
+    color: #828585
+}
+
+ol.comment-kids {
+    border-left: 4px solid #259bff
+}
+
+ol.comment-kids>li.comment {
+    background: #185377
+}
+
+tr {
+    background: #1e4473;
+    color: #f0f8ff
+}
+
+tr#tr_Reply {
+    background: #062347 !important
+}
+
+#PleaseEndorse {
+    background-color: #062347;
+}
+
+#PremiumDownload,#CDN_speed_PopUp {
+
+    background: #1c2b75;
+
+}
+
+#cdnLink {
+    background: #081d5d;
+    color: beige !important;
+}
+
+#cdnLink:hover {
+    background: #2242a3;
+    color: rgb(235, 157, 54) !important;
+}

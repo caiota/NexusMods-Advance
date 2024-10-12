@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusMods Advance</title>
+    <style>
+        * {
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            user-select: none
+        }
+
+        body {
+            -o-transition: height .2s ease-out;
+            -o-transition: width .2s ease-out;
+            -o-transition: background-color 0.7s, color .7s;
+            -webkit-box-sizing: border-box;
+            -webkit-transition: height .2s ease-out;
+            -webkit-transition: width .2s ease-out;
+            -webkit-transition: background-color 0.7s, color .7s;
+            background: #01070e;
+            box-sizing: border-box;
+            color: #e1e1e1;
+            font-family: sans-serif;
+            margin: 0 auto;
+            max-width: 780px;
+            max-width: 100%;
+            min-inline-size: -webkit-max-content;
+            min-inline-size: -moz-max-content;
+            min-inline-size: max-content;
+            min-width: 780px;
+            overflow-x: hidden;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            text-align: -webkit-match-parent;
+            transition: height .2s ease-out;
+            transition: width .2s ease-out;
+            transition: background-color 0.7s, color .7s;
+            width: 100%
+        }
+
+        a {
+            color: #f5f5d5
+        }
+
+        #modTips {
+            font-size: 20px
+        }
+
+        @-webkit-keyframes rotate-anticlockwise {
+            from {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg)
+            }
+
+            to {
+                -webkit-transform: rotate(-360deg);
+                transform: rotate(-360deg)
+            }
+        }
+
+        @keyframes rotate-anticlockwise {
+            from {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg)
+            }
+
+            to {
+                -webkit-transform: rotate(-360deg);
+                transform: rotate(-360deg)
+            }
+        }
+
+        #settings {
+            contain: inline-size;
+            font-size: large
+        }
+
+        .tabItem {
+            background: #eb8e4b;
+            display: inline;
+            padding: 10px
+        }
+
+        #selected {
+            background: #be5f1b !important;
+            cursor: pointer;
+            font-size: large
+        }
+
+        #tabItens {
+            cursor: pointer;
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            font-size: large;
+            padding: 20px
+        }
+
+        #mods {
+            -o-transition: height .2s ease-out;
+            -o-transition: width .2s ease-out;
+            -webkit-transition: height .2s ease-out;
+            -webkit-transition: width .2s ease-out;
+            display: none;
+            overflow: hidden;
+            text-align: -webkit-center;
+            transition: height .2s ease-out;
+            transition: width .2s ease-out
+        }
+
+        #mod_content {
+            -o-transition: height .2s ease-out;
+            -o-transition: width .2s ease-out;
+            -webkit-transition: height .2s ease-out;
+            -webkit-transition: width .2s ease-out;
+            display: inline-block;
+            height: 100%;
+            transition: height .2s ease-out;
+            transition: width .2s ease-out;
+            width: 100%
+        }
+
+        #modTitleDiv {
+            left: 31%;
+            margin-bottom: 4px;
+            width: 100%;
+            z-index: 100
+        }
+
+        #modViewDiv {
+            -ms-transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            display: none;
+            height: 80%;
+            left: 50%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 10px;
+            position: fixed;
+            right: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 95vw;
+            z-index: 99999
+        }
+
+        #modPic {
+            border-radius: 10px;
+            height: 60%;
+            width: 100%
+        }
+
+        #modTitle {
+            font-size: 30px
+        }
+
+        #mainNameTitle {
+            font-size: 15px
+        }
+
+        #Changelog {
+            font-size: larger;
+            padding-left: 10px;
+            text-align: left;
+            text-wrap: wrap
+        }
+
+        #Changelog img {
+            margin-left: 1%;
+            margin-right: 1%;
+            margin-top: 4px;
+            max-width: 95%
+        }
+
+        ul.change-logs {
+            list-style: none;
+            padding-left: 5px;
+            padding-right: 5px;
+            text-align: left
+        }
+
+        .THUMBNAIL {
+            background-repeat: no-repeat !important;
+            background-size: 100% 160px !important;
+            display: block;
+            height: 170px;
+            width: 100%
+        }
+
+        #modThumbnail {
+            height: 190px;
+            min-width: 100%;
+            width: 100%;
+            z-index: 1
+        }
+
+        .open-modTable {
+            height: 400px !important;
+            overflow-y: auto !important
+        }
+
+        #modTable {
+            border-radius: 4px;
+            color: #f1f1f1;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 13px;
+            height: 360px;
+            margin-bottom: 3px;
+            margin-left: 1.5px;
+            margin-right: 1.5px;
+            overflow: hidden;
+            scrollbar-width: thin;
+            text-align: left;
+            text-wrap: wrap;
+            width: 31.7vw
+        }
+
+        .container {
+            -ms-flex-align: end;
+            -ms-flex-direction: row;
+            -ms-flex-pack: center;
+            -webkit-box-align: end;
+            -webkit-box-direction: normal;
+            -webkit-box-orient: horizontal;
+            -webkit-box-pack: center;
+            align-items: flex-end;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            float: left
+        }
+
+        .simple {
+            -ms-flex-direction: column !important;
+            -ms-flex-line-pack: start !important;
+            -webkit-box-direction: normal !important;
+            -webkit-box-orient: vertical !important;
+            align-content: flex-start !important;
+            container-type: inline-size;
+            flex-direction: column !important;
+            width: 98vw
+        }
+
+        .subSpan_simple {
+            font-size: 13px;
+            margin-left: 8px
+        }
+
+        .modTitleDiv_simple {
+            display: -webkit-box !important;
+            margin-bottom: 0 !important
+        }
+
+        #TOP_CONTENT_simple {
+            -ms-flex-align: start;
+            -ms-flex-align: end;
+            -ms-flex-direction: row;
+            -webkit-box-align: start;
+            -webkit-box-align: end;
+            -webkit-box-direction: normal;
+            -webkit-box-orient: horizontal;
+            align-items: flex-end;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+            padding-top: 2px;
+            position: relative
+        }
+
+        #TOP_DETAILS_simple {
+            -ms-flex-wrap: wrap;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            flex-wrap: wrap;
+            padding-left: 10px
+        }
+
+        #modTable_simple {
+            color: #f1f1f1;
+            cursor: pointer;
+            display: block;
+            font-size: 14px;
+            height: 27px;
+            margin-bottom: 6px;
+            max-width: 100%;
+            overflow: hidden;
+            padding-top: 10px;
+            text-align: left;
+            text-wrap: wrap;
+            width: 100vw
+        }
+
+        #version {
+            color: #15ff15;
+            display: block;
+            z-index: 100
+        }
+
+        .subSpan_simple#version {
+            text-wrap: nowrap
+        }
+
+        #category,
+        #full_name,
+        #gameName,
+        #size,
+        #updated,
+        #version {
+            display: block;
+            font-weight: bolder;
+            z-index: 100
+        }
+
+        #gameName {
+            font-size: small;
+            margin-bottom: 9px
+        }
+
+        #TOP_DETAILS {
+            padding-left: 10px
+        }
+
+        #title {
+            color: #f5deb3;
+            cursor: pointer;
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            overflow: hidden;
+            text-wrap: wrap;
+            white-space: break-spaces
+        }
+
+        #title:hover {
+            color: #ffb120
+        }
+
+        #TOP_CONTENT {
+            -ms-flex-align: start;
+            -ms-flex-direction: column;
+            -ms-flex-line-pack: center;
+            -webkit-box-align: start;
+            -webkit-box-direction: normal;
+            -webkit-box-orient: vertical;
+            align-content: center;
+            align-items: flex-start;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative
+        }
+
+        #BOT_CONTENT {
+            margin-left: 6px;
+            margin-top: 6px
+        }
+
+        #delete,
+        #delete_simple,
+        #update,
+        #update_simple {
+            -ms-flex-align: center;
+            -ms-flex-pack: center;
+            -o-transition: opacity .2s ease-out, visibility .2s ease-out;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+            -webkit-transition: opacity .2s ease-out, visibility .2s ease-out;
+            align-items: center;
+            color: #fff;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            font-family: "FontAwesome";
+            font-size: large;
+            height: 30px;
+            justify-content: center;
+            opacity: 0;
+            position: absolute;
+            transition: opacity .2s ease-out, visibility .2s ease-out;
+            visibility: hidden;
+            width: 30px;
+            z-index: 99991
+        }
+
+        #delete_simple {
+            background-color: #c52727;
+            height: 40px;
+            right: 0;
+            width: 50px
+        }
+
+        #delete {
+            background-color: #c52727;
+            right: 0;
+            top: 0
+        }
+
+        #update {
+            display: none;
+            background-color: #1087e9;
+            right: 0;
+            top: 33px
+        }
+
+        #update_simple {
+            display: none;
+            background-color: #1087e9;
+            height: 40px;
+            right: 52px;
+            width: 50px
+        }
+
+        #update:hover,
+        #update_simple:hover {
+            background-color: #054a83
+        }
+
+        #delete:hover,
+        #delete_simple:hover {
+            background-color: #8b0000
+        }
+
+        #title3 {
+            color: #f5deb3;
+            font-size: large;
+            font-weight: bolder
+        }
+
+        #settings input {
+            margin-bottom: 12px
+        }
+
+        .custom-checkbox {
+            background-color: #f83f3f;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            height: 20px;
+            position: relative;
+            width: 20px
+        }
+
+        .custom-checkbox::after {
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            content: '';
+            height: 8px;
+            left: 4px;
+            opacity: 0;
+            position: absolute;
+            top: 4px;
+            transform: rotate(45deg);
+            width: 8px
+        }
+
+        input[type="checkbox"]:checked+.custom-checkbox::after {
+            opacity: 1
+        }
+
+        #creds {
+            color: #87cefa;
+            font-family: monospace;
+            font-size: larger;
+            font-weight: 700;
+            padding-right: 10px;
+            padding-top: 6px;
+            text-align: end
+        }
+
+        #mod_image {
+            width: 20%
+        }
+
+        #modFilter {
+            -o-transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out;
+            -webkit-box-sizing: border-box;
+            -webkit-transition: border-color .3s ease-in-out, -webkit-box-shadow .3s ease-in-out;
+            border: 4px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            display: inline-block;
+            font-size: 16px;
+            padding: 10px 15px;
+            transition: border-color .3s ease-in-out, -webkit-box-shadow .3s ease-in-out;
+            transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out;
+            transition: border-color .3s ease-in-out, box-shadow .3s ease-in-out, -webkit-box-shadow .3s ease-in-out;
+            width: 70%
+        }
+
+        #modFilter:focus {
+            -webkit-box-shadow: 0 0 5px #66afe980;
+            border-color: #66afe9;
+            box-shadow: 0 0 5px #66afe980;
+            outline: none
+        }
+
+        .modFilterFixed {
+            -ms-transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            left: 50%;
+            position: fixed;
+            top: 0;
+            transform: translateX(-50%);
+            width: 100% !important;
+            z-index: 9999
+        }
+
+        .settings {
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px
+        }
+
+        .mods {
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px
+        }
+
+        #modSettings {
+            display: inline-block;
+            width: 100%
+        }
+
+        #deleteDiv {
+            position: relative
+        }
+
+        #modSettings .tabItem {
+            margin-left: 2%;
+            padding: 10px;
+            border-radius: 4px
+        }
+
+        #modSettings_inputs {
+            border: 3px solid;
+            display: none;
+            font-size: large;
+            padding: 20px;
+            text-align: left
+        }
+
+        .modSubSpan {
+            margin-bottom: 3px
+        }
+
+        select {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #2c2c2c;
+            background-image: url(data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23FFF%22%20d%3D%22M2%200L0%202h4zm0%205L0%203h4z%22/%3E%3C/svg%3E);
+            background-position: right 10px center;
+            background-repeat: no-repeat;
+            background-size: 12px 12px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            padding: 12px 20px;
+            width: 200px
+        }
+
+        select:hover {
+            border-color: #555
+        }
+
+        select:focus {
+            border-color: #777;
+            outline: none
+        }
+
+        option {
+            background-color: #2c2c2c;
+            color: #fff
+        }
+
+        #modLoading {
+            -ms-flex-align: center;
+            -ms-flex-pack: center;
+            -webkit-box-align: center;
+            -webkit-box-pack: center;
+            align-items: center;
+            display: none;
+            justify-content: center;
+            margin: 20px
+        }
+
+        #modLoading span {
+            font-size: large;
+            font-weight: 700;
+            margin-left: 15px
+        }
+
+        #loadingImg {
+            -webkit-animation: rotate-anticlockwise 4s linear infinite;
+            animation: rotate-anticlockwise 4s linear infinite;
+            width: 50px
+        }
+
+        #loadTimeout {
+            background: #a0522d;
+            font-weight: bolder;
+            padding: 5px;
+            width: 300px
+        }
+
+        #timeoutPanel {
+            -ms-transform: translateX(-50%);
+            -webkit-transform: translateX(-50%);
+            bottom: 0;
+            font-size: 13px;
+            left: 50%;
+            position: fixed;
+            transform: translateX(-50%);
+            z-index: 999
+        }
+
+        .message {
+            background: #a0522d;
+            display: none;
+            font-weight: bolder;
+            padding: 5px;
+            width: 100%
+        }
+
+        .ModStatus {
+            border-radius: 5px;
+            display: block;
+            font-weight: bolder;
+            left: 2px;
+            padding: 5px;
+            position: absolute;
+            top: 2px
+        }
+
+        .ModMessage {
+            border-radius: 5px;
+            display: none;
+            font-weight: bolder;
+            padding: 5px;
+            position: absolute
+        }
+
+        span#deleteMsg {
+            background-color: #f33b03;
+            right: 32px;
+            top: 2px
+        }
+
+        span#updateMsg {
+            visibility: collapse;
+            background-color: #1087e9;
+            right: 32px;
+            top: 35px
+        }
+
+        #modUpdated {
+            background: #03a500
+        }
+
+        #modOutdated {
+            background: #f37703
+        }
+
+        #modError {
+            background: #f31f03
+        }
+
+        #miniMenu {
+            cursor: pointer;
+            font-size: 25px;
+            position: relative
+        }
+
+        #fa-reload {
+            left: 20px;
+            position: absolute;
+            top: 20px
+        }
+
+        #fa-sun {
+            left: 50px;
+            position: absolute;
+            top: 20px
+        }
+
+        #notificationBadge {
+            display: none;
+            left: 140px;
+            position: absolute;
+            top: 20px;
+            width: 25px;
+            height: 25px
+        }
+
+        #notificationBadge>span {
+            font-size: 15px;
+            position: absolute;
+            right: -6px;
+            top: -4px
+        }
+
+        #notificationBadge>i {
+            vertical-align: top
+        }
+
+        #notLogged i {
+            color: orange;
+            font-size: 70px
+        }
+
+        #notLogged {
+            container-type: inline-size;
+            display: none
+        }
+
+        #notLoggedDesc {
+            padding: 20px;
+            text-align: left
+        }
+
+        #profile {
+            display: none;
+            font-weight: 700;
+            height: 100px;
+            position: absolute;
+            right: 60px;
+            text-align: -webkit-center;
+            top: 20px;
+            width: 120px
+        }
+
+        #profileImg {
+            border-radius: 30%;
+            margin-bottom: 5px;
+            max-width: 100%
+        }
+
+        input[type="checkbox"],
+        #modContent {
+            display: none
+        }
+
+        @-webkit-keyframes flicker {
+            50% {
+                color: #ffd700 !important;
+                text-shadow: 0 0 2px #ff4500, 0 0 5px #ff4500, 0 0 5px #ff0000, 0 0 7px red
+            }
+
+            0%,
+            100% {
+                color: #fff !important;
+                text-shadow: 0 0 4px #ff4500, 0 0 6px #ff4500, 0 0 6px #ff0000, 0 0 10px red
+            }
+        }
+
+        @keyframes flicker {
+            50% {
+                color: #ffd700 !important;
+                text-shadow: 0 0 2px #ff4500, 0 0 5px #ff4500, 0 0 5px #ff0000, 0 0 7px red
+            }
+
+            0%,
+            100% {
+                color: #fff !important;
+                text-shadow: 0 0 4px #ff4500, 0 0 6px #ff4500, 0 0 6px #ff0000, 0 0 10px red
+            }
+        }
+
+        label span {
+            margin: 5px;
+            vertical-align: top
+        }
+
+        #msgPopup {
+            background: #b8860b;
+            border-radius: 15px;
+            bottom: 150%;
+            display: none;
+            height: auto;
+            padding: 10px;
+            position: absolute;
+            width: 600px;
+            z-index: 9999
+        }
+
+        label div.down {
+            bottom: unset !important;
+            top: 150% !important
+        }
+
+        .msgPopup_fieldSet {
+            bottom: 120% !important
+        }
+
+        #overflow {
+            background-color: #000000a6;
+            display: none;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 99999
+        }
+
+        #HiddenContentArea {
+            font-family: sans-serif;
+            font-weight: bolder;
+            line-height: 30px;
+            width: 100%
+        }
+
+        #translatedBy {
+            margin-right: 5px
+        }
+
+        #NotifyMessage {
+            border-radius: 5px;
+            display: none;
+            font-size: large;
+            left: 20px;
+            padding: 10px;
+            position: absolute;
+            text-wrap: nowrap;
+            top: 100%;
+            white-space: nowrap;
+            width: auto
+        }
+
+        .section {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px
+        }
+
+        .section-title {
+            background-color: #f5f5f5;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            font-weight: 700;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            text-align: center;
+            width: 100%
+        }
+
+        .HiddenMod_Div {
+            -moz-user-select: all;
+            -ms-user-select: all;
+            -webkit-user-select: all;
+            cursor: pointer;
+            margin-bottom: 2px;
+            margin-top: 2px;
+            user-select: all
+        }
+
+        .HiddenMod_Div:hover {
+            background-color: #f0121266 !important
+        }
+
+        .section-content {
+            -o-transition: max-height .3s ease;
+            -webkit-transition: max-height .3s ease;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .3s ease
+        }
+
+        .section-content.expanded {
+            margin-left: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            scrollbar-width: thin
+        }
+
+        #nexusMods_Post {
+            fill: #fff;
+            height: 25px;
+            left: 80px;
+            position: absolute;
+            top: 20px;
+            width: 25px
+        }
+
+        #test_CDNSpeed {
+            fill: #fff;
+            height: 25px;
+            left: 110px;
+            position: absolute;
+            top: 20px;
+            width: 25px
+        }
+
+        #moreOptions {
+            border-radius: 10px;
+            display: none;
+            height: auto;
+            left: 90px;
+            max-width: 90%;
+            padding: 10px;
+            position: absolute;
+            top: 50px;
+            width: 60%
+        }
+
+        .open {
+            display: block !important
+        }
+
+        #moreOptions>span {
+            display: block;
+            margin-bottom: 4px;
+            width: 100%
+        }
+
+        #modView_menu {
+            -ms-flex-direction: row;
+            -ms-flex-pack: center;
+            -ms-flex-wrap: nowrap;
+            -webkit-box-direction: normal;
+            -webkit-box-orient: horizontal;
+            -webkit-box-pack: center;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            width: 100%;
+            top: 0;
+            position: sticky
+        }
+
+        #modView_menu>div {
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: larger;
+            font-weight: 700;
+            margin-right: 10px;
+            padding: 10px
+        }
+
+        #Logs {
+            background: #0000004d;
+            padding-left: 10px;
+            text-align: left
+        }
+
+        #Logs>h3 {
+            font-size: large;
+            text-align: left
+        }
+
+        thead {
+            background: #4169e1 !important
+        }
+
+        tr {
+            text-align: center;
+            text-wrap: pretty
+        }
+
+        td.table-bug-title {
+            padding: 10px;
+            width: 150px
+        }
+
+        td.table-bug-post {
+            width: 100px
+        }
+
+        td.table-bug-status {
+            width: 70px
+        }
+
+        td.table-bug-status span.red {
+            color: #ff5b5b;
+            font-weight: 700
+        }
+
+        td.table-bug-status span.green {
+            color: #61ff5b;
+            font-weight: 700
+        }
+
+        td.table-bug-replies {
+            width: 10px
+        }
+
+        td.table-bug-version {
+            width: 130px
+        }
+
+        table {
+            table-layout: auto;
+            width: 100%
+        }
+
+        table a {
+            color: #ffe7b9 !important;
+            cursor: pointer;
+            text-decoration: underline
+        }
+
+        #Posts div.img-wrapper img {
+            width: 100%
+        }
+
+        #Posts div.comment-details ul {
+            display: block;
+            margin: 2px;
+            padding-left: 0
+        }
+
+        div.comment-details ul span.status-premium,
+        div.comment-details ul span.status-supporter {
+            color: #03a500;
+            font-weight: 700
+        }
+
+        #Bugs div.comment-details,
+        #Posts div.comment-details {
+            -ms-flex-direction: column;
+            -ms-flex-item-align: center;
+            -ms-grid-row-align: center;
+            -webkit-box-direction: normal;
+            -webkit-box-orient: vertical;
+            align-self: center;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: column;
+            font-size: 15px;
+            height: 100%;
+            padding: 5px;
+            width: 100%
+        }
+
+        #Bugs ul,
+        #Posts ul {
+            list-style: none;
+            padding: 0
+        }
+
+        li.comment {
+            list-style: none;
+            margin-bottom: 10px;
+            text-align: justify;
+            width: 100%;
+            display: inline-block
+        }
+
+        ol.comment-kids {
+            margin-left: 30px;
+            padding: 0 0 0 20px
+        }
+
+        div.comment-content div.sticky {
+            background: red;
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px
+        }
+
+        div.comment-content {
+            padding: 5px
+        }
+
+        #Bugs div.comment-head,
+        #Posts div.comment-head {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex
+        }
+
+        div.comment-details {
+            -ms-flex-direction: column;
+            -webkit-box-direction: normal;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: column
+        }
+
+        #Bugs time,
+        #Posts time {
+            display: block;
+            margin-bottom: 10px
+        }
+
+        #Posts div.comment-content-text {
+            color: #fff;
+            font-size: 16px;
+            text-align: left
+        }
+
+        #Posts figure.quote {
+            background: #0006;
+            border: 2px solid;
+            border-left: 5px #1568ff solid;
+            font-style: italic
+        }
+
+        #Posts a {
+            display: inline-block
+        }
+
+        #Posts .youtube_container {
+            width: 100%;
+            height: 40vh
+        }
+
+        #Posts .youtube_container iframe {
+            width: 100%;
+            height: 100%
+        }
+
+        #LoadingDecoil {
+            -webkit-animation: rotateAnimation 2s infinite ease-in-out;
+            animation: rotateAnimation 2s infinite ease-in-out;
+            display: block;
+            width: 130px
+        }
+
+        .fieldSet,
+        label {
+            position: relative
+        }
+
+        div.comment-content div.locked,
+        #Posts svg {
+            display: none
+        }
+
+        @-webkit-keyframes rotateAnimation {
+            from {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg)
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes rotateAnimation {
+            from {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg)
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg)
+            }
+        }
+
+        #BugsReplys {
+            -ms-transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            bottom: 10%;
+            display: none;
+            height: 300px;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            width: 100%
+        }
+
+        tr#tr_Reply {
+            -o-transition: opacity .6s ease, visibility .6s ease;
+            -webkit-transition: opacity .6s ease, visibility .6s ease;
+            opacity: 0;
+            transition: opacity .6s ease, visibility .6s ease;
+            visibility: hidden
+        }
+
+        #tr_Reply.show {
+            opacity: 1;
+            visibility: visible
+        }
+
+        tr#tr_Reply ol {
+            padding: 10px
+        }
+
+        #nexusTitleAdvanced {
+            font-size: 30px
+        }
+
+        #menuContent {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -ms-flex-line-pack: center;
+            align-content: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding-top: 50px;
+            padding-bottom: 20px;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap
+        }
+
+        #NexusModsAdvance {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: end;
+            -ms-flex-align: end;
+            align-items: flex-end
+        }
+
+        #nexusIcon {
+            width: 40%;
+            cursor: pointer
+        }
+
+        #PleaseEndorse {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            z-index: 999;
+            padding: 5px
+        }
+
+        #PleaseEndorse legend {
+            text-align: center;
+            font-size: large
+        }
+
+        #PleaseEndorse #endorseMsg {
+            font-size: 15px
+        }
+
+        #PleaseEndorse #closeMe {
+            position: absolute;
+            top: 0;
+            right: 2px;
+            font-size: 20px;
+            z-index: 9999;
+            color: #ff5a5a;
+            cursor: pointer
+        }
+
+        #settings #BlockSize_input,#settings #GameBlockSize_input {
+            width: 60px;
+            border: 0;
+            border-radius: 5px;
+            font-weight: bolder;
+            margin: 0
+        }
+
+        #settings .fieldSet_Option {
+            padding-left: 2px
+        }
+
+        #PremiumDownload,
+        #CDN_speed_PopUp {
+            display: none;
+            position: fixed;
+            left: 50%;
+            right: 50%;
+            top: 50%;
+            width: 600px;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            z-index: 9999999;
+            padding: 5px;
+            border-radius: 5px
+        }
+
+        #CDN_speed_PopUp {
+            width: 650px;
+            font-weight: 700;
+            top: 200px;
+            max-height: 600px;
+            overflow-y: auto;
+            -webkit-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            transform: translateX(-50%)
+        }
+
+        #CDN_speed_PopUp #cdn_results {
+            margin-top: 20px
+        }
+
+        #CDN_speed_PopUp #Start_Test {
+            text-align: center;
+            padding: 10px;
+            font-size: 25px;
+            margin-top: 20px;
+            background-color: #c75d2b;
+            font-variant: all-petite-caps;
+            cursor: pointer
+        }
+
+        #PremiumDownload legend,
+        #CDN_speed_PopUp legend {
+            text-align: center;
+            font-size: 25px
+        }
+
+        #cdnLink {
+            display: block;
+            padding: 5px;
+            margin-bottom: 2px;
+            color: #f5f5dc !important;
+            font-weight: 700;
+            font-size: large;
+            text-decoration: none
+        }
+
+        #PremiumDownload #DownloadName,
+        #DownloadTip {
+            text-align: center;
+            font-size: large;
+            padding: 10px
+        }
+
+        #cdn_results fieldset {
+            margin-bottom: 10px;
+            padding: 10px
+        }
+
+        #cdn_results legend {
+            text-align: left;
+            padding-left: 0
+        }
+
+        .cdn_dldSpeed,
+        .cdn_dldTime {
+            padding: 5px;
+            font-size: 15px
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 25px;
+            overflow: hidden;
+            height: 30px
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: #76c7c0;
+            border-radius: 25px;
+            text-align: center;
+            line-height: 30px;
+            color: #fff;
+            font-weight: 700
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content" style='display: none;'>
+
+        <div id="overflow"></div>
+        <div id="CDN_speed_PopUp">
+            <fieldset>
+                <legend>CDN Speed Test</legend>
+                <div id="CDN_downloadMsg" style="font-size: medium;"></div>
+                <div id="cdn_results"></div>
+                <div id="Start_Test"></div>
+            </fieldset>
+        </div>
+        <div id="PremiumDownload">
+            <fieldset>
+                <legend>Choose CDN Server</legend>
+                <div id="DownloadName"></div>
+                <div id="Links"></div>
+                <div id="DownloadTip"></div>
+            </fieldset>
+        </div>
+        <div id="PleaseEndorse">
+            <div id="closeMe"><i class="fa-solid fa-rectangle-xmark" aria-hidden="true"></i></div>
+            <fieldset>
+                <legend>Gostando da Extensão?</legend>
+                <span id="endorseMsg">Se você gosta da Extensão, por favor <a
+                        href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Vote</a> nela no NexusMods e não
+                    se esqueça de <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Endossar</a>
+                    também! Isso ajuda a divulgar a extensão para quem precisa, e me motiva a continuar trabalhando
+                    nela! Obrigado :D</span>
+
+            </fieldset>
+        </div>
+
+        <div id="profile"><img id="profileImg" draggable="false">
+            <br>
+            <span id="userName">Not Logged.</span>
+        </div>
+        <div id='miniMenu'>
+            <i id='fa-reload' class="fa-solid fa-arrows-rotate" aria-hidden="true" title="Reload"></i>
+            <i id='fa-sun' class="fa-solid fa-sun" aria-hidden="true" title="Extension Theme"></i>
+            <i id='nexusMods_Post' class="fa-solid fa-bars" aria-hidden="true"
+                title="Discussion Page, Donate and Endorse!"></i>
+            <i id='test_CDNSpeed' class="fa-solid fa-gauge-high" aria-hidden="true"
+                title="Test NexusMods CDN Download Speed"></i>
+            <div id="notificationBadge" title="NexusMods Notifications">
+                <span id="notificationCount">0</span>
+                <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                <div id="NotifyMessage"></div>
+            </div>
+            <div id="moreOptions">
+                <span id="more_OfficialPost"></span>
+                <span id="more_DonatePls"></span>
+                <span id="more_EndorsePls"></span>
+            </div>
+        </div>
+        <div id="menuContent">
+            <div id="NexusModsAdvance">
+                <img id="nexusIcon" src="imgs/Advance.png" draggable="false">
+                <span id='extVersion' style="
+            margin-left: 5px;
+            font-size: 15px;
+        "></span>
+            </div>
+            <br>
+            <div id="tabItens">
+                <div class="tabItem settings" id="selected">Settings</div>
+                <div class="tabItem mods">Mods Updates</div>
+            </div>
+
+            <br>
+            <select id="language" name="language">
+                <option value="english">English</option>
+                <option value="portuguese">Português - Brasil</option>
+                <option value="alemao">Deutsch</option>
+                <option value="polones">Polski</option>
+            </select>
+        </div>
+        <div id="settings">
+            <br>
+            <fieldset>
+                <legend id="title3" class="fastButtons">Fast
+                    Buttons</legend>
+                <label for="FastViewButton">
+                    <input type="checkbox" id="FastViewButton">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="FastDownloadButton">
+                    <input type="checkbox" id="FastDownloadButton">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="FastDescriptionButton">
+                    <input type="checkbox" id="FastDescriptionButton">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="FastIgnoreButton">
+                    <input type="checkbox" id="FastIgnoreButton">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="InfiniteScroll">
+                    <input type="checkbox" id="InfiniteScroll">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="AutoTrackDownloaded">
+                    <input type="checkbox" id="AutoTrackDownloaded">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="largerYoutubeVideos">
+                    <input type="checkbox" id="largerYoutubeVideos">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="OriginalImages">
+                    <input type="checkbox" id="OriginalImages">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="showImagesPopup">
+                    <input type="checkbox" id="showImagesPopup">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="showVideosPopup">
+                    <input type="checkbox" id="showVideosPopup">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="FastDownloadTranslates">
+                    <input type="checkbox" id="FastDownloadTranslates">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="AwaysChangelogs">
+                    <input type="checkbox" id="AwaysChangelogs">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="FastDownloadModManager">
+                    <input type="checkbox" id="FastDownloadModManager">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="DescriptionOnMouse">
+                    <input type="checkbox" id="DescriptionOnMouse">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="ArticlesOnMouse">
+                    <input type="checkbox" id="ArticlesOnMouse">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="ProfileOnMouse">
+                    <input type="checkbox" id="ProfileOnMouse">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="WideWebsite">
+                    <input type="checkbox" id="WideWebsite">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="AllNotifications" needrestart="true">
+                    <input type="checkbox" id="AllNotifications">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="BetterModBlocks">
+                    <input type="checkbox" id="BetterModBlocks">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="FixedModMenu">
+                    <input type="checkbox" id="FixedModMenu">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="BetterSearch">
+                    <input type="checkbox" id="BetterSearch">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="SharePostsLinks">
+                    <input type="checkbox" id="SharePostsLinks">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="BlockYoutube">
+                    <input type="checkbox" id="BlockYoutube">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+               
+                <br>
+                <label for="PauseExternalGifs">
+                    <input type="checkbox" id="PauseExternalGifs">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="SimpleSiteNotifications">
+                    <input type="checkbox" id="SimpleSiteNotifications">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="Following_EditMenu">
+                    <input type="checkbox" id="Following_EditMenu">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="NewTab_ExternalURL">
+                    <input type="checkbox" id="NewTab_ExternalURL">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+            </fieldset>
+            <br>
+            
+            <fieldset>
+                <legend id="title3" class="changeContent">Change
+                    Content</legend>
+
+                <fieldset class="fieldSet_Option">
+                    <legend><label for="ModBlock_Render">
+                            <input type="checkbox" id="ModBlock_Render">
+                            <div class="custom-checkbox"></div>
+                            <span></span>
+                            <div id='msgPopup'></div>
+                        </label></legend>
+
+                    <label for="BlockSize_input">
+                        <span></span><input type="text" id="BlockSize_input">
+                    </label>
+                </fieldset><br>
+
+                <fieldset class="fieldSet" haspopuptip="true">
+                    <div id='msgPopup' ></div>
+                    <legend class="CustomGameSize"><span></span>
+                        </legend>
+                        <br> <label for="GameBlock_Render">
+                            <input type="checkbox" id="GameBlock_Render">
+                            <div class="custom-checkbox"></div>
+                            <span></span>
+                            <div id='msgPopup'></div>
+                        </label><br>
+                        <label for="DetailGameBlocks">
+                            <input type="checkbox" id="DetailGameBlocks">
+                            <div class="custom-checkbox"></div>
+                            <span></span>
+                            <div id='msgPopup'></div>
+                        </label><br>
+                    <label for="GameBlockSize_input">
+                        <span></span>
+                        <div id='msgPopup'></div>
+                        <input type="text" id="GameBlockSize_input">
+                    </label>
+                </fieldset>
+            </fieldset><br>
+            <fieldset>
+                <legend id="title3" class="hideContent">Hide
+                    Content</legend>
+                <label for="HideRequerimentsTab">
+                    <input type="checkbox" id="HideRequerimentsTab">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="HideTranslationsTab">
+                    <input type="checkbox" id="HideTranslationsTab">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="HidePermissionsTab">
+                    <input type="checkbox" id="HidePermissionsTab">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="HideChangelogsTab">
+                    <input type="checkbox" id="HideChangelogsTab">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="HideDonationsTab">
+                    <input type="checkbox" id="HideDonationsTab">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="HideStickyPosts">
+                    <input type="checkbox" id="HideStickyPosts">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="NotRenderTrackMods_Button">
+                    <input type="checkbox" id="NotRenderTrackMods_Button">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="HideHiddenMods">
+                    <input type="checkbox" id="HideHiddenMods">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="HideModStatus">
+                    <input type="checkbox" id="HideModStatus">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br><br>
+                <fieldset haspopuptip="true">
+                    <legend><label for="hideContentWords">
+                        <input type="checkbox" id="hideContentWords">
+                        <div class="custom-checkbox"></div>
+                        <span></span>
+                        <div id='msgPopup'></div>
+                    </label></legend>
+                    <textarea id="HiddenContentArea" cols="30" rows="10"></textarea>
+                </fieldset>
+            </fieldset>
+            <br>
+            <fieldset class='fieldSet hiddenMods' haspopuptip="true">
+                <legend id="title3" class="hiddenMods_field">Hidden
+                    Mods</legend>
+                <div id='msgPopup'></div>
+                <div id="HiddenMods"></div>
+            </fieldset>
+            <br>
+            <fieldset style='display: none; width:0;height: 0;'>
+                <legend id="title3" class='extensionSettings'>Extension
+                    Settings</legend>
+                <select id="themeSelector">
+                    <option value="light_1" id="light_1">Tema Claro</option>
+                    <option value="dark_1" id="dark_1">Tema Escuro</option>
+                    <option value="mod_organizer" id="mod_organizer">Mod
+                        Organizer 2</option>
+                </select>
+            </fieldset>
+        </div>
+        <div id="mods">
+            <div id="notLogged">
+                <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+                <br>
+                <i class="fa-solid fa-circle-check" aria-hidden="true" style='display:none;color: limegreen;'></i>
+                <h1 id="notLoggedText">...</h1>
+                <h2 id="notLoggedDesc">...</h2>
+            </div>
+            <div id="modViewDiv">
+                <img id="modPic" draggable="false">
+                <br>
+                <br>
+                <span id="modTitle">Loading...</span>
+                <br>
+                <br>
+                <a id="mainNameTitle" target='_blank'>Loading...</a>
+                <br>
+                <hr>
+                <div id="modView_menu">
+                    <div id='viewDescription'>Description</div>
+                    <div id='viewPosts'>Mod Posts</div>
+                    <div id='viewBugs'>Mod Bugs</div>
+                    <div id='viewLogs'>Mod Logs</div>
+                </div>
+                <div id="Changelog"></div>
+                <div id="Posts"></div>
+                <div id="Bugs"></div>
+                <div id="Logs"></div>
+                <div id="BugsReplys"></div>
+                <img src='icon.png' id="LoadingDecoil">
+            </div>
+            <div id="modContent">
+                <div id="modSettings">
+                    <input type="text" id="modFilter" placeholder="Filter By Text" />
+                    <div id="tabItens" class='modSettingsBtn tabItem'>Mod
+                        Settings</div>
+                </div>
+                <br>
+                <div id="modSettings_inputs">
+                    <label for="NotifyUpdates">
+                        <input type="checkbox" id="NotifyUpdates">
+                        <div class="custom-checkbox"></div>
+                        <span></span>
+                        <div id='msgPopup'></div>
+                    </label>
+                    <br>
+                    <label for="SimpleMode" needrestart="true">
+                        <input type="checkbox" id="SimpleMode">
+                        <div class="custom-checkbox"></div>
+                        <span></span>
+                        <div id='msgPopup'></div>
+                    </label>
+                    <br>
+                    <label for="MemoryMode" needrestart="true">
+                        <input type="checkbox" id="MemoryMode">
+                        <div class="custom-checkbox"></div>
+                        <span></span>
+                        <div id='msgPopup' class="down"></div>
+                    </label>
+                    <br>
+                    <label for="Prevent_TrackOnDownload">
+                        <input type="checkbox" id="Prevent_TrackOnDownload">
+                        <div class="custom-checkbox"></div>
+                        <span></span>
+                        <div id='msgPopup' class="down"></div>
+                    </label>
+                    <br>
+                    <select id="TrackingMods_RenderBy">
+                        <option value="Default" id="Default"></option>
+                        <option value="alfabetico_FileName" id="alfabetico_FileName"></option>
+                        <option value="alfabetico_ModName" id="alfabetico_ModName"></option>
+                        <option value="alfabetico_category" id="alfabetico_category"></option>
+                        <option value="alfabetico_gameName" id="alfabetico_gameName"></option>
+                    </select>
+                </div>
+                <br>
+                <div id="modLoading"><img id="loadingImg" src="imgs/nexusLobby.png"></div>
+                <div id="mod_content">
+                    <fieldset id="modTips" style="text-align: center;font-size: x-large;contain: inline-size;">
+                        <legend id="nexusTitle"></legend>
+                        <div id="modTips"></div>
+                    </fieldset>
+                </div>
+                <div id="timeoutPanel">
+                    <div class="message">
+                        <span id="usageWarning">...</span>
+                        <br>
+                        <span id='dailyUsage'></span>
+                        <br>
+                        <span id='hourUsage'></span>
+                        <br>
+                    </div>
+                    <div id="loadTimeout"></div>
+                </div>
+            </div>
+        </div>
+        <div id="creds">
+            <span id="translatedBy"></span>| By
+            <a href="discord://discordapp.com/users/606186579983335444" target='_blank'>Caiota</a>
+            |
+            <a href="https://next.nexusmods.com/profile/CaiotaBR/about-me" target='_blank'>Caiota on NexusMods</a>
+        </div>
+    </div>
+</body>
+<script src="modules/var.js" async="async"></script>
+<script src="modules/socketHandler.js" async="async"></script>
+<script src="modules/utils.js" async="async"></script>
+<script src="modules/modRenderer.js" async="async"></script>
+<script src="modules/TranslateLoader.js" async="async"></script>
+<script src="config.js" defer="defer"></script>
+
+</html>

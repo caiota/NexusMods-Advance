@@ -1,0 +1,508 @@
+{
+  "extensionName": {
+    "message": "NexusMods Advance",
+    "description": "Enhance your browsing experience on the NexusMods site and manage your mods directly through the browser!"
+  },
+  "translateBy": {
+    "message": "English Translation by Caiota"
+  },
+  "description": {
+    "message": "Enhance your browsing experience on the NexusMods site and manage your mods directly through the browser!"
+  },
+  "siteSettings_Settings": {
+    "message": "Settings"
+  },
+  "siteSettings_Mods": {
+    "message": "Tracking Files"
+  },
+  "fastButtons_title": {
+    "message": "NexusMods Improvements"
+  },
+  "hideContent_title": {
+    "message": "Hide Content"
+  },
+  "hiddenMods_field": {
+    "message": "Hidden Mods",
+    "description": "Hidden Mods from NexusMods Website, click the name to Delete from Ignore List."
+  },
+  "themeLight_title": {
+    "message": "Pink Light Theme"
+  },
+  "themeDark_title": {
+    "message": "Dark Blue Theme"
+  },
+  "themeMO2_title": {
+    "message": "MO2 Gray Theme"
+  },
+  "NexusModsAdvance_addFile": {
+    "message": "Track File on NexusMods Advance"
+  },
+  "TrackMod_Error": {
+    "message": "You can only add files that have been updated less than 1 year ago to avoid unnecessary consumption of the API Key.<br> But you can activate the 'Do not update files in the list' option in the Followed Files settings to be able to add old files."
+  },
+  "TrackMod_Success": {
+    "message": "File Successfully Added to Your File List!"
+  },
+  "NeedApi": {
+    "message": "NexusMods Account Required",
+    "description": "A NexusMods account is required to use this Feature.<br><br> Click <a href='#' id='nexusConnect'>HERE</a> to go to the NexusMods Authorization Page and log in with your account.<br>Authorization will be used to load information for mods you add here."
+  },
+  "ApiPendente": {
+    "message": "Connecting to NexusMods... You will be taken to the Authorization page shortly!"
+  },
+  "NeedApi_Success": {
+    "message": "Successfully Connected to NexusMods Advance!",
+    "description": "Successfully connected to NexusMods! Now, <a href='config.html?popup=true&tab=myMods'>RELOAD THE PAGE</a>"
+  },
+  "button_showGallery": {
+    "message": "Show Button for Image Gallery Popup in Mod Blocks",
+    "description": "Displays an 'Image' button in the mod blocks on the site's home pages to view the mod gallery in a popup. Use ESC to close the popup and Ctrl+Mouse Scroll to increase or decrease the size."
+  },
+  "button_showFiles": {
+    "message": "Show Button for Mod Files Popup on Mod Blocks",
+    "description": "Displays a 'Download' button on mod blocks on the site's main pages to view the Mod Files for download in a popup. Use ESC to close the popup."
+  },
+  "button_infiniteScroll": {
+    "message": "Enable Infinite Navigation",
+    "description": "Automatically loads the next page content when approaching the end of the current page, making navigation infinite and faster. Replaces Website Pagination and Works on Almost Every Page!"
+  },
+  "remove_RequerimentsTab": {
+    "message": "Remove Requirements Tab in Mod Descriptions (Not Recommended)",
+    "description": "Removes the Requirements tab from the description tab when viewing a mod. It is not recommended to use this option, as mods without properly installed requirements will not work properly."
+  },
+  "remove_TranslationsTab": {
+    "message": "Remove Translations Tab in Mod Description",
+    "description": "Removes the Translations Tab from the description tab when viewing a mod."
+  },
+  "remove_PermissionsTab": {
+    "message": "Remove Permissions Tab in Mod Description",
+    "description": "Remove the Permissions Tab from the description tab when viewing a mod."
+  },
+  "remove_ChangelogsTab": {
+    "message": "Remove Changelogs Tab in Mod Descriptions",
+    "description": "Removes the Changelogs tab from the description tab when viewing a mod."
+  },
+  "remove_DonationsTab": {
+    "message": "Remove Donations Tab in Mod Description",
+    "description": "Remove Donations Tab in Mod Description."
+  },
+  "hide_StickyPosts": {
+    "message": "Auto Hide Pinned Posts in Mods' Posts Tab",
+    "description": "Automatically hides Sticky Posts in the Mods Posts Tab"
+  },
+  "BetterModBlocks": {
+    "message": "Improve Mod-Block Rendering on Home Pages",
+    "description": "Renders Mod Blocks better by making them a little bigger, also applies a scroll bar to the mod's Mini-Description, as well as showing more information such as Total Views"
+  },
+  "button_AutoTrackDownloaded": {
+    "message": "Automatically Add Files Marked as 'Downloaded' to NexusMods Advance",
+    "description": "Detects downloaded files and automatically adds files marked as downloaded (<i class='fa-solid fa-cloud-download' aria-hidden='true'></i>) on mod pages to the NexusMods Advance list. You need to go to the files page of each mod to add them to the list. The button will turn green if the mod is added to the list. The file is added to the list simply by loading the page, no clicking required."
+}
+,
+  "button_showDescription": {
+    "message": "Show Button for Mod Description Popup in Mod Blocks",
+    "description": "Displays a 'Description' button in the mod blocks on the site's home pages to view the Mod Description in a popup. Use ESC to close the popup and Ctrl+Mouse Scroll to increase or decrease the size."
+  },
+  "button_ignoreMod": {
+    "message": "Show Button to Ignore Mod on Mod Blocks",
+    "description": "Displays a 'Ignore Mod' button on mod blocks on the site's main pages to remove that mod from your view. If you have at least 1 hidden mod, a list will appear here on NexusMods Advance to manage this list, separated by game."
+  },
+  "button_fastDownloadTranslate": {
+    "message": "Show Quick Download Button on Translation Links (For translation mods)",
+    "description": "Displays a Quick Download button in front of the mod's translation links (if available). Clicking it will download the first available file of that translation."
+  },
+  "alwaysLoad_Changelogs": {
+    "message": "Always Load File Patch Notes (in their description, if possible)",
+    "description": "It will always load and display a box with the changes to that file below the file description, if possible. Large Patch Notes often cause small freezes for 1 or 2 seconds while they are loading."
+  },
+  "autoClick_SlowDownload": {
+    "message": "Ignore Mod Requirement Popup and Automatically Click 'Slow Download' Button",
+    "description": "This feature will Skip the Mod Requirement Popup and automatically click the 'Slow Download' Button, then go back 1 page based on your history, saving you time. This feature also works for Premium users!"
+  },
+  "mousePopup": {
+    "message": "Show Descriptions in a Popup when Hovering over a Mod Link",
+    "description": "Will load and show the mod description in a popup when you hover over a mod link. Use ESC to close the popup and Ctrl+Mouse Scroll to increase or decrease the size."
+  },
+  "ArticlesPopup": {
+    "message": "Show Articles in a Popup when Hovering over an Article Link",
+    "description": "Will load and show the article from the link in a popup. Use ESC to close the popup and Ctrl+Mouse Scroll to increase or decrease the size."
+  },
+  "mouseProfilePopup": {
+    "message": "Show Profiles in a Popup when Hovering Over a User Profile Link",
+    "description": "It will load and show the User Profile in a Popup that you hover over."
+  },
+  "LargerYoutube": {
+    "message": "Increase YouTube Video Size and Enable Full Screen",
+    "description": "Enlarges YouTube videos on the site to 100% width and 600 pixels height and enables YouTube Full Screen feature."
+  },
+  "PopupImages": {
+    "message": "Show Images in Popup on Hover",
+    "description": "Shows the Original Image when hovering over an image, works in the Media Session and on the mods' image page. Use Ctrl+Scroll to increase or decrease the image size and press 1 to Endorse!"
+  },
+  "PopupVideos": {
+    "message": "Load YouTube Videos in Popup when Clicking a Video Block",
+    "description": "Loads the Video from the Video Block in a Popup when clicked, instead of loading a new page, saving time. Use ESC to close the Popup, the key 1 to Endorse (you may need to click on the gray area above the video to endorse) and Ctrl+Mouse Scroll to increase or decrease the size."
+  },
+  "modSettings_button": {
+    "message": "Settings",
+    "description": ""
+  },
+  "modSettings_notifications": {
+    "message": "Show Notifications When Any Mod Updates",
+    "description": "Shows a notification in Windows when a new version of a mod is available. This feature only works once every 5 hours."
+  },
+  "modSettings_simpleMode": {
+    "message": "Show Mods in a Simple List",
+    "description": "It shows the Mods in your List in a much more compact and simple way, without images or details."
+  },
+  "modTab_title": {
+    "message": "The Downloaded Mod Files will appear here",
+    "description": "When downloading a mod, the Downloaded File will be added to a list here! In this tab, you can Check for Updates, read the description, and see the latest version changes by clicking on the Mod Card! You can also view Bugs and User Posts about the Mod."
+  },
+  "MODS_DELAY_MESSAGE": {
+    "message": "Delay to Reload Mods: ",
+    "description": "Mod loading is limited to once every 5 hours, as the NexusMods API has a limit of 500 requests per hour. When you add a new mod, or modify an existing one in your list, it will be updated normally."
+  },
+  "MODS_DELAY_USAGE": {
+    "message": " requests remaining per day.",
+    "description": " requests remaining per hour."
+  },
+  "modOption_delete": {
+    "message": "Remove File"
+  },
+  "modOption_update": {
+    "message": "Download Update"
+  },
+  "modStatus_updated": {
+    "message": "UPDATED"
+  },
+  "modStatus_outdated": {
+    "message": "OUTDATED"
+  },
+  "modStatus_error": {
+    "message": "NO UPDATES FOUND!"
+  },
+  "modStatus_ApiLimit": {
+    "message": "ERROR IN NEXUSAPI"
+  },
+  "version": {
+    "message": "Version: "
+  },
+  "size": {
+    "message": "Size: "
+  },
+  "mod_description": {
+    "message": "Description: ",
+    "description": "ChangeLog: "
+  },
+  "updated": {
+    "message": "Updated: "
+  },
+  "category": {
+    "message": "Category: "
+  },
+  "main_name": {
+    "message": "Mod: "
+  },
+  "new_update": {
+    "message": "Update Available!"
+  },
+  "not_found": {
+    "message": " - NO UPDATE FOUND, FILE HAS PROBABLY CHANGED NAME!"
+  },
+  "mod_changelogFailure": {
+    "message": " Not Found."
+  },
+  "mod_descriptionFailure": {
+    "message": " Not Found."
+  },
+  "temporaryBan": {
+    "message": " ERROR: NEXUS API UNAVAILABLE!"
+  },
+  "filter_placeHolder": {
+    "message": "Filter (Title, Version, Date...)"
+  },
+  "popupTip_Image": {
+    "message": "View Gallery in a Popup"
+  },
+  "popupTip_Description": {
+    "message": "View Description in a Popup"
+  },
+  "popupTip_Files": {
+    "message": "View Files in a Popup"
+  },
+  "popupTip_Ignore": {
+    "message": "Hide this Mod"
+  },
+  "loadOriginalImages": {
+    "message": "Always load High Resolution Images",
+    "description": "Always loads mod images in their original resolution when available, useful for users with very large screens who are bothered by blurry images. (Increases network consumption, some images may be over 5 MB). Does not affect website loading as this feature is only activated when the page is fully loaded."
+  },
+  "ImagePopup": {
+    "message": "Use the Arrow Keys or A/D to navigate between images, ESC to close the PopUp and Ctrl+S to save the current image.",
+    "description": "You can use Ctrl+S to save this image and the Key 1 to endorse it!"
+  },
+  "NotRenderTrackMods_Button": {
+    "message": "Hide 'Track File on NexusMods Advance' Button",
+    "description": "Hides the 'Track File on NexusMods Advance Button' that appears next to the mod file download buttons in the Files section of mods, however, when you download a mod it will still appear in your Extension's Followed Mods List as normal."
+  },
+  "HideContent": {
+    "message": "Hide Content"
+  },
+  "changeContent_title": {
+    "message": "Content Styling"
+  },
+  "HideContent_Enable": {
+    "message": "Blur Images Based on Words",
+    "description": "Blurs images by applying a Blur Effect according to the words defined below line by line. The defined words are searched for in Mod Categories, Author Names and in Mod and Image Titles. This affects the entire site and the Mod Images page."
+  },
+  "Notification": {
+    "message": " Unread Notifications"
+  },
+  "AllNotifications": {
+    "message": "Enable Enhanced Notifications",
+    "description": "Monitors and notifies you better if you receive any Notifications on NexusMods, the extension icon will show the number of unread notifications, if this feature is active."
+  },
+  "WideWebsite": {
+    "message": "Expand Website Width",
+    "description": "Expands the width of the site to occupy all available space that is originally reserved for ads."
+  },
+  "HideHiddenMods": {
+    "message": "Hide 'Hidden' Mods on My Content Page",
+    "description": "Hides mods marked as 'Hidden' in the Your Contents section, a button will appear that can be used to show these hidden files."
+  },
+  "HideMods_button": {
+    "message": "Show Hidden Mods",
+    "description": "Hide Hidden Mods"
+  },
+  "more_OfficialPost": {
+    "message": "<i class='fa-solid fa-comments' aria-hidden='true'></i> Official Mod Page on NexusMods"
+  },
+  "more_DonatePls": {
+    "message": "<i class='fa-solid fa-hand-holding-heart' aria-hidden='true'></i> Donate via PayPal"
+  },
+  "more_EndorsePls": {
+    "message": "<i class='fa-solid fa-trophy' aria-hidden='true'></i> Endorse the Extension",
+    "description": "<i class='fa-solid fa-trophy' aria-hidden='true'></i> Thank You!!"
+  },
+  "modViewPopup_changelog": {
+    "message": "Description"
+  },
+  "modViewPopup_posts": {
+    "message": "Posts"
+  },
+  "modViewPopup_bugs": {
+    "message": "Bugs"
+  },
+  "modViewPopup_logs": {
+    "message": "Changes"
+  },
+  "bugsPage": {
+    "message": "<h3>There's is no Bugs reports or Posts yet</h3>"
+  },
+  "FixedModMenu": {
+    "message": "Enable Floating Menu on Website",
+    "description": "Makes the Site Options Menus stay at the top of the screen when you scroll down, so they are always visible. Works with all site menus from the mods, news, images and videos pages."
+  },
+  "BetterSearch_TranslationsOnly": {
+    "message": "Translations Only?"
+  },
+  "BetterSearch_SearchLanguage": {
+    "message": "Mod in Any Language"
+  },
+  "BetterSearch_SearchEndorsements": {
+    "message": "No Endorsement Filter"
+  },
+  "BetterSearch_SearchDownloads": {
+    "message": "Any Number of Downloads"
+  },
+  "BetterSearch_SearchSize": {
+    "message": "Any Size"
+  },
+  "BetterSearch_EndorsementsSub_Low": {
+    "message": "Little Known Mods"
+  },
+  "BetterSearch_EndorsementsSub_Medium": {
+    "message": "Well Known Mods"
+  },
+  "BetterSearch_EndorsementsSub_High": {
+    "message": "Highly Known Mods"
+  },
+  "BetterSearch_EndorsementsSub_VeryHigh": {
+    "message": "Very Well Known Mods"
+  },
+  "BetterSearch_DownloadsSub_Low": {
+    "message": "Low Number of Downloads"
+  },
+  "BetterSearch_DownloadsSub_Medium": {
+    "message": "Medium Number of Downloads"
+  },
+  "BetterSearch_DownloadsSub_High": {
+    "message": "High Number of Downloads"
+  },
+  "BetterSearch_DownloadsSub_VeryHigh": {
+    "message": "Very High Number of Downloads"
+  },
+  "BetterSearch_SearchType": {
+    "message": "All Mods",
+    "description": "Only Mod Translations"
+  },
+  "BetterSearch": {
+    "message": "Enable Quick Search Filters",
+    "description": "Displays a Small Search Filters Menu when you search for Mods in the WebSite's Search Bar"
+  },
+  "SharePostsLinks": {
+    "message": "Enable Button to Copy Comment Link",
+    "description": "Show a Button on Posts (on the Mods Posts page) to copy the link of the current comment<br><hr>BUG: Currently, there is a bug on the site regarding Comment Pages. Shared links work normally PROVIDED that the comment is from page 1. If the comment is from page 2 or beyond, the site will fail to scroll to the comment because technically it does not exist. I was able to fix this with the extension, but remember: <i>Sharing links to comments from page 2 and beyond with people who do not use the extension will not work.</i>"
+  },
+  "FastCopy_Comment": {
+    "message": "Copy Comment Link",
+    "description": "Comment Link Copied!"
+  },
+ "BlockYoutube": {
+    "message": "Prevent YouTube Iframes from Loading",
+    "description": "Prevents YouTube Iframes from loading by blocking the site's requests until the video is <b>VISIBLE</b>. This can significantly improve the site's loading time, as a large portion of YouTube's resources are CPU-intensive, blocking the site's rendering."
+}
+,
+  "RenderMods_AlfabeticoFile": {
+    "message": "By File Name"
+  },
+  "RenderMods_AlfabeticoMod": {
+    "message": "By Mod Name"
+  },
+  "RenderMods_Categoria": {
+    "message": "By Category"
+  },
+  "RenderMods_Game": {
+    "message": "By Game Name"
+  },
+  "RenderMods_Default": {
+    "message": "Organize Files By"
+  },
+  "HideModStatus": {
+    "message": "Hide Mod Status in Mod Blocks",
+    "description": "Hides the Mod Status on pages, such as 'Downloaded' and 'Update Available'. They are still shown when you hover over the mod."
+  },
+  "EndorseAndVote": {
+    "message": "Enjoying the Extension?",
+    "description": "If you like the Extension, please <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Vote</a> for it on NexusMods and don't forget to <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Endorse</a> as well! This helps spread the word about the Extension to those who need it, and motivates me to keep working on it! Thanks :D"
+  },
+  "fastDownloadTranslate_tip": {
+    "message": "Click to quickly download this translation"
+  },
+  "GameDetails_downloads": {
+    "message": " Downloads"
+  },
+  "GameDetails_mods": {
+    "message": " Mods"
+  },
+  "GameDetails_files": {
+    "message": " Files"
+  },
+  "GameDetails_date": {
+    "message": "Added on: "
+  },
+  "GameDetails_collections": {
+    "message": " Collections"
+  },
+  "GameDetails_genre": {
+    "message": "Genre "
+  },
+  "DetailGameBlocks": {
+    "message": "Show More Details in Game Blocks",
+    "description": "On the NexusMods games page (https://www.nexusmods.com/games), it will show more game details in the blocks, such as the number of collections, mods, downloads, and the game genre.<hr><span style='color: #ffffff;font-weight: 700;'>REQUIRES the Option (Improved Games List) to be enabled.</span>"
+  },
+  "ModBlock_Render": {
+    "message": "Enable Custom Mod Block Size",
+    "description": "On Mod Pages, customize the size of the mod blocks. You can use CSS values like percentages (%) or fixed values such as (px, vw, %...). You can input values such as: 200px, 10%, 10vw. The default value on the site is 20%. This function can be used to increase or decrease the number of mod blocks per row."
+  },
+  "GameBlock_Render": {
+    "message": "Improved Games List",
+    "description": "On the homepage of the site (the games page), it rebuilds the entire list in a much more CPU-efficient way without crashing the browser."
+  },
+  "BlockSize_input": {
+    "message": "Mod Block Size: "
+  },
+  "GameBlockSize_input": {
+    "message": "Game Block Size: ",
+    "description": "Set the size of Game Blocks individually, you can use CSS values ​​like (px, vw, % or any other value of any type)."
+  },
+  "EndorsePopup_done": {
+    "message": "Endorsed Content!"
+  },
+  "EndorsePopup_undone": {
+    "message": "Endorsement Undone!"
+  },
+  "EndorsePopup_cant": {
+    "message": "Unable to Endorse this (invalid item)"
+  },
+  "MemoryMode": {
+    "message": "Do Not Update Files in the List",
+    "description": "This option will ensure that the files in this list are never updated, in case you want to use it just as a list to save the files you want. <br><br>(With this option enabled, you can add older files to this list as usual, and they will be updated normally if you disable this option later, which will result in unnecessary consumption of your API key. Also, the update status of the files will not be shown.)<br><br>New files are still updated once to ensure no information is incorrect."
+  },
+  "PauseExternalGifs": {
+    "message": "Pause External GIFs",
+    "description": "Will prevent the playback of external GIFs (like imgur or other GIF servers); the GIF will still play when hovering over it."
+  },
+  "PremiumDownload": {
+    "message": "Choose the Download Server",
+    "description": "Use the Ctrl key on your keyboard along with a click to download the compressed file normally, or click normally to download the file using a mod manager like Vortex or Mod Organizer 2."
+  },
+  "SimpleSiteNotifications": {
+    "message": "Site Notifications on the Right",
+    "description": "Displays site notifications when performing actions, such as following a mod, in a simpler way on the right side of the screen. No annoying popup with a close button."
+  },
+  "CDNTest_legend": {
+    "message": "Server Speed Test",
+    "description": "This function is used to measure the download speed of the NexusMods Premium CDN servers. Before starting the test, make sure there are no other downloads, videos, streams, or music playing through the Internet at the moment, as anything using the network can affect the result. Be aware that this test is also never 100% accurate. To cancel the test, simply reload this page.<br> The test will be conducted by downloading a 105 MB file from each of the 6 servers and measuring the time it takes to determine the average download speed.<br><br>Credits: <a href='https://www.nexusmods.com/site/mods/423' target='_blank'>https://www.nexusmods.com/site/mods/423</a>"
+  },
+  "CDNTest_start": {
+    "message": "Start Test"
+  },
+  "timeMeansure": {
+    "message": "Seconds",
+    "description": "Minutes,"
+  },
+  "meansureResponse": {
+    "message": "The test took: ",
+    "description": " to download a 105MB file"
+  },
+  "cdnTest_responseSpeed": {
+    "message": "Download Speed: ~"
+  },
+  "cdnTest_inlineButton": {
+    "message": "Test Speed of CDN Servers on NexusMods Advance"
+  },
+  "CustomGameSize": {
+    "message": "Nexus Games Page Improvements",
+    "description": "Adjustments Related to the NexusMods Games Page (nexusmods.com/games).<br>The text box for Game Block Size accepts CSS values like px, vw, or %. For example: 100px, 33vw, or 30%. The site's default value is usually 11.111%."
+  },
+  "Following_EditMenu": {
+    "message": "Transform the Text Box Options Menu into a Floating Menu",
+    "description": "Transforms the options menu of text boxes (such as when posting an article or replying to a comment) into a floating menu that follows the mouse when you click, making editing long texts much easier. Just click, and the menu will come to you."
+  },
+  "Favorite_Game": {
+    "message": "Added to Favorite Games!",
+    "description": "Removed from Favorite Games!"
+  },
+  "Filter_Dropdown_1": {
+    "message": "Sort by Name",
+    "description": "Sort by Date"
+  },
+  "Filter_Dropdown_2": {
+    "message": "Sort by Downloads",
+    "description": "Sort by Mods"
+  },
+  "Filter_Dropdown_3": {
+    "message": "Sort by Genre",
+    "description": "Sort by Collections"
+  },
+  "NewTab_ExternalURL": {
+    "message": "Always Open External Links in a New Tab",
+    "description": "External links from websites other than NexusMods.com will be opened in a new tab by default."
+  },
+  "Prevent_TrackOnDownload": {
+    "message": "Do Not Add Files to Your Tracking List When Clicking Download Buttons",
+    "description": "Prevents the Extension from Adding Files to Your List when clicking any Download button on the mods' Files page. Only the orange button to Add Files to NexusMods Advance will work."
+  }
+}

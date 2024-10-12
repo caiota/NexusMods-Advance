@@ -1,0 +1,514 @@
+{
+  "extensionName": {
+    "message": "NexusMods Advance",
+    "description": "Verbessere Dein Surferlebnis auf der NexusModsSite und verwalte Deine Mods direkt über den Browser!"
+  },
+  "translateBy": {
+    "message": "Deutsche Übersetzung von bapcules"
+  },
+  "description": {
+    "message": "Verbessere Dein Surferlebnis auf der NexusMods-Site und verwalte Deine Mods direkt über den Browser!"
+  },
+  "siteSettings_title": {
+    "message": "NexusMods Site Verbesserungen"
+  },
+  "siteSettings_Settings": {
+    "message": "Einstellungen"
+  },
+  "siteSettings_Mods": {
+    "message": "Gefolgte Dateien"
+  },
+  "fastButtons_title": {
+    "message": "NexusMods Verbesserungen"
+  },
+  "hideContent_title": {
+    "message": "Inhalt ausblenden"
+  },
+  "changeContent_title": {
+    "message": "Inhaltsgestaltung"
+  },
+  "hiddenMods_field": {
+    "message": "Versteckte Mods",
+    "description": "Versteckte Mods von der NexusMods-Website. Klicken Sie auf den Namen, um ihn aus der Ignorierliste zu löschen."
+  },
+  "themeLight_title": {
+    "message": "Pink Helles Theme"
+  },
+  "themeDark_title": {
+    "message": "Dunkelblaues Theme"
+  },
+  "themeMO2_title": {
+    "message": "MO2 Graues Theme"
+  },
+  "NexusModsAdvance_addFile": {
+    "message": "Datei zu NexusMods Advance hinzufügen"
+  },
+  "TrackMod_Error": {
+    "message": "Sie können nur Dateien hinzufügen, die vor weniger als einem Jahr aktualisiert wurden, um unnötigen Verbrauch des API-Schlüssels zu vermeiden.<br> Sie können jedoch die Option „Listendateien nicht aktualisieren“ in den Einstellungen für verfolgte Dateien aktivieren, um hinzufügen zu können Alte Dateien."
+  },
+  "TrackMod_Success": {
+    "message": "Datei erfolgreich zu Deiner Modliste hinzugefügt!"
+  },
+  "NeedApi": {
+    "message": "NexusMods Account Erforderlich",
+    "description": "Zur Nutzung dieser Funktion ist ein NexusMods-Konto erforderlich..<br><br> Click <a href='#' id='nexusConnect'>HERE</a> um zur NexusMods-Autorisierungsseite zu gelangen und Dich mit Deinem Konto anzumelden.<br>Die Autorisierung wird verwendet, um Informationen für Mods zu laden, die Du hier hinzufügst."
+  },
+  "ApiPendente": {
+    "message": "Verbindung zu NexusMods wird hergestellt... Du wirst in Kürze zur Autorisierungsseite weitergeleitet!"
+  },
+  "NeedApi_Success": {
+    "message": "Erfolgreich mit NexusMods Advance verbunden!",
+    "description": "Erfolgreich mit NexusMods verbunden! Now, <a href='config.html?popup=true&tab=myMods'>RELOAD THE PAGE</a>"
+  },
+  "button_showGallery": {
+    "message": "Schaltfläche für Popup mit Bildgalerie in den Mod-Blöcken anzeigen",
+    "description": "Zeigt eine 'Bild'-Schaltfläche in den Mod-Blöcken auf den Startseiten der Website, um die Mod-Galerie in einem Popup anzuzeigen. Verwenden Sie ESC, um das Popup zu schließen, und Strg+Mausrad, um die Größe zu vergrößern oder zu verkleinern."
+  },
+  "button_showFiles": {
+    "message": "Schaltfläche für Mod Dateien-Popup auf Mod Blöcken anzeigen",
+    "description": "Zeigt eine Schaltfläche „Herunterladen“ in Mod-Blöcken auf den Hauptseiten der Site an, um die Mod-Dateien zum Download in einem Popup anzuzeigen. Verwende ESC, um das Popup zu schließen.."
+  },
+  "button_infiniteScroll": {
+    "message": "Unendliches Scrollen Aktivieren",
+    "description": "Lädt automatisch den Inhalt der nächsten Seite, wenn Sie sich dem Ende der aktuellen Seite nähern, wodurch die Navigation unbegrenzt und schneller wird. Ersetzt die Site-Seite und funktioniert auf fast allen Seiten!"
+  },
+  "remove_RequerimentsTab": {
+    "message": "Registerkarte „Anforderungen“ in Mod Beschreibungen entfernen (nicht empfohlen))",
+    "description": "Entfernt die Registerkarte „Anforderungen“ aus der Beschreibungsregisterkarte beim Anzeigen eines Mods. Es wird nicht empfohlen, diese Option zu verwenden, da Mods ohne ordnungsgemäß installierte Anforderungen nicht ordnungsgemäß funktionieren.."
+  },
+  "remove_TranslationsTab": {
+    "message": "Registerkarte „Übersetzungen“ in der Mod Beschreibung entfernen",
+    "description": "Entfernt die Registerkarte „Übersetzungen“ aus der Registerkarte „Beschreibung“ beim Anzeigen eines Mods."
+  },
+  "remove_PermissionsTab": {
+    "message": "Registerkarte „Berechtigungen“ in der Mod Beschreibung entfernen",
+    "description": "Entfernt die Registerkarte „Berechtigungen“ aus der Registerkarte „Beschreibung“, wenn Du einen Mod anzeigst."
+  },
+  "remove_ChangelogsTab": {
+    "message": "Registerkarte „Changelogs“ in Mod-Beschreibungen entfernen",
+    "description": "Entfernt die Registerkarte „Changelogs“ aus der Registerkarte „Beschreibung“ beim Anzeigen eines Mods."
+  },
+  "remove_DonationsTab": {
+    "message": "Registerkarte „Spenden“ in der Mod-Beschreibung entfernen",
+    "description": "Registerkarte „Spenden“ in der Mod-Beschreibung entfernen."
+  },
+  "hide_StickyPosts": {
+    "message": "Angeheftete Beiträge im Beiträge Tab der Mods automatisch ausblenden",
+    "description": "Blendet angeheftete Beiträge im Mods Posts Tab automatisch aus"
+  },
+  "BetterModBlocks": {
+    "message": "Mod Block Rendering auf Homepages verbessern",
+    "description": "Rendert Mod Blöcke besser, indem sie etwas größer gemacht werden, wendet auch eine Bildlaufleiste auf die Mini Beschreibung des Mods an und zeigt mehr Informationen wie die Gesamtzahl der Aufrufe an"
+  },
+  "button_AutoTrackDownloaded": {
+    "message": "Markierte Dateien als 'Heruntergeladen' automatisch zu NexusMods Advance hinzufügen",
+    "description": "Erkennt heruntergeladene Dateien und fügt die als heruntergeladen markierten Dateien (<i class='fa-solid fa-cloud-download' aria-hidden='true'></i>) auf den Mod-Seiten automatisch der NexusMods Advance-Liste hinzu. Es ist erforderlich, die Dateiseite jedes Mods zu besuchen, um sie zur Liste hinzuzufügen. Der Button wird grün, wenn der Mod zur Liste hinzugefügt wird. Die Datei wird zur Liste hinzugefügt, sobald die Seite geladen wird, es ist kein Klick erforderlich."
+}
+,
+  "button_showDescription": {
+    "message": "Schaltfläche für Popup mit Mod-Beschreibung in den Mod-Blöcken anzeigen",
+    "description": "Zeigt eine 'Beschreibung'-Schaltfläche in den Mod-Blöcken auf den Startseiten der Website, um die Mod-Beschreibung in einem Popup anzuzeigen. Verwenden Sie ESC, um das Popup zu schließen, und Strg+Mausrad, um die Größe zu vergrößern oder zu verkleinern."
+  },
+  "button_ignoreMod": {
+    "message": "Schaltfläche „Mod überspringen“ auf Mod-Blöcken anzeigen",
+    "description": "Wenn Sie mindestens einen versteckten Mod haben, wird hier auf NexusMods Advance eine Liste angezeigt, in der Sie diese Liste verwalten können, getrennt nach Spielen."
+  },
+  "button_fastDownloadTranslate": {
+    "message": "Schaltfläche „Schnelldownload“ bei Übersetzungslinks anzeigen (für Übersetzungsmods)",
+    "description": "Zeigt eine Schaltfläche „Schnelldownload“ vor den Übersetzungslinks des Mods an (sofern verfügbar). Wenn Du darauf klickst, wird die erste verfügbare Datei dieser Übersetzung heruntergeladen.."
+  },
+  "alwaysLoad_Changelogs": {
+    "message": "Immer Datei-Patchnotizen laden (wenn möglich in der Beschreibung)",
+    "description": "Es wird immer geladen und wenn möglich unterhalb der Dateibeschreibung ein Feld mit den Änderungen an dieser Datei angezeigt. Große Patchnotizen verursachen beim Laden oft kleine Einfrierungen für 1 oder 2 Sekunden.."
+  },
+  "autoClick_SlowDownload": {
+    "message": "Umgehe das Popup mit den Mod Anforderungen und klicke automatisch auf die Schaltfläche „Langsamer Download“ des Mods",
+    "description": "Diese Funktion überspringt das Mod-Anforderungs-Popup und klickt automatisch auf die Schaltfläche „Langsamer Download“. Anschließend geht es basierend auf dem Verlauf eine Seite zurück, was Zeit spart. Diese Funktion funktioniert auch für Premium-Benutzer!"
+  },
+  "mousePopup": {
+    "message": "Beschreibung in einem Popup anzeigen, wenn der Mauszeiger über einen Mod-Link fährt",
+    "description": "Lädt und zeigt die Beschreibung des Mods, über den Sie mit der Maus fahren, in einem Popup an. Verwenden Sie ESC, um das Popup zu schließen, und Strg+Mausrad, um die Größe zu vergrößern oder zu verkleinern."
+  },
+  "ArticlesPopup": {
+    "message": "Artikel in einem Popup anzeigen, wenn der Mauszeiger über einen Artikel-Link fährt",
+    "description": "Lädt und zeigt den Artikel des Links in einem Popup an. Verwenden Sie ESC, um das Popup zu schließen, und Strg+Mausrad, um die Größe zu vergrößern oder zu verkleinern."
+  },
+  "mouseProfilePopup": {
+    "message": "Profile in einem Popup anzeigen, wenn der Mauszeiger über einen Benutzerprofil Link bewegt wird",
+    "description": "Wird geladen und zeigt das Benutzerprofil in einem Popup an, über das Du mit der Maus fährst."
+  },
+  "LargerYoutube": {
+    "message": "Erhöhen Sie die Größe des YouTube-Videos und erlauben Sie den Vollbildmodus",
+    "description": "Vergrößert YouTube-Videos auf der Website auf 100 % Breite und 600 Pixel Höhe und aktiviert die YouTube-Vollbildfunktion."
+  },
+  "PopupImages": {
+    "message": "Zeigt Popup Bilder beim Darüberfahren",
+    "description": "Zeigt das Originalbild an, wenn Sie mit der Maus über ein Bild fahren. Funktioniert in der Mediensitzung und auf der Mods-Bildseite. Verwenden Sie Strg+Bildlauf, um die Bildgröße zu vergrößern oder zu verkleinern, und drücken Sie 1, um zu bestätigen!"
+  },
+  "PopupVideos": {
+    "message": "YouTube-Videos in einem Popup laden, wenn ein Video-Block angeklickt wird",
+    "description": "Lädt das Video aus dem Video-Block in einem Popup beim Klicken, anstatt eine neue Seite zu laden, wodurch Zeit gespart wird. Verwenden Sie ESC, um das Popup zu schließen, die Taste 1, um zu unterstützen (möglicherweise müssen Sie auf den grauen Bereich über dem Video klicken, um zu unterstützen) und Strg+Mausrad, um die Größe zu vergrößern oder zu verkleinern."
+  },
+  "modSettings_button": {
+    "message": "Eintellungen",
+    "description": ""
+  },
+  "modSettings_notifications": {
+    "message": "Benachrichtigungen bei Mod Updates anzeigen",
+    "description": "Zeigt eine Benachrichtigung in Windows an, wenn eine neue Version eines Mods verfügbar ist. Diese Funktion funktioniert nur einmal alle 5 Stunden."
+  },
+  "modSettings_simpleMode": {
+    "message": "Zeigt Mods in einer einfachen Liste",
+    "description": "Es zeigt die Mods in Ihrer Liste viel kompakter und einfacher an, ohne Bilder oder Details."
+  },
+  "modTab_title": {
+    "message": "Die heruntergeladenen Mod-Dateien werden hier angezeigt",
+    "description": "Beim Herunterladen eines Mods wird die heruntergeladene Datei hier zu einer Liste hinzugefügt! In diesem Tab können Sie nach Updates suchen, die Beschreibung lesen und die neuesten Versionsänderungen sehen, indem Sie auf die Mod-Karte klicken! Außerdem können Sie Fehlerberichte und Benutzerposts zum Mod einsehen."
+  },
+  "MODS_DELAY_MESSAGE": {
+    "message": "Verzögerung beim Neuladen von Mods: ",
+    "description": "Das Laden von Mods ist auf einmal alle 5 Stunden begrenzt, da die NexusMods API ein Limit von 500 Anfragen pro Stunde hat. Wenn Du einen neuen Mod hinzufügst oder einen vorhandenen in Ihrer Liste änderst, wird dieser normal aktualisiert.."
+  },
+  "MODS_DELAY_USAGE": {
+    "message": " Verbleibende Anfragen pro Tag.",
+    "description": " Verbleibende Anfragen pro Stunde."
+  },
+  "modOption_delete": {
+    "message": "Datei Entfernen"
+  },
+  "modOption_update": {
+    "message": "Update herunterladen"
+  },
+  "modStatus_updated": {
+    "message": "AKTUALISIERT"
+  },
+  "modStatus_outdated": {
+    "message": "VERALTET"
+  },
+  "modStatus_error": {
+    "message": "KEIN UPDATE GEFUNDEN!"
+  },
+  "modStatus_ApiLimit": {
+    "message": "FEHLER IN NEXUSAPI"
+  },
+  "version": {
+    "message": "Version: "
+  },
+  "size": {
+    "message": "Grösse: "
+  },
+  "mod_description": {
+    "message": "Beschreibung: ",
+    "description": "Änderungsprotokoll: "
+  },
+  "updated": {
+    "message": "Aktualisiert: "
+  },
+  "category": {
+    "message": "Kategorie: "
+  },
+  "main_name": {
+    "message": "Mod: "
+  },
+  "new_update": {
+    "message": "Update Verfügbar!"
+  },
+  "not_found": {
+    "message": " - KEIN UPDATE GEFUNDEN, DIE DATEI HAT WAHRSCHEINLICH DEN NAME GEÄNDERT!"
+  },
+  "mod_changelogFailure": {
+    "message": " Nicht Gefunden."
+  },
+  "mod_descriptionFailure": {
+    "message": " Nicht Gefunden."
+  },
+  "temporaryBan": {
+    "message": " FEHLER: NEXUS API NICHT VERFÜGBAR!"
+  },
+  "filter_placeHolder": {
+    "message": "Filter (Titel, Version, Datum...)"
+  },
+  "popupTip_Image": {
+    "message": "Zeige Gallerie in einem Popup"
+  },
+  "popupTip_Description": {
+    "message": "Zeige Beschreibung in einem Popup"
+  },
+  "popupTip_Files": {
+    "message": "Zeige Dateien in einem Popup"
+  },
+  "popupTip_Ignore": {
+    "message": "Verstecke diesen Mod"
+  },
+  "loadOriginalImages": {
+    "message": "Immer hochauflösende Bilder laden",
+    "description": "Lädt Mod Bilder immer in ihrer Originalauflösung, wenn verfügbar. Nützlich für Benutzer mit sehr großen Bildschirmen, die sich an verschwommenen Bildern stören. (Erhöht den Netzwerkverbrauch, einige Bilder können über 5 MB groß sein.) Hat keinen Einfluss auf das Laden der Website, da diese Funktion nur aktiviert wird, wenn die Seite vollständig geladen ist.."
+  },
+  "ImagePopup": {
+    "message": "Verwenden Sie die Pfeiltasten oder A/D, um zwischen den Bildern zu navigieren, ESC, um das PopUp zu schließen, und Ctrl+S, um das aktuelle Bild zu speichern.",
+    "description": "Sie können Strg+S verwenden, um dieses Bild zu speichern, und die Taste 1, um es zu unterstützen!"
+  },
+  "NotRenderTrackMods_Button": {
+    "message": "Schaltfläche „Datei zu NexusMods Advance hinzufügen“ ausblenden",
+    "description": "Blendet die Schaltfläche „Datei auf NexusMods verfolgen – Erweiterte Schaltfläche“ aus, die neben den Schaltflächen zum Herunterladen von Moddateien im Abschnitt „Dateien“ von Mods angezeigt wird. Wenn Sie jedoch einen Mod herunterladen, wird dieser weiterhin wie gewohnt in der Liste der verfolgten Mods Ihrer Erweiterung angezeigt."
+  },
+  "HideContent": {
+    "message": "Inhalt ausblenden"
+  },
+  "HideContent_Enable": {
+    "message": "Verwischen Sie Bilder basierend auf Wörtern",
+    "description": "Verwischt die Bilder, indem ein Unschärfeeffekt gemäß den unten definierten Wörtern Zeile für Zeile angewendet wird. Die definierten Wörter werden in Mod-Kategorien, Autorennamen sowie Mod-Titeln und Bildern gesucht. Dies betrifft die gesamte Website und die Mod-Images-Seite"
+  },
+  "Notification": {
+    "message": " Ungelesene Benachrichtigungen"
+  },
+  "AllNotifications": {
+    "message": "Erweiterte Benachrichtigungen aktivieren",
+    "description": "Überwacht und benachrichtigt Sie besser, wenn Sie Benachrichtigungen zu NexusMods erhalten. Das Erweiterungssymbol zeigt die Anzahl der ungelesenen Benachrichtigungen an, wenn diese Funktion aktiv ist."
+  },
+  "WideWebsite": {
+    "message": "Erweitern Sie die Website-Breite",
+    "description": "Erweitert die Breite der Site, um den gesamten verfügbaren Platz auszufüllen, der ursprünglich für Anzeigen reserviert ist."
+  },
+  "HideHiddenMods": {
+    "message": "Als „Versteckt“ gekennzeichnete Inhalte auf der Seite „Meine Inhalte“ ausblenden“",
+    "description": "Blenden Sie Mods aus, die im Abschnitt „Ihre Inhalte“ als „Versteckt“ markiert sind. Es erscheint eine Schaltfläche, mit der Sie diese versteckten Dateien anzeigen können."
+  },
+  "HideMods_button": {
+    "message": "Versteckte Mods anzeigen",
+    "description": "Versteckte Mods ausblenden"
+  },
+  "more_OfficialPost": {
+    "message": "<i class='fa-solid fa-comments' aria-hidden='true'></i> Offizielle Mod-Seite auf NexusMods"
+  },
+  "more_DonatePls": {
+    "message": "<i class='fa-solid fa-hand-holding-heart' aria-hidden='true'></i> Spenden Sie über PayPal"
+  },
+  "more_EndorsePls": {
+    "message": "<i class='fa-solid fa-trophy' aria-hidden='true'></i> Unterstützen Sie die Verlängerung",
+    "description": "<i class='fa-solid fa-trophy' aria-hidden='true'></i> Danke schön!!"
+  },
+  "modViewPopup_changelog": {
+    "message": "Beschreibung"
+  },
+  "modViewPopup_posts": {
+    "message": "Beiträge"
+  },
+  "modViewPopup_bugs": {
+    "message": "Fehler"
+  },
+  "modViewPopup_logs": {
+    "message": "Änderungen"
+  },
+  "bugsPage": {
+    "message": "<h3>Noch keine Fehlerberichte oder Beiträge</h3>"
+  },
+  "FixedModMenu": {
+    "message": "Aktivieren Sie das schwebende Menü auf der Website",
+    "description": "Sorgt dafür, dass die Site-Optionsmenüs beim Scrollen nach unten oben auf dem Bildschirm bleiben, sodass sie immer sichtbar sind. Funktioniert mit allen Mods-Seiten-Website-Menüs, Nachrichten, Bildern und Videos."
+  },
+  "BetterSearch_TranslationsOnly": {
+    "message": "Nur Übersetzungen?"
+  },
+  "BetterSearch_SearchLanguage": {
+    "message": "Mod in Jeder Sprache"
+  },
+  "BetterSearch_SearchEndorsements": {
+    "message": "Kein Endorsement-Filter"
+  },
+  "BetterSearch_SearchDownloads": {
+    "message": "Beliebige Anzahl von Downloads"
+  },
+  "BetterSearch_SearchSize": {
+    "message": "Beliebige Größe"
+  },
+  "BetterSearch_EndorsementsSub_Low": {
+    "message": "Wenig Empfohlene Mods"
+  },
+  "BetterSearch_EndorsementsSub_Medium": {
+    "message": "Mäßig Empfohlene Mods"
+  },
+  "BetterSearch_EndorsementsSub_High": {
+    "message": "Stark Empfohlene Mods"
+  },
+  "BetterSearch_EndorsementsSub_VeryHigh": {
+    "message": "Sehr Stark Empfohlene Mods"
+  },
+  "BetterSearch_DownloadsSub_Low": {
+    "message": "Geringe Anzahl an Downloads"
+  },
+  "BetterSearch_DownloadsSub_Medium": {
+    "message": "Mittlere Anzahl an Downloads"
+  },
+  "BetterSearch_DownloadsSub_High": {
+    "message": "Hohe Anzahl an Downloads"
+  },
+  "BetterSearch_DownloadsSub_VeryHigh": {
+    "message": "Sehr hohe Anzahl an Downloads"
+  },
+  "BetterSearch_SearchType": {
+    "message": "Alle Mods",
+    "description": "Nur Mod-Übersetzungen"
+  },
+  "BetterSearch": {
+    "message": "Aktivieren Sie Schnellsuchfilter",
+    "description": "Zeigt ein kleines Menü für Suchfilter an, wenn Sie nach Mods in der Suchleiste der Website suchen"
+  },
+  "SharePostsLinks": {
+    "message": "Aktiviere die Schaltfläche zum Teilen des Kommentarlinks",
+    "description": "Zeige einen Button in den Beiträgen (auf der Seite Mod-Beiträge) an, um den Link des aktuellen Kommentars zu kopieren<br><hr>FEHLER: Derzeit gibt es einen Fehler auf der Website in Bezug auf Kommentarseiten. Geteilte Links funktionieren normalerweise, VORAUSGESETZT, dass der Kommentar von Seite 1 stammt. Wenn der Kommentar von Seite 2 oder darüber stammt, wird die Website nicht in der Lage sein, zum Kommentar zu scrollen, da er technisch gesehen nicht existiert. Ich konnte das mit der Erweiterung beheben, aber denk daran: <i>Das Teilen von Links zu Kommentaren ab Seite 2 mit Personen, die die Erweiterung nicht verwenden, wird nicht funktionieren.</i>"
+  },
+  "FastCopy_Comment": {
+    "message": "Kommentarlink kopieren",
+    "description": "Link kopiert!"
+  },
+ "BlockYoutube": {
+    "message": "Verhindern des Ladens von YouTube-Iframes",
+    "description": "Verhindert das Laden von YouTube-Iframes, indem die Anfragen der Seite blockiert werden, bis das Video <b>SICHTBAR</b> ist. Dies kann die Ladezeit der Seite erheblich verbessern, da viele Ressourcen von YouTube viel CPU-Leistung benötigen und die Seitenrendering blockieren."
+}
+,
+  "RenderMods_AlfabeticoFile": {
+    "message": "Nach Dateiname"
+  },
+  "RenderMods_AlfabeticoMod": {
+    "message": "Nach Mod-Name"
+  },
+  "RenderMods_Categoria": {
+    "message": "Nach Kategorie"
+  },
+  "RenderMods_Game": {
+    "message": "Nach Spielname"
+  },
+  "RenderMods_Default": {
+    "message": "Dateien organisieren nach"
+  },
+  "HideModStatus": {
+    "message": "Mod-Status in Mod-Blöcken ausblenden",
+    "description": "Verbirgt die Mod-Status auf den Seiten, wie zum Beispiel 'Heruntergeladen' und 'Update verfügbar'. Sie werden jedoch weiterhin angezeigt, wenn Sie mit der Maus über den Mod fahren."
+  },
+  "EndorseAndVote": {
+    "message": "Gefällt Ihnen die Erweiterung?",
+    "description": "Wenn Ihnen die Erweiterung gefällt, <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Stimmen Sie dafür</a> auf NexusMods ab und vergessen Sie nicht, <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Unterstützen Sie auch</a>! Dies trägt dazu bei, die Erweiterung denjenigen bekannt zu machen, die sie benötigen, und motiviert mich, weiter daran zu arbeiten! Danke :D"
+  },
+  "fastDownloadTranslate_tip": {
+    "message": "Klicken Sie, um diese Übersetzung schnell herunterzuladen"
+  },
+  "GameDetails_downloads": {
+    "message": " Downloads"
+  },
+  "GameDetails_mods": {
+    "message": " Mods"
+  },
+  "GameDetails_files": {
+    "message": " Dateien"
+  },
+  "GameDetails_date": {
+    "message": "Hinzugefügt in: "
+  },
+  "GameDetails_collections": {
+    "message": " Sammlungen"
+  },
+  "GameDetails_genre": {
+    "message": "Genre "
+  },
+  "DetailGameBlocks": {
+    "message": "Mehr Details in den Spielblöcken anzeigen",
+    "description": "Auf der Spiele-Seite von NexusMods (https://www.nexusmods.com/games) werden mehr Spieldetails in den Blöcken angezeigt, wie z.B. die Anzahl der Sammlungen, Mods, Downloads und das Genre des Spiels.<hr><span style='color: #ffffff;font-weight: 700;'>ERFORDERT die Option (Verbesserte Spieleliste) Aktiv sein.</span>"
+  },
+  "ModBlock_Render": {
+    "message": "Benutzerdefinierte Größe der Mod-Blöcke aktivieren",
+    "description": "Auf den Mod-Seiten können Sie die Größe der Mod-Blöcke anpassen. Sie können CSS-Werte wie Prozentsätze (%) oder feste Werte wie (px, vw, %...) verwenden. Sie können Werte wie zum Beispiel: 200px, 10%, 10vw eingeben. Der Standardwert der Seite beträgt 20%. Diese Funktion kann verwendet werden, um die Anzahl der Mod-Blöcke pro Zeile zu erhöhen oder zu verringern."
+  },
+  "GameBlock_Render": {
+    "message": "Verbesserte Spieleliste",
+    "description": "Auf der Startseite der Website (der Spiele-Seite) wird die gesamte Liste auf eine viel effizientere Weise für die CPU neu erstellt, ohne den Browser zum Absturz zu bringen."
+  },
+  "BlockSize_input": {
+    "message": "Größe der Mod-Blöcke: "
+  },
+  "GameBlockSize_input": {
+    "message": "Größe der Spielblöcke: ",
+    "description": "Legen Sie die Größe der Spielblöcke individuell fest. Sie können CSS-Werte wie (px, vw, % oder jeden anderen Wert beliebigen Typs) verwenden."
+  },
+  "EndorsePopup_done": {
+    "message": "Empfohlener Inhalt!"
+  },
+  "EndorsePopup_undone": {
+    "message": "Bestätigung gebrochen!"
+  },
+  "EndorsePopup_cant": {
+    "message": "Dies kann nicht bestätigt werden (ungültiger Artikel)"
+  },
+  "MemoryMode": {
+    "message": "Dateien in der Liste nicht aktualisieren",
+    "description": "Diese Option sorgt dafür, dass die Dateien in dieser Liste niemals aktualisiert werden, falls Sie sie nur als Speicherliste verwenden möchten. <br><br>(Mit dieser Option können Sie ältere Dateien wie gewohnt zu dieser Liste hinzufügen, und sie werden wie gewohnt aktualisiert, wenn Sie diese Option später deaktivieren, was zu einem unnötigen Verbrauch Ihres API-Schlüssels führen kann. Außerdem wird der Aktualisierungsstatus der Dateien nicht angezeigt.)<br><br>Neue Dateien werden weiterhin einmalig aktualisiert, um sicherzustellen, dass keine Informationen falsch sind."
+  },
+  "PauseExternalGifs": {
+    "message": "Externe GIFs pausieren",
+    "description": "Verhindert die Wiedergabe von externen GIFs (wie imgur oder anderen GIF-Servern); das GIF wird weiterhin abgespielt, wenn der Mauszeiger darüber fährt."
+  },
+  "PremiumDownload": {
+    "message": "Wählen Sie den Download-Server",
+    "description": "Verwenden Sie die Strg-Taste auf der Tastatur zusammen mit einem Klick, um die komprimierte Datei normal herunterzuladen, oder klicken Sie normal, um die Datei mit einem Mod-Manager wie Vortex oder Mod Organizer 2 herunterzuladen."
+  },
+  "SimpleSiteNotifications": {
+    "message": "Website-Benachrichtigungen rechts",
+    "description": "Zeigt Website-Benachrichtigungen bei Aktionen wie dem Folgen eines Mods auf einfachere Weise auf der rechten Seite des Bildschirms an. Kein lästiges Popup mit Schließen-Button."
+  },
+  "CDNTest_legend": {
+    "message": "Geschwindigkeitstest der Server",
+    "description": "Diese Funktion dient dazu, die Downloadgeschwindigkeit der Premium-CDN-Server von NexusMods zu messen. Stellen Sie sicher, dass während des Tests kein anderer Download, Video, Stream oder Musik über das Internet läuft, da alles, was das Netzwerk nutzt, das Ergebnis beeinflussen kann. Beachten Sie, dass dieser Test auch nie zu 100 % genau ist. Um den Test abzubrechen, laden Sie diese Seite einfach neu.<br> Der Test wird durchgeführt, indem eine Datei von 105 MB von jedem der 6 Server heruntergeladen und die benötigte Zeit gemessen wird, um die durchschnittliche Downloadgeschwindigkeit zu ermitteln.<br><br>Credits: <a href='https://www.nexusmods.com/site/mods/423' target='_blank'>https://www.nexusmods.com/site/mods/423</a>"
+  },
+  "CDNTest_start": {
+    "message": "Test starten"
+  },
+  "timeMeansure": {
+    "message": "Sekunden",
+    "description": "Minuten,"
+  },
+  "meansureResponse": {
+    "message": "Der Test dauerte: ",
+    "description": " um eine 105 MB große Datei herunterzuladen"
+  },
+  "cdnTest_responseSpeed": {
+    "message": "Download-Geschwindigkeit: ~"
+  },
+  "cdnTest_inlineButton": {
+    "message": "Testgeschwindigkeit von CDN-Servern auf NexusMods Advance"
+  },
+  "CustomGameSize": {
+    "message": "Verbesserungen an der Spieleseite",
+    "description": "Einstellungen zur NexusMods-Spiele-Seite (nexusmods.com/games).<br>Das Textfeld für die Größe der Spielblöcke akzeptiert CSS-Werte wie px, vw oder %. Zum Beispiel: 100px, 33vw oder 30%. Der Standardwert der Website beträgt normalerweise 11,111%."
+  },
+  "Following_EditMenu": {
+    "message": "Das Optionsmenü der Textfelder in ein schwebendes Menü umwandeln",
+    "description": "Verwandelt das Optionsmenü der Textfelder (wie beim Veröffentlichen eines Artikels oder beim Antworten auf einen Kommentar) in ein schwebendes Menü, das der Maus folgt, wenn Sie klicken, wodurch das Bearbeiten langer Texte viel einfacher wird. Klicken Sie einfach und das Menü kommt zu Ihnen."
+  },
+  "Favorite_Game": {
+    "message": "Zu den Favoriten hinzugefügt!",
+    "description": "Von den Favoriten entfernt!"
+  },
+  "Filter_Dropdown_1": {
+    "message": "Nach Name sortieren",
+    "description": "Nach Datum sortieren"
+  },
+  "Filter_Dropdown_2": {
+    "message": "Nach Downloads sortieren",
+    "description": "Nach Mods sortieren"
+  },
+  "Filter_Dropdown_3": {
+    "message": "Nach Genre sortieren",
+    "description": "Nach Sammlungen sortieren"
+  },
+  "NewTab_ExternalURL": {
+    "message": "Externe Links immer in einem neuen Tab öffnen",
+    "description": "Externe Links von anderen Websites als NexusMods.com werden standardmäßig in einem neuen Tab geöffnet."
+  },
+  
+    "Prevent_TrackOnDownload": {
+      "message": "Keine Dateien zu Ihrer Liste hinzufügen, wenn Sie auf Download-Schaltflächen klicken",
+      "description": "Verhindert, dass die Erweiterung Dateien zu Ihrer Liste hinzufügt, wenn Sie auf eine der Download-Schaltflächen auf der Mod-Dateien-Seite klicken. Nur der orangefarbene Button zum Hinzufügen von Dateien zu NexusMods Advance wird funktionieren."
+    }
+  
+  
+}
