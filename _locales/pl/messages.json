@@ -254,7 +254,7 @@
   },
   "HideContent_Enable": {
     "message": "Rozmycie obrazów na podstawie słów",
-    "description": "Rozmywa obrazy, stosując efekt rozmycia zgodnie ze słowami zdefiniowanymi poniżej, linia po linii. Zdefiniowane słowa są wyszukiwane w kategoriach modów, nazwach autorów oraz tytułach modów i obrazach. Ma to wpływ na całą witrynę i stronę Mod Images."
+    "description": "Rozmyj obrazy, stosując efekt rozmycia zgodnie ze słowami zdefiniowanymi poniżej, linia po linii. Zdefiniowane słowa są wyszukiwane w kategoriach modów, szybkim opisie modów, nazwach autorów oraz tytułach modów i obrazach. Ma to wpływ na całą witrynę i stronę Mod Images"
   },
   "Notification": {
     "message": " Nieprzeczytane powiadomienia"

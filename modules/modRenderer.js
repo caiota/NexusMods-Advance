@@ -363,7 +363,7 @@ async function CreateModTables(mods, title) {
 			} else {
 				if (response && response.success) {
 					console.log("%c" + response.message, 'background: yellow; color: black;');
-					window.location.reload();
+					//window.location.reload();
 					AllMods = {};
 
 				} else {
@@ -1134,16 +1134,25 @@ function GET_GAMES() {
 		console.log("Error Starting ModLoader: API Required!")
 		return;
 	}
-	if (GAMES.length == 0) {
-		fetch("https://www.nexusmods.com/assets/files/games.json", http_headers)
-			.then(response => response.json())
-			.then(data => {
-				GAMES = data;
-				LoadMods();
-			});
-	} else {
-		LoadMods();
-	}
+	chrome.runtime.sendMessage({
+		action: 'SyncGameList',
+	  }, async function (response) {
+		if (chrome.runtime.lastError) {
+		  console.error("Error sending message:", chrome.runtime.lastError.message);
+		} else {
+		  if (response.success == false) {
+			console.error("No Loaded Games!");
+			return;
+		  }
+		  if (response && response.success) {
+			GAMES = response.message;
+			GAMES.sort((a, b) => b.downloads - a.downloads);
+			LoadMods();
+		  } else {
+			console.error("Error in response:", response.error);
+		  }
+		}
+	  });
 }
 
 function LoadMods() {

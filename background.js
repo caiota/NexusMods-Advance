@@ -60,6 +60,9 @@ var mods = {};
 var MOD_CACHE = {};
 var mods_data = {};
 var YOUTUBE_STATUS = 'lock';
+
+  
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	(async () => {
 		try {
@@ -166,6 +169,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 					//UNBLOCK_GAME_IMAGES();
 					sendResponse({ success: true });
 					break;
+				case "fetch_collections":
+					await Fetch_NexusModsCollections(message.game,sendResponse);
+
+				break;
 				default:
 					sendResponse({ success: false, message: "Ação desconhecida" });
 					break;
@@ -177,7 +184,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	})();
 	return true;
 });
-
 async function handleSaveBox(item, checado, sendResponse) {
 	if (item === 'NEXUS_API') {
 		await chrome.storage.local.set({ "nexususer": checado });
@@ -642,7 +648,6 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id) {
 			DATA = temp_FetchCache[gameId][modIde].response;
 			console.log("%cCarregando " + title + " do Cache de FetchCache", "padding:2px;background: #ff2f2f;font-weight:bold;color:black");
 		} else {
-			console.warn("SOLICITANDO API PARA " + title)
 			activeRequests[modIde] = fetch("https://api.nexusmods.com/v1/games/" + findGameLinkById(gameId) + "/mods/" + modIde + "/files.json", api_headers);
 			const response = await activeRequests[modIde];
 			DATA = await response.json();
@@ -664,8 +669,7 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id) {
 
 			delete activeRequests[modIde];
 		}
-		const dldUrl = findURLbyID(gameId);
-		let latestVersion = null;
+		let latestVersion = 0;
 		let latestFile = null;
 		if (!mods_data[modIde] || !mods_data[modIde]["LAST_LOAD_" + file_id]) {
 			mods_data[modIde]["LAST_LOAD_" + file_id] = {
@@ -699,22 +703,22 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id) {
 				if (mods_data[modIde]) {
 					if (mods_data[modIde]["LAST_LOAD_" + file_id]) {
 						mods_data[modIde]["LAST_LOAD_" + file_id].Last_Load_Timestamp = Math.floor(Date.now() / 1000);
-						if (latestFile.description) {
+						
+						if (latestFile&&latestFile.description) {
 							DESCRIPTION = latestFile.description.replaceAll("\n", "<br>");
 						} else {
 							DESCRIPTION = 0;
 						}
-						if (latestFile.changelog_html) {
+						if (latestFile&&latestFile.changelog_html) {
 							CHANGELOG = latestFile.changelog_html.replaceAll("\n", "<br>");
 						} else {
 							CHANGELOG = 0;
 						}
-
 						mods_data[modIde]["LAST_LOAD_" + file_id].lastVersion = latestVersion;
 						mods_data[modIde]["LAST_LOAD_" + file_id].changelog = CHANGELOG;
 						mods_data[modIde]["LAST_LOAD_" + file_id].description = DESCRIPTION;
-						mods_data[modIde]["LAST_LOAD_" + file_id].size = latestFile.size_in_bytes;
-						mods_data[modIde]["LAST_LOAD_" + file_id].last_FileID = latestFile.file_id;
+						mods_data[modIde]["LAST_LOAD_" + file_id].size = latestFile ? latestFile.size_in_bytes : 0;
+						mods_data[modIde]["LAST_LOAD_" + file_id].last_FileID = latestFile ? latestFile.file_id : file_id;
 						await SAVE_MODDATA();
 					}
 				}
@@ -762,10 +766,12 @@ function formatDate(unixTimestamp) {
 var GAMES = [];
 
 async function GET_GAMES(sendResponse) {
+	console.log("CARREGANDO GAMES");
 	fetch("https://www.nexusmods.com/assets/files/games.json", http_headers)
 		.then(response => response.json())
 		.then(async (data) => {
 			GAMES = data;
+			console.log(GAMES);
 			if (sendResponse) {
 
 				sendResponse({ success: true, message: GAMES });
@@ -869,7 +875,6 @@ async function GET_NOTIFICATIONS(sendResponse) {
 async function UpdateStartUp() {
 	await LOAD_OPTIONS();
 	await Load_NEXUSAPI();
-
 	await checkOneWeekPassed();
 	await SETUP_YOUTUBE_DEFER("block");
 	if (NEXUS_API == 0 || NEXUS_API == "0" || !NEXUS_API) {
@@ -932,17 +937,61 @@ async function UNBLOCK_GAME_IMAGES() {
 		removeRuleIds: [2]
 	});
 }
+async function Fetch_NexusModsCollections(gameName,sendResponse){
+	fetch("https://next.nexusmods.com/api/graphql", {
+		headers: {
+			"accept": "*/*",
+			"accept-language": "pt-BR,pt;q=0.6",
+			"api-version": "2023-09-05",
+			"content-type": "application/json",
+			"priority": "u=1, i",
+			"sec-ch-ua": "\"Chromium\";v=\"130\", \"Brave\";v=\"130\", \"Not?A_Brand\";v=\"99\"",
+			"sec-ch-ua-mobile": "?0",
+			"sec-ch-ua-platform": "\"Windows\"",
+			"sec-fetch-dest": "empty",
+			"sec-fetch-mode": "cors",
+			"sec-fetch-site": "same-origin",
+			"sec-gpc": "1"
+		},
+		referrer: "https://next.nexusmods.com/",
+		referrerPolicy: "strict-origin-when-cross-origin",
+		body: "{\"query\":\"query Collections ($thumbnailSize: ThumbnailSize!, $count: Int, $facets: CollectionsFacet, $filter: CollectionsUserFilter, $gameDomain: String, $offset: Int, $postFilter: CollectionsUserFilter, $sortBy: String, $userId: Int, $viewAdultContent: Boolean, $viewDiscarded: Boolean, $viewListed: Boolean, $viewUnderModeration: Boolean, $viewUnlisted: Boolean) { collections (count: $count, facets: $facets, filter: $filter, gameDomain: $gameDomain, offset: $offset, postFilter: $postFilter, sortBy: $sortBy, userId: $userId, viewAdultContent: $viewAdultContent, viewDiscarded: $viewDiscarded, viewListed: $viewListed, viewUnderModeration: $viewUnderModeration, viewUnlisted: $viewUnlisted) { nodesCount, nodes { collectionStatus, discardedAt, draftRevisionNumber, endorsements, id, name, overallRating, overallRatingCount, slug, totalDownloads, summary, category { name }, game { domainName, name }, latestPublishedRevision { adultContent, modCount, totalSize }, metadata { downloadedAt }, permissions { global, key }, tileImage { thumbnailUrl (size: $thumbnailSize)  }, user { avatar, name } }, nodesFacets { count, facet, value } } }\",\"variables\":{\"count\":40,\"facets\":{\"adultContent\":[\"false\",\"true\"],\"categoryName\":[],\"collectionRating\":[],\"collectionStatus\":[],\"gameIds\":[],\"gameName\":[\""+gameName+"\"],\"gameVersion\":[],\"hasDraftRevision\":[],\"hasPublishedRevision\":[],\"tag\":[]},\"filter\":{\"generalSearch\":[]},\"offset\":0,\"postFilter\":{\"modUid\":[]},\"sortBy\":\"total_downloads\",\"viewAdultContent\":true,\"viewDiscarded\":false,\"viewListed\":true,\"viewUnderModeration\":false,\"viewUnlisted\":false,\"thumbnailSize\":\"med\",\"filters\":{\"adultContent\":true,\"categoryName\":[],\"collectionRating\":[],\"collectionStatus\":[],\"gameName\":[\""+gameName+"\"],\"gameVersion\":[],\"includedMod\":[],\"tag\":[]}},\"operationName\":\"Collections\"}",
+		method: "POST",
+		mode: "cors",
+		credentials: "include"
+	})
+	.then(response => {
+		if (!response.ok) {
+			throw new Error('Network response was not ok');
+		}
+		return response.json(); // Converte a resposta em JSON
+	})
+	.then(data => {
+		// Aqui você pode manipular os dados JSON recebidos
+		const collections = data.data.collections.nodes; // Acessando os nós das coleções
+		console.log(collections); // Exibe as coleções no console
+		
+		// Exemplo de como acessar informações específicas de cada coleção
+		
+		sendResponse({
+			success: true,
+			message: collections
+		})
+	})
+	.catch(error => {
+		console.error('Houve um problema com a requisição Fetch:', error);
+	});
+}
 
 async function SETUP_YOUTUBE_DEFER(type) {
 	if (options['BlockYoutube'] == true) {
 		if (type === "block") {
-
-			// Primeiro, remove a regra se ela existir
+			
 			await chrome.declarativeNetRequest.updateDynamicRules({
-				removeRuleIds: [1]  // Remove a regra com id 1
+				removeRuleIds: [1]
+				
 			});
-
-			// Em seguida, adiciona a nova regra para bloquear
+			
 			await chrome.declarativeNetRequest.updateDynamicRules({
 				addRules: [{
 					"id": 1,
@@ -950,28 +999,32 @@ async function SETUP_YOUTUBE_DEFER(type) {
 					"action": { "type": "block" },
 					"condition": {
 						"urlFilter": "youtube.com",
-						"resourceTypes": ["sub_frame"]
+						"resourceTypes": ["sub_frame"],
+						"initiatorDomains": ["nexusmods.com"]
 					}
 				}],
 				removeRuleIds: []  // Remove regras adicionais, se necessário
 			});
-
-			chrome.storage.local.set({ "YOUTUBE_STATUS": YOUTUBE_STATUS })
+			console.warn("Youtube Bloqueado");
+			chrome.storage.local.set({ "YOUTUBE_STATUS": 'lock' })
 		} else {
-			// Remove a regra para desbloquear
+			
+			console.warn("Youtube Desbloqueado");
 			await chrome.declarativeNetRequest.updateDynamicRules({
-				removeRuleIds: [1]  // Remove a regra com id 1
+				removeRuleIds: [1]
 			});
-			chrome.storage.local.set({ "YOUTUBE_STATUS": YOUTUBE_STATUS })
+			chrome.storage.local.set({ "YOUTUBE_STATUS": 'unlock' })
 		}
 	} else {
 
+		console.warn("Youtube Desbloqueado");
 		await chrome.declarativeNetRequest.updateDynamicRules({
 			removeRuleIds: [1]  // Remove a regra com id 1
 		});
-		chrome.storage.local.set({ "YOUTUBE_STATUS": YOUTUBE_STATUS })
+		chrome.storage.local.set({ "YOUTUBE_STATUS": 'unlock' })
 	}
 }
+
 
 var canShowEndorse = false;
 async function checkOneWeekPassed() {
@@ -995,6 +1048,7 @@ async function checkOneWeekPassed() {
 				chrome.storage.local.set({ installTime }, () => {
 					console.log('Data de instalação salva:', new Date(installTime).toLocaleString());
 				});
+				
 			}
 		});
 	}
@@ -1028,12 +1082,13 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 				options['language'] = 'polones';
 				break;
 			default:
+				userLanguage="en"
 				options['language'] = 'english';
 				console.log("Idioma não reconhecido ou não suportado.");
 				break;
 		}
 		await SAVE_OPTIONS();
-
+		
 	}
 	clearInterval(UpdateLoop);
 	UpdateLoop = setInterval(UpdateStartUp, 61000);

@@ -1,4 +1,4 @@
-var MOD_VERSION = '0.20.1';
+var MOD_VERSION = '0.23';
 
 function updateContent(messages) {
 	translate_strings = messages;

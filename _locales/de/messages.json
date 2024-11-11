@@ -257,7 +257,7 @@
   },
   "HideContent_Enable": {
     "message": "Verwischen Sie Bilder basierend auf Wörtern",
-    "description": "Verwischt die Bilder, indem ein Unschärfeeffekt gemäß den unten definierten Wörtern Zeile für Zeile angewendet wird. Die definierten Wörter werden in Mod-Kategorien, Autorennamen sowie Mod-Titeln und Bildern gesucht. Dies betrifft die gesamte Website und die Mod-Images-Seite"
+    "description": "Verwischen Sie die Bilder, indem Sie einen Unschärfeeffekt gemäß den unten definierten Wörtern Zeile für Zeile anwenden. Die definierten Wörter werden in Mod-Kategorien, Mod-Kurzbeschreibung, Autorennamen sowie Mod-Titeln und Bildern durchsucht. Dies betrifft die gesamte Website und die Mod-Images-Seite"
   },
   "Notification": {
     "message": " Ungelesene Benachrichtigungen"

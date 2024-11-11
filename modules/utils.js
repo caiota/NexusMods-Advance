@@ -52,7 +52,7 @@ function findGameLinkById(gameId) {
   }
   return null
 }
-function getParameterByName(name, url) {
+async function getParameterByName(name, url) {
   name = name.replace(/[\[\]]/g, '\\$&')
   const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
   const results = regex.exec(url)

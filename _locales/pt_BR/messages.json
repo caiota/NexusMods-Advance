@@ -253,7 +253,7 @@
   },
   "HideContent_Enable": {
     "message": "Borrar Imagens com Base em Palavras",
-    "description": "Borra as imagens aplicando um Efeito de Blur de acordo com as palavras definidas abaixo linha por linha, As palavras definidas são procuradas nas Categorias de Mods, Nomes de Autores e nos Titulos dos Mods e Imagens. Isso afeta todo o site e a página Imagens dos Mods"
+    "description": "Borra as imagens aplicando um Efeito de Blur de acordo com as palavras definidas abaixo linha por linha, As palavras definidas são procuradas nas Categorias de Mods, Rápida Descrição de Mods, Nomes de Autores e nos Titulos dos Mods e Imagens. Isso afeta todo o site e a página Imagens dos Mods"
   },
   "Notification": {
     "message": " Notificações não lidas"

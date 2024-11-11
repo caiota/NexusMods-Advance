@@ -254,7 +254,7 @@
   },
   "HideContent_Enable": {
     "message": "Blur Images Based on Words",
-    "description": "Blurs images by applying a Blur Effect according to the words defined below line by line. The defined words are searched for in Mod Categories, Author Names and in Mod and Image Titles. This affects the entire site and the Mod Images page."
+    "description": "Blurs images by applying a Blur Effect according to the words defined below line by line. The defined words are searched for in Mod Categories, Mod Quick Description, Author Names and in Mod and Image Titles. This affects the entire site and the Mod Images page."
   },
   "Notification": {
     "message": " Unread Notifications"
