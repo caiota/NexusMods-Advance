@@ -17,9 +17,9 @@ async function ARTICLES_ONMOUSE() {
                     clearTimeout(articleTimeout);
                     articleTimeout = setTimeout(function () {
                         lastDescriptionID = linkModId;
-                        temp_gameID = findIdByNexusmodsUrl(link.href);
+                        temp_gameID = findIdBydomainName(link.href);
                         console.log("Carregando MOD ID " + linkModId + " do jogo " + temp_gameID);
-                        CREATE_MOD_DESCRIPTION(temp_gameID, linkModId, 'artigo');
+                        CREATE_MOD_DESCRIPTION(link.href, linkModId, 'artigo');
                     }, 600);
                 }
             });

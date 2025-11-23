@@ -6,10 +6,12 @@ async function GENERATE_TRACK_BUTTONS() {
         const buttonsDownloads = document.querySelectorAll("div.tabbed-block ul.accordion-downloads");
         const modsTitles = Array.from(document.querySelectorAll("dl.accordion dt p"));
 
-        const modName = document.querySelector("section.modpage h1").innerText || 'Null Mod Name';
-        const modCategory = Array.from(document.querySelectorAll("section.modpage ul li")).find(a => a.querySelector('a') && a.querySelector('a').href.includes('/categories/'))?.innerText || 'No Category Found';
+        const modName = document.querySelector("section.modpage h1").innerText || 'Error Loading Mod Name';
+        const modCategory = document.querySelector('ul#breadcrumb a[href*="mods?categoryName="]').innerText || "Error Loading Category!"
         const thumbnailUrl = document.querySelector("ul.thumbgallery li img")?.src || 'https://www.nexusmods.com/assets/images/default/noimage.svg';
-
+        
+        const match = thumbnailUrl.match(/mods\/(\d+)\//);
+      const game_number = match ? match[1] : null;
         const currentTimeInMillis = Date.now();
         const oneYearInMillis = 365 * 24 * 60 * 60 * 1000;
 
@@ -57,6 +59,7 @@ async function GENERATE_TRACK_BUTTONS() {
                 newLi.setAttribute("version", version);
                 newLi.setAttribute("updated", unixTimestamp);
                 newLi.setAttribute("modName", modName);
+                newLi.setAttribute("mod_number",game_number);
                 newLi.setAttribute("modCategory", modCategory);
                 if (thumbnailUrl) {
                     newLi.setAttribute("thumbnail", thumbnailUrl);
@@ -70,6 +73,7 @@ async function GENERATE_TRACK_BUTTONS() {
                     listItem.setAttribute("version", version);
                     listItem.setAttribute("updated", unixTimestamp);
                     listItem.setAttribute("modName", modName);
+                  newLi.setAttribute("game_number",game_number);
                     listItem.setAttribute("modCategory", modCategory);
                     if (thumbnailUrl) {
                         listItem.setAttribute("thumbnail", thumbnailUrl);
@@ -79,8 +83,7 @@ async function GENERATE_TRACK_BUTTONS() {
                 });
 
                 newLi.addEventListener("click", (ev) => { TRACK_MOD(ev); });
-
-                if (modElement.querySelector("li.stat-downloaded") && options['AutoTrackDownloaded']) {
+                if (modElement.querySelector("li.stat-downloaded") && options['AutoTrackDownloaded']==true) {
                     newLi.click();
                 }
             }
@@ -117,14 +120,19 @@ async function TRACK_MOD(ev) {
     const version = eve.getAttribute('version');
     const mod_FileName = eve.getAttribute('modTitle');
     const thumbnail = eve.getAttribute('thumbnail');
+    const game_numberId = eve.getAttribute('game_number');
     const moname = eve.getAttribute('modName');
     const mod_Category = eve.getAttribute('modCategory');
     const fileid = eve.getAttribute('modID');
-    const gameName = findGameById(gameId);
-    console.log("FullName " + moname, "File_Name " + mod_FileName)
+    if(gameId=="Modding Tools"){
+      gameId="site";
+    }
+    const gameName = gameId;
+    //console.log(game_numberId,modid,updateDate,version,mod_FileName,thumbnail,moname,mod_Category,fileid,gameName)
     chrome.runtime.sendMessage({
       action: 'TrackMod',
       file_id: fileid,
+      game_number:game_numberId,
       mod: modid,
       mod_thumbnail: thumbnail,
       mod_name: mod_FileName,
@@ -132,7 +140,7 @@ async function TRACK_MOD(ev) {
       mod_Fullname: moname,
       version: version,
       updated: updateDate,
-      game: gameId,
+      game: gameId.replaceAll(" ","").toLowerCase(),
       gameName: gameName
     }, function (response) {
       if (chrome.runtime.lastError) {

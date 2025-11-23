@@ -1,8 +1,6 @@
-var MOD_VERSION = '0.23';
+var MOD_VERSION = '0.25';
 
-function updateContent(messages) {
-	translate_strings = messages;
-
+async function updateContent(messages) {
 	const elementsToUpdate = [
 		{ selector: "#nexusTitle", text: messages.extensionName.message },
 		{ selector: "#extVersion", text: MOD_VERSION },
@@ -21,6 +19,8 @@ function updateContent(messages) {
 		{ selector: "label[for='FastDescriptionButton'] div#msgPopup", html: messages.button_showDescription.description },
 		{ selector: "label[for='FastIgnoreButton'] span", text: messages.button_ignoreMod.message },
 		{ selector: "label[for='FastIgnoreButton'] div#msgPopup", html: messages.button_ignoreMod.description },
+		{ selector: "label[for='JustBlur_IgnoredMods'] span", text: messages.button_ignoreMod_BLUR.message },
+		{ selector: "label[for='JustBlur_IgnoredMods'] div#msgPopup", html: messages.button_ignoreMod_BLUR.description },
 		{ selector: "label[for='InfiniteScroll'] span", text: messages.button_infiniteScroll.message },
 		{ selector: "label[for='InfiniteScroll'] div#msgPopup", html: messages.button_infiniteScroll.description },
 		{ selector: "label[for='AutoTrackDownloaded'] span", text: messages.button_AutoTrackDownloaded.message },
@@ -57,6 +57,10 @@ function updateContent(messages) {
 		{ selector: "label[for='HideChangelogsTab'] div#msgPopup", text: messages.remove_ChangelogsTab.description },
 		{ selector: "label[for='HideDonationsTab'] span", text: messages.remove_DonationsTab.message },
 		{ selector: "label[for='HideDonationsTab'] div#msgPopup", text: messages.remove_DonationsTab.description },
+		{ selector: "label[for='HideModCollections'] span", text: messages.remove_HideModCollections.message },
+		{ selector: "label[for='HideModCollections'] div#msgPopup", text: messages.remove_HideModCollections.description },
+
+		
 		{ selector: "label[for='HideStickyPosts'] span", text: messages.hide_StickyPosts.message },
 		{ selector: "label[for='HideStickyPosts'] div#msgPopup", text: messages.hide_StickyPosts.description },
 		{ selector: "label[for='OriginalImages'] span", text: messages.loadOriginalImages.message },
@@ -68,22 +72,21 @@ function updateContent(messages) {
 		
 		{ selector: "fieldset label[for='hideContentWords'] span", text: messages.HideContent_Enable.message },
 		{ selector: "fieldset label[for='hideContentWords'] div#msgPopup", text: messages.HideContent_Enable.description },
-		{ selector: "label[for='AllNotifications'] span", text: messages.AllNotifications.message },
-		{ selector: "label[for='AllNotifications'] div#msgPopup", text: messages.AllNotifications.description },
 		{ selector: "label[for='WideWebsite'] span", text: messages.WideWebsite.message },
 		{ selector: "label[for='WideWebsite'] div#msgPopup", text: messages.WideWebsite.description },
 		{ selector: "label[for='HideHiddenMods'] span", text: messages.HideHiddenMods.message },
 		{ selector: "label[for='HideHiddenMods'] div#msgPopup", text: messages.HideHiddenMods.description },
 		{ selector: "label[for='FixedModMenu'] span", text: messages.FixedModMenu.message },
 		{ selector: "label[for='FixedModMenu'] div#msgPopup", text: messages.FixedModMenu.description },
-		{ selector: "label[for='BetterSearch'] span", text: messages.BetterSearch.message },
-		{ selector: "label[for='BetterSearch'] div#msgPopup", text: messages.BetterSearch.description },
 		{ selector: "label[for='SharePostsLinks'] span", text: messages.SharePostsLinks.message },
 		{ selector: "label[for='SharePostsLinks'] div#msgPopup", html: messages.SharePostsLinks.description },
 		{ selector: "label[for='BlockYoutube'] span", text: messages.BlockYoutube.message },
 		{ selector: "label[for='BlockYoutube'] div#msgPopup", html: messages.BlockYoutube.description },
 		{ selector: "label[for='HideModStatus'] span", text: messages.HideModStatus.message },
 		{ selector: "label[for='HideModStatus'] div#msgPopup", html: messages.HideModStatus.description },
+		{ selector: "label[for='HideCollections_ModPage'] span", text: messages.HideCollections_ModPage.message },
+		{ selector: "label[for='HideCollections_ModPage'] div#msgPopup", html: messages.HideCollections_ModPage.description },
+	
 		{ selector: "label[for='DetailGameBlocks'] span", text: messages.DetailGameBlocks.message },
 		{ selector: "label[for='DetailGameBlocks'] div#msgPopup", html: messages.DetailGameBlocks.description },
 		{ selector: "label[for='ModBlock_Render'] span", text: messages.ModBlock_Render.message },
@@ -97,12 +100,14 @@ function updateContent(messages) {
 		{ selector: "label[for='Following_EditMenu'] div#msgPopup", html: messages.Following_EditMenu.description },
 		{ selector: "label[for='NewTab_ExternalURL'] span", text: messages.NewTab_ExternalURL.message },
 		{ selector: "label[for='NewTab_ExternalURL'] div#msgPopup", html: messages.NewTab_ExternalURL.description },
+
+		{ selector: "label[for='ModBlock_ImageFillDivs'] span", text: messages.ModBlock_ImageFillDivs.message },
+		{ selector: "label[for='ModBlock_ImageFillDivs'] div#msgPopup", html: messages.ModBlock_ImageFillDivs.description },
+
+		
 		{ selector: "label[for='Prevent_TrackOnDownload'] span", text: messages.Prevent_TrackOnDownload.message },
 		{ selector: "label[for='Prevent_TrackOnDownload'] div#msgPopup", html: messages.Prevent_TrackOnDownload.description },
 		
-
-		{ selector: "fieldset.fieldSet legend.CustomGameSize span", text: messages.CustomGameSize.message },
-		{ selector: "fieldset.fieldSet div#msgPopup", html: messages.CustomGameSize.description },
 		{ selector: "label[for='MemoryMode'] span", text: messages.MemoryMode.message },
 		{ selector: "label[for='MemoryMode'] div#msgPopup", html: messages.MemoryMode.description },
 		{ selector: "label[for='PauseExternalGifs'] span", text: messages.PauseExternalGifs.message },
@@ -124,7 +129,6 @@ function updateContent(messages) {
 		{ selector: "span#translatedBy", text: translate_strings.translateBy.message },
 		{ selector: "span#more_OfficialPost", html: translate_strings.more_OfficialPost.message },
 		{ selector: "span#more_DonatePls", html: translate_strings.more_DonatePls.message },
-		{ selector: "span#more_EndorsePls", html: translate_strings.more_EndorsePls.message },
 		{ selector: "div#viewDescription", html: translate_strings.modViewPopup_changelog.message },
 		{ selector: "div#viewPosts", html: translate_strings.modViewPopup_posts.message },
 		{ selector: "div#viewBugs", html: translate_strings.modViewPopup_bugs.message },
@@ -162,6 +166,7 @@ function updateContent(messages) {
 	document.querySelector("input#modFilter").value = '';
 	document.querySelector("h2#notLoggedDesc a").addEventListener("click", connect);
 	LoadHiddenWords();
+	 LoadMods();
 }
 
 async function LoadHiddenWords() {
@@ -187,30 +192,30 @@ async function LoadHiddenWords() {
 }
 
 async function loadMessages(locale) {
-	if (locale == 'portuguese') {
-		locale = 'pt_BR';
-		document.querySelector("div#moreOptions span#more_DonatePls").addEventListener('click', function () { window.open('https://livepix.gg/caiota'); })
-	}
-	if (locale == 'english') {
-		locale = 'en';
-		document.querySelector("div#moreOptions span#more_DonatePls").addEventListener('click', function () { window.open('https://www.paypal.com/donate/?hosted_button_id=ZCJ7S9ZK42ZS2'); })
-	}
-	if (locale == 'alemao') {
-		locale = 'de';
-		document.querySelector("div#moreOptions span#more_DonatePls").addEventListener('click', function () { window.open('https://www.paypal.com/donate/?hosted_button_id=ZCJ7S9ZK42ZS2'); })
-	}
-	if (locale == 'polones') {
-		locale = 'pl';
-		document.querySelector("div#moreOptions span#more_DonatePls").addEventListener('click', function () { window.open('https://www.paypal.com/donate/?hosted_button_id=ZCJ7S9ZK42ZS2'); })
-	}
+	let donateLink = 'https://www.paypal.com/donate/?hosted_button_id=ZCJ7S9ZK42ZS2';
 
-	fetch(`/_locales/${locale}/messages.json`)
-		.then(response => response.json())
-		.then(messages => {
-			updateContent(messages);
-		})
-		.catch(error => console.error('Error loading locale messages:', error));
+	if (locale === 'portuguese') {
+		locale = 'pt_BR';
+		donateLink = 'https://livepix.gg/caiota';
+	}
+	if (locale === 'english') locale = 'en';
+	if (locale === 'alemao') locale = 'de';
+	if (locale === 'polones') locale = 'pl';
+
+	const response = await fetch(`/_locales/${locale}/messages.json`);
+        const messages = await response.json();
+
+        translate_strings = messages;
+
+        updateContent(messages);
+
+			// só adiciona o listener depois de recriar o DOM
+			document
+				.querySelector("div#moreOptions span#more_DonatePls")
+				.addEventListener('click', () => window.open(donateLink));
+		
 }
+
 
 async function ReloadOptions(options) {
 	Object.keys(options).forEach(function (key) {

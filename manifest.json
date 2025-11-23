@@ -1,107 +1,97 @@
 {
-    "manifest_version": 3,
-    "name": "__MSG_extensionName__",
-    "description": "__MSG_description__",
-    "default_locale": "en",
-    "version": "0.23",
-    "permissions": [
-        "activeTab",
-        "tabs",
-        "storage",
-        "notifications",
-        "webNavigation",
-        "declarativeNetRequest",
-        "declarativeNetRequestWithHostAccess"
-    ],
-    "host_permissions": [
-        "http://*.nexusmods.com/*",
+  "manifest_version": 3,
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_description__",
+  "default_locale": "en",
+  "version": "0.25",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "notifications",
+    "webNavigation",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "host_permissions": [
+    "http://*.nexusmods.com/*",
+    "https://*.nexusmods.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
         "https://*.nexusmods.com/*"
-    ],
-    "web_accessible_resources": [
-  {
-    "resources": ["icon.png"],
-    "matches": ["https://*.nexusmods.com/*"]
-  }
-],
-    "content_scripts": [
-        {
-            "matches": [
-                "https://*.nexusmods.com/*"
-            ],
-            "js": [
-                "script/var.js",
-                "script/utils.js",
-                "script/LoadModDetails/LoadModDetails.js",
-                "script/Buttons_GenerateModButtons/Buttons_GenerateModButtons.js",
-                "script/Button_CreateModDescription/Button_CreateModDescription.js",
-                "script/Button_CreateModGallery/Button_CreateModGallery.js",
-                "script/BlurContentByWords/BlurContentByWords.js",
-                "script/InfiniteScroll_PageWatcher/InfiniteScroll_PageWatcher.js",
-                "script/TrackingModsPage_GetFilters/TrackingModsPage_GetFilters.js",
-                "script/TrackingModsPage_InfiniteScroll/TrackingModsPage_InfiniteScroll.js",
-                "script/HideModsByList/HideModsByList.js",
-                "script/BetterSearch/BetterSearch.js",
-                "script/ModsPages_InfiniteScroll/ModsPages_InfiniteScroll.js",
-                "script/MediaPage_InfiniteScroll/MediaPage_InfiniteScroll.js",
-                "script/VideosPage_InfiniteScroll/VideosPage_InfiniteScroll.js",
-                "script/PostsTabWatcher/PostsTabWatcher.js",
-                "script/AutoClickDownloadButton/AutoClickDownloadButton.js",
-                "script/GenerateTrackButton/GenerateTrackButton.js",
-                "script/OriginalImageLoader/OriginalImageLoader.js",
-                "script/DescriptionTagHideItens/DescriptionTagHideItens.js",
-                "script/ScrollToUpdate/ScrollToUpdate.js",
-                "script/ChangelogsOnFiles/ChangelogsOnFiles.js",
-                "script/MouseArticlePopup/MouseArticlePopup.js",
-                "script/FastModTranslates/FastModTranslates.js",
-                "script/ViewProfileOnMouse/ViewProfileOnMouse.js",
-                "script/MouseDescriptionPopup/MouseDescriptionPopup.js",
-                "script/PostsTabHideSticky/PostsTabHideSticky.js",
-                "script/PostsTabShareButton/PostsTabShareButton.js",
-                "script/GetSelectedModTab/GetSelectedModTab.js",
-                "script/IgnoreDownloadRequirements/IgnoreDownloadRequirements.js",
-                "script/WiderWebsite/WiderWebsite.js",
-                "script/CheckYoutubeFrames/CheckYoutubeFrames.js",
-                "script/NotificationManager/NotificationManager.js",
-                "script/CustomBlockSize/CustomBlockSize.js",
-                "script/MouseVideoPopup/MouseVideoPopup.js",
-                "script/HideMyMods/HideMyMods.js",
-                "script/MouseImagePopup/MouseImagePopup.js",
-                "script/RemoveModStatus/RemoveModStatus.js",
-                "script/YoutubeEnlarger/YoutubeEnlarger.js",
-                "script/ImprovedGameList/ImprovedGameList.js",
-                "script/FloatingMenu/FloatingMenu.js",
-                "script/AutoFocusPostsSearch/AutoFocusPostsSearch.js",
-                "script/ExternalURLsNewTab/ExternalURLsNewTab.js",
-                "script/RemakeAddModsTab/RemakeAddModsTabList.js",
-                "script/PauseExternalGifs/PauseExternalGifs.js",
-                "script/FixYoutubeThumbnails/FixYoutubeThumbnails.js",
-                "script/FixArticleEditLink/FixArticleEditLink.js",
-                "script/FloatingEditMenu/FloatingEditMenu.js",
-                "script/SimpleNotifications/SimpleNotifications.js",
-                "script/StickyEditButtons/StickyEditButtons.js",
-                "script/AdvancedSearch/AdvancedSearch.js",
-                "script/NEXUSMODS.js"
-            ],
-            "css": [
-                "script/NEXUSMODS.css"
-            ],
-            "run_at": "document_start"
-        }
-    ],
-    "background": {
-        "service_worker": "background.js",
-        "type": "module"
-    },
-    "action": {
-        "default_popup": "config.html"
-    },
-    "icons": {
-        "16": "icon_16.png",
-        "19": "icon_19.png",
-        "32": "icon_32.png",
-        "38": "icon_38.png",
-        "48": "icon_48.png",
-        "128": "icon_128.png",
-        "512": "icon.png"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "script/nexusmods.css"
+      ],
+      "js": [
+        "script/var.js",
+        "script/utils.js",
+        "script/LoadModDetails/LoadModDetails.js",
+        "script/Buttons_GenerateModButtons/Buttons_GenerateModButtons.js",
+        "script/Button_CreateModDescription/Button_CreateModDescription.js",
+        "script/Button_CreateModGallery/Button_CreateModGallery.js",
+        "script/BlurContentByWords/BlurContentByWords.js",
+        "script/InfiniteScroll_PageWatcher/InfiniteScroll_PageWatcher.js",
+        "script/TrackingModsPage_GetFilters/TrackingModsPage_GetFilters.js",
+        "script/TrackingModsPage_InfiniteScroll/TrackingModsPage_InfiniteScroll.js",
+        "script/HideModsByList/HideModsByList.js",
+        "script/ModsPages_InfiniteScroll/ModsPages_InfiniteScroll.js",
+        "script/MediaPage_InfiniteScroll/MediaPage_InfiniteScroll.js",
+        "script/VideosPage_InfiniteScroll/VideosPage_InfiniteScroll.js",
+        "script/PostsTabWatcher/PostsTabWatcher.js",
+        "script/AutoClickDownloadButton/AutoClickDownloadButton.js",
+        "script/GenerateTrackButton/GenerateTrackButton.js",
+        "script/OriginalImageLoader/OriginalImageLoader.js",
+        "script/DescriptionTagHideItens/DescriptionTagHideItens.js",
+        "script/ScrollToUpdate/ScrollToUpdate.js",
+        "script/ChangelogsOnFiles/ChangelogsOnFiles.js",
+        "script/MouseArticlePopup/MouseArticlePopup.js",
+        "script/FastModTranslates/FastModTranslates.js",
+        "script/ViewProfileOnMouse/ViewProfileOnMouse.js",
+        "script/MouseDescriptionPopup/MouseDescriptionPopup.js",
+        "script/PostsTabHideSticky/PostsTabHideSticky.js",
+        "script/PostsTabShareButton/PostsTabShareButton.js",
+        "script/GetSelectedModTab/GetSelectedModTab.js",
+        "script/IgnoreDownloadRequirements/IgnoreDownloadRequirements.js",
+        "script/WiderWebsite/WiderWebsite.js",
+        "script/CheckYoutubeFrames/CheckYoutubeFrames.js",
+        "script/CustomBlockSize/CustomBlockSize.js",
+        "script/MouseVideoPopup/MouseVideoPopup.js",
+        "script/HideMyMods/HideMyMods.js",
+        "script/MouseImagePopup/MouseImagePopup.js",
+        "script/RemoveModStatus/RemoveModStatus.js",
+        "script/RemoveModCollections/RemoveModCollections.js",
+        "script/YoutubeEnlarger/YoutubeEnlarger.js",
+        "script/ImprovedGameList/ImprovedGameList.js",
+        "script/FloatingMenu/FloatingMenu.js",
+        "script/AutoFocusPostsSearch/AutoFocusPostsSearch.js",
+        "script/ExternalURLsNewTab/ExternalURLsNewTab.js",
+        "script/RemakeAddModsTab/RemakeAddModsTabList.js",
+        "script/PauseExternalGifs/PauseExternalGifs.js",
+        "script/FixYoutubeThumbnails/FixYoutubeThumbnails.js",
+        "script/FixArticleEditLink/FixArticleEditLink.js",
+        "script/FloatingEditMenu/FloatingEditMenu.js",
+        "script/StickyEditButtons/StickyEditButtons.js",
+        "script/nexusmods.js"
+      ]
     }
+  ],
+  "background": {
+  "service_worker": "background.js"
+},
+  "action": {
+    "default_popup": "config.html"
+  },
+  "icons": {
+    "16": "icon_16.png",
+    "19": "icon_19.png",
+    "32": "icon_32.png",
+    "38": "icon_38.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png",
+    "512": "icon.png"
+  }
 }

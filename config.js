@@ -103,8 +103,11 @@ document.querySelector("div#viewPosts").addEventListener('click', async function
 	document.querySelector("div#Posts").innerHTML = '';
 	document.querySelector("img#LoadingDecoil").style.display = 'block';
 	const mod_id = ev.target.closest('div#modViewDiv').getAttribute('mod_id');
-	const game_id = ev.target.closest('div#modViewDiv').getAttribute('game_id');
-	const response = await fetch("https://www.nexusmods.com/" + findGameLinkById(game_id) + "/mods/" + mod_id, {
+	console.log(ev.target.closest("div#modViewDiv"))
+	const game_id = ev.target.closest('div#modViewDiv').getAttribute('game');
+	const game_number=ev.target.closest('div#modViewDiv').getAttribute('game_id');
+	console.error(game_id)
+	const response = await fetch("https://www.nexusmods.com/" + game_id + "/mods/" + mod_id, {
 		"headers": {
 			"accept": "text/html, */*; q=0.01",
 			"accept-language": "pt-BR,pt;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
@@ -143,11 +146,11 @@ document.querySelector("div#viewPosts").addEventListener('click', async function
 	if (threadId) {
 		window.thread = threadId;
 		window.mod_id = mod_id;
-		window.game_id = game_id;
+		window.game_id = game_number;
 		chrome.runtime.sendMessage({
 			action: 'UnlockYoutube'
 		});
-		await ProcessPosts(threadId, mod_id, game_id, 1);
+		await ProcessPosts(threadId, mod_id, game_number, 1);
 	} else {
 		stillLoading = false;
 		document.querySelector("div#Posts").innerHTML = translate_strings.bugsPage.message;
@@ -478,36 +481,7 @@ async function FetchAndAdd(mod_id, game_id, page) {
 
 document.querySelector("img#nexusIcon").addEventListener('click', function () { window.open('https://www.nexusmods.com/site/mods/1018'); })
 document.querySelector("div#moreOptions span#more_OfficialPost").addEventListener('click', function () { window.open('https://www.nexusmods.com/site/mods/1018'); })
-document.querySelector("div#moreOptions span#more_EndorsePls").addEventListener('click', Endorse);
-function Endorse() {
-	const options = {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'ApiKey': NEXUS_API,
-		},
-		body: '' // In your case, the body is empty
-	};
 
-	fetch('https://api.nexusmods.com/v1/games/site/mods/1018/endorse.json', options)
-		.then(response => response.json())
-		.then(data => {
-			document.querySelector("div#moreOptions span#more_EndorsePls").innerHTML = translate_strings.more_EndorsePls.description;
-			document.querySelector("div#moreOptions span#more_EndorsePls").disabled = true;
-			document.querySelector("div#moreOptions span#more_EndorsePls").style.opacity = '0.3';
-			document.querySelector("div#moreOptions span#more_EndorsePls").removeEventListener('click', Endorse);
-			chrome.runtime.sendMessage({
-				action: 'SaveBox',
-				item: 'Endorsed',
-				checado: true
-			});
-
-		})
-		.catch(error => {
-			console.error('Error:', error);
-		});
-
-}
 function WheelListener(ev) {
 	const modFilter = document.querySelector('#modFilter');
 	const settingsButton = document.querySelector('.modSettingsBtn');
@@ -671,18 +645,9 @@ window.addEventListener("load", function () {
 								document.querySelector("div#CDN_speed_PopUp").style.display = 'block';
 							}
 							await ReloadOptions(options);
-							await GetApi_Data();
 							await LOAD_HIDDEN_MODS();
-							if (options['AllNotifications'] == true) {
-								await GET_NOTIFICATIONS(true);
-								setInterval(GET_NOTIFICATIONS, 5000);
-								document.querySelector("div#notificationBadge").style.display = 'block';
-							}
-							if (options['Endorsed'] == true) {
-								document.querySelector("div#moreOptions span#more_EndorsePls").disabled = true;
-								document.querySelector("div#moreOptions span#more_EndorsePls").style.opacity = '0.3';
-								document.querySelector("div#moreOptions span#more_EndorsePls").removeEventListener('click', Endorse);
-							} else {
+							await GetApi_Data();
+							if (options['Endorsed'] == false) {
 								chrome.runtime.sendMessage({
 									action: 'ShowEndorsePopup'
 								}, async function (response3) {
@@ -723,13 +688,6 @@ document.querySelector("input#BlockSize_input").addEventListener("change", async
 	await saveCheckbox(ev.target.id, ev.target.value);
 
 });
-document.querySelector("input#GameBlockSize_input").addEventListener("change", async function (ev) {
-	if (ev.target.value.trim() == "") {
-		ev.target.value = "11%";
-	}
-	await saveCheckbox(ev.target.id, ev.target.value);
-
-});
 
 document.querySelector("div#PleaseEndorse div#closeMe").addEventListener("click", function (ev) {
 	chrome.runtime.sendMessage({
@@ -762,7 +720,7 @@ document.querySelector("div.settings").addEventListener("click", function (ev) {
 document.querySelector("div.mods").addEventListener("click", function (ev) {
 	document.addEventListener("scroll", WheelListener);
 	updateURLParameter('tab', 'myMods');
-	document.querySelector("div#modLoading").style.display = 'flex';
+	//document.querySelector("div#modLoading").style.display = 'flex';
 	document.querySelector("div#mods").style.display = 'block';
 	document.querySelector("div.settings").id = '';
 	document.querySelector("div#settings").style.display = 'none';
@@ -774,9 +732,12 @@ document.querySelector("div.mods").addEventListener("click", function (ev) {
 	if (NEXUS_API == "0" || !NEXUS_API) {
 		document.querySelector("div#notLogged").style.display = 'block';
 	} else {
-		document.querySelector("div#modSettings").style.display = 'none';
+		//document.querySelector("div#modSettings").style.display = 'none';
 		document.querySelector("div#modContent").style.display = 'block';
-		GET_GAMES();
+		if (!NEXUS_API || NEXUS_API == "0" || NEXUS_API == 0) {
+		console.log("Error Starting ModLoader: API Required!")
+		return;
+	}
 	}
 });
 async function loadTheme(theme) {

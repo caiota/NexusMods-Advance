@@ -18,23 +18,22 @@ async function ImagePopupSetup() {
             imgPopup.src = "https://www.nexusmods.com/assets/images/default/noimage.svg";
             imgPopup.style.transform = "scale(" + zoomLevel + ")";
         });
-        var images = Array.from(document.querySelectorAll('li:not(.video-tile) a.mod-image:not([POPUP_SETUP])')).filter(function (link) {
-            const foreDiv = link.querySelector('div.fore, div.fore_div');
-            return foreDiv && foreDiv.querySelector('img');
+        var images = Array.from(document.querySelectorAll('div[data-e2eid="media-tile"]:not([POPUP_IMAGE]),li.image-tile')).filter(function (link) {
+            
+            return link.querySelector('img');
         });
 
-        if (SITE_URL.indexOf("next.nexusmods.com/") != -1) {
-            const nextData = Array.from(document.querySelectorAll("div.swiper-wrapper div:not([POPUP_SETUP])"));
-            images = images.concat(nextData);
-        }
-
         images.forEach(function (img, index) {
-            if (img.closest("li")) {
-                var img_li = img.closest('li').querySelector('a.mod-image');
-                img_li.setAttribute("POPUP_SETUP", true);
+            if (img.closest("div[data-e2eid='media-tile'],li.image-tile")) {
+                if(img.closest("div[data-e2eid='media-tile'],li.image-tile").querySelector('a')){
+                var img_li = img.closest("div[data-e2eid='media-tile'],li.image-tile").querySelector('a');
+                }else{
+                var img_li = img;
+                }
+                img_li.setAttribute("POPUP_IMAGE", true);
             }
 
-            img.setAttribute("POPUP_SETUP", true);
+            img.setAttribute("POPUP_IMAGE", true);
             const img_button = img;
             imgPopup.addEventListener("load", (ev) => {
                 if (imgPopup) {
@@ -72,21 +71,21 @@ async function ImagePopupSetup() {
             })
             if (img_li) {
                 img_li.addEventListener('mouseenter', async function (ev) {
-                    try {
+                  
                         if (!options['showImagesPopup']) {
                             return;
                         }
-                        const img_id = await extrairID(img_li.href) || null;
-                        if (ev.currentTarget.querySelector('div.fore_div') && ev.currentTarget.querySelector('div.fore_div img').src) {
-
-                            imgPopup.src = ev.currentTarget.querySelector('div.fore_div img').src;
-                            loadImage(ev.currentTarget.querySelector('div.fore_div img').src.replace("/thumbnails", ""))
-                        } else if (ev.currentTarget.querySelector('div.fore')) {
-                            imgPopup.src = ev.currentTarget.querySelector('div.fore_div img').src;
-                            loadImage(ev.currentTarget.querySelector('div.fore img').src.replace("/thumbnails", ""))
+                        if(!img_li.closest('div[data-e2eid="media-tile"]')){
+                        var img_id = img_li.href;
+                        }else{
+                        var img_id = img_li.querySelector("img").src;
                         }
+                        
+                       
 
-                        imgPopup.setAttribute("image_id", img_id);
+                            imgPopup.src = img_id;
+                            loadImage(img_id.replace("/thumbnails", ""))
+                       
                         if (FIRST_IMAGE_POPUP) {
                             CreateNotificationContainer(translate_strings.ImagePopup.description, "success");
                             FIRST_IMAGE_POPUP = false;
@@ -95,13 +94,11 @@ async function ImagePopupSetup() {
                         lastImg = document.elementFromPoint(ev.clientX, ev.clientY).nodeName;
                         funcLoop = setInterval(PopUpImage_Check, 200);
                         imgPopup.classList.remove("popup-hidden");
-                    } catch (E) {
-                        console.error("NexusMods Advance Error:" + E);
-                    }
+                    
                 });
 
                 img_li.addEventListener('mouseleave', function (ev) {
-                    if (!img_li.closest("li").contains(ev.relatedTarget) && ev.relatedTarget !== imgPopup && !imgPopup.contains(ev.relatedTarget)) {
+                    if (!img_li.closest("div[data-e2eid='media-tile'],li.image-tile").contains(ev.relatedTarget) && ev.relatedTarget !== imgPopup && !imgPopup.contains(ev.relatedTarget)) {
                         zoomLevel = 1.0;
                         imgPopup.src = "https://www.nexusmods.com/assets/images/default/noimage.svg";
                         imgPopup.classList = "popup-hidden"
@@ -184,6 +181,7 @@ function loadImage(url) {
 }
 
 async function EndorseImageByPopup(PopUpimage_id) {
+    return;
     if (SITE_URL.indexOf("/supporterimages/") == -1) {
         support = 0;
     } else {
@@ -192,32 +190,32 @@ async function EndorseImageByPopup(PopUpimage_id) {
     if (PopUpimage_id == null || PopUpimage_id == 'null') {
         return;
     }
-    const li_element = document.querySelector("li a[href*='" + PopUpimage_id + "']").closest("li").querySelector("svg.icon-endorse");
+    console.log(PopUpimage_id)
+    const li_element = document.querySelector("div[data-e2eid='media-tile'] a[href*='" + PopUpimage_id + "']").closest('div[data-e2eid="media-tile"]').querySelector("svg path[d='M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10M1,21H5V9H1V21Z']");
     if (li_element) {
         console.log("Endorsando imagem " + PopUpimage_id + " do jogo " + gameId + " Supporter: " + support);
-        fetch("https://www.nexusmods.com/Core/Libs/Common/Managers/Images?EndorseImage", {
-            "headers": {
-                "accept": "*/*",
-                "accept-language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-                "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-                "priority": "u=1, i",
-                "sec-ch-ua": "\"Brave\";v=\"129\", \"Not=A?Brand\";v=\"8\", \"Chromium\";v=\"129\"",
-                "sec-ch-ua-mobile": "?0",
-                "sec-ch-ua-platform": "\"Windows\"",
-                "sec-fetch-dest": "empty",
-                "sec-fetch-mode": "cors",
-                "sec-fetch-site": "same-origin",
-                "sec-gpc": "1",
-                "x-requested-with": "XMLHttpRequest"
-            },
-            "referrer": "https://www.nexusmods.com/",
-            "referrerPolicy": "strict-origin-when-cross-origin",
-            "body": "game_id=" + gameId + "&image_id=" + PopUpimage_id + "&is_supporter=" + support,
-            "method": "POST",
-            "mode": "cors",
-            "credentials": "include"
-        })
-            .then(response => {
+
+        fetch("https://www.nexusmods.com/images/"+PopUpimage_id+"/endorse", {
+  "headers": {
+    "accept": "*/*",
+    "accept-language": "pt-BR,pt;q=0.9",
+    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    "priority": "u=1, i",
+    "sec-ch-ua": "\"Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Brave\";v=\"140\"",
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": "\"Windows\"",
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-origin",
+    "sec-gpc": "1",
+    "x-requested-with": "XMLHttpRequest"
+  },
+  "referrer": "https://www.nexusmods.com/skyrimspecialedition/images/"+PopUpimage_id,
+  "body": "game_id=" + gameId + "&image_id=" + PopUpimage_id + "&is_supporter=" + support,
+  "method": "POST",
+  "mode": "cors",
+  "credentials": "include"
+}) .then(response => {
                 // Verifica se a resposta foi bem-sucedida
                 if (!response.ok) {
                     CreateNotificationContainer("NexusMods Error: " + response.status, 'error')
@@ -247,6 +245,9 @@ async function EndorseImageByPopup(PopUpimage_id) {
                 CreateNotificationContainer("Endorse Error: " + error, 'error')
                 console.error('Erro ao processar a requisição:', error);
             });
+
+
+           
 
     } else {
 

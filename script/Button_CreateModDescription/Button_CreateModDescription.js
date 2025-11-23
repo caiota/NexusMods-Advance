@@ -1,4 +1,4 @@
-async function CREATE_MOD_DESCRIPTION(gameID, modId, tipo){
+async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
     if (modPreview_element) {
       modPreview_element.style.display = "none";
     }
@@ -44,13 +44,14 @@ async function CREATE_MOD_DESCRIPTION(gameID, modId, tipo){
     }
     modPopup_element.style.display = "flex";
     modPopup_element.scrollTo(0, 0);
-    await MoveLoop(GLOBAL_MOUSE_X, GLOBAL_MOUSE_Y, modPopup_element)
-    await FETCH_MOD_DESCRIPTION(gameID, modId, tipo);
+    console.warn(game_id,modId,tipo)
+    await MoveLoop(GLOBAL_MOUSE_X, GLOBAL_MOUSE_Y, modPopup_element);
+    await FETCH_MOD_DESCRIPTION(game_id, modId, tipo);
 
   }
-  async function FETCH_MOD_TAGS(gameID, modId){
+  async function FETCH_MOD_TAGS(game_id, modId){
 
-    const response = await fetch("https://www.nexusmods.com/Core/Libs/Common/Widgets/ModTaggingPopUp?mod_id=" + modId + "&game_id=" + gameID, http_headers);
+    const response = await fetch("https://www.nexusmods.com/Core/Libs/Common/Widgets/ModTaggingPopUp?mod_id=" + modId + "&game_id=" + game_id, http_headers);
     const html = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
@@ -68,24 +69,25 @@ async function CREATE_MOD_DESCRIPTION(gameID, modId, tipo){
     }
   }
   
-  async function FETCH_MOD_DESCRIPTION(gameID, modId, tipo = "descricao"){
+  async function FETCH_MOD_DESCRIPTION(game_id, modId, tipo = "descricao"){
     console.log("Carregando Informações do Tipo:" + tipo);
+    console.log("Do jogo "+game_id)
     modPopup_element.querySelector("div#descriptionContent").innerHTML = "";
     modPopup_element.querySelector("div#descriptionContent").classList.add("modPreview_Rotating");
     const url = tipo === 'descricao' ?
-      `https://www.nexusmods.com/Core/Libs/Common/Widgets/ModDescriptionTab?id=${modId}&game_id=${gameID}` :
+      `https://www.nexusmods.com/Core/Libs/Common/Widgets/ModDescriptionTab?id=${modId}&game_id=${game_id}` :
       tipo === 'translateMod' ?
-        `https://www.nexusmods.com/Core/Libs/Common/Widgets/ModFilesTab?id=${modId}&game_id=${gameID}` :
+        `https://www.nexusmods.com/Core/Libs/Common/Widgets/ModFilesTab?id=${modId}&game_id=${game_id}` :
         tipo === 'videos' ?
-          `https://www.nexusmods.com/${fingGameNameByID(gameID)}/videos/${modId}` :
-          `https://www.nexusmods.com/${fingGameNameByID(gameID)}/articles/${modId}`;
-
+          `https://www.nexusmods.com/${game_id}/videos/${modId}` :
+          `${game_id}`;
     try {
       const response = await fetch(url, http_headers);
       const html = await response.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
       const selectors = [
+        'svg.icon',
         'li.report-abuse-btn',
         'a.button-share',
         'div.manage-mod',
@@ -93,7 +95,7 @@ async function CREATE_MOD_DESCRIPTION(gameID, modId, tipo){
         'div#comment-container'
       ];
       if (tipo == "descricao") {
-        FETCH_MOD_TAGS(gameID, modId);
+        FETCH_MOD_TAGS(game_id, modId);
       }
       if (tipo == 'videos') {
         if (doc.body.querySelector("div.video-contain iframe")) {
@@ -109,35 +111,34 @@ async function CREATE_MOD_DESCRIPTION(gameID, modId, tipo){
         doc.body.querySelectorAll("div#pagetitle a").forEach(item => item.removeAttribute("href"));
       }
       if (tipo !== 'translateMod') {
-        // selectors.push('div.accordionitems');
+        selectors.push('div.accordionitems');
       } else {
         doc.querySelectorAll("div.accordionitems").forEach((accordionItem) => {
           accordionItem.querySelectorAll("a").forEach((item) => {
             item.href = item.href.replaceAll(
               "Core/Libs/Common/Widgets/ModRequirementsPopUp?id=",
-              fingGameNameByID(gameID) + "/mods/" + modId + "?tab=files&file_id="
+              gameId + "/mods/" + modId + "?tab=files&file_id="
             );
             //PREMIUM POP
             //https://www.nexusmods.com/Core/Libs/Common/Widgets/DownloadPopUp?id=385848&nmm=1&game_id=1704
             item.href = item.href.replaceAll(
               "Core/Libs/Common/Widgets/DownloadPopUp?id=",
-              fingGameNameByID(gameID) + "/mods/" + modId + "?tab=files&file_id="
+              gameId + "/mods/" + modId + "?tab=files&file_id="
             );
 
           });
         });
 
         if (doc.querySelectorAll("div.accordionitems dt").length <= 1) {
-          window.open(doc.querySelector("div.accordionitems ul.accordion-downloads a").href);
+          window.open(doc.querySelector("div.accordionitems ul.accordion-downloads a").href+"&popup=true");
           modPopup_element.style.display = "none";
           return;
-        } else {
-
+      }else{
           doc.querySelectorAll("dd").forEach((dd) => {
             dd.style.display = 'block';
             dd.classList.add("open");
           });
-        }
+      }
       }
       doc.body.querySelectorAll("a").forEach(item => item.setAttribute("target", "_blank"));
       doc.body.querySelectorAll("a").forEach(item => item.setAttribute("draggable", "false"));

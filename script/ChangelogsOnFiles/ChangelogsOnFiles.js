@@ -2,7 +2,6 @@ async function FAST_CHANGELOGS() {
     try {
         if (current_modTab === "files" && options['AwaysChangelogs']) {
             const mods = Array.from(document.querySelectorAll("dl.accordion dt div.stat a[VISIBLE]:not([CHANGELOG_INJECTED])"));
-
             for (const item of mods) {
                 const temp = item.innerText;
                 item.setAttribute("CHANGELOG_INJECTED", true);
@@ -28,7 +27,7 @@ async function FAST_CHANGELOGS() {
 
 async function LOAD_CHANGELOGS(modID, elemento, version) {
     try {
-        await fetch("https://www.nexusmods.com/Core/Libs/Common/Widgets/ModChangeLogPopUp?mod_id=" + modID + "&game_id=" + gameId + "&version=" + version, http_headers)
+        await fetch("https://www.nexusmods.com/Core/Libs/Common/Widgets/ModChangeLogPopUp?mod_id=" + modID + "&game_id=" + gameID_Number + "&version=" + version, http_headers)
             .then(response => response.text())
             .then(html => {
                 const parser = new DOMParser();

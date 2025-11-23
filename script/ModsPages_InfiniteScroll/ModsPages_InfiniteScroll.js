@@ -168,8 +168,8 @@ async function GENERATE_INFINITE_SCROLL() {
                 });
 
                 console.log("INFINITE SCROLL PAGE " + PAGINA_ATUAL);
-                EXEC_ONCE('hideMods', HideModsByList, 300);
-                EXEC_ONCE('profileMouse', PROFILE_ONMOUSE, 300);
+                EXEC_ONCE('hideMods', HideModsByList, 500);
+                EXEC_ONCE('profileMouse', PROFILE_ONMOUSE, 1000);
                 EXEC_ONCE('createModButtons', GET_VISIBLE_BLOCKS, 300);
                 // EXEC_ONCE('removeTips', REMOVE_MOD_STATUSVIEW, 300);
                 //EXEC_ONCE('loadDetails', PAGE_VIEW.LOAD_MOD_DETAILS, 300);

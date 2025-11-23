@@ -1,11 +1,10 @@
 async function CustomModsBlockSize() {
+    if(document.querySelector("style")){
     if (options['ModBlock_Render'] == true) {
-        document.querySelector("style").textContent += "ul.tiles li.mod-tile { width:" + options['BlockSize_input'] + " !important; }";
+        document.querySelector("style").textContent += "div.mods-grid div[class*='mod-tile'] { width:" + options['BlockSize_input'] + " !important; }";
     }
+}else{
+    
+    setTimeout(CustomModsBlockSize,500);
 }
-async function CustomGameBlockSize() {
-    if (options['GameBlockSize_input']) {
-        document.querySelector("style").textContent += "ul.game-tiles li.image-tile { width:" + options['GameBlockSize_input'] + " !important; }";
-        document.querySelector("style").textContent += "ul#BetterGameList li.gameCard { width:" + options['GameBlockSize_input'] + " !important; }";
-    }
 }

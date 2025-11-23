@@ -14,44 +14,6 @@ function formatBytes(bytes, decimals = 2) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i]
 }
 
-function findURLbyID(modID) {
-  if (GAMES.length > 0) {
-    for (let i = 0; i < GAMES.length; i++) {
-      if (modID == GAMES[i].id) {
-        return GAMES[i].nexusmods_url
-      }
-    }
-  } else {
-    console.error('SEM GAMES')
-  }
-  return null
-}
-
-function findGameById(gameId) {
-  if (GAMES.length > 0) {
-    for (let i = 0; i < GAMES.length; i++) {
-      if (gameId == GAMES[i].id) {
-        return GAMES[i].name
-      }
-    }
-  } else {
-    console.error('SEM GAMES')
-  }
-  return null
-}
-
-function findGameLinkById(gameId) {
-  if (GAMES.length > 0) {
-    for (let i = 0; i < GAMES.length; i++) {
-      if (gameId == GAMES[i].id) {
-        return GAMES[i].domain_name
-      }
-    }
-  } else {
-    console.error('SEM GAMES')
-  }
-  return null
-}
 async function getParameterByName(name, url) {
   name = name.replace(/[\[\]]/g, '\\$&')
   const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
@@ -127,50 +89,6 @@ async function saveCheckbox(box, valor) {
   )
 }
 
-async function GET_NOTIFICATIONS(forceUpdate = false) {
-  chrome.runtime.sendMessage(
-    {
-      action: 'SYNC_NOTIFICATIONCOUNT',
-      forceUpdate: forceUpdate
-    },
-    function (response) {
-      if (!response) {
-        return;
-      }
-      NOTIFICATIONS_COUNT = response.message
-      if (isNaN(NOTIFICATIONS_COUNT)) {
-        return
-      }
-      document.querySelector('div#notificationBadge span').innerText =
-        NOTIFICATIONS_COUNT
-      if (NOTIFICATIONS_COUNT > 0) {
-        document.querySelector('div#notificationBadge i').classList =
-          'fa-solid fa-bell'
-        document.querySelector(
-          'div#notificationBadge #NotifyMessage'
-        ).innerText =
-          NOTIFICATIONS_COUNT + translate_strings.Notification.message
-        document.querySelector(
-          'div#notificationBadge #NotifyMessage'
-        ).style.display = 'block'
-        document
-          .querySelector('div#notificationBadge')
-          .addEventListener('click', OpenNotifications)
-      } else {
-        document.querySelector('div#notificationBadge i').classList =
-          'fa-regular fa-bell'
-        document.querySelector(
-          'div#notificationBadge #NotifyMessage'
-        ).style.display = 'none'
-        document
-          .querySelector('div#notificationBadge')
-          .removeEventListener('click', OpenNotifications)
-      }
-    }
-  )
-
-  LOAD_HIDDEN_MODS
-}
 function OpenNotifications() {
   window.open('https://next.nexusmods.com/notifications/all')
 }
@@ -350,4 +268,48 @@ async function GetPremiumDownload(game, modId, fileId, modName, newVersion) {
         console.error('Erro:', error);
       });
   }
+}
+
+async function GET_NOTIFICATIONS(forceUpdate = false) {
+  chrome.runtime.sendMessage(
+    {
+      action: 'SYNC_NOTIFICATIONCOUNT',
+      forceUpdate: forceUpdate
+    },
+    function (response) {
+      if (!response) {
+        return;
+      }
+      NOTIFICATIONS_COUNT = response.message
+      if (isNaN(NOTIFICATIONS_COUNT)) {
+        return
+      }
+      document.querySelector('div#notificationBadge span').innerText =
+        NOTIFICATIONS_COUNT
+      if (NOTIFICATIONS_COUNT > 0) {
+        document.querySelector('div#notificationBadge i').classList =
+          'fa-solid fa-bell'
+        document.querySelector(
+          'div#notificationBadge #NotifyMessage'
+        ).innerText =
+          NOTIFICATIONS_COUNT + translate_strings.Notification.message
+        document.querySelector(
+          'div#notificationBadge #NotifyMessage'
+        ).style.display = 'block'
+        document
+          .querySelector('div#notificationBadge')
+          .addEventListener('click', OpenNotifications)
+      } else {
+        document.querySelector('div#notificationBadge i').classList =
+          'fa-regular fa-bell'
+        document.querySelector(
+          'div#notificationBadge #NotifyMessage'
+        ).style.display = 'none'
+        document
+          .querySelector('div#notificationBadge')
+          .removeEventListener('click', OpenNotifications)
+      }
+    }
+  )
+
 }

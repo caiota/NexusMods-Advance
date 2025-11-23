@@ -452,7 +452,7 @@
             width: 20px
         }
 
-        .custom-checkbox::after {
+        .custom-checkbox::after{
             -ms-transform: rotate(45deg);
             -webkit-transform: rotate(45deg);
             border: solid #fff;
@@ -470,7 +470,23 @@
         input[type="checkbox"]:checked+.custom-checkbox::after {
             opacity: 1
         }
-
+        .checkboxOff::after{
+            border: 0;
+            background-color: #f83f3f;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            height: 20px;
+            position: relative;
+            width: 20px;
+            transform:rotate(0);
+            -ms-transform: rotate(0);
+            -webkit-transform: rotate(0);
+            left: 0;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+        }
         #creds {
             color: #87cefa;
             font-family: monospace;
@@ -1442,7 +1458,6 @@
             <div id="moreOptions">
                 <span id="more_OfficialPost"></span>
                 <span id="more_DonatePls"></span>
-                <span id="more_EndorsePls"></span>
             </div>
         </div>
         <div id="menuContent">
@@ -1493,12 +1508,20 @@
                     <div id='msgPopup'></div>
                 </label>
                 <br>
-                <label for="FastIgnoreButton">
-                    <input type="checkbox" id="FastIgnoreButton">
-                    <div class="custom-checkbox"></div>
-                    <span></span>
-                    <div id='msgPopup'></div>
-                </label>
+                <fieldset haspopuptip="true">
+                    <legend><label for="FastIgnoreButton">
+                        <input type="checkbox" id="FastIgnoreButton">
+                        <div class="custom-checkbox"></div>
+                        <span></span>
+                        <div id='msgPopup'></div>
+                    </label></legend>
+                    <label for="JustBlur_IgnoredMods">
+                        <input type="checkbox" id="JustBlur_IgnoredMods">
+                        <div class="custom-checkbox"></div>
+                        <span></span>
+                        <div id='msgPopup'></div>
+                    </label>
+                </fieldset>
                 <br>
                 <label for="InfiniteScroll">
                     <input type="checkbox" id="InfiniteScroll">
@@ -1591,13 +1614,6 @@
                     <div id='msgPopup'></div>
                 </label>
                 <br>
-                <label for="AllNotifications" needrestart="true">
-                    <input type="checkbox" id="AllNotifications">
-                    <div class="custom-checkbox"></div>
-                    <span></span>
-                    <div id='msgPopup'></div>
-                </label>
-                <br>
                 <label for="BetterModBlocks">
                     <input type="checkbox" id="BetterModBlocks">
                     <div class="custom-checkbox"></div>
@@ -1607,13 +1623,6 @@
                 <br>
                 <label for="FixedModMenu">
                     <input type="checkbox" id="FixedModMenu">
-                    <div class="custom-checkbox"></div>
-                    <span></span>
-                    <div id='msgPopup'></div>
-                </label>
-                <br>
-                <label for="BetterSearch">
-                    <input type="checkbox" id="BetterSearch">
                     <div class="custom-checkbox"></div>
                     <span></span>
                     <div id='msgPopup'></div>
@@ -1641,13 +1650,6 @@
                     <div id='msgPopup'></div>
                 </label>
                 <br>
-                <label for="SimpleSiteNotifications">
-                    <input type="checkbox" id="SimpleSiteNotifications">
-                    <div class="custom-checkbox"></div>
-                    <span></span>
-                    <div id='msgPopup'></div>
-                </label>
-                <br>
                 <label for="Following_EditMenu">
                     <input type="checkbox" id="Following_EditMenu">
                     <div class="custom-checkbox"></div>
@@ -1657,6 +1659,13 @@
                 <br>
                 <label for="NewTab_ExternalURL">
                     <input type="checkbox" id="NewTab_ExternalURL">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="ModBlock_ImageFillDivs">
+                    <input type="checkbox" id="ModBlock_ImageFillDivs">
                     <div class="custom-checkbox"></div>
                     <span></span>
                     <div id='msgPopup'></div>
@@ -1681,28 +1690,6 @@
                     </label>
                 </fieldset><br>
 
-                <fieldset class="fieldSet" haspopuptip="true">
-                    <div id='msgPopup' ></div>
-                    <legend class="CustomGameSize"><span></span>
-                        </legend>
-                        <br> <label for="GameBlock_Render">
-                            <input type="checkbox" id="GameBlock_Render">
-                            <div class="custom-checkbox"></div>
-                            <span></span>
-                            <div id='msgPopup'></div>
-                        </label><br>
-                        <label for="DetailGameBlocks">
-                            <input type="checkbox" id="DetailGameBlocks">
-                            <div class="custom-checkbox"></div>
-                            <span></span>
-                            <div id='msgPopup'></div>
-                        </label><br>
-                    <label for="GameBlockSize_input">
-                        <span></span>
-                        <div id='msgPopup'></div>
-                        <input type="text" id="GameBlockSize_input">
-                    </label>
-                </fieldset>
             </fieldset><br>
             <fieldset>
                 <legend id="title3" class="hideContent">Hide
@@ -1742,6 +1729,13 @@
                     <div id='msgPopup'></div>
                 </label>
                 <br>
+                <label for="HideModCollections">
+                    <input type="checkbox" id="HideModCollections">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
                 <label for="HideStickyPosts">
                     <input type="checkbox" id="HideStickyPosts">
                     <div class="custom-checkbox"></div>
@@ -1765,6 +1759,13 @@
                 <br>
                 <label for="HideModStatus">
                     <input type="checkbox" id="HideModStatus">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="HideCollections_ModPage">
+                    <input type="checkbox" id="HideCollections_ModPage">
                     <div class="custom-checkbox"></div>
                     <span></span>
                     <div id='msgPopup'></div>

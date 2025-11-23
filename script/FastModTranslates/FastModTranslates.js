@@ -26,7 +26,7 @@ function fastTranslateDownload(modId, mod_element) {
     tempButton = document.createElement("i");
     tempButton.addEventListener("click", function () {
 
-        CREATE_MOD_DESCRIPTION(gameId, modId, 'translateMod');
+        CREATE_MOD_DESCRIPTION(gameID_Number, modId, 'translateMod');
     });
     tempButton.classList = "fastDownloadButton fa-solid fa-cloud-arrow-down";
     tempButton.setAttribute("aria-hidden", true);

@@ -2,6 +2,7 @@
 let SITE_URL = window.location.href;
 var page_atual = 0;
 var PAGINA_ATUAL = 0;
+var gameID_Number=null;
 var max_pages = 0;
 var lastOptions = {};
 var last_modTab = "";

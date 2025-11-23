@@ -2,6 +2,7 @@ var modData = {
 
 }
 async function CreateModTables(mods, title) {
+	try{
 	line = 0;
 	lineOutdated = 0;
 	lineElement_Outdated = document.createElement("div");
@@ -32,7 +33,7 @@ async function CreateModTables(mods, title) {
 	}
 	else if (options['TrackingMods_RenderBy'] == 'alfabetico_gameName') {
 		tempMods.sort((a, b) => {
-			return a[1].game.localeCompare(b[1].game);
+			return a[1].game_number.localeCompare(b[1].game_number);
 		});
 		tempMods.reverse();
 	}
@@ -56,12 +57,15 @@ async function CreateModTables(mods, title) {
 		const {
 			mod_id,
 			game,
+			game_number,
+			gameName,
 			version,
-			updated,
+			updatedLegible,
 			category,
 			file_id,
 			full_name,
 		} = modInfo;
+		console.log(modInfo)
 		if (lineOutdated == 3) {
 			lineOutdated = 0;
 			lineElement_Outdated = document.createElement("div");
@@ -95,7 +99,8 @@ async function CreateModTables(mods, title) {
 				document.querySelector("div#modViewDiv img").src = "https://www.nexusmods.com/assets/images/default/noimage.svg"
 			}
 			document.querySelector("div#modViewDiv").setAttribute('mod_id', ev.target.closest("div#modTable").getAttribute("mod_id"))
-			document.querySelector("div#modViewDiv").setAttribute('game_id', ev.target.closest("div#modTable").getAttribute("game"))
+			document.querySelector("div#modViewDiv").setAttribute('game', ev.target.closest("div#modTable").getAttribute("game"))
+			document.querySelector("div#modViewDiv").setAttribute('game_id', ev.target.closest("div#modTable").getAttribute("game_number"))
 			changelog_element = document.querySelector("div#modViewDiv div#Changelog");
 			changelog_element.innerHTML = "";
 			document.querySelector("div#modViewDiv span#modTitle").innerText = ev.target.closest("div#modTable").getAttribute("mod_title");
@@ -147,12 +152,16 @@ async function CreateModTables(mods, title) {
 		mod_span_game = document.createElement('span');
 		mod_span_game.id = "gameName";
 		mod_span_game.classList = "modSubSpan";
-		mod_span_game.innerText = findGameById(game);
-		modTable.setAttribute("gameName", findGameById(game));
-
+		if(gameName=="site"){
+		mod_span_game.innerText = "Modding Tools";
+		modTable.setAttribute("gameName", "Modding Tools");
+		}else{
+		mod_span_game.innerText = gameName;
+		modTable.setAttribute("gameName", gameName);
+		}
 		mod_span_updated = document.createElement('span');
 		mod_span_updated.id = "updated";
-		mod_span_updated.innerText = formatDate(updated);
+		mod_span_updated.innerText = updatedLegible || 0;
 		mod_span_updated.classList = "modSubSpan";
 
 		mod_span_category = document.createElement('span');
@@ -187,14 +196,14 @@ async function CreateModTables(mods, title) {
 			const mod_Fullname = ev.target.closest("div#modTable").getAttribute('mod_fullname');
 			const newVersion = ev.target.closest("div#modTable").getAttribute("NEW_VERSION");
 			const mod_id = ev.target.closest("div#modTable").getAttribute('mod_id');
-			const game = ev.target.closest("div#modTable").getAttribute('game');
+			const game_number = ev.target.closest("div#modTable").getAttribute('game_number');
 			const updateStatus = ev.target.closest("div#modTable").classList[0];
 			const newSize=ev.target.closest("div#modTable").getAttribute('NEW_SIZE');
 			const category = ev.target.closest("div#modTable").getAttribute('category');
 			const thumbnail = ev.target.closest("div#modTable").getAttribute('thumbnail');
-			const gameName = ev.target.closest("div#modTable").getAttribute('gameName');
+			const gameName = ev.target.closest("div#modTable").getAttribute('game');
 			if (!is_premium) {
-				window.open("https://www.nexusmods.com/" + findGameLinkById(game) + "/mods/" + mod_id + "/?tab=files&NAdvance_ScrollToFile=" + updateVersion);
+				window.open("https://www.nexusmods.com/" + gameName + "/mods/" + mod_id + "/?tab=files&NAdvance_ScrollToFile=" + updateVersion);
 			} else {
 				console.log("%cPremium Download " + mod_Fullname, "padding:2px;background: #da8e35;font-weight:bold;color:black");
 				modData.file_id = updateVersion;
@@ -202,10 +211,10 @@ async function CreateModTables(mods, title) {
 				modData.modName = mod_name;
 				modData.category = category;
 				modData.thumbnail = thumbnail;
-				modData.game_id = game;
+				modData.game_id = game_number;
 				modData.size=newSize;
 				modData.game_name = gameName;
-				GetPremiumDownload(findGameLinkById(game), mod_id, updateVersion, mod_Fullname, newVersion);
+				GetPremiumDownload(game_number, mod_id, updateVersion, mod_Fullname, newVersion);
 			}
 		});
 
@@ -328,28 +337,27 @@ async function CreateModTables(mods, title) {
 				updateDiv.style.opacity = '0';
 			}
 		}, true);
-		console.log("FullName: " + full_name);
-		console.log("Mod Name: " + mod_name);
 		modTable.appendChild(DIV_TOP);
 		modTable.setAttribute("mod_id", mod_id);
-		modTable.setAttribute("game", game);
+		modTable.setAttribute("game_number", game_number);
+		modTable.setAttribute("game",game)
 		modTable.setAttribute("mod_title", mod_name);
 		modTable.setAttribute("mod_fullName", full_name);
 		modTable.setAttribute("size", size);
-		modTable.setAttribute("mod_href", "https://www.nexusmods.com/" + findGameLinkById(game) + "/mods/" + mod_id);
+		modTable.setAttribute("mod_href", "https://www.nexusmods.com/" + game + "/mods/" + mod_id);
 		modTable.setAttribute("file_id", file_id);
 		if (mod_tempData[mod_id] && mod_tempData[mod_id]["LAST_LOAD_" + file_id] && mod_tempData[mod_id]["LAST_LOAD_" + file_id]["Last_Load_Timestamp"]) {
 
 			//18000
 			if ((Math.floor(Date.now() / 1000) - mod_tempData[mod_id]["LAST_LOAD_" + file_id]["Last_Load_Timestamp"]) > 18000 && options['MemoryMode'] == false) {
 				console.log("%cTimestamp do Mod " + mod_name + " expirou.", "padding:2px;background: #da8e35;font-weight:bold;color:black");
-				await GetFileInfo(mod_id, Number(file_id), game, version, 0, mod_name, modTable, lineElement, 'normal');
+				await GetFileInfo(mod_id, Number(file_id), game, version, 0, mod_name, modTable, lineElement, 'normal',game);
 			} else {
-				await GetFileInfo_ByCache(mod_tempData[mod_id], mod_id, Number(file_id), game, version, mod_name, modTable, lineElement, 200, 'normal');
+				await GetFileInfo_ByCache(mod_tempData[mod_id], mod_id, Number(file_id), game, version, mod_name, modTable, lineElement, 200, 'normal',game);
 			}
 		} else {
 			console.log("%cNovo Mod Carregando: " + mod_name, "padding:2px;background: #4c970f;font-weight:bold;color:black");
-			await GetFileInfo(mod_id, Number(file_id), game, version, size, mod_name, modTable, lineElement, 'normal');
+			await GetFileInfo(mod_id, Number(file_id), game, version, size=0, mod_name, modTable, lineElement, 'normal',game);
 
 		}
 	};
@@ -373,12 +381,12 @@ async function CreateModTables(mods, title) {
 		});
 	}
 
-	if (reloadDelay == 0) {
-		reloadDelay = options.LAST_MOD_UPDATE_CHECK;
-		setInterval(timeoutLoop, 1000);
-	}
 	GetApi_Data();
 	document.querySelector("div#modLoading").style.display = 'none';
+	}catch(e){
+		//setTimeout(()=>{window.location.reload();},1500);
+		throw e;
+	}
 }
 async function CreateModTables_SimpleMode(mods, title) {
 	lineElement_Outdated = document.createElement("div");
@@ -408,7 +416,7 @@ async function CreateModTables_SimpleMode(mods, title) {
 	}
 	else if (options['TrackingMods_RenderBy'] == 'alfabetico_gameName') {
 		tempMods.sort((a, b) => {
-			return a[1].game.localeCompare(b[1].game);
+			return a[1].game_number.localeCompare(b[1].game_number);
 		});
 		tempMods.reverse();
 	}
@@ -430,6 +438,8 @@ async function CreateModTables_SimpleMode(mods, title) {
 	for (const [mod_name, modInfo] of Object.entries(tempMods)) {
 		const {
 			mod_id,
+			game_number,
+			gameName,
 			game,
 			version,
 			updated,
@@ -455,7 +465,7 @@ async function CreateModTables_SimpleMode(mods, title) {
 				document.querySelector("div#modViewDiv img").src = mod_tempItems[ev.target.closest("div#modTable_simple").getAttribute("file_id")].PIC.replace("/thumbnails", "");
 			}
 			document.querySelector("div#modViewDiv").setAttribute('mod_id', ev.target.closest("div#modTable_simple").getAttribute("mod_id"))
-			document.querySelector("div#modViewDiv").setAttribute('game_id', ev.target.closest("div#modTable_simple").getAttribute("game"))
+			document.querySelector("div#modViewDiv").setAttribute('game_id', ev.target.closest("div#modTable_simple").getAttribute("game_number"))
 			changelog_element = document.querySelector("div#modViewDiv div#Changelog");
 			changelog_element.innerHTML = "";
 			document.querySelector("div#modViewDiv span#modTitle").innerText = ev.target.closest("div#modTable_simple").getAttribute("mod_title");
@@ -509,7 +519,7 @@ async function CreateModTables_SimpleMode(mods, title) {
 		mod_span_game = document.createElement('span');
 		mod_span_game.id = "gameName";
 		mod_span_game.classList = "modSubSpan";
-		mod_span_game.innerText = findGameById(game);
+		mod_span_game.innerText =game_number;
 
 		mod_span_FullMod = document.createElement('span');
 		mod_span_FullMod.id = "full_name";
@@ -543,14 +553,15 @@ async function CreateModTables_SimpleMode(mods, title) {
 			const mod_Fullname = ev.target.closest("div#modTable_simple").getAttribute('mod_fullname');
 			const newVersion = ev.target.closest("div#modTable_simple").getAttribute("NEW_VERSION");
 			const mod_id = ev.target.closest("div#modTable_simple").getAttribute('mod_id');
-			const game = ev.target.closest("div#modTable_simple").getAttribute('game');
+			const game_number = ev.target.closest("div#modTable_simple").getAttribute('game_number');
 			const updateStatus = ev.target.closest("div#modTable_simple").classList[0];
 			const category = ev.target.closest("div#modTable_simple").getAttribute('category');
 			const thumbnail = ev.target.closest("div#modTable_simple").getAttribute('thumbnail');
+			const game=ev.target.closest("div#modTable_simple").getAttribute('game');
 			const gameName = ev.target.closest("div#modTable_simple").getAttribute('gameName');
 			console.log(thumbnail)
 			if (!is_premium) {
-				window.open("https://www.nexusmods.com/" + findGameLinkById(game) + "/mods/" + mod_id + "/?tab=files&NAdvance_ScrollToFile=" + updateVersion);
+				window.open("https://www.nexusmods.com/" + gameName + "/mods/" + mod_id + "/?tab=files&NAdvance_ScrollToFile=" + updateVersion);
 			} else {
 				console.log("%cPremium Download " + mod_Fullname, "padding:2px;background: #da8e35;font-weight:bold;color:black");
 				modData.file_id = updateVersion;
@@ -558,9 +569,10 @@ async function CreateModTables_SimpleMode(mods, title) {
 				modData.modName = mod_name;
 				modData.category = category;
 				modData.thumbnail = thumbnail;
-				modData.game_id = game;
+				modData.game=game;
+				modData.game_id = game_number;
 				modData.game_name = gameName;
-				GetPremiumDownload(findGameLinkById(game), mod_id, updateVersion, mod_Fullname, newVersion);
+				GetPremiumDownload(game_number, mod_id, updateVersion, mod_Fullname, newVersion);
 			}
 		});
 
@@ -637,21 +649,21 @@ async function CreateModTables_SimpleMode(mods, title) {
 		DIV_TOP.appendChild(delete_mod);
 
 		modTable.setAttribute("mod_id", mod_id);
-		modTable.setAttribute("game", game);
+		modTable.setAttribute("game_number", game_number);
 		modTable.setAttribute("mod_title", mod_name);
 		modTable.setAttribute("mod_fullName", full_name);
-		modTable.setAttribute("mod_href", "https://www.nexusmods.com/" + findGameLinkById(game) + "/mods/" + mod_id);
+		modTable.setAttribute("mod_href", "https://www.nexusmods.com/" + game_number + "/mods/" + mod_id);
 		modTable.setAttribute("file_id", file_id);
 		if (mod_tempData[mod_id] && mod_tempData[mod_id]["LAST_LOAD_" + file_id] && mod_tempData[mod_id]["LAST_LOAD_" + file_id]["Last_Load_Timestamp"]) {
 			//18000
 			if ((Math.floor(Date.now() / 1000) - mod_tempData[mod_id]["LAST_LOAD_" + file_id]["Last_Load_Timestamp"]) > 18000 && options['MemoryMode'] == false) {
 				console.log("%cTimestamp do Mod " + mod_name + " expirou.", "padding:2px;background: #da8e35;font-weight:bold;color:black")
-				await GetFileInfo(mod_id, Number(file_id), game, version, size, mod_name, modTable, lineElement, 'simple');
+				await GetFileInfo(mod_id, Number(file_id), gameName, version, size, mod_name, modTable, lineElement, 'simple',game);
 			} else {
-				await GetFileInfo_ByCache(mod_tempData[mod_id], mod_id, Number(file_id), game, version, mod_name, modTable, lineElement, 200, 'simple');
+				await GetFileInfo_ByCache(mod_tempData[mod_id], mod_id, Number(file_id), gameName, version, mod_name, modTable, lineElement, 200, 'simple',game);
 			}
 		} else {
-			await GetFileInfo(mod_id, Number(file_id), game, version, size, mod_name, modTable, lineElement, 'simple');
+			await GetFileInfo(mod_id, Number(file_id), gameName, version, size, mod_name, modTable, lineElement, 'simple',game);
 
 		}
 	};
@@ -675,17 +687,13 @@ async function CreateModTables_SimpleMode(mods, title) {
 			}
 		});
 	}
-	if (reloadDelay == 0) {
-		reloadDelay = options.LAST_MOD_UPDATE_CHECK;
-		setInterval(timeoutLoop, 1000);
-	}
 	GetApi_Data();
 	document.querySelector("div#modLoading").style.display = 'none';
 }
 function timeoutLoop() {
 	if (reloadDelay > 0) {
 		const differenceInSeconds = Math.floor(Date.now() / 1000) - reloadDelay;
-		const secondsIn24Hours = 5 * 60 * 60;
+		const secondsIn24Hours = 2 * 60 * 60;
 		const remainingSeconds = secondsIn24Hours - differenceInSeconds;
 		const remainingSecondsNonNegative = Math.max(remainingSeconds, 0);
 		const hours = Math.floor(remainingSecondsNonNegative / 3600);
@@ -722,14 +730,14 @@ document.querySelector("input#modFilter").addEventListener('input', function (ev
 		}
 	}, 200);
 })
-async function GetFileInfo(modIde, file_id, gameId, version, sizeBytes, title, element, tableElement, mode) {
+async function GetFileInfo(modIde, file_id, gameId, version, sizeBytes, title, element, tableElement, mode,game) {
 	if (temp_FetchCache[gameId] && temp_FetchCache[gameId][modIde]) {
 
 		DATA = temp_FetchCache[gameId][modIde].response;
 		console.log("%cCarregando " + title + " do Cache de FetchCache", "padding:2px;background: #ff2f2f;font-weight:bold;color:black");
 
 	} else {
-		const response = await fetch("https://api.nexusmods.com/v1/games/" + findGameLinkById(gameId) + "/mods/" + modIde + "/files.json", api_headers);
+		const response = await fetch("https://api.nexusmods.com/v1/games/" + game + "/mods/" + modIde + "/files.json", api_headers);
 		DATA = await response.json();
 		if (!response.ok) {
 			console.error("Erro de Conexão: " + response.status);
@@ -754,7 +762,7 @@ async function GetFileInfo(modIde, file_id, gameId, version, sizeBytes, title, e
 			response: DATA
 		};
 	}
-	const dldUrl = findURLbyID(gameId);
+	const dldUrl = "https://www.nexusmods.com/"+gameId;
 	let latestVersion = null;
 	let latestFile = null;
 	let MOD_STATUS = "outdated";
@@ -921,9 +929,9 @@ async function GetFileInfo(modIde, file_id, gameId, version, sizeBytes, title, e
 	});
 }
 async function GetFileInfo_ByCache(cache_item, modIde, file_id, gameId, version, title, element, tableElement, HTTP_STATUS, mode) {
-	const dldUrl = findURLbyID(gameId);
+	const dldUrl = "https://www.nexusmods.com/"+gameId;
 	const update = cache_item;
-	size = update["LAST_LOAD_" + file_id].size;
+	size = update["LAST_LOAD_" + file_id].size || 0;
 
 	DESCRIPTION = update["LAST_LOAD_" + file_id].description;
 	CHANGELOG = update["LAST_LOAD_" + file_id].changelog;
@@ -1095,8 +1103,8 @@ function bbcodeToHtml(bbcode) {
 	return bbcode;
 }
 
-async function GetMod_info(fileId, modId, game, element) {
-	const response = await fetch("https://api.nexusmods.com/v1/games/" + game + "/mods/" + modId + ".json", api_headers);
+async function GetMod_info(fileId, modId, game_number, element) {
+	const response = await fetch("https://api.nexusmods.com/v1/games/" + game_number + "/mods/" + modId + ".json", api_headers);
 	const DATA = await response.json();
 	if (DATA.picture_url) {
 		var parts = DATA.picture_url.split('/images/');
@@ -1129,36 +1137,18 @@ async function GetMod_info(fileId, modId, game, element) {
 	});
 }
 
-function GET_GAMES() {
+async function GET_GAMES() {
 	if (!NEXUS_API || NEXUS_API == "0" || NEXUS_API == 0) {
 		console.log("Error Starting ModLoader: API Required!")
 		return;
 	}
-	chrome.runtime.sendMessage({
-		action: 'SyncGameList',
-	  }, async function (response) {
-		if (chrome.runtime.lastError) {
-		  console.error("Error sending message:", chrome.runtime.lastError.message);
-		} else {
-		  if (response.success == false) {
-			console.error("No Loaded Games!");
-			return;
-		  }
-		  if (response && response.success) {
-			GAMES = response.message;
-			GAMES.sort((a, b) => b.downloads - a.downloads);
-			LoadMods();
-		  } else {
-			console.error("Error in response:", response.error);
-		  }
-		}
-	  });
+	await LoadMods();
 }
 
-function LoadMods() {
+async function LoadMods() {
 	chrome.runtime.sendMessage({
 		action: 'LoadMods'
-	}, function (responseData) {
+	},async function (responseData) {
 		if (chrome.runtime.lastError) {
 			console.error("Error sending message:", chrome.runtime.lastError.message);
 		} else {
@@ -1173,7 +1163,7 @@ function LoadMods() {
 				}
 				chrome.runtime.sendMessage({
 					action: 'LoadMods_Thumbnails'
-				}, function (response) {
+				}, async function (response) {
 					if (chrome.runtime.lastError) {
 						console.error("Error sending message:", chrome.runtime.lastError.message);
 					} else {
@@ -1181,9 +1171,9 @@ function LoadMods() {
 							if (Object.keys(response.data).length > 0) {
 								mod_tempData = response.data;
 								if (options['SimpleMode'] == true) {
-									CreateModTables_SimpleMode(responseData.data, "");
+									await CreateModTables_SimpleMode(responseData.data, "");
 								} else {
-									CreateModTables(responseData.data, "");
+									await CreateModTables(responseData.data, "");
 								}
 							} else {
 								document.querySelector("div#loadTimeout").style.display = 'none';
@@ -1191,13 +1181,27 @@ function LoadMods() {
 
 						} else {
 							if (options['SimpleMode'] == true) {
-								CreateModTables_SimpleMode(responseData, "");
+								await CreateModTables_SimpleMode(responseData, "");
 
 							} else {
-								CreateModTables(responseData.data, "");
+								await CreateModTables(responseData.data, "");
 							}
 							console.error("Error in response:", response.error);
 						}
+						console.warn(options)
+		reloadDelay = options.LAST_MOD_UPDATE_CHECK;
+		if(reloadDelay==0){
+			reloadDelay=Math.floor(Date.now() / 1000);
+			chrome.runtime.sendMessage({
+				action: 'SaveBox',
+				item: 'LAST_MOD_UPDATE_CHECK',
+				checado: Math.floor(Date.now() / 1000)
+			}, function () {
+				window.location.reload();
+			})
+		}
+		setInterval(timeoutLoop, 1000);
+	
 					}
 				});
 			} else {

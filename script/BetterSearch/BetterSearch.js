@@ -1,4 +1,5 @@
 async function BetterSearch() {
+  return;
     if (options['BetterSearch'] && SITE_URL.indexOf("next.nexusmods.com/") == -1) {
       if (!document.querySelector("div#BetterSearch") && !searchDiv) {
         searchDiv = document.createElement("div");

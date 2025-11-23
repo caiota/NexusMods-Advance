@@ -147,17 +147,19 @@ function findIdByNexusmodsUrl(targetUrl) {
     }
     return null; // Retorna null se não encontrar o URL alvo
 }
-function findIdBydomainName(targetUrl) {
+function findIdBydomainName() {
 
-    if (GAMES.length > 0) {
-        for (let i = 0; i < GAMES.length; i++) {
-            if (targetUrl == GAMES[i].domain_name) {
-
-                return GAMES[i].id;
-            }
-        }
-    } else {
-        console.error("SEM GAMES")
+    const nav = document.querySelector('nav[aria-label="Breadcrumb navigation"]');
+    if(nav){
+const spans = nav.querySelectorAll('span');
+const nakedSpans = Array.from(spans).filter(span => span.attributes.length === 0);
+if(nakedSpans){
+return nakedSpans[0].innerText;
+}
+    }
+    else if(document.querySelector("div.nav-current-game span")){
+        const nav = document.querySelector("div.nav-current-game span").innerText;
+        return nav;
     }
     return null; // Retorna null se não encontrar o URL alvo
 }
@@ -209,14 +211,15 @@ async function ON_MOD_PAGES(url) {
         "/mods/moretrending",
         "/mods/today",
         "/mods/thisweek",
-        "/media/",
-        "/videos/",
-        "/images/"
+        "/media",
+        "/videos",
+        "/images",
+        "/games"
     ];
     if (modPagePatterns.some(pattern => url.includes(pattern))) {
         return "mod_pages_all";
     }
-    if (document.querySelector("div#game-trending-mods")) {
+    if (document.querySelector("h2#trending-mods-header")|| window.location.pathname === '/') {
         return "home_page";
     }
     return "only_mod_page";
@@ -281,7 +284,11 @@ function startDragging(e) {
   }
   
   function isTextField(element) {
+    if(!element){
+        return false;
+    }
     const tagName = element.tagName.toLowerCase();
+    
     const isInputOrTextarea = tagName === 'input' && (element.type === 'text' || element.type === 'password' || element.type === 'email' || element.type === 'number' || element.type === 'search' || element.type === 'tel' || element.type === 'url') || tagName === 'textarea';
     const isContentEditable = element.isContentEditable;
     return isInputOrTextarea || isContentEditable;

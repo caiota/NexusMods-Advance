@@ -1,11 +1,14 @@
 async function VideoPopupSetup() {
     if (options['showVideosPopup'] == true && current_page != "only_mod_page") {
-        var videos = Array.from(document.querySelectorAll('li.video-tile a.mod-image:not([POPUP_SETUP])'));
+        var videos = Array.from(document.querySelectorAll('div[data-e2eid="media-tile"] :not([POPUP_VIDEO]) :has(svg[role="presentation"] path[d="M8,5.14V19.14L19,12.14L8,5.14Z"])'));
 
         for (let index = 0; index < videos.length; index++) {
             let video = videos[index];
-            video.setAttribute("POPUP_SETUP", true);
-
+                video = video.closest('div[data-e2eid="media-tile"] a');
+                if(!video){
+                    return;
+                }
+                video.setAttribute("POPUP_VIDEO", true);
             video.addEventListener('mouseenter', function (ev) {
                 zoomLevel = 1.0;
 
@@ -15,9 +18,13 @@ async function VideoPopupSetup() {
             });
             video.addEventListener('click', async function (ev) {
                 ev.preventDefault();
-                video = ev.target.closest('li.video-tile a.mod-image');
+                video = ev.target.closest('div[data-e2eid="media-tile"] a');
+                
+                gameId = new URL(video.href);
+                gameId = gameId.pathname.split("/")[1];
+                console.log(gameId)
                 VIDEO_ID = await extrairID(video.href);
-                elementView = ev.target.closest("li.video-tile");
+                elementView = ev.target.closest('div[data-e2eid="media-tile"]');
                 console.log("Video ID: " + VIDEO_ID)
                 try {
                     if (!options['showVideosPopup']) {
@@ -31,7 +38,8 @@ async function VideoPopupSetup() {
                         imgPopup.classList.add('popup-hidden');
                         imgPopup.src = "";
                         imgPopup.style.transform = "scale(" + zoomLevel + ")";
-                        CREATE_MOD_DESCRIPTION(gameId, videoId[0], 'videos');
+                        console.warn(gameId.replaceAll(" ","").toLowerCase())
+                        CREATE_MOD_DESCRIPTION(gameId.replaceAll(" ","").toLowerCase(), videoId[0], 'videos');
                     } else {
                         console.log("ID não encontrado.");
                     }
@@ -44,6 +52,7 @@ async function VideoPopupSetup() {
     }
 }
 async function EndorseVideoByPopup(video_id, element) {
+    return;
     if (SITE_URL.indexOf("/supporterimages/") == -1) {
         support = 0;
     } else {

@@ -1,6 +1,9 @@
 async function WIDER_WEBSITE() {
     try {
-        const mainContent = document.querySelector("div#mainContent");
+        var mainContent = document.querySelector("div#mainContent div[class*='relative next-container']");
+        if(!mainContent){
+            mainContent=document.querySelector("div#mainContent");
+        }
         if (mainContent) {
             if (options['WideWebsite']) {
                 mainContent.classList.add("noPadding");

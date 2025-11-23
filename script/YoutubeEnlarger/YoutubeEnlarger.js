@@ -8,6 +8,7 @@ async function YoutubeEnlarger() {
             let container = video.closest("div.youtube_container");
             if (container) {
                 container.classList.add("enlarged-youtube-video");
+                video.classList.add("enlarged-youtube-video");
             }
             video.src = video.src + "?autoplay=0";
             video.setAttribute("Enlarged", true);

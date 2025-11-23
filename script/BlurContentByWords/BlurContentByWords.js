@@ -1,35 +1,38 @@
 async function BLUR_CONTENT_BYWORD(fastHide = false) {
-    let PAGE_CONTENT;
-    if (fastHide == true) {
-        PAGE_CONTENT = Array.from(document.querySelectorAll("li div[data-mod-id]:not([HIDDEN_SETUP]), li.image-tile:not([HIDDEN_SETUP])"));
-    } else {
-        PAGE_CONTENT = Array.from(document.querySelectorAll("li[VISIBLE] div[data-mod-id]:not([HIDDEN_SETUP]), li.image-tile[VISIBLE]:not([HIDDEN_SETUP])"));
-    }
+    
+        const a_links = Array.from(document.querySelectorAll("div[class*='mod-tile'][VISIBLE]:not([HIDDEN_SETUP])"));
+        const li_links = Array.from(document.querySelectorAll("div[class*='mod-tile'][VISIBLE]:not([HIDDEN_SETUP])"));
+        const mod_images = Array.from(document.querySelectorAll("div[data-e2eid*='media-tile'][VISIBLE]:not([HIDDEN_SETUP])"));
+        const mod_trackingImages = Array.from(document.querySelectorAll("td.tracking-mod"));
+        const PAGE_CONTENT = a_links.concat(li_links, mod_images, mod_trackingImages);
     PAGE_CONTENT.forEach(function (divItem) {
         let type;
         let author;
         let category;
         let description;
-        if (divItem.classList.contains("mod-tile-left") || divItem.classList.contains("mod-tile") || (divItem.nodeName.toLocaleLowerCase() == "li" && divItem.querySelector("div[data-mod-id]"))) {
+        divItem=divItem.closest("div[class*='mod-tile'],div[data-e2eid*='media-tile']");
+        if (divItem.getAttribute("data-e2eid")=="mod-tile") {
             type = "MOD";
         } else {
             type = "IMAGE";
         }
         divItem.setAttribute("HIDDEN_SETUP", true);
-        const MAIN = divItem.closest("li").querySelector("figure");
-        if (divItem.style.display != 'none' && MAIN && !MAIN.classList.contains("blur-image-sm")) {
+        const MAIN = divItem.closest("div[class*='mod-tile'],div[data-e2eid*='media-tile']");
+        if (divItem.style.display != 'none' && MAIN && !MAIN.classList.contains("blurIgnoredModBlock")) {
 
-            const title = divItem.querySelector('div.tile-desc p.tile-name') ? divItem.querySelector('div.tile-desc p.tile-name').innerText.trim().toLowerCase() : "";
-            description = divItem.querySelector('div.tile-desc p.desc') ? divItem.querySelector('div.tile-desc p.desc').innerText.trim().toLowerCase() : "";
+            const title = divItem.querySelector('a[data-e2eid="mod-tile-title"],a[data-e2eid="media-tile-title"]') ? divItem.querySelector('a[data-e2eid="mod-tile-title"],a[data-e2eid="media-tile-title"]').innerText.trim().toLowerCase() : "";
+            description = divItem.querySelector('div[data-e2eid="mod-tile-summary"]') ? divItem.querySelector('div[data-e2eid="mod-tile-summary"]').innerText.trim().toLowerCase() : "";
+            
             if (type == "MOD") {
-                category = divItem.querySelector('div.tile-desc div.category') || divItem.querySelector('div.tile-desc ul li');
+                category = divItem.querySelector('a[data-e2eid="mod-tile-category"]');
                 category = category ? category.innerText.trim().toLowerCase() : "";
-                author = divItem.querySelector('div.tile-desc div.author a') || divItem.querySelectorAll('div.tile-desc ul li')[1];
+                author = divItem.querySelector('a[data-e2eid="user-link"] span,a[data-e2eid="media-tile-author"]');
                 author = author ? author.innerText.replace("By ", "").trim().toLowerCase() : "";
             } else {
-                author = divItem.querySelector('div.tile-desc div.author').innerText.trim().toLowerCase();
+                if(divItem.querySelector('a[data-e2eid="media-tile-author"]'))
+                author = divItem.querySelector('a[data-e2eid="media-tile-author"]').innerText.replace("by ", "").trim().toLowerCase();
+            
             }
-
             const containsWord = WORD_LIST.some(word =>
                 (author && author.includes(word)) ||
                 (category && category.includes(word)) ||
@@ -37,7 +40,8 @@ async function BLUR_CONTENT_BYWORD(fastHide = false) {
                 (description && description.includes(word))
             );
             if (containsWord && MAIN) {
-                MAIN.classList.add("blur-image-sm");
+                console.log(MAIN,containsWord)
+                MAIN.classList.add("blurIgnoredModBlock");
             }
         }
     });
@@ -57,6 +61,7 @@ async function LOAD_HIDDEN_WORDS(fastHide = false) {
                 if (response && response.success) {
                     WORD_LIST = response.message[0].split("#-#").map(word => word.toLowerCase());
                     if (WORD_LIST.length > 0 && !WORD_LIST[0] == "") {
+                        console.log(WORD_LIST)
                         BLUR_CONTENT_BYWORD(fastHide);
                     }
                 } else {

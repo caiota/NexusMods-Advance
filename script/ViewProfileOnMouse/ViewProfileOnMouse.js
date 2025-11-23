@@ -2,7 +2,7 @@ async function PROFILE_ONMOUSE(){
     try {
 
       if (options['ProfileOnMouse'] == true&&SITE_URL.indexOf("next.nexusmods.com/")==-1) {
-        const profileAndUserUrls_mainContent = Array.from(document.querySelectorAll("div#mainContent a:not([PROFILE_ONMOUSE])")).filter(function (link) {
+        const profileAndUserUrls_mainContent = Array.from(document.querySelectorAll("div#mainContent a:not([PROFILE_ONMOUSE]),div[aria-label='Search Nexus mods'][role='dialog'] a:not([PROFILE_ONMOUSE])")).filter(function (link) {
           return /\/(profile|users)\//.test(link.href) && !/about-me/.test(link.href) && !/myaccount/.test(link.href);
         });
         const profileAndUserUrls_endorsePopup = Array.from(document.querySelectorAll("div#mod-endorsers-popup a:not([PROFILE_ONMOUSE])")).filter(function (link) {
@@ -15,13 +15,6 @@ async function PROFILE_ONMOUSE(){
           link.setAttribute("PROFILE_ONMOUSE", true);
           if (link.href.indexOf("?tab=") != -1 || !link.href) {
             return;
-          }
-          if (!link.innerText && link.querySelector('img')) {
-            const TempName = link.querySelector('img').getAttribute("title") || link.querySelector('img').getAttribute("alt");
-            link.href = "https://next.nexusmods.com/profile/" + TempName + "/about-me"
-          } else {
-
-            link.href = "https://next.nexusmods.com/profile/" + link.innerText + "/about-me";
           }
           link.setAttribute("target", '_blank')
           link.addEventListener("mouseenter", function (ev) {
@@ -41,6 +34,6 @@ async function PROFILE_ONMOUSE(){
         };
       }
     } catch (e) {
-      console.error("NexusMods Advance Error:" + E);
+      console.error("NexusMods Advance Error:" + e);
     }
   }

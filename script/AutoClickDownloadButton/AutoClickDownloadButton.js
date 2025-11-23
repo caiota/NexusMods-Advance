@@ -1,40 +1,63 @@
+let DOWNLOAD_STARTED=false;
+var MAX_TRY=20;
+var dldLOOP=null;
 async function FAST_DOWNLOAD() {
+    try{ 
+    if(!DOWNLOAD_STARTED){
+        DOWNLOAD_STARTED=true;
+        const modFile = document.querySelector("mod-file-download");
+
+const root = modFile?.shadowRoot;
+const botoes = root?.querySelectorAll("button") || [];
+
+const slowBtn = Array.from(botoes).find(btn =>
+  btn.textContent.trim().toLowerCase().includes("slow download")
+);
+
+
     const downloadConditionsMet = (
         (SITE_URL.includes("&nmm=1") || SITE_URL.includes("tab=files&file_id=")) &&
-        (document.querySelector("button#slowDownloadButton") || document.querySelector("button#startDownloadButton")) &&
+        (slowBtn) &&
         options['FastDownloadModManager'] === true
     );
 
     if (!downloadConditionsMet) return;
+            if(!dldLOOP)
+            slowBtn.click();
+            dldLOOP=setInterval(()=>{
+                if(MAX_TRY>0){
+  MAX_TRY--;
+               DLD_LINK=Array.from(document.querySelectorAll("a")).find(btn =>
+  btn.textContent.trim().toLowerCase().includes("click here"));
+if(DLD_LINK&&DLD_LINK.href&&!DLD_LINK.getAttribute("DOWNLOAD_OK")){
+                clearInterval(dldLOOP);
+                MAX_TRY=20;
+                DLD_LINK.setAttribute("DOWNLOAD_OK",true);
+              window.stop()
+    window.open(DLD_LINK.href);
+              setTimeout(handleFallbackDownload, 100);
+}
+               }else{
+                clearInterval(dldLOOP);
+                MAX_TRY=20;
+               }
 
-    const downloadButton = document.querySelector("button#slowDownloadButton,button#startDownloadButton");
-    const buttonUrl = downloadButton.getAttribute("data-download-url");
-
-    if (buttonUrl && !buttonUrl.includes("#ERROR-download")) {
-        initiateDownload(buttonUrl);
-    } else {
-        downloadButton.click();
-        setTimeout(handleFallbackDownload, 2000);
+            },200)
+}
+    }catch(e){
+        DOWNLOAD_STARTED=false;
+        console.error("NexusMods Advance Error: "+e);
     }
 }
 
-function initiateDownload(url) {
-    window.open(url);
-    window.history.go(-1);
-    setTimeout(() => {
-        try {
-            window.close();
-        } catch (error) {
-            console.warn("Failed to close the window: ", error);
-        }
-    }, 1000);
-}
 
 function handleFallbackDownload() {
-    const fileLink = document.querySelector("div.donation-wrapper a")?.href;
-    if (fileLink) {
-        initiateDownload(fileLink);
-    } else {
-        console.error("Download fallback link not found.");
-    }
+        setTimeout(() => {
+            try {
+             window.history.go(-1);
+            } catch (error) {
+                DOWNLOAD_STARTED=false;
+                console.warn("Failed to close the window: ", error);
+            }
+        }, 300);
 }

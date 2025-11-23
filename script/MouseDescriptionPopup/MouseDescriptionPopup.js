@@ -1,7 +1,13 @@
 async function DESCRIPTION_ONMOUSE() {
     if (options['DescriptionOnMouse'] === true) {
         const currentModId = await extrairID(SITE_URL);
-        const links = Array.from(document.querySelectorAll("a:not([DESCRIPTION_CLICK])")).filter(link =>
+        if(SITE_URL.indexOf("trackingcentre?tab=mods")){
+        var ALL_LINKS=document.querySelectorAll("td.tracking-mod a:not([DESCRIPTION_CLICK])");
+        }{
+           
+        var ALL_LINKS=document.querySelectorAll("a:not([DESCRIPTION_CLICK])");
+        }
+        const links = Array.from(ALL_LINKS).filter(link =>
             /\/mods\/\d+/.test(link.href.replace(/#$/, ''))
         );
 
@@ -14,10 +20,9 @@ async function DESCRIPTION_ONMOUSE() {
                     clearTimeout(descriptionTimeout);
                     descriptionTimeout = setTimeout(async () => {
                         lastDescriptionID = linkModId;
-                        temp_gameID = findIdByNexusmodsUrl(link.href);
-                        if (temp_gameID && linkModId) {
-                            console.log(`Carregando MOD ID ${linkModId} do jogo ${temp_gameID}`);
-                            CREATE_MOD_DESCRIPTION(temp_gameID, linkModId, 'descricao');
+                        if ( linkModId && current_modTab!="images"&&current_modTab!="videos"&&current_modTab!="files") {
+                            console.log(`Carregando MOD ID ${linkModId} do jogo ${gameID_Number}`);
+                            CREATE_MOD_DESCRIPTION(gameID_Number, linkModId, 'descricao');
                         }
                     }, 600);
                 }

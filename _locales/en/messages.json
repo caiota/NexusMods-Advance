@@ -86,6 +86,10 @@
     "message": "Remove Donations Tab in Mod Description",
     "description": "Remove Donations Tab in Mod Description."
   },
+  "remove_HideModCollections": {
+    "message": "Remove the Collections tab from the Mods Description",
+    "description": "Remove the Collections tab from the description tab when viewing a mod."
+  },
   "hide_StickyPosts": {
     "message": "Auto Hide Pinned Posts in Mods' Posts Tab",
     "description": "Automatically hides Sticky Posts in the Mods Posts Tab"
@@ -97,8 +101,7 @@
   "button_AutoTrackDownloaded": {
     "message": "Automatically Add Files Marked as 'Downloaded' to NexusMods Advance",
     "description": "Detects downloaded files and automatically adds files marked as downloaded (<i class='fa-solid fa-cloud-download' aria-hidden='true'></i>) on mod pages to the NexusMods Advance list. You need to go to the files page of each mod to add them to the list. The button will turn green if the mod is added to the list. The file is added to the list simply by loading the page, no clicking required."
-}
-,
+  },
   "button_showDescription": {
     "message": "Show Button for Mod Description Popup in Mod Blocks",
     "description": "Displays a 'Description' button in the mod blocks on the site's home pages to view the Mod Description in a popup. Use ESC to close the popup and Ctrl+Mouse Scroll to increase or decrease the size."
@@ -106,6 +109,10 @@
   "button_ignoreMod": {
     "message": "Show Button to Ignore Mod on Mod Blocks",
     "description": "Displays a 'Ignore Mod' button on mod blocks on the site's main pages to remove that mod from your view. If you have at least 1 hidden mod, a list will appear here on NexusMods Advance to manage this list, separated by game."
+  },
+  "button_ignoreMod_BLUR": {
+    "message": "Only Visually Blur Ignored Mods",
+    "description": "Only Visually Blur Ignored Mods, this will leave the ignored mod blocks visible (and clickable), but they will be blurred out completely"
   },
   "button_fastDownloadTranslate": {
     "message": "Show Quick Download Button on Translation Links (For translation mods)",
@@ -149,7 +156,7 @@
   },
   "modSettings_notifications": {
     "message": "Show Notifications When Any Mod Updates",
-    "description": "Shows a notification in Windows when a new version of a mod is available. This feature only works once every 5 hours."
+    "description": "Shows a notification in Windows when a new version of a mod is available. This feature only works once every 2 hours."
   },
   "modSettings_simpleMode": {
     "message": "Show Mods in a Simple List",
@@ -161,7 +168,7 @@
   },
   "MODS_DELAY_MESSAGE": {
     "message": "Delay to Reload Mods: ",
-    "description": "Mod loading is limited to once every 5 hours, as the NexusMods API has a limit of 500 requests per hour. When you add a new mod, or modify an existing one in your list, it will be updated normally."
+    "description": "Mod loading is limited to once every 2 hours, as the NexusMods API has a limit of 500 requests per hour. When you add a new mod, or modify an existing one in your list, it will be updated normally."
   },
   "MODS_DELAY_USAGE": {
     "message": " requests remaining per day.",
@@ -259,17 +266,13 @@
   "Notification": {
     "message": " Unread Notifications"
   },
-  "AllNotifications": {
-    "message": "Enable Enhanced Notifications",
-    "description": "Monitors and notifies you better if you receive any Notifications on NexusMods, the extension icon will show the number of unread notifications, if this feature is active."
-  },
   "WideWebsite": {
     "message": "Expand Website Width",
     "description": "Expands the width of the site to occupy all available space that is originally reserved for ads."
   },
   "HideHiddenMods": {
-    "message": "Hide 'Hidden' Mods on My Content Page",
-    "description": "Hides mods marked as 'Hidden' in the Your Contents section, a button will appear that can be used to show these hidden files."
+    "message": "Hide content marked 'Hidden' on My Mods Page",
+    "description": "Hide mods marked as 'Hidden' in the Your Mods section, a button will appear that can be used to show these hidden files. Also, a search bar will be available on the page to search among your mods"
   },
   "HideMods_button": {
     "message": "Show Hidden Mods",
@@ -280,10 +283,6 @@
   },
   "more_DonatePls": {
     "message": "<i class='fa-solid fa-hand-holding-heart' aria-hidden='true'></i> Donate via PayPal"
-  },
-  "more_EndorsePls": {
-    "message": "<i class='fa-solid fa-trophy' aria-hidden='true'></i> Endorse the Extension",
-    "description": "<i class='fa-solid fa-trophy' aria-hidden='true'></i> Thank You!!"
   },
   "modViewPopup_changelog": {
     "message": "Description"
@@ -304,53 +303,6 @@
     "message": "Enable Floating Menu on Website",
     "description": "Makes the Site Options Menus stay at the top of the screen when you scroll down, so they are always visible. Works with all site menus from the mods, news, images and videos pages."
   },
-  "BetterSearch_TranslationsOnly": {
-    "message": "Translations Only?"
-  },
-  "BetterSearch_SearchLanguage": {
-    "message": "Mod in Any Language"
-  },
-  "BetterSearch_SearchEndorsements": {
-    "message": "No Endorsement Filter"
-  },
-  "BetterSearch_SearchDownloads": {
-    "message": "Any Number of Downloads"
-  },
-  "BetterSearch_SearchSize": {
-    "message": "Any Size"
-  },
-  "BetterSearch_EndorsementsSub_Low": {
-    "message": "Little Known Mods"
-  },
-  "BetterSearch_EndorsementsSub_Medium": {
-    "message": "Well Known Mods"
-  },
-  "BetterSearch_EndorsementsSub_High": {
-    "message": "Highly Known Mods"
-  },
-  "BetterSearch_EndorsementsSub_VeryHigh": {
-    "message": "Very Well Known Mods"
-  },
-  "BetterSearch_DownloadsSub_Low": {
-    "message": "Low Number of Downloads"
-  },
-  "BetterSearch_DownloadsSub_Medium": {
-    "message": "Medium Number of Downloads"
-  },
-  "BetterSearch_DownloadsSub_High": {
-    "message": "High Number of Downloads"
-  },
-  "BetterSearch_DownloadsSub_VeryHigh": {
-    "message": "Very High Number of Downloads"
-  },
-  "BetterSearch_SearchType": {
-    "message": "All Mods",
-    "description": "Only Mod Translations"
-  },
-  "BetterSearch": {
-    "message": "Enable Quick Search Filters",
-    "description": "Displays a Small Search Filters Menu when you search for Mods in the WebSite's Search Bar"
-  },
   "SharePostsLinks": {
     "message": "Enable Button to Copy Comment Link",
     "description": "Show a Button on Posts (on the Mods Posts page) to copy the link of the current comment<br><hr>BUG: Currently, there is a bug on the site regarding Comment Pages. Shared links work normally PROVIDED that the comment is from page 1. If the comment is from page 2 or beyond, the site will fail to scroll to the comment because technically it does not exist. I was able to fix this with the extension, but remember: <i>Sharing links to comments from page 2 and beyond with people who do not use the extension will not work.</i>"
@@ -359,11 +311,10 @@
     "message": "Copy Comment Link",
     "description": "Comment Link Copied!"
   },
- "BlockYoutube": {
+  "BlockYoutube": {
     "message": "Prevent YouTube Iframes from Loading",
     "description": "Prevents YouTube Iframes from loading by blocking the site's requests until the video is <b>VISIBLE</b>. This can significantly improve the site's loading time, as a large portion of YouTube's resources are CPU-intensive, blocking the site's rendering."
-}
-,
+  },
   "RenderMods_AlfabeticoFile": {
     "message": "By File Name"
   },
@@ -383,9 +334,13 @@
     "message": "Hide Mod Status in Mod Blocks",
     "description": "Hides the Mod Status on pages, such as 'Downloaded' and 'Update Available'. They are still shown when you hover over the mod."
   },
+  "HideCollections_ModPage": {
+  "message": "Hide Collections Section on Mod Pages",
+  "description": "Hides the Collections section that appears on a game's page above the most recent mods."
+},
   "EndorseAndVote": {
     "message": "Enjoying the Extension?",
-    "description": "If you like the Extension, please <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Vote</a> for it on NexusMods and don't forget to <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Endorse</a> as well! This helps spread the word about the Extension to those who need it, and motivates me to keep working on it! Thanks :D"
+    "description": "If you like the Extension don't forget to <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Endorse</a> as well! This helps spread the word about the Extension to those who need it, and motivates me to keep working on it! Thanks :D"
   },
   "fastDownloadTranslate_tip": {
     "message": "Click to quickly download this translation"
@@ -473,10 +428,6 @@
   "cdnTest_inlineButton": {
     "message": "Test Speed of CDN Servers on NexusMods Advance"
   },
-  "CustomGameSize": {
-    "message": "Nexus Games Page Improvements",
-    "description": "Adjustments Related to the NexusMods Games Page (nexusmods.com/games).<br>The text box for Game Block Size accepts CSS values like px, vw, or %. For example: 100px, 33vw, or 30%. The site's default value is usually 11.111%."
-  },
   "Following_EditMenu": {
     "message": "Transform the Text Box Options Menu into a Floating Menu",
     "description": "Transforms the options menu of text boxes (such as when posting an article or replying to a comment) into a floating menu that follows the mouse when you click, making editing long texts much easier. Just click, and the menu will come to you."
@@ -501,8 +452,30 @@
     "message": "Always Open External Links in a New Tab",
     "description": "External links from websites other than NexusMods.com will be opened in a new tab by default."
   },
+  "ModBlock_ImageFillDivs": {
+  "message": "Stretch Mod Blocks Images",
+  "description": "Stretches the images of Mod Blocks on the game's homepage to fit entirely in the main DIV, improving visibility. It may cause a weird stretched image effect for some very small images."
+},
   "Prevent_TrackOnDownload": {
     "message": "Do Not Add Files to Your Tracking List When Clicking Download Buttons",
     "description": "Prevents the Extension from Adding Files to Your List when clicking any Download button on the mods' Files page. Only the orange button to Add Files to NexusMods Advance will work."
+  },
+  "AdvancedSearch_SearchBar": {
+    "message": "Search Game"
+  },
+  "AdvancedSearchOption_AllContent": {
+    "message": "All Content"
+  },
+  "AdvancedSearchOption_Games": {
+    "message": "Games"
+  },
+  "AdvancedSearchOption_Collections": {
+    "message": "Collections"
+  },
+  "AdvancedSearchOption_Images": {
+    "message": "Images"
+  },
+  "AdvancedSearchOption_Videos": {
+    "message": "Videos"
   }
 }

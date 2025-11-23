@@ -1,5 +1,5 @@
 async function HideMyMods() {
-    if (options['HideHiddenMods'] == true && (SITE_URL.indexOf('/users/myaccount?tab=my+files') != -1 || SITE_URL.indexOf('/users/myaccount?tab=files') != -1 || SITE_URL.indexOf('/users/myaccount?tab=other+files') != -1)) {
+    if (options['HideHiddenMods'] == true && (SITE_URL.indexOf('/users/myaccount?tab=my+files') != -1 || SITE_URL.indexOf('/users/myaccount?tab=files') != -1 || SITE_URL.indexOf('/users/myaccount?tab=other+files') != -1|| SITE_URL.indexOf('/users/myaccount?tab=mods') != -1)) {
         const files = document.querySelectorAll("li.mod-tile");
         if (files.length > 0) {
             for (let i = 0; i < files.length; i++) {
@@ -73,7 +73,6 @@ async function HideMyMods() {
                         hideStatus = false;
                     }
                 });
-
                 document.querySelector("div.account-add-new").prepend(showButton);
                 document.querySelector("ul.sorting").prepend(li);
                 searchBar.click();

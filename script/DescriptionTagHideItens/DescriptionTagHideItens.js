@@ -7,6 +7,8 @@ async function DESCRIPTION_TAB() {
         const Translations = dts.filter(dt => dt.textContent.includes("Translations"))[0];
         const Changelogs = dts.filter(dt => dt.textContent.includes("Changelogs"))[0];
         const Donations = dts.filter(dt => dt.textContent.includes("Donations"))[0];
+        const Collections = dts.filter(dt => dt.textContent.includes("Collections"))[0];
+        const Collections_Content=document.querySelector("dd[data-collections-accordion-content]");
         if (options['HideRequerimentsTab'] == true && requeriments) {
             requeriments.style.display = 'none';
 
@@ -25,8 +27,14 @@ async function DESCRIPTION_TAB() {
         }
         if (options['HideDonationsTab'] == true && Donations) {
             Donations.style.display = 'none';
-
         }
+        if (options['HideModCollections'] == true && Collections && Collections_Content) {
+            Collections.style.display = 'none';
+            Collections_Content.style.display = 'none';
+        }
+
+            console.log(Collections)
+
         PROFILE_ONMOUSE();
         ARTICLES_ONMOUSE();
         FAST_TRANSLATES();

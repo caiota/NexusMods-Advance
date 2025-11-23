@@ -10,10 +10,10 @@ var options = {
 	"FastDescriptionButton": true,
 	"FastDownloadTranslates": true,
 	"FastIgnoreButton": true,
+	"JustBlur_IgnoredMods":false,
 	"AwaysChangelogs": true,
 	"OriginalImages": false,
 	"FastDownloadModManager": true,
-	"AllNotifications": true,
 	"DescriptionOnMouse": true,
 	"NotifyUpdates": true,
 	"InfiniteScroll": true,
@@ -31,27 +31,25 @@ var options = {
 	"HidePermissionsTab": false,
 	"HideChangelogsTab": false,
 	"HideDonationsTab": false,
+	"HideModCollections":false,
 	"HideStickyPosts": false,
 	"hideContentWords": false,
 	"WideWebsite": false,
 	"HideHiddenMods": false,
 	"FixedModMenu": true,
-	"BetterSearch": true,
 	"Endorsed": false,
 	"SharePostsLinks": true,
 	"BlockYoutube": true,
 	"HideModStatus": false,
-	"GameBlock_Render": true,
-	"GameBlockSize_input": "11.111%",
-	"DetailGameBlocks": true,
+	"HideCollections_ModPage":false,
 	"ModBlock_Render": false,
 	"BlockSize_input": "20%",
 	"MemoryMode": false,
 	"PauseExternalGifs": true,
-	"SimpleSiteNotifications": true,
 	"Following_EditMenu": true,
 	"NewTab_ExternalURL": true,
 	"Prevent_TrackOnDownload":false,
+	"ModBlock_ImageFillDivs":true
 };
 var hiddenContent = "";
 var hiddenMods = {};
@@ -134,10 +132,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 					await LOAD_MODDATA();
 					await deleteMod(message.mod_name, message.modId, sendResponse);
 					break;
-
-				case "SYNC_NOTIFICATIONCOUNT":
-					await handleSyncNotificationCount(message.forceUpdate, sendResponse);
-					break;
 				case 'UnlockYoutube':
 					await SETUP_YOUTUBE_DEFER("unlock");
 					YOUTUBE_STATUS = 'unlock';
@@ -154,13 +148,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 					sendResponse({ success: true, message: canShowEndorse });
 					break;
-				case 'SyncGameList':
-					if (GAMES.length == 0||!GAMES) {
-						await GET_GAMES(sendResponse);
-					} else {
-						sendResponse({ success: true, message: GAMES });
-					}
-					break;
 				case 'Block_InitialLoad':
 					//BLOCK_GAME_IMAGES();
 					sendResponse({ success: true });
@@ -169,10 +156,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 					//UNBLOCK_GAME_IMAGES();
 					sendResponse({ success: true });
 					break;
-				case "fetch_collections":
-					await Fetch_NexusModsCollections(message.game,sendResponse);
-
-				break;
 				default:
 					sendResponse({ success: false, message: "Ação desconhecida" });
 					break;
@@ -191,11 +174,6 @@ async function handleSaveBox(item, checado, sendResponse) {
 		return;
 	}
 	options[item] = checado;
-	if (item === "AllNotifications") {
-		if (checado) {
-			GET_NOTIFICATIONS();
-		}
-	}
 	await SAVE_OPTIONS(item);
 	if (item === "NotifyUpdates") {
 		clearInterval(UpdateLoop);
@@ -288,17 +266,10 @@ async function handlePopupConfig(type, sendResponse) {
 
 async function handleTrackMod(message, sendResponse) {
 	await loadMods();
-	await SAVE_MOD(message.mod, message.mod_name, message.file_id, message.game, message.version, message.updated, message.category, message.mod_Fullname, message.mod_thumbnail, message.gameName);
+	await SAVE_MOD(message.mod, message.mod_name, message.file_id, message.game, message.version, message.updated, message.category, message.mod_Fullname, message.mod_thumbnail, message.gameName,message.game_number);
 	sendResponse({ success: true, message: `Mod ${message.mod_name} Atualizado!` });
 }
 
-async function handleSyncNotificationCount(forceUpdate, sendResponse) {
-	if (forceUpdate) {
-		await GET_NOTIFICATIONS(sendResponse);
-	} else {
-		sendResponse({ success: true, message: NOTIFICATIONS_COUNT });
-	}
-}
 
 let popupWindowId = null;
 
@@ -446,11 +417,12 @@ async function deleteMod(modName, modId, sendResponse) {
 	});
 }
 
-async function SAVE_MOD(mod, mod_name, file_id, game, version, updated, category, fullname, thumbnail, gameName) {
+async function SAVE_MOD(mod, mod_name, file_id, game, version, updated, category, fullname, thumbnail, gameName,game_number) {
 	return new Promise(async (resolve, reject) => {
-		if (!mods[mod] || mods[mod].mod_name !== mod_name || mods[mod].file_id !== file_id || mods[mod].game !== game || mods[mod].version !== version || mods[mod].updated !== updated || mods[mod].category !== category || mods[mod].fullname !== fullname || mods[mod].gameName !== gameName) {
+		if (!mods[mod] || mods[mod].mod_name !== mod_name || mods[mod].file_id !== file_id || mods[mod].game !== game || mods[mod].version !== version || mods[mod].updated !== updated || mods[mod].category !== category || mods[mod].fullname !== fullname || mods[mod].gameName !== gameName||mods[mod].game_number!==game_number) {
 			mods[mod_name] = {
 				mod_id: mod,
+				game_number:game_number,
 				game: game,
 				file_id: file_id,
 				updated: updated,
@@ -468,6 +440,7 @@ async function SAVE_MOD(mod, mod_name, file_id, game, version, updated, category
 			}
 			await SAVE_MODDATA();
 			saveMods().then(() => {
+				console.log(mods_data[mod]);
 				console.log('Mod salvo:', mods[mod_name], mods_data[mod]);
 				resolve();
 			});
@@ -599,10 +572,11 @@ async function CheckModUpdates() {
 			version,
 			updated,
 			category,
+			game_number,
 			full_name,
 			file_id,
 		} = modInfo;
-		await GetFileInfo(mod_id, game, version, updated, modName, Number(file_id));
+		await GetFileInfo(mod_id, game, version, updated, modName, Number(file_id),game_number);
 
 	};
 	if (outdated_mods > 0) {
@@ -637,7 +611,7 @@ var api_headers = {
 var temp_FetchCache = {};
 var DESCRIPTION, CHANGELOG;
 var activeRequests = {};
-async function GetFileInfo(modIde, gameId, version, updated, title, file_id) {
+async function GetFileInfo(modIde, gameId, version, updated, title, file_id,game_number) {
 	try {
 		if (activeRequests[modIde]) {
 			console.log("Aguardando requisição já em andamento para " + title);
@@ -648,7 +622,7 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id) {
 			DATA = temp_FetchCache[gameId][modIde].response;
 			console.log("%cCarregando " + title + " do Cache de FetchCache", "padding:2px;background: #ff2f2f;font-weight:bold;color:black");
 		} else {
-			activeRequests[modIde] = fetch("https://api.nexusmods.com/v1/games/" + findGameLinkById(gameId) + "/mods/" + modIde + "/files.json", api_headers);
+			activeRequests[modIde] = fetch("https://api.nexusmods.com/v1/games/" + gameId + "/mods/" + modIde + "/files.json", api_headers);
 			const response = await activeRequests[modIde];
 			DATA = await response.json();
 
@@ -731,31 +705,7 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id) {
 	}
 }
 
-function findGameLinkById(gameId) {
-	if (GAMES.length > 0) {
-		for (let i = 0; i < GAMES.length; i++) {
-			if (gameId == GAMES[i].id) {
-				return GAMES[i].domain_name;
-			}
-		}
-	} else {
-		console.error("SEM GAMES")
-	}
-	return null;
-}
 
-function findURLbyID(modID) {
-	if (GAMES.length > 0) {
-		for (let i = 0; i < GAMES.length; i++) {
-			if (modID == GAMES[i].id) {
-				return GAMES[i].nexusmods_url;
-			}
-		}
-	} else {
-		console.error("SEM GAMES")
-	}
-	return null;
-}
 
 function formatDate(unixTimestamp) {
 	const date = new Date(unixTimestamp * 1000);
@@ -765,113 +715,9 @@ function formatDate(unixTimestamp) {
 }
 var GAMES = [];
 
-async function GET_GAMES(sendResponse) {
-	console.log("CARREGANDO GAMES");
-	fetch("https://www.nexusmods.com/assets/files/games.json", http_headers)
-		.then(response => response.json())
-		.then(async (data) => {
-			GAMES = data;
-			console.log(GAMES);
-			if (sendResponse) {
-
-				sendResponse({ success: true, message: GAMES });
-			}
-			console.log(GAMES.length + " GAMES LOADED");
-		});
-
-}
 
 var NOTIFICATIONS_COUNT = 0;
 
-async function GET_NOTIFICATIONS(sendResponse) {
-	if (options['AllNotifications'] == true) {
-		let FETCH_DATA;
-		fetch("https://www.nexusmods.com/ProxyClient?Proxy&url=%2F&service=notifications-v2&method=POST", {
-			"headers": {
-				"accept": "*/*",
-				"accept-language": "pt-BR,pt;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-				"content-type": "text/plain;charset=UTF-8",
-				"priority": "u=1, i",
-				"sec-ch-ua": "\"Chromium\";v=\"128\", \"Not;A=Brand\";v=\"24\", \"Microsoft Edge\";v=\"128\"",
-				"sec-ch-ua-mobile": "?0",
-				"sec-ch-ua-platform": "\"Windows\"",
-				"sec-fetch-dest": "empty",
-				"sec-fetch-mode": "cors",
-				"sec-fetch-site": "same-origin"
-			},
-			"referrer": "https://www.nexusmods.com/",
-			"referrerPolicy": "strict-origin-when-cross-origin",
-			"body": "{\"query\":\"query NotificationGroupsUnreadCount($tag: String) {\\n  notificationGroups(tag: $tag) {\\n    unreadCount\\n  }\\n}\",\"variables\":{\"readStatus\":\"UNREAD\"}}",
-			"method": "POST",
-			"mode": "cors",
-			"credentials": "include"
-		}).then(async (response) => {
-			if (response.status != 200) {
-				console.error("Error Loading Notifications: Service Unavailable (" + response.status + ")")
-			}
-			FETCH_DATA = response.json()
-			return FETCH_DATA;
-		})
-			.then(async (data) => {
-				NOTIFICATIONS_COUNT = data.data.notificationGroups.unreadCount;
-				if (isNaN(NOTIFICATIONS_COUNT)) {
-					chrome.action.setBadgeText({
-						text: ''
-					});
-					chrome.action.setTitle({
-						title: "NexusMods Advance"
-					});
-					return;
-				}
-				chrome.action.setBadgeText({
-					text: NOTIFICATIONS_COUNT.toString()
-				});
-
-				if (NOTIFICATIONS_COUNT > 0) {
-					if (options['language'] == "english") {
-						var notification_message = " New Notifications!"
-					} else if (options['language'] == "portuguese") {
-						var notification_message = " Novas Notificações!"
-					} else if (options['language'] == "alemao") {
-						var notification_message = " Neue Benachrichtigungen!"
-					} else if (options['language'] == "polones") {
-						var notification_message = " Nowe powiadomienia!"
-					}
-
-					chrome.action.setTitle({
-						title: NOTIFICATIONS_COUNT + notification_message
-					});
-				} else {
-					chrome.action.setBadgeText({
-						text: ''
-					});
-					chrome.action.setTitle({
-						title: "NexusMods Advance"
-					});
-				}
-				if (sendResponse) {
-
-					sendResponse({
-						success: true,
-						message: NOTIFICATIONS_COUNT
-					})
-				}
-				if (NotificationLoop) {
-					clearTimeout(NotificationLoop)
-				}
-				NotificationLoop = setTimeout(GET_NOTIFICATIONS, 11000);
-			});
-
-	} else {
-		chrome.action.setBadgeText({
-			text: ''
-		});
-		chrome.action.setTitle({
-			title: "NexusMods Advance"
-		});
-		clearInterval(NotificationLoop);
-	}
-}
 async function UpdateStartUp() {
 	await LOAD_OPTIONS();
 	await Load_NEXUSAPI();
@@ -889,7 +735,7 @@ async function UpdateStartUp() {
 	}
 	const lastModUpdateCheck = options.LAST_MOD_UPDATE_CHECK;
 	const currentTimeUnix = Math.floor(Date.now() / 1000);
-	const twentyFourHoursInSeconds = 5 * 60 * 60;
+	const twentyFourHoursInSeconds = 2 * 60 * 60;
 	//const twentyFourHoursInSeconds = 1*60;
 	const isMoreThan5Hours = (currentTimeUnix - lastModUpdateCheck) >= twentyFourHoursInSeconds;
 	if (options['MemoryMode'] == true) {
@@ -899,14 +745,14 @@ async function UpdateStartUp() {
 		return;
 	}
 	if (options['NotifyUpdates'] == true && isMoreThan5Hours == true) {
-		if (GAMES.length > 0) {
+		
 			await loadMods();
 			await LOAD_MODDATA();
 			CheckModUpdates();
 
 			options.LAST_MOD_UPDATE_CHECK = Math.floor(Date.now() / 1000);
 			await SAVE_OPTIONS();
-		}
+		
 	}
 
 }
@@ -935,51 +781,6 @@ async function BLOCK_GAME_IMAGES() {
 async function UNBLOCK_GAME_IMAGES() {
 	await chrome.declarativeNetRequest.updateDynamicRules({
 		removeRuleIds: [2]
-	});
-}
-async function Fetch_NexusModsCollections(gameName,sendResponse){
-	fetch("https://next.nexusmods.com/api/graphql", {
-		headers: {
-			"accept": "*/*",
-			"accept-language": "pt-BR,pt;q=0.6",
-			"api-version": "2023-09-05",
-			"content-type": "application/json",
-			"priority": "u=1, i",
-			"sec-ch-ua": "\"Chromium\";v=\"130\", \"Brave\";v=\"130\", \"Not?A_Brand\";v=\"99\"",
-			"sec-ch-ua-mobile": "?0",
-			"sec-ch-ua-platform": "\"Windows\"",
-			"sec-fetch-dest": "empty",
-			"sec-fetch-mode": "cors",
-			"sec-fetch-site": "same-origin",
-			"sec-gpc": "1"
-		},
-		referrer: "https://next.nexusmods.com/",
-		referrerPolicy: "strict-origin-when-cross-origin",
-		body: "{\"query\":\"query Collections ($thumbnailSize: ThumbnailSize!, $count: Int, $facets: CollectionsFacet, $filter: CollectionsUserFilter, $gameDomain: String, $offset: Int, $postFilter: CollectionsUserFilter, $sortBy: String, $userId: Int, $viewAdultContent: Boolean, $viewDiscarded: Boolean, $viewListed: Boolean, $viewUnderModeration: Boolean, $viewUnlisted: Boolean) { collections (count: $count, facets: $facets, filter: $filter, gameDomain: $gameDomain, offset: $offset, postFilter: $postFilter, sortBy: $sortBy, userId: $userId, viewAdultContent: $viewAdultContent, viewDiscarded: $viewDiscarded, viewListed: $viewListed, viewUnderModeration: $viewUnderModeration, viewUnlisted: $viewUnlisted) { nodesCount, nodes { collectionStatus, discardedAt, draftRevisionNumber, endorsements, id, name, overallRating, overallRatingCount, slug, totalDownloads, summary, category { name }, game { domainName, name }, latestPublishedRevision { adultContent, modCount, totalSize }, metadata { downloadedAt }, permissions { global, key }, tileImage { thumbnailUrl (size: $thumbnailSize)  }, user { avatar, name } }, nodesFacets { count, facet, value } } }\",\"variables\":{\"count\":40,\"facets\":{\"adultContent\":[\"false\",\"true\"],\"categoryName\":[],\"collectionRating\":[],\"collectionStatus\":[],\"gameIds\":[],\"gameName\":[\""+gameName+"\"],\"gameVersion\":[],\"hasDraftRevision\":[],\"hasPublishedRevision\":[],\"tag\":[]},\"filter\":{\"generalSearch\":[]},\"offset\":0,\"postFilter\":{\"modUid\":[]},\"sortBy\":\"total_downloads\",\"viewAdultContent\":true,\"viewDiscarded\":false,\"viewListed\":true,\"viewUnderModeration\":false,\"viewUnlisted\":false,\"thumbnailSize\":\"med\",\"filters\":{\"adultContent\":true,\"categoryName\":[],\"collectionRating\":[],\"collectionStatus\":[],\"gameName\":[\""+gameName+"\"],\"gameVersion\":[],\"includedMod\":[],\"tag\":[]}},\"operationName\":\"Collections\"}",
-		method: "POST",
-		mode: "cors",
-		credentials: "include"
-	})
-	.then(response => {
-		if (!response.ok) {
-			throw new Error('Network response was not ok');
-		}
-		return response.json(); // Converte a resposta em JSON
-	})
-	.then(data => {
-		// Aqui você pode manipular os dados JSON recebidos
-		const collections = data.data.collections.nodes; // Acessando os nós das coleções
-		console.log(collections); // Exibe as coleções no console
-		
-		// Exemplo de como acessar informações específicas de cada coleção
-		
-		sendResponse({
-			success: true,
-			message: collections
-		})
-	})
-	.catch(error => {
-		console.error('Houve um problema com a requisição Fetch:', error);
 	});
 }
 
@@ -1057,7 +858,6 @@ async function checkOneWeekPassed() {
 var UpdateLoop, NotificationLoop;
 chrome.runtime.onInstalled.addListener(async (details) => {
 
-	GET_GAMES();
 	if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
 		const installTime = Date.now();
 		chrome.storage.local.set({ installTime }, () => {
@@ -1092,7 +892,6 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 	}
 	clearInterval(UpdateLoop);
 	UpdateLoop = setInterval(UpdateStartUp, 61000);
-	GET_NOTIFICATIONS();
 	UpdateStartUp();
 	chrome.action.setBadgeBackgroundColor({
 		color: 'orange'
@@ -1106,10 +905,8 @@ chrome.runtime.onStartup.addListener(async () => {
 	});
 	clearInterval(UpdateLoop);
 	UpdateLoop = setInterval(UpdateStartUp, 61000);
-	await GET_NOTIFICATIONS();
 	UpdateStartUp();
 
-	GET_GAMES();
 });
 
 chrome.notifications.onClicked.addListener(notificationId => {
@@ -1125,7 +922,6 @@ chrome.notifications.onClicked.addListener(notificationId => {
 });
 chrome.action.onClicked.addListener(() => {
 
-	GET_GAMES();
 	chrome.windows.create({
 		url: chrome.runtime.getURL("config.html?tab=settings"),
 		type: "popup",
