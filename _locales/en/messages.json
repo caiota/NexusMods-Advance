@@ -106,6 +106,10 @@
     "message": "Show Button for Mod Description Popup in Mod Blocks",
     "description": "Displays a 'Description' button in the mod blocks on the site's home pages to view the Mod Description in a popup. Use ESC to close the popup and Ctrl+Mouse Scroll to increase or decrease the size."
   },
+  "PopupRightScreen":{
+    "message":"Show description popup on the right side of the screen",
+    "description":"Display the Description popup on the right side of the screen instead of a popup next to the mouse. This also prevents it from being moved with the mouse, but it can still be resized using Ctrl+Scroll. This also affects the 'Show Descriptions in a Popup when Hovering over a Mod Link' option."
+  },
   "button_ignoreMod": {
     "message": "Show Button to Ignore Mod on Mod Blocks",
     "description": "Displays a 'Ignore Mod' button on mod blocks on the site's main pages to remove that mod from your view. If you have at least 1 hidden mod, a list will appear here on NexusMods Advance to manage this list, separated by game."
@@ -263,6 +267,14 @@
     "message": "Blur Images Based on Words",
     "description": "Blurs images by applying a Blur Effect according to the words defined below line by line. The defined words are searched for in Mod Categories, Mod Quick Description, Author Names and in Mod and Image Titles. This affects the entire site and the Mod Images page."
   },
+  "HideContent_Enable_FULLHIDE": {
+    "message": "Hide Items instead of Blurring",
+    "description": "Hides Mods/Images/Videos instead of just blurring them."
+  },
+  "searchRequerimentsTab":{
+   "message":"Search Mods Here"
+
+  },
   "Notification": {
     "message": " Unread Notifications"
   },
@@ -337,6 +349,10 @@
   "HideCollections_ModPage": {
   "message": "Hide Collections Section on Mod Pages",
   "description": "Hides the Collections section that appears on a game's page above the most recent mods."
+},
+"HideExternalImages_ModPage":{
+"message":"Hide Images from the Description and Files tab of the mods",
+"description":"Hides external images in the Description tab and Files tab of the mods"
 },
   "EndorseAndVote": {
     "message": "Enjoying the Extension?",
@@ -452,9 +468,13 @@
     "message": "Always Open External Links in a New Tab",
     "description": "External links from websites other than NexusMods.com will be opened in a new tab by default."
   },
-  "ModBlock_ImageFillDivs": {
-  "message": "Stretch Mod Blocks Images",
-  "description": "Stretches the images of Mod Blocks on the game's homepage to fit entirely in the main DIV, improving visibility. It may cause a weird stretched image effect for some very small images."
+  "NewTab_Messenger": {
+    "message": "Open Messages tab in a PopUp",
+    "description": "Opens the NexusMods Messaging tab in a pop-up window when you click the messaging icon."
+  },
+  "AutoRotate_ModPictures": {
+  "message": "Automatically rotate mods portfolio",
+  "description": "In the mod tabs, automatically rotates mod images"
 },
   "Prevent_TrackOnDownload": {
     "message": "Do Not Add Files to Your Tracking List When Clicking Download Buttons",

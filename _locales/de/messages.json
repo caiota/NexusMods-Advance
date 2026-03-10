@@ -112,6 +112,10 @@
     "message": "Schaltfläche für Popup mit Mod-Beschreibung in den Mod-Blöcken anzeigen",
     "description": "Zeigt eine 'Beschreibung'-Schaltfläche in den Mod-Blöcken auf den Startseiten der Website, um die Mod-Beschreibung in einem Popup anzuzeigen. Verwenden Sie ESC, um das Popup zu schließen, und Strg+Mausrad, um die Größe zu vergrößern oder zu verkleinern."
   },
+  "PopupRightScreen":{
+  "message":"Beschreibungs-Popup auf der rechten Seite des Bildschirms anzeigen",
+  "description":"Zeigt das Beschreibungs-Popup auf der rechten Seite des Bildschirms an, anstatt eines Popups neben dem Mauszeiger. Dadurch wird auch verhindert, dass es mit der Maus verschoben werden kann, es kann jedoch weiterhin mit Strg+Scroll in der Größe verändert werden. Dies wirkt sich auch auf die Option „Beschreibungen in einem Popup anzeigen, wenn der Mauszeiger über einem Mod-Link schwebt“ aus."
+},
   "button_ignoreMod": {
     "message": "Schaltfläche „Mod überspringen“ auf Mod-Blöcken anzeigen",
     "description": "Wenn Sie mindestens einen versteckten Mod haben, wird hier auf NexusMods Advance eine Liste angezeigt, in der Sie diese Liste verwalten können, getrennt nach Spielen."
@@ -266,6 +270,13 @@
     "message": "Verwischen Sie Bilder basierend auf Wörtern",
     "description": "Verwischen Sie die Bilder, indem Sie einen Unschärfeeffekt gemäß den unten definierten Wörtern Zeile für Zeile anwenden. Die definierten Wörter werden in Mod-Kategorien, Mod-Kurzbeschreibung, Autorennamen sowie Mod-Titeln und Bildern durchsucht. Dies betrifft die gesamte Website und die Mod-Images-Seite"
   },
+  "HideContent_Enable_FULLHIDE": {
+  "message": "Elemente ausblenden statt verwischen",
+  "description": "Blendet Mods/Bilder/Videos aus, anstatt sie zu verwischen."
+},
+"searchRequerimentsTab":{
+  "message":"Mods Hier Suchen"
+},
   "Notification": {
     "message": " Ungelesene Benachrichtigungen"
   },
@@ -340,6 +351,10 @@
   "HideCollections_ModPage": {
   "message": "Sammlungsbereich auf Mod-Seiten ausblenden",
   "description": "Blendet den Sammlungsbereich aus, der auf der Spielseite oberhalb der neuesten Mods angezeigt wird."
+},
+"HideExternalImages_ModPage":{
+  "message":"Externe Bilder in der Beschreibung und im Dateien-Tab der Mods ausblenden",
+  "description":"Blendet externe Bilder im Beschreibungs-Tab und im Dateien-Tab der Mods aus"
 },
 "EndorseAndVote": {
   "message": "Gefällt dir die Erweiterung?",
@@ -455,9 +470,13 @@
     "message": "Externe Links immer in einem neuen Tab öffnen",
     "description": "Externe Links von anderen Websites als NexusMods.com werden standardmäßig in einem neuen Tab geöffnet."
   },
-  "ModBlock_ImageFillDivs": {
-  "message": "Mod-Block-Bilder strecken",
-  "description": "Dehnt die Bilder der Mod-Blöcke auf der Spielstartseite aus, um sie vollständig im Haupt-DIV einzupassen und die Sichtbarkeit zu verbessern. Dies kann bei sehr kleinen Bildern zu einem verzerrten Streckeffekt führen."
+  "NewTab_Messenger": {
+  "message": "Nachrichten-Tab in einem Pop-up-Fenster öffnen",
+  "description": "Öffnet den NexusMods-Nachrichten-Tab in einem Pop-up-Fenster, wenn du auf das Nachrichtensymbol klickst."
+},
+"AutoRotate_ModPictures": {
+  "message": "Mods-Portfolio automatisch drehen",
+  "description": "In den Mod-Tabs werden die Mod-Bilder automatisch gedreht"
 },
   "Prevent_TrackOnDownload": {
     "message": "Keine Dateien zu Ihrer Liste hinzufügen, wenn Sie auf Download-Schaltflächen klicken",

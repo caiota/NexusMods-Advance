@@ -109,6 +109,10 @@
     "message": "Pokaż przycisk do wyskakującego okna opisu moda w blokach modów",
     "description": "Wyświetla przycisk 'Opis' w blokach modów na stronach głównych witryny, aby wyświetlić opis moda w wyskakującym oknie. Użyj ESC, aby zamknąć okno, oraz Ctrl+przewijanie myszką, aby zwiększyć lub zmniejszyć rozmiar."
   },
+  "PopupRightScreen":{
+  "message":"Wyświetl wyskakujące okno opisu po prawej stronie ekranu",
+  "description":"Wyświetla wyskakujące okno opisu po prawej stronie ekranu zamiast okna obok kursora myszy. Zapobiega to również jego przesuwaniu za pomocą myszy, ale nadal można zmieniać jego rozmiar za pomocą Ctrl+Scroll. Ma to także wpływ na opcję „Wyświetlaj opisy w wyskakującym oknie po najechaniu kursorem na link moda“."
+},
   "button_ignoreMod": {
     "message": "Pokaż przycisk pominięcia modu w blokach modów",
     "description": "Jeśli masz co najmniej 1 ukryty mod, w NexusMods Advance pojawi się lista, w której możesz zarządzać tą listą, rozdzieloną według gier."
@@ -263,6 +267,13 @@
     "message": "Rozmycie obrazów na podstawie słów",
     "description": "Rozmyj obrazy, stosując efekt rozmycia zgodnie ze słowami zdefiniowanymi poniżej, linia po linii. Zdefiniowane słowa są wyszukiwane w kategoriach modów, szybkim opisie modów, nazwach autorów oraz tytułach modów i obrazach. Ma to wpływ na całą witrynę i stronę Mod Images"
   },
+  "HideContent_Enable_FULLHIDE": {
+  "message": "Ukryć elementy zamiast je rozmywać",
+  "description": "Ukrywa mody/obrazy/filmy zamiast je rozmywać."
+},
+"searchRequerimentsTab":{
+  "message":"Szukaj Modów Tutaj"
+},
   "Notification": {
     "message": " Nieprzeczytane powiadomienia"
   },
@@ -337,6 +348,10 @@
   "HideCollections_ModPage": {
   "message": "Ukryj sekcję Kolekcji na stronach modów",
   "description": "Ukrywa sekcję Kolekcji, która pojawia się na stronie gry powyżej najnowszych modów."
+},
+"HideExternalImages_ModPage":{
+"message":"Ukryj obrazy w zakładce Opis i Pliki modów",
+"description":"Ukrywa zewnętrzne obrazy w zakładce Opis i Pliki modów"
 },
 "EndorseAndVote": {
   "message": "Podoba Ci się rozszerzenie?",
@@ -452,9 +467,13 @@
     "message": "Zawsze otwieraj linki zewnętrzne w nowej karcie",
     "description": "Linki zewnętrzne z innych stron niż NexusMods.com będą domyślnie otwierane w nowej karcie."
   },
-  "ModBlock_ImageFillDivs": {
-  "message": "Rozciągnij obrazy bloków modów",
-  "description": "Rozciąga obrazy bloków modów na stronie głównej gry, aby całkowicie zmieściły się w głównym DIV-ie, poprawiając widoczność. Może to powodować dziwny efekt rozciągnięcia dla bardzo małych obrazów."
+  "NewTab_Messenger": {
+  "message": "Otwórz zakładkę Wiadomości w wyskakującym oknie",
+  "description": "Otwiera zakładkę Wiadomości NexusMods w wyskakującym oknie po kliknięciu ikony wiadomości."
+},
+"AutoRotate_ModPictures": {
+  "message": "Automatycznie obracać portfolio modów",
+  "description": "Na kartach modów automatycznie obraca obrazy modów"
 },
   "Prevent_TrackOnDownload": {
     "message": "Nie dodawaj plików do swojej listy po kliknięciu przycisków pobierania",

@@ -112,6 +112,10 @@
     "message": "Mostrar Botão para o Popup de Descrição do Mod nos Blocos dos Mods",
     "description": "Mostra um botão de 'Descrição' nos blocos de mods nas páginas iniciais do site para ver a Descrição do Mod em um popup. Use ESC para fechar o popup e Ctrl+Scroll do Mouse para aumentar ou reduzir o tamanho."
   },
+  "PopupRightScreen":{
+  "message":"Mostrar popup de descrição no lado direito da tela",
+  "description":"Exibe o popup de descrição no lado direito da tela em vez de um popup ao lado do cursor do mouse. Isso também impede que ele seja movido com o mouse, mas ainda permite redimensioná-lo usando Ctrl+Scroll. Isso também afeta a opção 'Mostrar descrições em um popup ao passar o mouse sobre um link de mod'."
+},
   "button_ignoreMod": {
     "message": "Mostrar Botão de Ignorar Mod nos Blocos de Mods",
     "description": "Mostra um Botão de Ignorar mod nos blocos de mods, isso irá ocultar totalmente o mod das páginas. Se você tiver ao menos 1 mod oculto, uma lista irá surgir aqui na NexusMods Advance para gerenciar esta lista, separada por jogo."
@@ -263,6 +267,13 @@
     "message": "Borrar Imagens com Base em Palavras",
     "description": "Borra as imagens aplicando um Efeito de Blur de acordo com as palavras definidas abaixo linha por linha, As palavras definidas são procuradas nas Categorias de Mods, Rápida Descrição de Mods, Nomes de Autores e nos Titulos dos Mods e Imagens. Isso afeta todo o site e a página Imagens dos Mods"
   },
+  "HideContent_Enable_FULLHIDE": {
+    "message": "Ocultar os Itens em vez de Borrar",
+    "description": "Oculta os Mods/Imagens/Videos ao invés de borra-los."
+  },
+  "searchRequerimentsTab":{
+  "message":"Pesquise Mods Aqui"
+},
   "Notification": {
     "message": " Notificações não lidas"
   },
@@ -337,6 +348,10 @@
   "HideCollections_ModPage": {
     "message": "Ocultar Sessão de Coleções nos Blocos de Mods",
     "description": "Oculta a Sessão de Coleções que aparece na página de algum jogo acima dos mods mais recentes."
+  },
+  "HideExternalImages_ModPage":{
+    "message":"Ocultar Imagens da Descrição e Aba Files dos mods",
+    "description":"Oculta imagens externas na Aba Descrição e na Aba Files dos mods"
   },
   "EndorseAndVote": {
     "message": "Gostando da Extensão?",
@@ -452,9 +467,14 @@
     "message": "Sempre Abrir Links Externos em uma Nova Aba",
     "description": "Os links externos de outros sites que não sejam NexusMods.com serão abertos em uma Nova Aba por padrão."
   },
-  "ModBlock_ImageFillDivs": {
-    "message": "Esticar Imagens dos Blocos de Mods",
-    "description": "Estica as Imagens de Blocos de Mods na página inicial dos jogos para caber todo no DIV principal, melhorando a visibilidade. Pode causar um efeito estranho de imagem esticada para algumas imagens muito pequenas."
+  
+  "NewTab_Messenger": {
+    "message": "Abrir Mensagens em um PopUp",
+    "description": "Abre o Messenger do NexusMods em um popUp ao clicar no icone de mensagens."
+  },
+  "AutoRotate_ModPictures": {
+    "message": "Rodar portifólio de mods automáticamente",
+    "description": "Nas abas de mods, roda as imagens dos mods automáticamente"
   },
 
   
