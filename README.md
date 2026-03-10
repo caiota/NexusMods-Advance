@@ -1,7 +1,6 @@
 # NexusMods Advance
-## Simple extension designed to enhance NexusMods Browsing with a built-in File Tracker to notify and download mod updates.
-
-## I'm not familiar with Github, but here I am :D
+## A very complex extension designed to enhance NexusMods Browsing with a built-in File Tracker to notify and download mod updates.
+## Thank you to the NexusMods team for all the support and permission.
 
 ## Credits to
 - Bapcules for translating the Extension into German
