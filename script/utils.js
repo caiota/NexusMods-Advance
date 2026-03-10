@@ -76,7 +76,7 @@ function formatNumber(number) {
     }
 }
 
-async function CreateNotificationContainer(msg, type, iconClass, timer) {
+async function CreateNotificationContainer(msg, type, iconClass, timer = 5000) {
     // Cria o container da notificação
     const notificationDiv = document.createElement('div');
     if (!timer || isNaN(timer)) {
@@ -118,6 +118,7 @@ async function CreateNotificationContainer(msg, type, iconClass, timer) {
 
     adjustNotificationPositions();
     // Remove a notificação após 5 segundos
+    
     setTimeout(() => {
         notificationDiv.remove();
         adjustNotificationPositions();
@@ -310,3 +311,24 @@ async function getParameterByName(name, url) {
     if (!results[2]) return ''
     return decodeURIComponent(results[2].replace(/\+/g, ' '))
   }
+
+
+async function LOAD_GAMES_LIST() {
+    if(GAMES.length<=0)
+  GAMES = [];
+chrome.runtime.sendMessage(
+          {
+            action: 'LoadGameList'
+          },
+          function (response) {
+            if (response && response.success) {
+            GAMES=response.data;
+            console.log("Loaded "+GAMES.length+" Games from NexusMods")
+            }
+            else if(response.success==false){
+                console.warn("GAMES LOADING IS BUSY, WAITING 5 SECS");
+                setTimeout(LOAD_GAMES_LIST,5000)
+            }
+          }
+        );
+}

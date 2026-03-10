@@ -17,7 +17,8 @@ async function START () {
           'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css'
         //faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'; < OLD VERSION
 
-        document.head.appendChild(faLink)
+        document.head.appendChild(faLink);
+         LOAD_GAMES_LIST();
       }
 
       requestAnimationFrame(LoadLoop)
@@ -246,7 +247,6 @@ async function NEXUS_TWEAKS () {
     ShortCut_Availability()
     await SCROLL_TO_UPDATE()
     setTimeout(GET_VISIBLE_BLOCKS, 150)
-    NOTIFICATION_COUNT_TO_TITLE();
     LOAD_HIDDEN_WORDS(true)
     FloatingMenu()
     YoutubeEnlarger()
@@ -263,50 +263,41 @@ async function NEXUS_TWEAKS () {
     await EXTERNAL_LINKS_NEWTAB()
     PROFILE_ONMOUSE()
     ARTICLES_ONMOUSE()
-   
+    await NEW_TAB_MESSENGER_HANDLER();
+    //CARREGAR QUANTIDADE DE MODS DESATUALIZADOS DIRETO NO SITE VIA NOTIFICACAO
+  LOAD_OUTDATED_MODLIST();
+
+    //CRIAR BOTAO DA EXTENSAO NO SITE NEXUSMODS
+    var MAIN_DIV1=document.querySelector("button#profile-menu")?.parentElement;
+    var MAIN_DIV2=document.querySelector("div[class='nav-interact rj-profile']")?.parentElement;
+    if((MAIN_DIV1||MAIN_DIV2)&&!document.querySelector("button#NexusModsAdvance_Menu")){
+      var bt = document.createElement("button");
+      bt.id="NexusModsAdvance_Menu"
+      bt.classList="NexusMods_Advance_B64LOGO";
+      bt.addEventListener("click",()=>{
+openExtensionUI();
+
+      })
+      if(MAIN_DIV1){
+     MAIN_DIV1.insertBefore(bt, MAIN_DIV1.children[1]);
+      }
+     else if(MAIN_DIV2){
+      MAIN_DIV2.prepend(bt);
+     }
+    }
 
     console.log('Trabalhando em ' + current_page)
-    var NexusImage = document.querySelector("a[data-e2eid='nexus-logo'] img")
-    var NexusSvg = document.querySelector('a.headlogo svg')
     switch (current_page) {
       case 'home_page':
         canScroll = false
-        if (NexusSvg) {
-          NexusSvg.style.visibility = 'hidden'
-        }
-        if (NexusImage) {
-          NexusImage.style.visibility = ''
-          document
-            .querySelector("a[data-e2eid='nexus-logo']")
-            ?.classList.remove('NexusMods_Advance_B64LOGO')
-        }
+       
         break
       case 'mod_pages_all':
         canScroll = true
-        document
-          .querySelector("a[data-e2eid='nexus-logo']")
-          ?.setAttribute('title', 'NexusMods Advance extension loaded!')
-        if (NexusImage) {
-          NexusImage.style.visibility = 'hidden'
-          document
-            .querySelector("a[data-e2eid='nexus-logo']")
-            ?.classList.remove('NexusMods_Advance_B64LOGO')
-        }
-
-        document
-          .querySelector("a[data-e2eid='nexus-logo']")
-          ?.classList.add('NexusMods_Advance_B64LOGO')
+       
         break
       case 'only_mod_page':
-        document
-          .querySelector('a.headlogo')
-          ?.setAttribute('title', 'NexusMods Advance extension loaded!')
-        if (NexusSvg) {
-          NexusSvg.style.visibility = 'hidden'
-        }
-        document
-          .querySelector('a.headlogo')
-          ?.classList.add('NexusMods_Advance_B64LOGO')
+     
         pageID = await extrairID(SITE_URL)
         console.log('MOD_ID: ' + pageID)
         // DESCRIPTION_ONMOUSE();
@@ -321,7 +312,8 @@ async function NEXUS_TWEAKS () {
           ITEM_LOAD_EXECUTED=false;
           await SELECTED_TAB()
           TAB_POSTS_OBSERVER()
-          setTimeout(DESCRIPTION_TAB, 500)
+          setTimeout(DESCRIPTION_TAB, 500);
+          await HIDE_IMAGES();
         await Search_RequiringFileTab()
           DESCRIPTION_ONMOUSE()
           GENERATE_TRACK_BUTTONS()
@@ -331,6 +323,7 @@ async function NEXUS_TWEAKS () {
           if(FORCE_LOAD_PAGE==0){
           FORCE_LOAD_PAGE=1;
           }
+          await AutoRotate_ModsPortifolio();
         await PAGINATION_FIX();
         }
         if (SITE_URL.indexOf('popup=true') != -1) {
@@ -505,6 +498,7 @@ async function INIT () {
         if (response && response.success) {
           options = response.data
           lastOptions = options
+    WIDER_WEBSITE()
           YOUTUBE_STATUS = 'lock'
           loadMessages(options['language'])
           console.log(options)
@@ -516,6 +510,7 @@ async function INIT () {
     }
   )
 }
+
 document.addEventListener('DOMContentLoaded', () => {
   INIT()
   setTimeout(INIT, 2000)
@@ -560,9 +555,6 @@ function waitForMainContentStable (callback) {
 }
 
 window.addEventListener('load', async () => {
-  waitForMainContentStable(() => {
-    WIDER_WEBSITE()
-  })
   setTimeout(FLOATING_MENU_SHORTCUTS, 1000)
   await FAST_DOWNLOAD()
   await SELECTED_TAB()
@@ -1005,6 +997,52 @@ if(current_page=="mod_pages_all"&&distanceToBottom<threshold&&!isLoadingGames&&S
   modBlocksTimeout = setTimeout(GET_VISIBLE_BLOCKS, 150)
 })
 
+
+function openExtensionUI(){
+  chrome.runtime.sendMessage(
+          {
+            action: 'PopupConfig',
+            type: 'normal'
+          },
+          function (response) {
+            if (response && response.success) {
+            }
+          }
+        )
+}
+
+var WARNING_MODS_SHOWN =false;
+function LOAD_OUTDATED_MODLIST(){
+  if(WARNING_MODS_SHOWN){
+    return;
+  }
+  chrome.runtime.sendMessage(
+          {
+            action: 'GET_OUTDATED_MODLIST',
+          },
+          function (response) {
+            if (response && response.success) {
+              if(response.message>0){
+              console.log(response.message+" outdated mods!");
+              if (options['language'] == "english") {
+			var mods_message = " Tracking Mods Outdated!"
+		} else if (options['language'] == "portuguese") {
+			var mods_message = " Mods Seguidos Desatualizados!"
+		} else if (options['language'] == "alemao") {
+			var mods_message = " Tracking-Mods veraltet!"
+		} else if (options['language'] == "polones") {
+			var mods_message = " Śledzenie modów jest nieaktualne!"
+		}
+  WARNING_MODS_SHOWN=true;
+                        CreateNotificationContainer(response.message+mods_message, 'warning', 'fa-solid fa-circle-down',5000)
+  }
+            }else{
+              setTimeout(LOAD_OUTDATED_MODLIST,5000)
+              console.log("NexusMods Advance still checking mods update, wait 5 secs")
+            }
+          }
+        )
+}
 function GET_VISIBLE_BLOCKS () {
   // 1️⃣ Seletor único e simples
   const SELECTOR = `

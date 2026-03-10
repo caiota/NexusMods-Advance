@@ -24,7 +24,16 @@
     filter: opacity(0.4);
     -webkit-filter: opacity(0.4);
 }
+#NexusModsAdvance_Menu {
+  width: 40px;
+  height: 40px;
+  transition: 0.2s ease;
+}
 
+#NexusModsAdvance_Menu:hover {
+
+  transform: scale(1.1) rotate(45deg);
+}
 #FullSearch_PopUp {
     scrollbar-width: thin;
     overflow-y: auto;
@@ -417,7 +426,6 @@ letter-spacing: var(--tracking-wide);
         transform: rotate(360deg);
     }
 }
-
 .noPadding {
     padding: 0 !important;
     max-width: 98vw !important;
@@ -621,7 +629,7 @@ div#descriptionContent dd table td {
    display: flex;
     flex-direction: column;
     position: absolute;
-    top: 32px;
+    top: 40px;
     right: 7px;
     gap: 2px;
     z-index: 3 !important;
@@ -666,24 +674,29 @@ div.viewMoreContainer:hover .popupBox_Extension {
 }
 
 #IgnoreContainer_PopUp {
-    right: 56px;
-    top: -20px;
+    right: 60px;
+    top: 20px;
+    z-index: 99999999 !important;
 }
 
 #viewMorePopup {
     right: 34px;
+    z-index: 99999999 !important;
 }
 
 #fastDldPopup {
     right: 34px;
+    z-index: 99999999 !important;
 }
 
 #fastDescriptionPopup {
     right: 34px;
+    z-index: 99999999 !important;
 }
 
 #fastDld {
     top: 63px !important;
+    z-index: 99999999;
 }
 .blurIgnoredModBlock{
     filter: blur(7px) !important;
@@ -721,10 +734,7 @@ div.viewMoreContainer:hover .popupBox_Extension {
     position: relative;
     z-index: 99999;
     width: auto;
-    padding: 9px 10px;
-    font-weight: 500;
     text-align: center;
-    text-transform: uppercase;
     color: #fff;
     background-color: #da8e35;
     -moz-transition: background-color .2s ease-out;
@@ -735,6 +745,12 @@ div.viewMoreContainer:hover .popupBox_Extension {
     margin-left: 10px;
     max-height: 35.59px;
     transition: background-color .2s ease-out;
+
+
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 7px 9px;
+    font-weight: 600;
 }
 
 #SaveMod_disabled {
@@ -862,7 +878,7 @@ div.viewMoreContainer:hover .popupBox_Extension {
 
 #removeContent {
     z-index: 999 !important;
-    right: 33px;
+    right: 40px;
     top: 7px;
 }
 
@@ -870,6 +886,7 @@ div.viewMoreContainer:hover .popupBox_Extension {
     float: left;
     font-size: 15px;
     margin-right: 5px;
+    transform: rotate(-45deg);
 }
 
 #InjectChangelog>div {
@@ -1085,6 +1102,7 @@ div.Advance_gameDetails span {
 }
 
 .AdvanceNotification {
+    pointer-events: none;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

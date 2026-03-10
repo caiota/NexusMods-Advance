@@ -19,9 +19,6 @@ var isDragging = false;
 let isThrottling = false;
 var messageLoop = null;
 var scrollPage = 1;
-const NEXUS_WIDGET_GENERIC_URL="https://www.nexusmods.com/Core/Libs/Common/Widgets/";
-const MOD_LIST_GENERIC_URL="https://www.nexusmods.com/Core/Libs/Common/Widgets/ModList";
-
 var pageAct = null;
 var current_url = "#?";
 var canScroll = true;
