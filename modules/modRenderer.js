@@ -3,6 +3,8 @@ var modData = {
 }
 async function CreateModTables(mods, title) {
 	try{
+		
+	document.querySelector("div#modLoading").style.display = 'flex';
 	line = 0;
 	lineOutdated = 0;
 	lineElement_Outdated = document.createElement("div");
@@ -373,6 +375,8 @@ async function CreateModTables(mods, title) {
 					console.log("%c" + response.message, 'background: yellow; color: black;');
 					//window.location.reload();
 					AllMods = {};
+					
+	document.querySelector("div#modLoading").style.display = 'none';
 
 				} else {
 					console.error("Error in response:", response.error);
@@ -389,6 +393,8 @@ async function CreateModTables(mods, title) {
 	}
 }
 async function CreateModTables_SimpleMode(mods, title) {
+	
+	document.querySelector("div#modLoading").style.display = 'flex';
 	lineElement_Outdated = document.createElement("div");
 	lineElement_Outdated.classList = 'container simple';
 	document.querySelector("div#mod_content").prepend(lineElement_Outdated);
@@ -678,6 +684,7 @@ async function CreateModTables_SimpleMode(mods, title) {
 				if (response && response.success) {
 					console.log("%c" + response.message, 'background: yellow; color: black;');
 					console.log(response.data);
+	document.querySelector("div#modLoading").style.display = 'none';
 					//window.location.reload();
 					AllMods = {};
 

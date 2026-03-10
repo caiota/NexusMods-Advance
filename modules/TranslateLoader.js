@@ -1,4 +1,4 @@
-var MOD_VERSION = '0.25';
+var MOD_VERSION = '0.26.6';
 
 async function updateContent(messages) {
 	const elementsToUpdate = [
@@ -17,10 +17,16 @@ async function updateContent(messages) {
 		{ selector: "label[for='FastDownloadButton'] div#msgPopup", html: messages.button_showFiles.description },
 		{ selector: "label[for='FastDescriptionButton'] span", text: messages.button_showDescription.message },
 		{ selector: "label[for='FastDescriptionButton'] div#msgPopup", html: messages.button_showDescription.description },
+		{ selector: "label[for='PopupRightScreen'] span", text: messages.PopupRightScreen.message },
+		{ selector: "label[for='PopupRightScreen'] div#msgPopup", html: messages.PopupRightScreen.description },
 		{ selector: "label[for='FastIgnoreButton'] span", text: messages.button_ignoreMod.message },
 		{ selector: "label[for='FastIgnoreButton'] div#msgPopup", html: messages.button_ignoreMod.description },
 		{ selector: "label[for='JustBlur_IgnoredMods'] span", text: messages.button_ignoreMod_BLUR.message },
 		{ selector: "label[for='JustBlur_IgnoredMods'] div#msgPopup", html: messages.button_ignoreMod_BLUR.description },
+		{ selector: "label[for='Hide_BluredContent'] span", text: messages.HideContent_Enable_FULLHIDE.message },
+		{ selector: "label[for='Hide_BluredContent'] div#msgPopup", html: messages.HideContent_Enable_FULLHIDE.description },
+
+		
 		{ selector: "label[for='InfiniteScroll'] span", text: messages.button_infiniteScroll.message },
 		{ selector: "label[for='InfiniteScroll'] div#msgPopup", html: messages.button_infiniteScroll.description },
 		{ selector: "label[for='AutoTrackDownloaded'] span", text: messages.button_AutoTrackDownloaded.message },
@@ -86,7 +92,11 @@ async function updateContent(messages) {
 		{ selector: "label[for='HideModStatus'] div#msgPopup", html: messages.HideModStatus.description },
 		{ selector: "label[for='HideCollections_ModPage'] span", text: messages.HideCollections_ModPage.message },
 		{ selector: "label[for='HideCollections_ModPage'] div#msgPopup", html: messages.HideCollections_ModPage.description },
+		{ selector: "label[for='HideExternalImages_ModPage'] span", text: messages.HideExternalImages_ModPage.message },
+		{ selector: "label[for='HideExternalImages_ModPage'] div#msgPopup", html: messages.HideExternalImages_ModPage.description },
 	
+
+		
 		{ selector: "label[for='DetailGameBlocks'] span", text: messages.DetailGameBlocks.message },
 		{ selector: "label[for='DetailGameBlocks'] div#msgPopup", html: messages.DetailGameBlocks.description },
 		{ selector: "label[for='ModBlock_Render'] span", text: messages.ModBlock_Render.message },
@@ -100,9 +110,11 @@ async function updateContent(messages) {
 		{ selector: "label[for='Following_EditMenu'] div#msgPopup", html: messages.Following_EditMenu.description },
 		{ selector: "label[for='NewTab_ExternalURL'] span", text: messages.NewTab_ExternalURL.message },
 		{ selector: "label[for='NewTab_ExternalURL'] div#msgPopup", html: messages.NewTab_ExternalURL.description },
-
-		{ selector: "label[for='ModBlock_ImageFillDivs'] span", text: messages.ModBlock_ImageFillDivs.message },
-		{ selector: "label[for='ModBlock_ImageFillDivs'] div#msgPopup", html: messages.ModBlock_ImageFillDivs.description },
+		{ selector: "label[for='NewTab_Messenger'] span", text: messages.NewTab_Messenger.message },
+		{ selector: "label[for='NewTab_Messenger'] div#msgPopup", html: messages.NewTab_Messenger.description },
+		{ selector: "label[for='AutoRotate_ModPictures'] span", text: messages.AutoRotate_ModPictures.message },
+		{ selector: "label[for='AutoRotate_ModPictures'] div#msgPopup", html: messages.AutoRotate_ModPictures.description },
+		
 
 		
 		{ selector: "label[for='Prevent_TrackOnDownload'] span", text: messages.Prevent_TrackOnDownload.message },
@@ -166,7 +178,7 @@ async function updateContent(messages) {
 	document.querySelector("input#modFilter").value = '';
 	document.querySelector("h2#notLoggedDesc a").addEventListener("click", connect);
 	LoadHiddenWords();
-	 LoadMods();
+	LoadMods();
 }
 
 async function LoadHiddenWords() {
