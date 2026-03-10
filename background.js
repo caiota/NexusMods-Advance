@@ -20,6 +20,8 @@ var options = {
 	"NotifyUpdates": true,
 	"InfiniteScroll": true,
 	"AutoTrackDownloaded": false,
+	"NewTab_Messenger":true,
+	"AutoRotate_ModPictures":true,
 	"largerYoutubeVideos": true,
 	"showImagesPopup": true,
 	"showVideosPopup": true,
@@ -28,6 +30,7 @@ var options = {
 	"NotRenderTrackMods_Button": false,
 	"ArticlesOnMouse": true,
 	"SimpleMode": false,
+	"HideExternalImages_ModPage":false,
 	"HideRequerimentsTab": false,
 	"HideTranslationsTab": false,
 	"HidePermissionsTab": false,
@@ -45,13 +48,12 @@ var options = {
 	"HideModStatus": false,
 	"HideCollections_ModPage":false,
 	"ModBlock_Render": false,
-	"BlockSize_input": "20%",
+	"BlockSize_input": "250px",
 	"MemoryMode": false,
 	"PauseExternalGifs": true,
 	"Following_EditMenu": true,
 	"NewTab_ExternalURL": true,
-	"Prevent_TrackOnDownload":false,
-	"ModBlock_ImageFillDivs":true
+	"Prevent_TrackOnDownload":false
 };
 var hiddenContent = "";
 var hiddenMods = {};
@@ -129,6 +131,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 					await loadMods();
 					sendResponse({ success: true, data: mods });
 					break;
+				case "LoadGameList":
+					LOAD_GAMES();
+					if(GAMES.length>0&&GAME_LOADING_BUSY==false){
+					sendResponse({ success: true, data: GAMES });
+					}else{
+					sendResponse({ success: false, data: [] });
+					}
+					break;
 
 				case "DeleteMod":
 					await LOAD_MODDATA();
@@ -149,6 +159,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 				case 'ShowEndorsePopup':
 
 					sendResponse({ success: true, message: canShowEndorse });
+					break;
+					case 'GET_OUTDATED_MODLIST':
+					if(modLoader_Busy==true){
+					sendResponse({ success: false, message: "Mod Loader Busy" });
+					}else{
+					sendResponse({ success: true, message: outdated_mods });
+					}
 					break;
 				case 'Block_InitialLoad':
 					//BLOCK_GAME_IMAGES();
@@ -353,6 +370,31 @@ function resetMods() {
 		});
 	});
 }
+
+async function SAVE_GAMES() {
+	return new Promise((resolve, reject) => {
+		chrome.storage.local.set({
+			"games_list": GAMES
+		}, () => {
+			resolve();
+		});
+	});
+}
+
+async function LOAD_GAMES() {
+	return new Promise((resolve, reject) => {
+		chrome.storage.local.get("games_list", (data) => {
+			if (data.games_list) {
+				GAMES = Object.assign(GAMES, data.games_list);
+				if(GAMES.length>0){
+					GAME_LOADING_BUSY=false;
+				}
+			}
+			resolve(GAMES);
+		});
+	});
+}
+
 
 async function SAVE_OPTIONS(item) {
 	return new Promise((resolve, reject) => {
@@ -562,11 +604,14 @@ async function saveHiddenContent(word, sendResponse) {
 	});
 }
 var outdated_mods = 0;
+var modLoader_Busy=false;
 async function CheckModUpdates() {
 	if (options['MemoryMode'] == true) {
 		console.error("Can't Update Mods: Memory Mode Option Enabled")
 		return;
 	}
+	outdated_mods=0;
+	modLoader_Busy=true;
 	for (const [modName, modInfo] of Object.entries(mods)) {
 		const {
 			mod_id,
@@ -598,10 +643,24 @@ async function CheckModUpdates() {
 			message: outdated_mods + mods_message,
 			priority: 2
 		});
-		outdated_mods = 0;
+
+		chrome.action.setBadgeText({
+	text: String(outdated_mods)
+});
+chrome.action.setTitle({
+	title: outdated_mods+mods_message
+});
+
+chrome.action.setBadgeBackgroundColor({
+	color: '#e9c389' 
+});
+
+	}else{
+		chrome.action.setBadgeText({ text: '' });
+
 	}
 	temp_FetchCache = {};
-
+	modLoader_Busy=false;
 }
 var api_headers = {
 	method: 'GET',
@@ -716,11 +775,77 @@ function formatDate(unixTimestamp) {
 	return formattedDate;
 }
 var GAMES = [];
+var GAME_LOADING_BUSY=false;
+async function LOAD_GAMES_LIST() {
+    if(GAMES.length<=0&&GAME_LOADING_BUSY==false)
+		GAME_LOADING_BUSY=true;
+  GAMES = [];
 
+  let offset = 0;
+  const count = 200; // pode aumentar pra acelerar
+
+  let total = 5000;
+ console.log("Carregando Lista de Jogos do NexusMods")
+  while (GAMES.length < total) {
+    const response = await fetch("https://api-router.nexusmods.com/graphql", {
+      headers: {
+        "accept": "*/*",
+        "content-type": "application/json",
+        "x-graphql-operationname": "Games"
+      },
+      body: JSON.stringify({
+        query: `
+          query Games($offset: Int, $count: Int = 25, $facets: GamesFacet, $filter: GamesSearchFilter, $sort: [GamesSearchSort!]) {
+            games(offset: $offset, count: $count, facets: $facets, filter: $filter, sort: $sort) {
+              totalCount
+              nodes {
+                artworkSchema
+                collectionCount
+                domainName
+                downloadCount
+                id
+                modCount
+                name
+              }
+            }
+          }
+        `,
+        variables: {
+          count,
+          offset,
+          facets: { genre: [], hasCollections: [], supportsVortex: [] },
+          filter: { filter: [], op: "AND" },
+          sort: { downloads: { direction: "DESC" } }
+        }
+      }),
+      method: "POST",
+      credentials: "include"
+    });
+
+    const json = await response.json();
+
+    const games = json.data.games.nodes;
+
+    total = json.data.games.totalCount;
+
+    GAMES.push(...games);
+
+offset += 20;
+  }
+  GAME_LOADING_BUSY=false;
+  console.log("TOTAL FINAL:", GAMES.length);
+  console.log(GAMES);
+  SAVE_GAMES();
+  return GAMES;
+}
 
 var NOTIFICATIONS_COUNT = 0;
 
 async function UpdateStartUp() {
+	await LOAD_GAMES();
+	if(GAMES.length==0){
+	LOAD_GAMES_LIST();
+	}
 	await LOAD_OPTIONS();
 	await Load_NEXUSAPI();
 	await checkOneWeekPassed();
@@ -738,7 +863,7 @@ async function UpdateStartUp() {
 	const lastModUpdateCheck = options.LAST_MOD_UPDATE_CHECK;
 	const currentTimeUnix = Math.floor(Date.now() / 1000);
 	const twentyFourHoursInSeconds = 2 * 60 * 60;
-	//const twentyFourHoursInSeconds = 1*60;
+	//const twentyFourHoursInSeconds = 20;
 	const isMoreThan5Hours = (currentTimeUnix - lastModUpdateCheck) >= twentyFourHoursInSeconds;
 	if (options['MemoryMode'] == true) {
 		console.error("Can't Update Mods: Memory Mode Option Enabled");
