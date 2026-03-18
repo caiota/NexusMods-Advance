@@ -5,12 +5,14 @@ async function AutoRotate_ModsPortifolio() {
     const UL_GALLERY = document.querySelector("ul.thumbgallery");
 
     if (UL_GALLERY&&UL_GALLERY.querySelectorAll("li.thumb").length>8) {
+      UL_GALLERY.addEventListener("mouseover",()=>{CAN_ROTATE=false});
+      UL_GALLERY.addEventListener("mouseout",()=>{CAN_ROTATE=true});
       setInterval(scrollGalleryStep, interval);
       isRotating = true;
     }
   }
 }
-
+var CAN_ROTATE=true;
 let currentX = 0;
 let step = -3;  // pixels por frame
 const interval = 40;
@@ -29,8 +31,10 @@ function scrollGalleryStep() {
   }
 
   // aplica a transformação
+  if(CAN_ROTATE==true){
   UL_GALLERY.style.transform = `translate3d(${currentX}px, 0px, 0px)`;
 
   // atualiza a posição
   currentX += step;
+  }
 }

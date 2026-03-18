@@ -46,7 +46,15 @@
     padding: 20px;
     border-radius: 5px;
 }
+#mainContent{
+  opacity:0;
+  transition: opacity 0.4s ease;
+}
 
+body{
+  opacity:1;
+  transition: opacity 0.2s ease;
+}
 #FullSearch_PopUp #FullSearch_Bar {
     width: 100%;
     background: #494c5a;

@@ -12,8 +12,6 @@ async function BLUR_CONTENT_BYWORD() {
         return;
     }
     
-    console.log("Carregados "+PAGE_CONTENT.length+" Links");
-    console.log(WORD_LIST)
     PAGE_CONTENT.forEach(function (divItem) {
         let type;
         let author;

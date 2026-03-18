@@ -374,7 +374,8 @@ async function LoadLoop () {
       SITE_URL = window.location.href
       LAST_URL = SITE_URL
       NEED_OVERALLRELOAD = true
-      console.log('Loading...')
+      console.log('Loading...');
+
       if (YOUTUBE_STATUS == 'unlock') {
         chrome.runtime.sendMessage(
           {
@@ -427,6 +428,15 @@ async function LoadLoop () {
             ''
         }
         canScroll = true
+
+ waitForMainContentStable(() => {
+    
+     requestAnimationFrame(()=>{
+  document.querySelector("div#mainContent").style.opacity='1';
+   })
+    WIDER_WEBSITE()
+ })
+
         clearTimeout(modBlocksTimeout)
         modBlocksTimeout = setTimeout(GET_VISIBLE_BLOCKS, 10)
         NEXUS_TWEAKS()
@@ -476,6 +486,7 @@ async function loadMessages (locale) {
   )
 }
 async function INIT () {
+  
   if (STARTED == true) {
     return
   }
@@ -511,14 +522,29 @@ async function INIT () {
   )
 }
 
+window.addEventListener("beforeunload", function () {
+    console.log("A página vai mudar!");
+    
+  document.querySelector("div#mainContent").style.opacity='0';
+  //document.body.style.opacity = "0";
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
   INIT()
   setTimeout(INIT, 2000)
   waitForMainContentStable(() => {
+    
+     requestAnimationFrame(()=>{
+  document.querySelector("div#mainContent").style.opacity='1';
+   })
     WIDER_WEBSITE()
     NEED_UPDATE = true
     setTimeout(NEXUS_TWEAKS, 200)
+ 
+  
   })
+    
 })
 
 function waitForMainContentStable (callback) {
@@ -536,9 +562,9 @@ function waitForMainContentStable (callback) {
       lastMainContent = current
       clearTimeout(stableTimer)
       stableTimer = setTimeout(() => {
-        // observer.disconnect();
+        //observer.disconnect();
         callback()
-      }, 300) // tempo sem recriação = estável
+      }, 200) // tempo sem recriação = estável
     }
   })
 
@@ -549,12 +575,17 @@ function waitForMainContentStable (callback) {
 
   // fallback absoluto (caso nunca estabilize)
   setTimeout(() => {
-    // observer.disconnect();
+  //observer.disconnect();
+  
     callback()
   }, 3000)
 }
 
 window.addEventListener('load', async () => {
+  document.body.style.opacity = "1";
+  const main = document.querySelector("#mainContent");
+  if(main) main.style.opacity = "1";
+
   setTimeout(FLOATING_MENU_SHORTCUTS, 1000)
   await FAST_DOWNLOAD()
   await SELECTED_TAB()

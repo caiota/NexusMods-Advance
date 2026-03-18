@@ -37,6 +37,7 @@ if(DLD_LINK&&DLD_LINK.href&&!DLD_LINK.getAttribute("DOWNLOAD_OK")){
              // window.stop()
     //window.open(DLD_LINK.href);
     
+                clearInterval(dldLOOP);
                 const params = url.searchParams
                 if(params.get("NMA_closeAfterDownload")){
              setTimeout(()=>{window.history.go(-1);},1000);

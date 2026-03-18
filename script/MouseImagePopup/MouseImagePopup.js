@@ -18,7 +18,7 @@ async function ImagePopupSetup() {
             imgPopup.src = "https://www.nexusmods.com/assets/images/default/noimage.svg";
             imgPopup.style.transform = "scale(" + zoomLevel + ")";
         });
-        var images = Array.from(document.querySelectorAll('div[data-e2eid="media-tile"]:not([POPUP_IMAGE]),li.image-tile')).filter(function (link) {
+        var images = Array.from(document.querySelectorAll('div[data-e2eid="media-tile"]:not([POPUP_IMAGE]),li.image-tile,ul.thumbgallery li.thumb')).filter(function (link) {
             
             return link.querySelector('img');
         });
@@ -83,7 +83,7 @@ async function ImagePopupSetup() {
                        
 
                             imgPopup.src = img_id;
-                            loadImage(img_id.replace("/thumbnails", ""))
+                            loadImage(img_id.replaceAll("/thumbnails", ""))
                        
                         if (FIRST_IMAGE_POPUP) {
                             CreateNotificationContainer(translate_strings.ImagePopup.description, "success");
@@ -112,7 +112,7 @@ async function ImagePopupSetup() {
 
                         }
                         if (lastImgUrl != ev.currentTarget.querySelector('img').src.replace("/t/small", "")) {
-                            lastImgUrl = ev.currentTarget.querySelector('img').src.replace("/t/small", "");
+                            lastImgUrl = ev.currentTarget.querySelector('img').src.replace("/t/small", "").replace("/thumbnails","");
                             imgPopup.src = "https://www.nexusmods.com/assets/images/default/noimage.svg";
                             imgPopup.src = lastImgUrl;
                             lastImg = document.elementFromPoint(ev.clientX, ev.clientY).nodeName;
