@@ -352,9 +352,9 @@
   "message": "Sammlungsbereich auf Mod-Seiten ausblenden",
   "description": "Blendet den Sammlungsbereich aus, der auf der Spielseite oberhalb der neuesten Mods angezeigt wird."
 },
-"HideExternalImages_ModPage":{
-  "message":"Externe Bilder in der Beschreibung und im Dateien-Tab der Mods ausblenden",
-  "description":"Blendet externe Bilder im Beschreibungs-Tab und im Dateien-Tab der Mods aus"
+"HideExternalImages_ModPage": {
+  "message": "Bilder und Videos in der Beschreibung und im Files-Tab von Mods ausblenden",
+  "description": "Blendet externe Bilder und Videos im 'Description'-Tab sowie im 'Files'-Tab von Mods aus."
 },
 "EndorseAndVote": {
   "message": "Gefällt dir die Erweiterung?",
@@ -477,6 +477,12 @@
 "AutoRotate_ModPictures": {
   "message": "Mods-Portfolio automatisch drehen",
   "description": "In den Mod-Tabs werden die Mod-Bilder automatisch gedreht"
+},
+"WebSiteFadeEffect": {
+"message": "Aktiviert den Ein- und Ausblendeffekt auf der Website",
+
+"description": "Beim Laden der Website wird ein sanfter Einblendeffekt angewendet, um ein flüssigeres Rendering zu gewährleisten. Beim Laden einer anderen Seite wird ein Ausblendeffekt angewendet, wodurch die Website ein angenehmeres Erscheinungsbild erhält."
+
 },
   "Prevent_TrackOnDownload": {
     "message": "Keine Dateien zu Ihrer Liste hinzufügen, wenn Sie auf Download-Schaltflächen klicken",

@@ -350,9 +350,9 @@
   "message": "Hide Collections Section on Mod Pages",
   "description": "Hides the Collections section that appears on a game's page above the most recent mods."
 },
-"HideExternalImages_ModPage":{
-"message":"Hide Images from the Description and Files tab of the mods",
-"description":"Hides external images in the Description tab and Files tab of the mods"
+"HideExternalImages_ModPage": {
+  "message": "Hide Images and Videos from the Description and Files tab of mods",
+  "description": "Hides external images and videos in the 'Description' tab and in the 'Files' tab of mods."
 },
   "EndorseAndVote": {
     "message": "Enjoying the Extension?",
@@ -475,6 +475,11 @@
   "AutoRotate_ModPictures": {
   "message": "Automatically rotate mods portfolio",
   "description": "In the mod tabs, automatically rotates mod images"
+},
+"WebSiteFadeEffect": {
+"message": "Enable Fade-in / Fade-out Effect on the website",
+"description": "When loading the website, applies a light fade-in effect to smooth the rendering experience, also applies a fade-out effect when the website is loading another page, helping to create a lighter feel to the website"
+
 },
   "Prevent_TrackOnDownload": {
     "message": "Do Not Add Files to Your Tracking List When Clicking Download Buttons",

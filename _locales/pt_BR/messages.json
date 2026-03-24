@@ -350,8 +350,8 @@
     "description": "Oculta a Sessão de Coleções que aparece na página de algum jogo acima dos mods mais recentes."
   },
   "HideExternalImages_ModPage":{
-    "message":"Ocultar Imagens da Descrição e Aba Files dos mods",
-    "description":"Oculta imagens externas na Aba Descrição e na Aba Files dos mods"
+    "message":"Ocultar Imagens e Vídeos da Descrição e Aba Files dos mods",
+    "description":"Oculta imagens e vídeos externos na Aba 'Descrição' e na Aba 'Files' dos mods."
   },
   "EndorseAndVote": {
     "message": "Gostando da Extensão?",
@@ -475,6 +475,10 @@
   "AutoRotate_ModPictures": {
     "message": "Rodar portifólio de mods automáticamente",
     "description": "Nas abas de mods, roda as imagens dos mods automáticamente"
+  },
+  "WebSiteFadeEffect": {
+    "message": "Ativar Efeito de Fade-in / Fade-out no site",
+    "description": "ao carregar o site, aplica um efeito leve de fade-in no site para suavizar a sensação de renderização, também aplica um efeito de fade-out quando o site está carregando outra página, ajuda na sensação de leveza do site"
   },
 
   

@@ -349,9 +349,9 @@
   "message": "Ukryj sekcję Kolekcji na stronach modów",
   "description": "Ukrywa sekcję Kolekcji, która pojawia się na stronie gry powyżej najnowszych modów."
 },
-"HideExternalImages_ModPage":{
-"message":"Ukryj obrazy w zakładce Opis i Pliki modów",
-"description":"Ukrywa zewnętrzne obrazy w zakładce Opis i Pliki modów"
+"HideExternalImages_ModPage": {
+  "message": "Ukryj obrazy i filmy w opisie oraz w zakładce Files modów",
+  "description": "Ukrywa zewnętrzne obrazy i filmy w zakładce 'Description' oraz w zakładce 'Files' modów."
 },
 "EndorseAndVote": {
   "message": "Podoba Ci się rozszerzenie?",
@@ -474,6 +474,11 @@
 "AutoRotate_ModPictures": {
   "message": "Automatycznie obracać portfolio modów",
   "description": "Na kartach modów automatycznie obraca obrazy modów"
+},
+"WebSiteFadeEffect": {
+"message": "Włącz efekt stopniowego pojawiania się/znikania obrazu na stronie internetowej",
+"description": "Podczas ładowania strony internetowej stosuje efekt stopniowego pojawiania się/znikania obrazu, aby wygładzić renderowanie. Stosuje również efekt stopniowego znikania obrazu podczas ładowania innej strony, pomagając nadać witrynie lżejszy wygląd."
+
 },
   "Prevent_TrackOnDownload": {
     "message": "Nie dodawaj plików do swojej listy po kliknięciu przycisków pobierania",
