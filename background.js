@@ -52,6 +52,7 @@ var options = {
 	"MemoryMode": false,
 	"PauseExternalGifs": true,
 	"Following_EditMenu": true,
+	"WebSiteFadeEffect":true,
 	"NewTab_ExternalURL": true,
 	"Prevent_TrackOnDownload":false
 };
@@ -78,7 +79,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 				case "Load_Messages":
 					await handleLoadMessages(lang, sendResponse);
 					break;
+				case "LoadCustomCSS":
+					await LoadCustomCSS(sendResponse);
+					break;
 
+					
 				case "SaveMods_Cache":
 					await handleSaveModsCache(modsData, sendResponse);
 					break;
@@ -205,6 +210,12 @@ async function handleSaveBox(item, checado, sendResponse) {
 async function handleLoadMessages(lang, sendResponse) {
 	const response = await fetch(`/_locales/${lang}/messages.json`);
 	const messages = await response.json();
+	sendResponse({ success: true, message: messages });
+
+}
+async function LoadCustomCSS(sendResponse) {
+	const response = await fetch(`/script/NexusMods_FadeEffect.css`);
+	const messages = await response.text();
 	sendResponse({ success: true, message: messages });
 
 }

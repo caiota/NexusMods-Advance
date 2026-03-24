@@ -575,6 +575,7 @@ async function loadIssueReplies(ev) {
 	}
 }
 document.addEventListener("keydown", function (k) {
+	
 	if ((k.key == "Escape" || k.key == "Enter") && document.querySelector("div#modViewDiv").style.display != 'none') {
 		k.preventDefault();
 		document.querySelector("div#modViewDiv").style.display = 'none';
