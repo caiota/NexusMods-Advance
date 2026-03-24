@@ -1,8 +1,8 @@
 async function WIDER_WEBSITE() {
     try {
-        console.warn("TEM OPCOES? "+options['WideWebsite'])
         if (!options || typeof options.WideWebsite !== 'boolean') return
-
+mainContent=document.querySelector("div#mainContent div[class*='relative next-container']")
+      || document.querySelector("div#mainContent");
   watchMainContent(mainContent => {
    APPLY_WIDER_TOGGLE(mainContent)
   })

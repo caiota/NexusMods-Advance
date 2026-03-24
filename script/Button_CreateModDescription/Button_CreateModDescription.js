@@ -11,6 +11,8 @@ async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
       modPopup_element.id = "modPopup";
       divContent = document.createElement("div");
       divContent.id = "descriptionContent";
+      divArrasta=document.createElement("div");
+      divArrasta.id="divArrastaOverlay";
       divClose = document.createElement("i");
       divClose.classList = "fa-solid fa-circle-xmark";
       divClose.setAttribute("aria-hidden", true);
@@ -24,6 +26,7 @@ async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
       modPopup_element.appendChild(divContent);
       document.body.appendChild(modPopup_element);
       if(options['PopupRightScreen']==false){
+      modPopup_element.appendChild(divArrasta);
       modPopup_element.addEventListener('mousedown', startDragging);
       document.addEventListener('mousemove', drag);
       document.addEventListener('mouseup', stopDragging);

@@ -1,3 +1,4 @@
+var expected_media="default"
 function getOffsetAndFixURL (count = 20) {
   const params = url.searchParams
 
@@ -34,7 +35,13 @@ maxPage = getMaxPages()
   const gameName = gameNameRaw
     ? decodeURIComponent(gameNameRaw.replace(/\+/g, ' '))
     : getGameNameFromPage()
-
+if (gameName) {
+    //gameName = gameName.toLowerCase().trim().replaceAll(' ', '')
+    checkFromGames=findBySimilarDomain(GAMES,gameName);
+    if(checkFromGames&&expected_media=="domainName"){
+      gameName=checkFromGames.domainName;
+    }
+  }
   const timeRange = params.get('timeRange') || null
   const sort = params.get('sort') || 'createdAt'
   const sortDirection = params.get('sortDirection') || 'DESC'
@@ -301,7 +308,11 @@ BLOCK_REMOVE_INTERVAL=setInterval(async ()=>{await REMOVE_VIDEO();},20);
 
     const json = await response.json()
     const items = json.data?.media?.nodes || []
-
+if(items.length==0){
+      expected_media="domainName";
+      GENERATE_INFINITE_SCROLL_VIDEOS();
+      return;
+    }
     const container = document.querySelector('div.media-grid')
      existingUrls = new Set(
       Array.from(container.querySelectorAll('a[href]')).map(a => a.href)

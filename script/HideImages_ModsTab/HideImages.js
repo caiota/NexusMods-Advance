@@ -12,6 +12,7 @@ if(descriptionImgs){
     item.style.display='none';
   })
 }
+HIDE_YOUTUBE_FRAMES("HIDE_IT");
 }
 else if(options['HideExternalImages_ModPage']==false){
   if(filesImgs){
@@ -24,5 +25,26 @@ if(descriptionImgs){
     item.style.display='';
   })
 }
+
+HIDE_YOUTUBE_FRAMES("SHOW_IT");
 }
+}
+
+function HIDE_YOUTUBE_FRAMES(style){
+   const iframes = Array.from(document.querySelectorAll('iframe'));
+
+        for (const iframeContainer of iframes) {
+            if (iframeContainer.src.includes('youtube.com')) {
+                const frameParent = iframeContainer.closest("div");
+
+  if(style=="HIDE_IT"){
+               frameParent.style.display='none';
+  }else{
+               frameParent.style.display='';
+  }
+            }
+        }
+        if(style=='SHOW_IT'){
+          CHECK_YOUTUBEIFRAMES();
+        }
 }

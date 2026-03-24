@@ -46,15 +46,7 @@
     padding: 20px;
     border-radius: 5px;
 }
-#mainContent{
-  opacity:0;
-  transition: opacity 0.4s ease;
-}
 
-body{
-  opacity:1;
-  transition: opacity 0.2s ease;
-}
 #FullSearch_PopUp #FullSearch_Bar {
     width: 100%;
     background: #494c5a;
@@ -441,7 +433,6 @@ letter-spacing: var(--tracking-wide);
     margin-left: auto;
     margin-right: auto;
 }
-
 #ImageView {
     width: 100%;
     height: 100%;
@@ -507,7 +498,19 @@ letter-spacing: var(--tracking-wide);
     left: 4px;
     top: 0;
 }
-
+#divArrastaOverlay{
+     position: absolute;
+    z-index: 9;
+    width: 96%;
+    height: 14%;
+    cursor: pointer;
+    left:0;
+    top: 0;
+    transition: all 0.3s ease;
+}
+#divArrastaOverlay:hover{
+    background-color: #0000007c;
+}
 #closePopButton {
     position: absolute;
     z-index: 10;
@@ -532,12 +535,14 @@ div#descriptionContent dd table td {
 }
 #modFiles,
 #modPopup {
+    user-select: text;
     position: absolute;
         z-index: 99999;
     overflow: auto;
     width: 61%;
     height: 60%;
     padding: 15px;
+    padding-top:30px;
     border: 3px solid;
     color: #f1f1f1;
     background-color: #444;

@@ -49,7 +49,7 @@ async function YOUTUBE_IFRAME_LOADER() {
             if (iframeContainer.src.includes('youtube.com')) {
                 const frameParent = iframeContainer.closest("div");
 
-                if (frameParent && isVisible(frameParent)) {
+                if (frameParent && isVisible(frameParent) && frameParent.style.display!='none') {
                     try {
                         const url = new URL(iframeContainer.src);
                         url.searchParams.set('unlock', '1');

@@ -15,7 +15,47 @@ function COMPARE_SETTINGS(obj1, obj2) {
 
     return true; // se todas as propriedades e valores forem iguais
 }
+function normalize(str) {
+  return str
+    .toLowerCase()
+    .replace(/\s+/g, "")
+    .replace(/[^a-z0-9]/g, "");
+}
+function romanToNumber(str) {
+  const map = {
+    xiv: "14",
+    xiii: "13",
+    xii: "12",
+    xi: "11",
+    x: "10",
+    ix: "9",
+    viii: "8",
+    vii: "7",
+    vi: "6",
+    v: "5",
+    iv: "4",
+    iii: "3",
+    ii: "2",
+    i: "1"
+  };
 
+  let result = str.toLowerCase();
+
+  for (const roman in map) {
+    result = result.replaceAll(roman, map[roman]);
+  }
+
+  return result;
+}
+
+function findBySimilarDomain(data, search) {
+  const normalizedSearch = normalize(romanToNumber(search));
+
+  return data.find(item => {
+    const domain = normalize(romanToNumber(item.domainName));
+    return domain.includes(normalizedSearch);
+  });
+}
 function findGameById(gameIDE) {
     if (GAMES.length > 0) {
         for (let i = 0; i < GAMES.length; i++) {
@@ -149,21 +189,89 @@ function findIdByNexusmodsUrl(targetUrl) {
     return null; // Retorna null se não encontrar o URL alvo
 }
 function findIdBydomainName() {
-
     const nav = document.querySelector('nav[aria-label="Breadcrumb navigation"]');
-    if(nav){
-const spans = nav.querySelectorAll('span');
-const nakedSpans = Array.from(spans).filter(span => span.attributes.length === 0);
-if(nakedSpans){
-return nakedSpans[0].innerText;
-}
+
+    if (nav) {
+        // 🔥 1. Tenta pegar diretamente dos links (<a>)
+        const links = nav.querySelectorAll('a[href*="/games/"]');
+
+        for (const link of links) {
+            try {
+                const url = new URL(link.href);
+                const parts = url.pathname.split('/').filter(Boolean);
+
+                // Esperado: ["games", "finalfantasy14"]
+                if (parts[0] === "games" && parts[1]) {
+                    return parts[1];
+                }
+            } catch (e) {
+                continue;
+            }
+        }
+
+        // 🟡 2. Fallback: usa texto (melhorado)
+        const spans = nav.querySelectorAll('span');
+
+        const texts = Array.from(spans)
+            .map(span => span.innerText.trim())
+            .filter(text => 
+                text &&
+                text.toLowerCase() !== "mods" &&
+                text.toLowerCase() !== "collections"
+            );
+
+        if (texts.length >= 2) {
+            return texts[1];
+        }
+
+        return texts[0] || null;
     }
-    else if(document.querySelector("div.nav-current-game span")){
-        const nav = document.querySelector("div.nav-current-game span").innerText;
-        return nav;
+
+    // 🔵 3. Outro fallback (layout alternativo)
+    const alt = document.querySelector("div.nav-current-game a[href*='/games/']");
+    if (alt) {
+        try {
+            const url = new URL(alt.href);
+            const parts = url.pathname.split('/').filter(Boolean);
+
+            if (parts[0] === "games" && parts[1]) {
+                return parts[1];
+            }
+        } catch (e) {}
     }
-    return null; // Retorna null se não encontrar o URL alvo
+
+    // 🔴 4. Último fallback: texto puro
+    const altText = document.querySelector("div.nav-current-game span");
+    if (altText) {
+        return altText.innerText.trim();
+    }
+
+    return null;
 }
+
+
+function getGameId(SITE_URL) {
+    try {
+        const url = new URL(SITE_URL);
+        const parts = url.pathname.split('/').filter(Boolean);
+
+        // Esperado: ["games", "finalfantasy14", "mods"]
+        if (parts[0] === "games" && parts[1]) {
+            return parts[1];
+        }
+    } catch (e) {
+        console.warn("Erro ao processar URL:", e);
+    }
+
+    // fallback pro DOM
+    return findIdBydomainName();
+}
+
+
+if (gameId === "Mods" || gameId === "mods") {
+    gameId = "site";
+}
+
 function findNameByDomainName(targetUrl) {
 
     if (GAMES.length > 0) {
@@ -253,8 +361,8 @@ function openPopupAtMousePosition(url, title, width, height, event) {
 function startDragging(e) {
     const offsetX1 = e.clientX - e.target.getBoundingClientRect().left;
     const offsetY1 = e.clientY - e.target.getBoundingClientRect().top;
-    const isOnRightEdge = offsetX1 > e.target.clientWidth - 70;
-    const isOnBottomEdge = offsetY1 > e.target.clientHeight - 70;
+    const isOnRightEdge = offsetX1 > e.target.clientWidth - 10;
+    const isOnBottomEdge = offsetY1 > e.target.clientHeight - 10;
     if (!isOnRightEdge && !isOnBottomEdge) {
       isDragging = true;
       offsetX = e.clientX - parseInt(window.getComputedStyle(this).left);
@@ -263,7 +371,6 @@ function startDragging(e) {
   }
   
   function drag(e) {
-  
     if (isDragging) {
       if (modPopup_element) {
         modPopup_element.style.left = (e.clientX - offsetX) + 'px';

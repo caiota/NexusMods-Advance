@@ -1,0 +1,9 @@
+#mainContent{
+  opacity:0 !important;
+  transition: opacity 0.4s ease;
+}
+
+body{
+  opacity:1;
+  transition: opacity 0.2s ease;
+}

@@ -1,3 +1,4 @@
+var expected_media="default"
 function LOAD_URL_PARAMS (count = 20) {
   const params = url.searchParams
 
@@ -31,10 +32,16 @@ function LOAD_URL_PARAMS (count = 20) {
     ? categoryNamesRaw.map(c => decodeURIComponent(c.replace(/\+/g, ' ')))
     : null
   const gameNameRaw = params.get('gameName')
-  const gameName = gameNameRaw
+  var gameName = gameNameRaw
     ? decodeURIComponent(gameNameRaw.replace(/\+/g, ' '))
     : getGameNameFromPage()
-
+ if (gameName) {
+    //gameName = gameName.toLowerCase().trim().replaceAll(' ', '')
+    checkFromGames=findBySimilarDomain(GAMES,gameName);
+    if(checkFromGames&&expected_media=="domainName"){
+      gameName=checkFromGames.domainName;
+    }
+  }
   let timeRange = params.get('timeRange') || "allTime"
   if(isNaN(timeRange)==true||timeRange=="NaN"){
     timeRange="allTime"
@@ -346,7 +353,11 @@ if (OnlyAdultContent == false || OnlyAdultContent == 'false') {
 
     const json = await response.json()
     const items = json.data?.media?.nodes || []
-
+    if(items.length==0){
+      expected_media="domainName";
+      GENERATE_INFINITE_SCROLL_MEDIA();
+      return;
+    }
     const container = document.querySelector('div.media-grid')
      existingUrls = new Set(
       Array.from(container.querySelectorAll('a[href]')).map(a => a.href)

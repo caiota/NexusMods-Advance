@@ -62,7 +62,13 @@ function LOAD_URL_MOD_PARAMS (count = 20) {
     : getGameNameFromPage()
   if (gameName) {
     gameName = gameName.toLowerCase().trim().replaceAll(' ', '')
+    checkFromGames=findBySimilarDomain(GAMES,gameName);
+    if(checkFromGames){
+      gameName=checkFromGames.domainName;
+      console.log(checkFromGames)
+    }
   }
+
   if (gameName == 'moddingtools') {
     gameName = 'site'
   }

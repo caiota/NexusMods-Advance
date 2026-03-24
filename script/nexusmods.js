@@ -233,13 +233,24 @@ async function NEXUS_TWEAKS () {
     NEED_UPDATE = false
 
     console.log('NexusTweaks')
-    gameId = new URL(SITE_URL)
-    gameId.pathname.split('/')[1]
-    gameId = findIdBydomainName()
-    if(gameId=="Mods"){
-      gameId="site";
-    }
-    console.warn('Game Name ' + gameId)
+   const gameIdFromUrl = getGameId(SITE_URL);
+const gameIdFromDom = findIdBydomainName();
+
+// Usa a URL como principal
+var gameId = gameIdFromUrl;
+
+// Se por algum motivo a URL falhar, usa o DOM
+if (!gameId) {
+    gameId = gameIdFromDom;
+}
+
+
+// Tratamento especial
+if (gameId === "Mods" || gameId === "mods") {
+    gameId = "site";
+}
+
+console.warn('Game Name ' + gameId);
     await GET_GAME_ID()
     current_page = await ON_MOD_PAGES(SITE_URL)
     clearInterval(YOUTUBE_LOOP)
@@ -431,9 +442,7 @@ async function LoadLoop () {
 
  waitForMainContentStable(() => {
     
-     requestAnimationFrame(()=>{
-  document.querySelector("div#mainContent").style.opacity='1';
-   })
+    
     WIDER_WEBSITE()
  })
 
@@ -485,15 +494,55 @@ async function loadMessages (locale) {
     }
   )
 }
+var overlay;
 async function INIT () {
   
   if (STARTED == true) {
     return
   }
+  if(!document.querySelector("div#nexus-fade-overlay")){
+ overlay = document.createElement('div');
+overlay.id = 'nexus-fade-overlay';
 
+overlay.style.position = 'fixed';
+overlay.style.top = '0';
+overlay.style.left = '0';
+overlay.style.width = '100%';
+overlay.style.height = '100%';
+overlay.style.backdropFilter = 'blur(14px)';
+overlay.style.background = 'rgba(20,20,20,0.2)';
+overlay.style.zIndex = '999999';
+overlay.style.pointerEvents = 'none';
+overlay.style.transition = 'opacity 0.8s ease';
+overlay.style.opacity = '1';
+
+  }
   STARTED = true
   console.log('Iniciando...')
   SITE_URL = window.location.href
+
+const storage = chrome?.storage || browser?.storage;
+storage.local.get("options_data", (data) => {
+  if(data.options_data){
+  options=data.options_data;
+  lastOptions = options;
+  console.log(options)
+  
+    WIDER_WEBSITE()
+  
+if (options['WebSiteFadeEffect'] === true) {
+document.documentElement.appendChild(overlay);
+setTimeout(revealSite,2000);
+  waitForMainContentStable(() => {
+    revealSite();
+  });
+
+}
+          YOUTUBE_STATUS = 'lock'
+          loadMessages(options['language'])
+        }else{
+
+
   chrome.runtime.sendMessage(
     {
       action: 'LoadBox'
@@ -507,11 +556,16 @@ async function INIT () {
         window.location.reload()
       } else {
         if (response && response.success) {
+          
           options = response.data
           lastOptions = options
+
+
+          
     WIDER_WEBSITE()
           YOUTUBE_STATUS = 'lock'
           loadMessages(options['language'])
+          
           console.log(options)
         } else {
           console.error('Error in response:', response.error)
@@ -520,32 +574,22 @@ async function INIT () {
       }
     }
   )
-}
-
-window.addEventListener("beforeunload", function () {
-    console.log("A página vai mudar!");
-    
-  document.querySelector("div#mainContent").style.opacity='0';
-  //document.body.style.opacity = "0";
+        }
 });
 
+}
+function revealSite() {
+  const overlay = document.getElementById('nexus-fade-overlay');
+  if (!overlay) return;
 
-document.addEventListener('DOMContentLoaded', () => {
-  INIT()
-  setTimeout(INIT, 2000)
-  waitForMainContentStable(() => {
-    
-     requestAnimationFrame(()=>{
-  document.querySelector("div#mainContent").style.opacity='1';
-   })
-    WIDER_WEBSITE()
-    NEED_UPDATE = true
-    setTimeout(NEXUS_TWEAKS, 200)
- 
-  
-  })
-    
-})
+  overlay.style.opacity = '0';
+
+  setTimeout(() => {
+    overlay.remove();
+  }, 400);
+}
+
+
 
 function waitForMainContentStable (callback) {
   let lastMainContent = null
@@ -567,12 +611,14 @@ function waitForMainContentStable (callback) {
       }, 200) // tempo sem recriação = estável
     }
   })
-
-  observer.observe(document.body, {
+if(document.body){
+    observer.observe(document.body, {
     childList: true,
     subtree: true
   })
-
+}else{
+  setTimeout(()=>waitForMainContentStable(callback),10)
+}
   // fallback absoluto (caso nunca estabilize)
   setTimeout(() => {
   //observer.disconnect();
@@ -580,6 +626,26 @@ function waitForMainContentStable (callback) {
     callback()
   }, 3000)
 }
+
+
+
+  INIT();
+
+document.addEventListener('DOMContentLoaded', () => {
+  INIT()
+  setTimeout(INIT, 2000)
+  waitForMainContentStable(() => {
+    
+     
+    WIDER_WEBSITE()
+    NEED_UPDATE = true
+    setTimeout(NEXUS_TWEAKS, 200)
+ 
+  
+  })
+    
+})
+
 
 window.addEventListener('load', async () => {
   document.body.style.opacity = "1";
@@ -785,6 +851,9 @@ function CanGoShortcut () {
 }
 
 document.addEventListener('keyup', async function (key) {
+  if(key.key=="Control"){
+      //isDragging = false;
+	}
   if (key.key == 'ArrowLeft' && CanGoShortcut() && textFieldFocused == false) {
     MOVE_SHORTCUT('left')
   }
@@ -793,6 +862,9 @@ document.addEventListener('keyup', async function (key) {
   }
 })
 document.addEventListener('keydown', async function (key) {
+	if(key.key=="Control"){
+      //isDragging = true;
+	}
   if (
     key.altKey == true &&
     key.key == 'n' &&

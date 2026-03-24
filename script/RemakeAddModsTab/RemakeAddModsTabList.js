@@ -218,19 +218,19 @@ function loadBatch() {
 
     for (let i = currentIndex; i < endIndex; i++) {
         const GAME_ITEM = GAMES[i];
-
         const li = document.createElement("li");
         li.classList.add("gameCard");
         li.id = `game-tile-${GAME_ITEM.id}`;
         li.setAttribute(
             "Nurl",
-            `${GAME_ITEM.nexusmods_url}/mods/add?NM_ADVANCERELOAD=false`
+            `https://nexusmods.com/${GAME_ITEM.domainName}/mods/add?NM_ADVANCERELOAD=false`
         );
 
         const subDiv = document.createElement("div");
         subDiv.classList.add("mod-tile-left");
 
         const imgA = document.createElement("a");
+        imgA.href=`https://nexusmods.com/${GAME_ITEM.domainName}/mods/add?NM_ADVANCERELOAD=false`;
         imgA.classList.add("mod-image");
 
         const img = document.createElement("img");
