@@ -3,7 +3,7 @@
   "name": "__MSG_extensionName__",
   "description": "__MSG_description__",
   "default_locale": "en",
-  "version": "0.26.72",
+  "version": "0.26.8",
   "permissions": [
     "activeTab",
     "tabs",
@@ -29,7 +29,10 @@
       "js": [
         "script/var.js",
         "script/utils.js",
+        "script/ProfileOptionsOnHover/ProfileOptionsOnHover.js",
         "script/SearchOn_ModRequiringFile/SearchOn_ModRequiringFile.js",
+        "script/Button_FavoriteMod/Button_FavoriteMod.js",
+        "script/TransformTextLinks/TransformTextLinks.js",
         "script/Buttons_GenerateModButtons/Buttons_GenerateModButtons.js",
         "script/Button_CreateModDescription/Button_CreateModDescription.js",
         "script/Button_CreateModGallery/Button_CreateModGallery.js",

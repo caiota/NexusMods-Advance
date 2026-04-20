@@ -354,6 +354,7 @@
   "message": "Hide Images and Videos from the Description and Files tab of mods",
   "description": "Hides external images and videos in the 'Description' tab and in the 'Files' tab of mods."
 },
+
   "EndorseAndVote": {
     "message": "Enjoying the Extension?",
     "description": "If you like the Extension don't forget to <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Endorse</a> as well! This helps spread the word about the Extension to those who need it, and motivates me to keep working on it! Thanks :D"
@@ -479,7 +480,18 @@
 "WebSiteFadeEffect": {
 "message": "Enable Fade-in / Fade-out Effect on the website",
 "description": "When loading the website, applies a light fade-in effect to smooth the rendering experience, also applies a fade-out effect when the website is loading another page, helping to create a lighter feel to the website"
-
+},
+"transformTextLinks": {
+  "message": "Enable conversion of text to links in mod comments",
+  "description": "On mod pages, in the posts section, automatically converts texts that are links into clickable links."
+},
+"NexusMenus_MouseHover": {
+  "message": "Enable Top Navigation Menus on the Site without clicking",
+  "description": "Enables the NexusMods menus at the top of the page without needing to click them, just by hovering the mouse"
+},
+"Enable_Keyboard_Shortcuts": {
+  "message": "Enable Extension Keyboard Shortcuts",
+  "description": "Enables keyboard shortcuts added by the extension<br><br>Ctrl+F to focus the search box in a mod's comments section.<br>Alt + E to endorse the current mod on the page.<br>Alt + N to open the comment text box and start typing.<br>Also includes arrow key shortcuts to navigate between Description/Files/Images/Videos tabs on mod pages"
 },
   "Prevent_TrackOnDownload": {
     "message": "Do Not Add Files to Your Tracking List When Clicking Download Buttons",

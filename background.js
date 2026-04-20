@@ -1,19 +1,20 @@
-"use strict";
-
 var options = {
 	"LAST_MOD_UPDATE_CHECK": 0,
 	"language": "english",
 	"themeSelector": "dark_1",
 	"TrackingMods_RenderBy": 'alfabetico_FileName',
+	"Enable_Keyboard_Shortcuts":true,
 	"FastViewButton": true,
 	"FastDownloadButton": true,
 	"FastDescriptionButton": true,
 	"FastDownloadTranslates": true,
 	"FastIgnoreButton": true,
 	"PopupRightScreen":true,
+	"transformTextLinks":true,
 	"JustBlur_IgnoredMods":false,
 	"Hide_BluredContent":false,
 	"AwaysChangelogs": true,
+	"NexusMenus_MouseHover":true,
 	"OriginalImages": false,
 	"FastDownloadModManager": true,
 	"DescriptionOnMouse": true,
@@ -69,8 +70,8 @@ var YOUTUBE_STATUS = 'lock';
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	(async () => {
 		try {
-			const { action, item, lang, modsData, modId, mod_id, fileId, game, mod_name, gameId } = message;
-
+			const { action, item, lang, modsData, modId, mod_id, fileId, game, mod_name, gameId,gameNumber,ModCategory,thumbnail,game_Name,modLink } = message;
+			
 			switch (action) {
 				case "SaveBox":
 					await handleSaveBox(item, message.checado, sendResponse);
@@ -95,7 +96,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 				case "LoadMods_Thumbnails":
 					await handleLoadModsThumbnails(sendResponse);
 					break;
-
+				case "Favorite_Mod":
+				await FAVORITE_MOD(modLink,modId,gameNumber,ModCategory,thumbnail,mod_name,game_Name,sendResponse)
+				break;
+				case "GET_FAVORITE_MODS":
+				await GET_FAVORITE_MODS(modId,gameNumber,ModCategory,sendResponse)
+				break;
+				
 				case "LoadBox":
 					await handleLoadBox(sendResponse);
 					break;
@@ -292,6 +299,84 @@ async function handlePopupConfig(type, sendResponse) {
 		openPopup(type);
 	}
 	sendResponse({ success: true, data: options });
+}
+var favorite_mods={}
+
+async function GET_FAVORITE_MODS(modId, gameNumber, modCategory, sendResponse){
+	chrome.storage.local.get('favoriteMods', async (result) => {
+
+		 favorite_mods = result.favoriteMods;
+
+
+
+
+		 sendResponse({
+			success: true,
+			message: favorite_mods
+		});
+	
+})
+}
+
+async function FAVORITE_MOD(modLink,modId, gameNumber, modCategory, thumbnail,modName,game_Name, sendResponse) {
+	chrome.storage.local.get('favoriteMods', async (result) => {
+
+		let favorite_mods = result.favoriteMods;
+
+if (!favorite_mods || Array.isArray(favorite_mods)) {
+	favorite_mods = {};
+}
+		// cria o array do jogo se não existir
+		if (!favorite_mods[gameNumber]) {
+			favorite_mods[gameNumber] = [];
+		}
+
+		// verifica se já existe esse mod
+		const exists = favorite_mods[gameNumber].some(
+			mod => String(mod.modId) === String(modId)
+		);
+
+		if (!exists) {
+			favorite_mods[gameNumber].push({
+				modLink,
+				modId,
+				modCategory,
+				thumbnail,
+				modName,
+				game_Name
+			});
+		}
+favorite_mods = CLEAN_FAVORITES(favorite_mods);
+		await SAVE_FAVORITE_MODS(favorite_mods);
+
+		sendResponse({
+			success: true,
+			message: exists ? "Mod já estava favoritado" : "Mod favoritado",
+			favoriteArray: favorite_mods
+		});
+	});
+}
+function CLEAN_FAVORITES(obj) {
+	if (Array.isArray(obj)) {
+		// converte array bugado pra objeto
+		const newObj = {};
+		obj.forEach((val, index) => {
+			if (val) {
+				newObj[index] = val;
+			}
+		});
+		return newObj;
+	}
+	return obj;
+}
+function SAVE_FAVORITE_MODS(favorite_mods) {
+	return new Promise((resolve) => {
+		chrome.storage.local.set({
+			favoriteMods: favorite_mods
+		}, () => {
+			resolve();
+		});
+	});
 }
 
 async function handleTrackMod(message, sendResponse) {
@@ -840,7 +925,8 @@ async function LOAD_GAMES_LIST() {
     total = json.data.games.totalCount;
 
     GAMES.push(...games);
-
+	
+  SAVE_GAMES();
 offset += 20;
   }
   GAME_LOADING_BUSY=false;

@@ -889,18 +889,19 @@
         }
 
         .section-content {
-            -o-transition: max-height .3s ease;
-            -webkit-transition: max-height .3s ease;
+            -o-transition: all .3s ease;
+            -webkit-transition: all .3s ease;
             max-height: 0;
             overflow: hidden;
-            transition: max-height .3s ease
+            transition: all .3s ease
         }
 
         .section-content.expanded {
             margin-left: 10px;
             max-height: 200px;
             overflow-y: auto;
-            scrollbar-width: thin
+            scrollbar-width: thin;
+            transition: all 0.5s ease;
         }
 
         #nexusMods_Post {
@@ -1688,6 +1689,27 @@
                 <br>
                 <label for="WebSiteFadeEffect">
                     <input type="checkbox" id="WebSiteFadeEffect">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="transformTextLinks">
+                    <input type="checkbox" id="transformTextLinks">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="NexusMenus_MouseHover">
+                    <input type="checkbox" id="NexusMenus_MouseHover">
+                    <div class="custom-checkbox"></div>
+                    <span></span>
+                    <div id='msgPopup'></div>
+                </label>
+                <br>
+                <label for="Enable_Keyboard_Shortcuts">
+                    <input type="checkbox" id="Enable_Keyboard_Shortcuts">
                     <div class="custom-checkbox"></div>
                     <span></span>
                     <div id='msgPopup'></div>

@@ -124,10 +124,13 @@ async function CREATE_HIDDEN_DIVS() {
   for (const [game, mods] of Object.entries(HIDDEN_MODS)) {
     const section = document.createElement('div')
     section.className = 'section'
+    section.setAttribute("game",game.replaceAll("'","").replaceAll('"',""))
+const count = Object.keys(mods).length;
+const length = count + (count === 1 ? " mod" : " mods");
 
     const title = document.createElement('div')
     title.className = 'section-title'
-    title.textContent = game
+    title.textContent = game +" ("+length+")"
     section.appendChild(title)
 
     const content = document.createElement('div')
@@ -138,6 +141,7 @@ async function CREATE_HIDDEN_DIVS() {
       modDiv.classList = 'HiddenMod_Div'
       modDiv.setAttribute('game', game)
       modDiv.setAttribute('mod_id', mod.mod_id)
+
       modDiv.textContent = mod.mod_name
       modDiv.addEventListener('click', function (mod) {
         const mod_id = mod.target.getAttribute('mod_id')
@@ -157,6 +161,10 @@ async function CREATE_HIDDEN_DIVS() {
               )
             } else {
               if (response && response.success) {
+                const DIV_HIDE=document.querySelector("div#HiddenMods div.section[game='"+mod_game.replaceAll("'","").replaceAll('"',"")+"']") || null;
+                if(count==1&&DIV_HIDE){
+                  DIV_HIDE.style.display='none'
+                }
                 mod.target.style.opacity = '0.2'
                 mod.target.style.background = 'red'
               } else {

@@ -484,6 +484,18 @@
 "description": "Beim Laden der Website wird ein sanfter Einblendeffekt angewendet, um ein flüssigeres Rendering zu gewährleisten. Beim Laden einer anderen Seite wird ein Ausblendeffekt angewendet, wodurch die Website ein angenehmeres Erscheinungsbild erhält."
 
 },
+"transformTextLinks": {
+  "message": "Aktiviere die Umwandlung von Text in Links in Mod-Kommentaren",
+  "description": "Auf den Mod-Seiten, im Beitragsbereich, werden Texte, die Links sind, automatisch in anklickbare Links umgewandelt."
+},
+"NexusMenus_MouseHover": {
+  "message": "Oberes Seitenmenü ohne Klick aktivieren",
+  "description": "Aktiviert die NexusMods-Menüs am oberen Seitenrand, ohne dass man darauf klicken muss – einfach mit der Maus darüberfahren"
+},
+"Enable_Keyboard_Shortcuts": {
+  "message": "Tastenkürzel der Erweiterung aktivieren",
+  "description": "Aktiviert die von der Erweiterung hinzugefügten Tastenkürzel<br><br>Ctrl+F, um das Suchfeld im Kommentarbereich eines Mods zu fokussieren.<br>Alt + E, um den aktuellen Mod auf der Seite zu unterstützen (Endorse).<br>Alt + N, um das Kommentarfeld zu öffnen und mit dem Tippen zu beginnen.<br>Enthält außerdem Pfeiltasten zur Navigation zwischen Description/Files/Images/Videos auf Mod-Seiten"
+},
   "Prevent_TrackOnDownload": {
     "message": "Keine Dateien zu Ihrer Liste hinzufügen, wenn Sie auf Download-Schaltflächen klicken",
     "description": "Verhindert, dass die Erweiterung Dateien zu Ihrer Liste hinzufügt, wenn Sie auf eine der Download-Schaltflächen auf der Mod-Dateien-Seite klicken. Nur der orangefarbene Button zum Hinzufügen von Dateien zu NexusMods Advance wird funktionieren."

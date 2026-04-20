@@ -480,8 +480,19 @@
     "message": "Ativar Efeito de Fade-in / Fade-out no site",
     "description": "ao carregar o site, aplica um efeito leve de fade-in no site para suavizar a sensação de renderização, também aplica um efeito de fade-out quando o site está carregando outra página, ajuda na sensação de leveza do site"
   },
+  "transformTextLinks": {
+    "message": "Ativar Conversão de Texto para Links em comentários dos mods",
+    "description": "na página dos mods, na sessão de posts, converte automáticamente textos que são links em links clicáveis autmáticamente."
+  },
+  "NexusMenus_MouseHover": {
+    "message": "Ativar Menus do Topo da Página do Site sem clicar",
+    "description": "Ativa os Menus do NexusMods no topo da página sem precisar clicar neles, apenas passando o mouse"
+  },
+  "Enable_Keyboard_Shortcuts": {
+    "message": "Ativar Atalho de Teclado da Extensão",
+    "description": "Ativa atalhos de teclado sobrepostos pela extensão<br><br>Ctrl+F para focar na caixa de pesquisa da sessão de comentários de um mod.<br> Alt + E para Endossar o mod atual da página.<br>Alt + N para abrir a caixa de texto de comentários e começar digitar.<br>e também os Atalhos das Setas do teclado para navegar entre Description/Files/Images/Videos... nas páginas dos mods"
+  },
 
-  
   "Prevent_TrackOnDownload": {
     "message": "Não Adicionar Arquivos á Sua Lista Quando clicar em Botões de Download",
     "description": "Previne a Extensão de Adicionar Arquivos á Sua Lista ao clicar em algum botão de Download na página de Arquivos dos mods, apenas o botão laranja de Adicionar Arquivos ao NexusMods Advance irá funcionar."

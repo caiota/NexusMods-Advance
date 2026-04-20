@@ -1,4 +1,4 @@
-var MOD_VERSION = '0.26.72 hotfix';
+var MOD_VERSION = '0.26.8';
 
 async function updateContent(messages) {
 	const elementsToUpdate = [
@@ -116,6 +116,12 @@ async function updateContent(messages) {
 		{ selector: "label[for='AutoRotate_ModPictures'] div#msgPopup", html: messages.AutoRotate_ModPictures.description },
 		{ selector: "label[for='WebSiteFadeEffect'] span", text: messages.WebSiteFadeEffect.message },
 		{ selector: "label[for='WebSiteFadeEffect'] div#msgPopup", html: messages.WebSiteFadeEffect.description },
+		{ selector: "label[for='transformTextLinks'] span", text: messages.transformTextLinks.message },
+		{ selector: "label[for='transformTextLinks'] div#msgPopup", html: messages.transformTextLinks.description },
+		{ selector: "label[for='NexusMenus_MouseHover'] span", text: messages.NexusMenus_MouseHover.message },
+		{ selector: "label[for='NexusMenus_MouseHover'] div#msgPopup", html: messages.NexusMenus_MouseHover.description },
+		{ selector: "label[for='Enable_Keyboard_Shortcuts'] span", text: messages.Enable_Keyboard_Shortcuts.message },
+		{ selector: "label[for='Enable_Keyboard_Shortcuts'] div#msgPopup", html: messages.Enable_Keyboard_Shortcuts.description },
 		
 
 		
