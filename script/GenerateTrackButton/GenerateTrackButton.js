@@ -127,6 +127,7 @@ async function TRACK_MOD(ev) {
     if(gameId=="Modding Tools"){
       gameId="site";
     }
+    console.log(gameId)
     const gameName = gameId;
     //console.log(game_numberId,modid,updateDate,version,mod_FileName,thumbnail,moname,mod_Category,fileid,gameName)
     chrome.runtime.sendMessage({

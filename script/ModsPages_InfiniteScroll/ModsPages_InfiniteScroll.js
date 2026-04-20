@@ -438,13 +438,15 @@ BLOCK_REMOVE_INTERVAL=setInterval(async ()=>{await REMOVE_MODS();},20);
     // ----- AVANÇA A PÁGINA -----
     const nextPage = currentPage + 1
     url.searchParams.set('page', nextPage)
-    history.replaceState(null, '', url.toString())
+    history.replaceState(null, '', url.toString());
     FETCH_BUSY = false
-    setTimeout(GET_VISIBLE_BLOCKS, 150)
+    
+    setTimeout(GET_VISIBLE_BLOCKS, 1000);
   } catch (err) {
     console.error('ERRO NO FETCH MEDIA:', err)
   } finally {
     FETCH_BUSY = false
+    setTimeout(GET_VISIBLE_BLOCKS, 1000);
   }
 }
 

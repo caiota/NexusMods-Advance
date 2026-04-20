@@ -52,7 +52,6 @@ async function PROCESS_HIDDEN_LIST() {
           if (tempo_id === Number(mod.mod_id)) {
             // marca com data attribute (lowercase) — confiável pra selector/hasAttribute
             mod_element_base.setAttribute('data-hidden-mod', 'true');
-console.log(mod_element_base);
             if (!options || !options['JustBlur_IgnoredMods']) {
               console.log("Removendo Mod Oculto: " + mod.mod_name);
               mod_element_base.style.display='none'

@@ -59,6 +59,7 @@ console.log("InfiniteScroll_PostsComments Page: "+ATUAL_PAGE);
 console.warn("HTML INJETADO, da página "+ATUAL_PAGE)
     // Insere só o conteúdo limpo
     document.querySelector("div.tabcontent div#comment-container").innerHTML += temp.innerHTML;
+    requestAnimationFrame(()=>{
             STICKY_POSTS();
             PAUSE_GIFS();
             DESCRIPTION_ONMOUSE();
@@ -67,7 +68,11 @@ console.warn("HTML INJETADO, da página "+ATUAL_PAGE)
            EXTERNAL_LINKS_NEWTAB()
             CHECK_YOUTUBEIFRAMES();
             YoutubeEnlarger();
-          
+            PROFILE_ONMOUSE()
+    ARTICLES_ONMOUSE();
+    PAUSE_GIFS();
+    TRANSFORM_TEXT_LINKS();
+    });
     }else{
       console.warn("FIM")
     }

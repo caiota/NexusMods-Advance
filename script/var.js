@@ -13,7 +13,7 @@ var modPreview_element = null;
 var modPopup_element = null;
 var modFiles_element = null;
 var imageUrls = null;
-var gameId = 0;
+var gameId = "0";
 var offsetX, offsetY;
 var isDragging = false;
 let isThrottling = false;

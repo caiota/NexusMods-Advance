@@ -69,18 +69,20 @@ async function CREATE_MODS_BUTTONS () {
           const TargetClick = ev.target.closest('div#MAIN_BLOCK')
           const mode = TargetClick.getAttribute('MOD_ID')
           const MOD_ELEMENT = TargetClick
-          if (mode && gameID_Number) {
+          if (mode) {
             const mod_game = TargetClick.getAttribute('GAME_NAME')
-            const mod_id = mode
+            const mod_id = mode;
+            const game_idNumber=TargetClick.getAttribute('GAME_ID')
             const modName = TargetClick.getAttribute('MOD_NAME')
             if (!modName) {
               return
             }
+            console.log(mod_game,game_idNumber,mod_id,modName)
             chrome.runtime.sendMessage(
               {
                 action: 'Save_HiddenMod',
                 game: mod_game,
-                gameId: gameID_Number,
+                gameId: game_idNumber,
                 mod_id: mod_id,
                 mod_name: modName
               },
@@ -170,7 +172,7 @@ async function CREATE_MODS_BUTTONS () {
 
           var mode = TargetClick.getAttribute('MOD_HREF')
 
-          if (mode && gameID_Number) {
+          if (mode ) {
             openCenteredPopup(
               mode + '?tab=files&popup=true',
               'Loading Mod...',

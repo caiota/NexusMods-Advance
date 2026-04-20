@@ -237,7 +237,7 @@ async function NEXUS_TWEAKS () {
 const gameIdFromDom = findIdBydomainName();
 
 // Usa a URL como principal
-var gameId = gameIdFromUrl;
+ gameId = gameIdFromUrl;
 
 // Se por algum motivo a URL falhar, usa o DOM
 if (!gameId) {
@@ -255,6 +255,7 @@ console.warn('Game Name ' + gameId);
     current_page = await ON_MOD_PAGES(SITE_URL)
     clearInterval(YOUTUBE_LOOP)
     YOUTUBE_LOOP = setInterval(CHECK_YOUTUBEIFRAMES, 500)
+SET_PROFILE_OPTIONS_MOUSEHOVER();
     ShortCut_Availability()
     await SCROLL_TO_UPDATE()
     setTimeout(GET_VISIBLE_BLOCKS, 150)
@@ -308,7 +309,6 @@ openExtensionUI();
        
         break
       case 'only_mod_page':
-     
         pageID = await extrairID(SITE_URL)
         console.log('MOD_ID: ' + pageID)
         // DESCRIPTION_ONMOUSE();
@@ -317,12 +317,14 @@ openExtensionUI();
           canScroll = true
           console.log('Correção de area de atuação para ' + current_page)
           if (SITE_URL.indexOf('trackingcentre') != -1) {
-            DESCRIPTION_ONMOUSE()
+            console.warn("trackingCentre")
+            DESCRIPTION_ONMOUSE(true)
           }
         } else {
           ITEM_LOAD_EXECUTED=false;
           await SELECTED_TAB()
-          TAB_POSTS_OBSERVER()
+          TAB_POSTS_OBSERVER();
+          TRANSFORM_TEXT_LINKS();
           setTimeout(DESCRIPTION_TAB, 500);
           await HIDE_IMAGES();
         await Search_RequiringFileTab()
@@ -357,6 +359,8 @@ openExtensionUI();
     if(FORCE_LOAD_PAGE==2){
       PAGINATION_WATCHER();
     }
+    
+     FAVORITE_MOD();
     await REMAKE_ADDMODS_LIST()
     await STICKY_EDIT_BUTTONS()
     await FIX_ARTICLE_EDIT_LINK()
@@ -439,15 +443,31 @@ async function LoadLoop () {
             ''
         }
         canScroll = true
-
+       
  waitForMainContentStable(() => {
-    
     
     WIDER_WEBSITE()
  })
 
         clearTimeout(modBlocksTimeout)
-        modBlocksTimeout = setTimeout(GET_VISIBLE_BLOCKS, 10)
+        modBlocksTimeout = setTimeout(()=>{
+          GET_VISIBLE_BLOCKS()
+
+    STICKY_POSTS();
+            PAUSE_GIFS();
+            DESCRIPTION_ONMOUSE();
+            PROFILE_ONMOUSE();
+            CREATE_POSTS_BUTTONS();
+           EXTERNAL_LINKS_NEWTAB()
+            CHECK_YOUTUBEIFRAMES();
+            YoutubeEnlarger();
+            PROFILE_ONMOUSE()
+    ARTICLES_ONMOUSE();
+    PAUSE_GIFS();
+    TRANSFORM_TEXT_LINKS();
+        }
+        
+        , 10)
         NEXUS_TWEAKS()
       }
     }
@@ -854,10 +874,10 @@ document.addEventListener('keyup', async function (key) {
   if(key.key=="Control"){
       //isDragging = false;
 	}
-  if (key.key == 'ArrowLeft' && CanGoShortcut() && textFieldFocused == false) {
+  if (key.key == 'ArrowLeft' && CanGoShortcut() && textFieldFocused == false && options['Enable_Keyboard_Shortcuts'] == true) {
     MOVE_SHORTCUT('left')
   }
-  if (key.key == 'ArrowRight' && CanGoShortcut() && textFieldFocused == false) {
+  if (key.key == 'ArrowRight' && CanGoShortcut() && textFieldFocused == false && options['Enable_Keyboard_Shortcuts'] == true) {
     MOVE_SHORTCUT('right')
   }
 })
@@ -871,7 +891,8 @@ document.addEventListener('keydown', async function (key) {
     (current_modTab == 'posts' ||
       current_modTab == 'bugs' ||
       current_modTab == 'forums') &&
-    current_page == 'only_mod_page'
+    current_page == 'only_mod_page' &&
+     options['Enable_Keyboard_Shortcuts'] == true
   ) {
     const newTopicButton = document.querySelector(
       "div.forum-nav ul li a#add-comment, a#report-a-bug, div.forum-nav ul li a[href='.popup-topic']"
@@ -882,7 +903,7 @@ document.addEventListener('keydown', async function (key) {
     }
   }
 
-  if (key.altKey == true && key.key == 'e' && current_page == 'only_mod_page') {
+  if (key.altKey == true && key.key == 'e' && current_page == 'only_mod_page'  &&  options['Enable_Keyboard_Shortcuts'] == true) {
     const endorseButtons = Array.from(
       document.querySelectorAll(
         "ul.modactions li[id^='action-endorse'], ul.modactions li[id^='action-unendorse']"
@@ -909,7 +930,7 @@ document.addEventListener('keydown', async function (key) {
       }
     }
   }
-  if (key.altKey == true && key.key == 't' && current_page == 'only_mod_page') {
+  if (key.altKey == true && key.key == 't' && current_page == 'only_mod_page' && options['Enable_Keyboard_Shortcuts'] == true) {
     const trackModButtons = Array.from(
       document.querySelectorAll(
         "ul.modactions li[id^='action-track'], ul.modactions li[id^='action-untrack']"
@@ -928,12 +949,13 @@ document.addEventListener('keydown', async function (key) {
     key.ctrlKey == true &&
     key.key == 'f' &&
     current_modTab == 'posts' &&
-    current_page == 'only_mod_page'
+    current_page == 'only_mod_page' && 
+    options['Enable_Keyboard_Shortcuts'] == true
   ) {
     key.preventDefault()
     FocusSearchElement()
   }
-  if (key.ctrlKey == true && key.key == 'c' && hiddenInput) {
+  if (key.ctrlKey == true && key.key == 'c' && hiddenInput ) {
     setTimeout(function () {
       hiddenInput.style.display = 'none'
     }, 1000)
@@ -1234,7 +1256,8 @@ function runUpdates () {
     Fix_Youtube_Thumbnails()
     OriginalImageSetup()
     PROFILE_ONMOUSE()
-    ARTICLES_ONMOUSE()
+    ARTICLES_ONMOUSE();
+    TRANSFORM_TEXT_LINKS();
   })
 }
 

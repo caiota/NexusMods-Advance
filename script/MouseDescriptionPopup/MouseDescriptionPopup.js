@@ -1,5 +1,5 @@
-async function DESCRIPTION_ONMOUSE () {
-  if (options['DescriptionOnMouse'] === true) {
+async function DESCRIPTION_ONMOUSE (ignoreCurrentPage=false) {
+  if (options['DescriptionOnMouse'] === true && (current_page =="only_mod_page" || ignoreCurrentPage == true)) {
     if (SITE_URL.indexOf('trackingcentre')) {
       var ALL_LINKS = document.querySelectorAll(
         'td.tracking-mod a:not([DESCRIPTION_CLICK])'
