@@ -1,4 +1,5 @@
 function LOAD_URL_MOD_PARAMS (count = 20) {
+    url = new URL(window.location.href)
   const params = url.searchParams
 
   let page = parseInt(params.get('page')) || 1
@@ -59,27 +60,36 @@ function LOAD_URL_MOD_PARAMS (count = 20) {
   const gameNameRaw = params.get('gameName')
   var gameName = gameNameRaw
     ? decodeURIComponent(gameNameRaw.replace(/\+/g, ' '))
-    : getGameNameFromPage()
+    : null
+    console.error(gameName)
   if (gameName) {
     gameName = gameName.toLowerCase().trim().replaceAll(' ', '')
     checkFromGames=findBySimilarDomain(GAMES,gameName);
     if(checkFromGames){
       gameName=checkFromGames.domainName;
-      console.log(checkFromGames)
+      console.error(checkFromGames)
     }
+  }else{
+    gameName=gameId;
+    console.error("SETANDO GAME NAME MANUAL")
   }
 
   if (gameName == 'moddingtools') {
     gameName = 'site'
   }
-  const rawTimeRange = params.get('timeRange') || 'allTime'
+  const rawTimeRange = params.get('timeRange')
   let timeRange = parseTimeRange(rawTimeRange)
-
+  if(!timeRange.days){
   if (isNaN(timeRange) == true || timeRange == 'NaN') {
     timeRange = 'allTime'
     params.set('timeRange', timeRange)
     history.replaceState(null, '', url.toString())
   }
+}else{
+    timeRange = timeRange.days
+    params.set('timeRange', rawTimeRange)
+    history.replaceState(null, '', url.toString())
+}
 
   const sort = params.get('sort') || 'downloads'
   const sortDirection = params.get('sortDirection') || 'DESC'
@@ -124,7 +134,7 @@ function getGameNameFromPage () {
 }
 function parseTimeRange (timeRange) {
   if (!timeRange || timeRange === 'allTime') {
-    return null
+    return 'allTime'
   }
 
   // intervalo absoluto: 2025-12-24|2025-12-25
@@ -142,7 +152,7 @@ function parseTimeRange (timeRange) {
   }
 
   // intervalo relativo (1, 7, 30…)
-  const days = parseInt(timeRange, 10)
+  const days = timeRangeToTimestamp(timeRange)
   if (!isNaN(days)) {
     return {
       type: 'relative',

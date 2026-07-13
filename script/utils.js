@@ -68,6 +68,28 @@ function findGameById(gameIDE) {
     }
     return null; // Retorna null se não encontrar o URL alvo
 }
+function findGameIdByName(GameName) {
+    console.log("PROCURANDO POR " + GameName)
+    if(GameName=="site"){
+        GameName="Modding Tools"
+    }
+    if (GAMES.length > 0) {
+        for (let i = 0; i < GAMES.length; i++) {
+            if (GameName == GAMES[i].name) {
+                return GAMES[i].id;
+            }
+        }
+    } else {
+        console.error("SEM GAMES")
+    }
+    return null; // Retorna null se não encontrar o URL alvo
+}
+
+function css(selector, styles) {
+  const el = document.querySelector(selector)
+  if (!el) return
+  Object.assign(el.style, styles)
+}
 function fingGameIDBy_DomainName(gameIDE) {
     console.log(GAMES.length, gameIDE)
     if (GAMES.length > 0) {
@@ -430,6 +452,7 @@ chrome.runtime.sendMessage(
           function (response) {
             if (response && response.success) {
             GAMES=response.data;
+            console.log(GAMES)
             console.log("Loaded "+GAMES.length+" Games from NexusMods")
             }
             else if(response.success==false){

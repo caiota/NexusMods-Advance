@@ -30,7 +30,6 @@ async function CREATE_MODS_BUTTONS () {
       var MOD_MAIN = mod.closest(
         "div[data-e2eid='mod-tile'],div[data-e2eid='mod-tile-teaser'], div[class*='group/mod-tile relative']"
       )
-
       const MOD_DETAILS = ({ MOD_ID, GAME_ID, MOD_HREF, MOD_NAME, GAME_NAME } =
         LOAD_MODBLOCK_INFO(MOD_MAIN))
       if (MOD_MAIN) {
@@ -231,10 +230,17 @@ async function CREATE_MODS_BUTTONS () {
         }
         paragraph.classList.add('tilesDesc_SCROLLABLE')
         paragraph.innerText += '\n\n'
-        paragraph
-          .closest("div[class*='mod-tile']")
-          .classList.add('tileInfo_REPADDIGN')
+        paragraph.closest("div[class*='mod-tile']").classList.add('tileInfo_REPADDIGN')
 
+const parent = paragraph.closest("div[class*='mod-tile']").parentElement;
+
+if (
+  parent?.tagName === "DIV" &&
+  parent.attributes.length === 0
+) {
+ 
+        paragraph.closest("div[class*='mod-tile']").parentElement.style.display='grid'
+}
         document.querySelectorAll('div.fadeoff').forEach(function (fadeDiv) {
           fadeDiv.remove()
         })
@@ -268,11 +274,18 @@ function LOAD_MODBLOCK_INFO (MOD_BLOCK) {
 
   const srcUrl = MOD_BLOCK.querySelector(
     "img[src*='/mod-images/'][alt], img[src*='/mods/'][alt]"
-  ).src
+  ).src 
+  //MOD_BLOCK.querySelector("a[data-e2eid='mod-tile-title']")?.href
+
   const match = srcUrl.match(/(?:mods|mod-images)\/(\d+)\//)
   var GAME_ID = Number(match ? match[1] : null)
   }else{
-  var GAME_ID = null;
+    
+  const srcUrl= MOD_BLOCK.querySelector("a[data-e2eid='mod-tile-title']")?.href
+
+  const match = srcUrl.split("/mods/")[0].split(".com/")[1].toLowerCase();
+
+  var GAME_ID = Number(findGameIdByName(match))
   }
   // MOD FULL HREF
   const MOD_HREF = MOD_BLOCK.querySelector("a[href*='/mods/']")?.href

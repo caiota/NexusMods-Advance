@@ -20,8 +20,8 @@ async function START () {
         document.head.appendChild(faLink);
          LOAD_GAMES_LIST();
       }
-
-      requestAnimationFrame(LoadLoop)
+      
+      setTimeout(LoadLoop,100)
       if (
         SITE_URL.indexOf('https://next.nexusmods.com/') != -1 &&
         document.querySelector('div#mainContent main')
@@ -233,6 +233,7 @@ async function NEXUS_TWEAKS () {
     NEED_UPDATE = false
 
     console.log('NexusTweaks')
+    SITE_URL=window.location.href;
    const gameIdFromUrl = getGameId(SITE_URL);
 const gameIdFromDom = findIdBydomainName();
 
@@ -297,7 +298,6 @@ openExtensionUI();
       MAIN_DIV2.prepend(bt);
      }
     }
-
     console.log('Trabalhando em ' + current_page)
     switch (current_page) {
       case 'home_page':
@@ -333,21 +333,27 @@ openExtensionUI();
           await STICKY_POSTS()
           CREATE_POSTS_BUTTONS()
           await PAUSE_GIFS()
+          
+    LOGS_PAGE_PRELOADDATA();
           if(FORCE_LOAD_PAGE==0){
           FORCE_LOAD_PAGE=1;
           }
           await AutoRotate_ModsPortifolio();
         await PAGINATION_FIX();
         }
-        if (SITE_URL.indexOf('popup=true') != -1) {
-          document.querySelector('body').style.marginTop = '0'
-          document.querySelector('div#mainContent').style.padding = 0
-          document.querySelector('div#mainContent').style.margin = 0
-          document.querySelector('div#mainContent').style.maxWidth = 'none'
-          document.querySelector('footer').style.display = 'none'
-          document.querySelector('header#head').style.display = 'none'
-          document.querySelector('header#mobile-head').style.display = 'none'
-          document.querySelector('div.info-details').style.display = 'none'
+        if (SITE_URL.indexOf('popup=true') != -1||window.innerWidth==600) {
+          if (!window.location.search.includes('popup=true')) {
+  const url = new URL(window.location.href)
+  url.searchParams.set('popup', 'true')
+  window.history.replaceState({}, '', url)
+}
+         css('body', { marginTop: '0' })
+css('#mainContent', { padding: 0, margin: 0, maxWidth: 'none' })
+css('footer', { display: 'none' })
+css('header#head', { display: 'none' })
+css('header', { display: 'none' })
+css('#mobile-head', { display: 'none' })
+css('.info-details', { display: 'none' })
           window.addEventListener('keydown', function (k) {
             if (k.key.toLowerCase() == 'escape') {
               window.close()
@@ -359,12 +365,13 @@ openExtensionUI();
     if(FORCE_LOAD_PAGE==2){
       PAGINATION_WATCHER();
     }
-    
+  setTimeout(Sync_NexusModsCheckBoxes,1000);
      FAVORITE_MOD();
     await REMAKE_ADDMODS_LIST()
     await STICKY_EDIT_BUTTONS()
     await FIX_ARTICLE_EDIT_LINK()
     await Fix_Youtube_Thumbnails()
+    REMOVE_NEXUSMODS_ImageBackground();
     setInterval(SEARCH_TAB_WATCHER, 2000)
     await MEDIA_WATCHER()
     clearInterval(FLOATING_MENU_TIMER)
@@ -376,105 +383,164 @@ openExtensionUI();
     console.log(`NEXUS_TWEAKS Executado em: ${tempoExecucao} ms`)
   }
 }
-var LAST_URL = ''
-async function LoadLoop () {
-  try {
-    const preloader = document.querySelector('div.mfp-preloader')
-    if (
-      document.querySelector('div.loading') ||
-      document.querySelector('div.nexus-ui-blocker') ||
-      (preloader && window.getComputedStyle(preloader).display !== 'none') ||
-      LAST_URL != window.location.href
-    ) {
-      SITE_URL = window.location.href
-      LAST_URL = SITE_URL
-      NEED_OVERALLRELOAD = true
-      console.log('Loading...');
 
-      if (YOUTUBE_STATUS == 'unlock') {
-        chrome.runtime.sendMessage(
-          {
-            action: 'lockYoutube'
-          },
-          function (response) {
-            if (response && response.success) {
-              console.log(response.message)
-              YOUTUBE_STATUS = response.YOUTUBE_STATUS
+
+var LAST_URL = ''
+// Use isso em vez do LoadLoop
+function LoadLoop() {
+  // Observer para mudanças na URL (SPA navigation)
+  let lastUrl = location.href;
+  new MutationObserver(() => {
+    const url = location.href;
+    if (url !== lastUrl) {
+      lastUrl = url;
+      handlePageChange();
+    }
+  }).observe(document, { subtree: true, childList: true });
+
+  // Observer para elementos DOM específicos
+  const domObserver = new MutationObserver((mutations) => {
+    let shouldReload = false;
+    for (const mutation of mutations) {
+      if (mutation.type === 'childList' && mutation.addedNodes.length) {
+        // Verifica se algum elemento de loading foi adicionado
+        for (const node of mutation.addedNodes) {
+          if (node.nodeType === 1) { // Element node
+            if (node.matches?.('div.loading, div.nexus-ui-blocker,div.mfp-preloader') ||
+                node.querySelector?.('div.loading, div.nexus-ui-blocker,div.mfp-preloader')) {
+              shouldReload = true;
+              break;
             }
           }
-        )
-      }
-      if (modPreview_element) {
-        modPreview_element.style.display = 'none'
-      }
-      if (modPopup_element) {
-        modPopup_element.style.display = 'none'
-      }
-      if (modFiles_element) {
-        modFiles_element.style.display = 'none'
-      }
-
-      last_modTab = ''
-    } else {
-      if (NEED_OVERALLRELOAD == true) {
-        NEED_OVERALLRELOAD = false
-
-        SITE_URL = window.location.href
-        LAST_URL = SITE_URL
-        console.log('Re Loading...')
-        ATUAL_PAGE = 1
-        canScroll = true
-        NEED_UPDATE = true
-        hideStatus = false
-        lastDescriptionID = 0
-        requerimentsCache = null
-        zoomLevel = 1.0
-        if (imgPopup) {
-          imgPopup.classList.add('popup-hidden')
-          imgPopup.style.transform = 'scale(' + zoomLevel + ')'
         }
-        if (modPreview_element) {
-          modPreview_element.style.transform = `scale(${zoomLevel})`
-        }
-        if (modPopup_element) {
-          modPopup_element.style.transform = `scale(${zoomLevel})`
-          modPopup_element.style.display = 'none'
-          modPopup_element.querySelector('div#descriptionContent').innerHTML =
-            ''
-        }
-        canScroll = true
-       
- waitForMainContentStable(() => {
-    
-    WIDER_WEBSITE()
- })
-
-        clearTimeout(modBlocksTimeout)
-        modBlocksTimeout = setTimeout(()=>{
-          GET_VISIBLE_BLOCKS()
-
-    STICKY_POSTS();
-            PAUSE_GIFS();
-            DESCRIPTION_ONMOUSE();
-            PROFILE_ONMOUSE();
-            CREATE_POSTS_BUTTONS();
-           EXTERNAL_LINKS_NEWTAB()
-            CHECK_YOUTUBEIFRAMES();
-            YoutubeEnlarger();
-            PROFILE_ONMOUSE()
-    ARTICLES_ONMOUSE();
-    PAUSE_GIFS();
-    TRANSFORM_TEXT_LINKS();
-        }
-        
-        , 10)
-        NEXUS_TWEAKS()
       }
     }
-    requestIdleCallback(LoadLoop)
-  } catch (e) {
-    console.error('NexusMods Advance Error:' + e)
+    
+    if (shouldReload) {
+      handleLoadingStart();
+    }
+  });
+  
+  domObserver.observe(document.body, { childList: true, subtree: true });
+  
+  // Executa uma vez ao iniciar
+  handlePageChange();
+}
+
+function handlePageChange() {
+  console.log('Page changed, reapplying functions...');
+  NEED_OVERALLRELOAD = true;
+  resetStates();
+  
+  waitForMainContentStable(() => {
+    
+   BackTopButton=document.querySelector("div#rj-back-to-top");
+              if(options['WideWebsite']==true&&BackTopButton){
+              BackTopButton.style.left="10px"
+              }
+    WIDER_WEBSITE();
+    
+    // Aplica tudo com um pequeno delay
+    setTimeout(async () => {
+      await NEXUS_TWEAKS();
+      GET_VISIBLE_BLOCKS();
+      STICKY_POSTS();
+      PAUSE_GIFS();
+      DESCRIPTION_ONMOUSE();
+      PROFILE_ONMOUSE();
+      CREATE_POSTS_BUTTONS();
+      EXTERNAL_LINKS_NEWTAB();
+      CHECK_YOUTUBEIFRAMES();
+      YoutubeEnlarger();
+      ARTICLES_ONMOUSE();
+      TRANSFORM_TEXT_LINKS();
+      LOGS_PAGE_PRELOADDATA();
+    }, 10);
+  });
+}
+
+function handleLoadingStart() {
+  console.log('Loading detected...');
+  if (YOUTUBE_STATUS === 'unlock') {
+    chrome.runtime.sendMessage({
+      action: 'lockYoutube'
+    }, (response) => {
+      if (response?.success) {
+        console.log(response.message);
+        YOUTUBE_STATUS = response.YOUTUBE_STATUS;
+      }
+    });
   }
+  
+  // Esconde elementos
+  [modPreview_element, modPopup_element, modFiles_element].forEach(el => {
+    if (el) el.style.display = 'none';
+  });
+  
+  last_modTab = '';
+  handlePageChange();
+}
+
+function resetStates() {
+  ATUAL_PAGE = 1;
+  canScroll = true;
+  NEED_UPDATE = true;
+  hideStatus = false;
+  lastDescriptionID = 0;
+  requerimentsCache = null;
+  zoomLevel = 1.0;
+  
+  if (imgPopup) {
+    imgPopup.classList.add('popup-hidden');
+    imgPopup.style.transform = 'scale(' + zoomLevel + ')';
+  }
+  
+  if (modPreview_element) {
+    modPreview_element.style.transform = `scale(${zoomLevel})`;
+  }
+  
+  if (modPopup_element) {
+    modPopup_element.style.transform = `scale(${zoomLevel})`;
+    modPopup_element.style.display = 'none';
+    const descContent = modPopup_element.querySelector('div#descriptionContent');
+    if (descContent) descContent.innerHTML = '';
+  }
+}
+function REMOVE_NEXUSMODS_ImageBackground(){
+  if((current_page=="mod_pages_all"||current_page=="home_page")&&!SITE_URL.includes("/images/")){
+  let imgHeader=document.querySelector("div#mainContent img");
+  if(imgHeader){
+      if(options['Hide_CurrentGame_Image']==true&&imgHeader.style.display!='none'){
+    imgHeader.style.display = 'none';
+      }    
+      else if(options['Hide_CurrentGame_Image']==false&&imgHeader.style.display=='none'){
+    imgHeader.style.display = '';
+      }    
+  }
+}
+}
+
+function LOGS_PAGE_PRELOADDATA(){
+  //funcao que ao carregar a página "LOGS" de um mod, précarrega os dados da página simulando cliques nas opções disponíveis
+  if(current_modTab == 'logs'){
+    document.querySelectorAll("div.tabbed-section div.accordionitems dl dt").forEach((item) => {
+      if(!item.classList.contains('accopen')&&item.getAttribute("AUTO_LOADED")!== "true"){
+        item.setAttribute("AUTO_LOADED",true)
+        realClick_event(item)
+      setTimeout(()=>{PROFILE_ONMOUSE()}, 2500);
+      }
+    });
+  }
+  }
+function realClick_event(el) {
+  ["pointerdown", "mousedown", "mouseup", "click"].forEach(type => {
+    el.dispatchEvent(new MouseEvent(type, {
+      bubbles: true,
+      cancelable: true,
+      button: 0,
+      buttons: 1
+    }));
+  });
 }
 
 async function loadMessages (locale) {
@@ -489,6 +555,9 @@ async function loadMessages (locale) {
   }
   if (locale == 'polones') {
     locale = 'pl'
+  }
+  if (locale == 'frances') {
+    locale = 'fr'
   }
 
   chrome.runtime.sendMessage(
@@ -547,7 +616,6 @@ storage.local.get("options_data", (data) => {
   options=data.options_data;
   lastOptions = options;
   console.log(options)
-  
     WIDER_WEBSITE()
   
 if (options['WebSiteFadeEffect'] === true) {
@@ -890,7 +958,7 @@ document.addEventListener('keydown', async function (key) {
     key.key == 'n' &&
     (current_modTab == 'posts' ||
       current_modTab == 'bugs' ||
-      current_modTab == 'forums') &&
+      current_modTab == 'forum') &&
     current_page == 'only_mod_page' &&
      options['Enable_Keyboard_Shortcuts'] == true
   ) {
@@ -1030,7 +1098,7 @@ document.addEventListener('keydown', async function (key) {
     key.key == '1' &&
     !imgPopup.classList.contains('popup-hidden')
   ) {
-    await EndorseImageByPopup(imgPopup.getAttribute('image_id'))
+    await EndorseImageByPopup(imgPopup)
   } else if (
     modPopup_element &&
     key.key == '1' &&

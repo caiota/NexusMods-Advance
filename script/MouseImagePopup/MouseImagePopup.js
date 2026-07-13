@@ -31,6 +31,7 @@ async function ImagePopupSetup() {
                 var img_li = img;
                 }
                 img_li.setAttribute("POPUP_IMAGE", true);
+        
             }
             img.setAttribute("POPUP_IMAGE", true);
             const img_button = img;
@@ -179,8 +180,29 @@ function loadImage(url) {
         });
 }
 
-async function EndorseImageByPopup(PopUpimage_id) {
-    return;
+async function EndorseImageByPopup(element){
+    if(!element) return;
+let IMG_ID=element.getAttribute('image_id')
+console.log(element)
+
+const response = await fetch("https://www.nexusmods.com/skyrimspecialedition/images/306043", {
+    credentials: "include"
+});
+
+const html = await response.text();
+
+const parser = new DOMParser();
+const doc = parser.parseFromString(html, "text/html");
+
+const endorseButton = doc.querySelector("a#button-endorse");
+
+console.log(endorseButton);
+console.log(endorseButton?.href);
+
+}
+
+async function EndorseImageByPopup_Stage2(PopUpimage_id) {
+
     if (SITE_URL.indexOf("/supporterimages/") == -1) {
         support = 0;
     } else {

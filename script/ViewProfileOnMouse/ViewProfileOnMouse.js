@@ -23,7 +23,7 @@ async function PROFILE_ONMOUSE(){
               profileTimeout = setTimeout(function () {
                 lastDescriptionID = ev.target.href;
                 openPopupAtMousePosition(ev.target.href + "?popup=true", 'Popup', 600, 900, ev);
-              }, 600);
+              }, 800);
             }
           });
 

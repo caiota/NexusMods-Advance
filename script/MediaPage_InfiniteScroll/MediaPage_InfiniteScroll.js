@@ -230,6 +230,10 @@ if (OnlyAdultContent == false || OnlyAdultContent == 'false') {
     }
 
     if (url.pathname.includes('/media')) {
+     const type = url.searchParams.get("type")?.toLowerCase();
+
+      if(url.pathname)
+        if(!type){
       variables.filter.filter = [
         {
           op: 'OR',
@@ -239,6 +243,16 @@ if (OnlyAdultContent == false || OnlyAdultContent == 'false') {
           ]
         }
       ]
+    }else{
+       variables.filter.filter = [
+        {
+          op: 'OR',
+          type: [
+            { op: 'EQUALS', value: type }
+          ]
+        }
+      ]
+    }
     }
     if (url.pathname.includes('/supporterimages')) {
       variables.filter.filter[0].type[0].value = 'supporter_image'

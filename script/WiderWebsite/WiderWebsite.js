@@ -3,6 +3,8 @@ async function WIDER_WEBSITE() {
         if (!options || typeof options.WideWebsite !== 'boolean') return
 mainContent=document.querySelector("div#mainContent div[class*='relative next-container']")
       || document.querySelector("div#mainContent");
+      
+   BackTopButton=document.querySelector("div#rj-back-to-top");
   watchMainContent(mainContent => {
    APPLY_WIDER_TOGGLE(mainContent)
   })
@@ -10,13 +12,16 @@ mainContent=document.querySelector("div#mainContent div[class*='relative next-co
         console.error("NexusMods Advance Error:" + e);
     }
 }
+var BackTopButton;
 function APPLY_WIDER_TOGGLE(mainContent){
         if (mainContent) {
             if (options['WideWebsite']==true&&!mainContent.classList.contains("noPadding")) {
+             
                 mainContent.classList.add("noPadding");
                 console.log("ADICIONANDO")
             } 
             else if (options['WideWebsite']==false&&mainContent.classList.contains("noPadding")) {
+             
                 mainContent.classList.remove("noPadding");
                 console.log("REMOVENDO")
             }

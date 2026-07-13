@@ -40,7 +40,7 @@ let Ignore_Requirements_maxTry = 90;
 
 var translate_strings = {};
 var options = [];
-
+var NexusMods_SearchOptions=[]
 var GLOBAL_MOUSE_X, GLOBAL_MOUSE_Y;
 var http_headers = {
   headers: {

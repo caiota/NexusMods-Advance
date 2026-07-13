@@ -56,6 +56,15 @@ async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
     await FETCH_MOD_DESCRIPTION(game_id, modId, tipo);
 
   }
+  var iframe;
+  async function CreateIframe_Worker(){
+    if(!document.querySelector("iframe#youtubeIframeNMX")){
+      iframe=document.createElement("iframe")
+      iframe.id="youtubeIframeNMX"
+              iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
+              iframe.setAttribute("frameborder", "0");
+    }
+  }
   async function FETCH_MOD_TAGS(game_id, modId){
 
     const response = await fetch("https://www.nexusmods.com/Core/Libs/Common/Widgets/ModTaggingPopUp?mod_id=" + modId + "&game_id=" + game_id, http_headers);
@@ -93,6 +102,7 @@ async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
       const html = await response.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
+      var isAdultBlocked=false;
       const selectors = [
         'svg.icon',
         'li.report-abuse-btn',
@@ -105,12 +115,38 @@ async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
         FETCH_MOD_TAGS(game_id, modId);
       }
       if (tipo == 'videos') {
-        if (doc.body.querySelector("div.video-contain iframe")) {
-          doc.body.innerHTML = doc.body.querySelector("div.video-contain iframe").outerHTML;
-          doc.body.querySelector("iframe").setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
-          doc.body.querySelector("iframe").setAttribute("frameborder", "0");
-          doc.body.querySelector("iframe").src += "?autoplay=1&unlock=1"
+        await CreateIframe_Worker();
+        if(doc.body.querySelector("div.info-content h3")){
+         isAdultBlocked=doc.body.querySelector("div.info-content h3")?.textContent=="Age verification required";
         }
+        chrome.runtime.sendMessage(
+          {
+            action: 'UnlockYoutube'
+          },
+          function (response2) {
+            if (response2 && response2.success) {
+              YOUTUBE_STATUS = response2.YOUTUBE_STATUS
+ if (doc.body.querySelector("div.video-contain iframe")) {
+         let frameSrc=doc.body.querySelector("div.video-contain iframe").src+"?autoplay=1&unlock=1"+"&autoplay=1&unlock=1";
+          iframe.src = frameSrc+"?autoplay=1&unlock=1";
+        //modPopup_element.querySelector("div#descriptionContent").innerHTML=iframe.outerHTML;
+        
+        modPopup_element.querySelector("div#descriptionContent").innerHTML="";
+        modPopup_element.querySelector("div#descriptionContent").appendChild(iframe);
+        
+        
+          //setTimeout(()=>{iframe.src = frameSrc;},1200);
+          
+        
+          
+        }
+        if(isAdultBlocked==true){
+          modPopup_element.querySelector("div#descriptionContent").innerHTML=doc.body.outerHTML;
+        }
+            }
+          }
+        )
+       
 
       }
       if (tipo !== 'descricao') {
@@ -178,8 +214,8 @@ async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
           })
         });
       } else {
-        modPopup_element.querySelector("div#descriptionContent").innerHTML = doc.body.outerHTML;
-
+        //modPopup_element.querySelector("div#descriptionContent").appendChild(iframe);
+        //modPopup_element.querySelector("div#descriptionContent").innerHTML=iframe.outerHTML
       }
       await PAUSE_GIFS();
       await YoutubeEnlarger();

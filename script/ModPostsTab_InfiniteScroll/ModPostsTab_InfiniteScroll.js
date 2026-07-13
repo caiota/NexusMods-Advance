@@ -6,7 +6,10 @@ await GET_PAGE();
 }
 
 var search_text=document.querySelector("input#comment_search")?.value || '';
-var thread_id= document.querySelector("ul.modtabs li#mod-page-tab-posts a.selected").getAttribute("data-target");
+var thread_id= document.querySelector("ul.modtabs li#mod-page-tab-posts a.selected")?.getAttribute("data-target") || null;
+if(!thread_id){
+  return;
+}
 
 const params = new URLSearchParams(thread_id.split("?")[1]);
 const threadId = params.get("thread_id");

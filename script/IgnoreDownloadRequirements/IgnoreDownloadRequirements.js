@@ -11,9 +11,14 @@ EventTarget.prototype.addEventListener = function (type, listener, opts) {
 };
 
 async function IgnoreRequeriments() {
-  const requerimentsPopUp = document.querySelector(
+  var requerimentsPopUp = document.querySelector(
     'div.widget-mod-requirements, div.popup-download'
   )
+  if(!requerimentsPopUp) {
+    console.warn("requerimentsPopUp not found, chamando callback")
+ requerimentsPopUp=document.querySelector("div#next-shadow-root").shadowRoot.querySelector("div.nxm-modal-content");
+ console.log(requerimentsPopUp)
+  }
   if (requerimentsPopUp) {
     console.warn('Ignorando Requerimentos')
     
@@ -43,17 +48,22 @@ async function IgnoreRequeriments() {
     }
     if (options['FastDownloadModManager'] == true) {
       Ignore_Requirements_maxTry = 90
-      const downloadButton = requerimentsPopUp.querySelector('a.btn')
-      if (downloadButton.getAttribute('onclick') == 'download_file();') {
+      const downloadButton = requerimentsPopUp.querySelector('a.btn,a.nxm-button')
+      if(downloadButton.querySelector("path[d='M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z']")){
+        
         downloadButton.click()
-        requerimentsPopUp.querySelector('button.mfp-close').click()
+        requerimentsPopUp.querySelector('button.mfp-close,button.nxm-modal-close-button').click()
+      }
+      else if (downloadButton.getAttribute('onclick') == 'download_file();') {
+        downloadButton.click()
+        requerimentsPopUp.querySelector('button.mfp-close,button.nxm-modal-close-button').click()
       }
       const DownloadDetectButton = downloadButton.href
       if (DownloadDetectButton.indexOf('nmm=1') != -1) {
         tempWindow = window.open(
           DownloadDetectButton + '&NMA_closeAfterDownload=1'
         )
-        requerimentsPopUp.querySelector('button.mfp-close').click()
+        requerimentsPopUp.querySelector('button.mfp-close,button.nxm-modal-close-button').click()
         WindowCloseTimer = setInterval(() => {
           if (!tempWindow || tempWindow.closed) {
             clearInterval(WindowCloseTimer)
@@ -77,7 +87,7 @@ async function IgnoreRequeriments() {
         tempWindow = window.open(
           DownloadDetectButton + '&NMA_closeAfterDownload=1'
         )
-        requerimentsPopUp.querySelector('button.mfp-close').click()
+        requerimentsPopUp.querySelector('button.mfp-close,button.nxm-modal-close-button').click()
         WindowCloseTimer = setInterval(() => {
           if (!tempWindow || tempWindow.closed) {
             clearInterval(WindowCloseTimer)
@@ -102,7 +112,8 @@ async function IgnoreRequeriments() {
   } else {
     if (Ignore_Requirements_maxTry > 0) {
       Ignore_Requirements_maxTry--
-      requestAnimationFrame(IgnoreRequeriments)
+      requestAnimationFrame(IgnoreRequeriments);
+      console.log("NADA PARA IGNORAR D:")
     } else {
       Ignore_Requirements_maxTry = 90
     }

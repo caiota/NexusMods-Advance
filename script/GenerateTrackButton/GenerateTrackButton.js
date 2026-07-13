@@ -17,19 +17,29 @@ async function GENERATE_TRACK_BUTTONS() {
 
         for (const [index, mod] of modsLinks.entries()) {
             const modElement = mod.previousElementSibling.querySelector("div.file-download-stats");
+            const modTitle=mod.previousElementSibling;
             const unixTimestamp = mod.previousElementSibling.getAttribute("data-date");
             const timestampInMillis = parseInt(unixTimestamp, 10) * 1000;
 
             const downloadButton = buttonsDownloads[index];
-            const fileLink = downloadButton.querySelector("li a");
+            var fileLink=null;
+            if(downloadButton.querySelector("li a")){
+             fileLink = downloadButton.querySelector("li a");
+            }
+            else if(downloadButton.querySelector("li mod-download-modal")){
+             fileLink = downloadButton.querySelector("li mod-download-modal").shadowRoot.querySelector("button");
+            }
 
             if (!fileLink) {
                 console.log("Erro ao encontrar ID de arquivo, MOD provavelmente está em análise :D");
                 continue;
             }
-
-            const fileId = await getParameterByName("id", fileLink.href) || await getParameterByName("file_id", fileLink.href);
-
+            const url_FileID=modTitle.getAttribute("data-id")
+            const fileId = await getParameterByName("id", fileLink.href) || await getParameterByName("file_id", fileLink.href) || url_FileID;
+          if(!fileId) {
+                console.error("Erro ao encontrar ID de arquivo para o mod: " + modName);
+                continue;
+            }
             const advanceIcon = document.createElement("i");
             advanceIcon.classList = "advanceIcon fa-solid fa-thumbtack";
             advanceIcon.setAttribute("aria-hidden", true);
