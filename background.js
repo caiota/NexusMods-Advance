@@ -55,8 +55,77 @@ var options = {
 	"Following_EditMenu": true,
 	"WebSiteFadeEffect":true,
 	"NewTab_ExternalURL": true,
-	"Prevent_TrackOnDownload":false
+	"Prevent_TrackOnDownload":false,
+	"Save_SearchOptions":true,
+	"Hide_CurrentGame_Image":true
 };
+var NexusMods_SearchOptions={
+  "checkbox-filter-alchemy": false,
+  "checkbox-filter-animation": false,
+  "checkbox-filter-armour": false,
+  "checkbox-filter-armour-shields": false,
+  "checkbox-filter-audio": false,
+  "checkbox-filter-body-face-and-hair": false,
+  "checkbox-filter-bug-fixes": false,
+  "checkbox-filter-buildings": false,
+  "checkbox-filter-cheats-and-god-items": false,
+  "checkbox-filter-cities-towns-villages-and-hamlets": false,
+  "checkbox-filter-clothing-and-accessories": false,
+  "checkbox-filter-collectables-treasure-hunts-and-puzzles": false,
+  "checkbox-filter-combat": false,
+  "checkbox-filter-crafting": false,
+  "checkbox-filter-creatures-and-mounts": false,
+  "checkbox-filter-dungeons": false,
+  "checkbox-filter-environmental": false,
+  "checkbox-filter-followers-companions": false,
+  "checkbox-filter-followers-companions-creatures": false,
+  "checkbox-filter-gameplay": false,
+  "checkbox-filter-guildsfactions": false,
+  "checkbox-filter-immersion": false,
+  "checkbox-filter-items-and-objects-player": false,
+  "checkbox-filter-items-and-objects-world": false,
+  "checkbox-filter-locations-new": false,
+  "checkbox-filter-locations-vanilla": false,
+  "checkbox-filter-magic-gameplay": false,
+  "checkbox-filter-magic-spells-enchantments": false,
+  "checkbox-filter-miscellaneous": false,
+  "checkbox-filter-modders-resources": false,
+  "checkbox-filter-models-and-textures": false,
+  "checkbox-filter-npc": false,
+  "checkbox-filter-overhauls": false,
+  "checkbox-filter-patches": false,
+  "checkbox-filter-player-homes": false,
+  "checkbox-filter-presets-enb-and-reshade": false,
+  "checkbox-filter-quests-and-adventures": false,
+  "checkbox-filter-races-classes-and-birthsigns": false,
+  "checkbox-filter-save-games": false,
+  "checkbox-filter-shouts": false,
+  "checkbox-filter-skills-and-leveling": false,
+  "checkbox-filter-stealth": false,
+  "checkbox-filter-user-interface": false,
+  "checkbox-filter-utilities": false,
+  "checkbox-filter-visuals-and-graphics": false,
+  "checkbox-filter-vr": false,
+  "checkbox-filter-weapons": false,
+  "checkbox-filter-weapons-and-armour": false,
+  "checkbox-filter-czech": false,
+  "checkbox-filter-dutch": false,
+  "checkbox-filter-english": false,
+  "checkbox-filter-french": false,
+  "checkbox-filter-german": false,
+  "checkbox-filter-hungarian": false,
+  "checkbox-filter-italian": false,
+  "checkbox-filter-japanese": false,
+  "checkbox-filter-korean": false,
+  "checkbox-filter-mandarin": false,
+  "checkbox-filter-polish": false,
+  "checkbox-filter-portuguese": false,
+  "checkbox-filter-russian": false,
+  "checkbox-filter-spanish": false,
+  "checkbox-filter-turkish": false,
+  "checkbox-filter-ukrainian": false
+
+}
 var hiddenContent = "";
 var hiddenMods = {};
 var NEXUS_API = 0;
@@ -70,7 +139,7 @@ var YOUTUBE_STATUS = 'lock';
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	(async () => {
 		try {
-			const { action, item, lang, modsData, modId, mod_id, fileId, game, mod_name, gameId,gameNumber,ModCategory,thumbnail,game_Name,modLink } = message;
+			const { action, item, lang, modsData, modId, mod_id, fileId, game, mod_name, gameId,gameNumber,ModCategory,thumbnail,game_Name,modLink,option } = message;
 			
 			switch (action) {
 				case "SaveBox":
@@ -187,6 +256,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 					//UNBLOCK_GAME_IMAGES();
 					sendResponse({ success: true });
 					break;
+					
+				case 'Update_NexusMods_SearchOptions':
+					await updateOption_NexusMods_SearchOptions(option,sendResponse)
+				break;
+				case 'NexusMods_SearchOptions':
+					await handle_NexusMods_SearchOptions(sendResponse)
+				break;
 				default:
 					sendResponse({ success: false, message: "Ação desconhecida" });
 					break;
@@ -213,7 +289,7 @@ async function handleSaveBox(item, checado, sendResponse) {
 	}
 	sendResponse({ success: true, message: `Opção ${item} Salvo` });
 }
-
+setInterval(UpdateStartUp, 10000);
 async function handleLoadMessages(lang, sendResponse) {
 	const response = await fetch(`/_locales/${lang}/messages.json`);
 	const messages = await response.json();
@@ -300,6 +376,43 @@ async function handlePopupConfig(type, sendResponse) {
 	}
 	sendResponse({ success: true, data: options });
 }
+
+
+async function updateOption_NexusMods_SearchOptions(option,sendResponse){
+
+	chrome.storage.local.set({
+			'NexusMods_SearchOptions': option
+		});
+
+
+		 sendResponse({
+			success: true,
+			message: option
+		});
+	
+
+}
+
+async function handle_NexusMods_SearchOptions(sendResponse){
+	chrome.storage.local.get('NexusMods_SearchOptions', async (result) => {
+		if(result.NexusMods_SearchOptions){
+		 NexusMods_SearchOptions = result.NexusMods_SearchOptions;
+		}else{
+		chrome.storage.local.set({
+			'NexusMods_SearchOptions': NexusMods_SearchOptions
+		});
+	}
+
+
+		 sendResponse({
+			success: true,
+			message: NexusMods_SearchOptions
+		});
+	
+})
+}
+
+
 var favorite_mods={}
 
 async function GET_FAVORITE_MODS(modId, gameNumber, modCategory, sendResponse){
@@ -807,7 +920,7 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id,game
 
 			}
 		}
-
+      console.log(DATA.files)
 		DATA.files.forEach(update => {
 			if ((update.category_name === "MAIN" || update.category_name === "OPTIONAL" || update.category_name === "MISCELLANEOUS" || update.category_name === "UPDATE") && update.name === title) {
 				if (!latestVersion || update.version > latestVersion) {
@@ -818,20 +931,25 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id,game
 		});
 
 		DATA.files.forEach(async (update) => {
+			console.log(file_id, update.file_id)
 			if (Number(update.file_id) === file_id) {
 				if (update.category_name === "MAIN" || update.category_name === "OPTIONAL" || update.category_name === "MISCELLANEOUS" || update.category_name === "UPDATE") {
 					mods_data[modIde]["LAST_LOAD_" + file_id].update_state = 'updated';
 				} else {
 					outdated_mods++;
 					console.log(title + " Desatualizado");
+					console.log(mods_data[modIde])
+					console.log(update);
 					if (latestVersion && update.version < latestVersion) {
-
+						console.log("desatualizado")
 						mods_data[modIde]["LAST_LOAD_" + file_id].update_state = 'outdated';
 					} else {
+						console.log("Arquivo antigo")
 						mods_data[modIde]["LAST_LOAD_" + file_id].update_state = 'old_file';
 					}
 				}
 				if (mods_data[modIde]) {
+					console.log("ATUALIZADO?")
 					if (mods_data[modIde]["LAST_LOAD_" + file_id]) {
 						mods_data[modIde]["LAST_LOAD_" + file_id].Last_Load_Timestamp = Math.floor(Date.now() / 1000);
 						
@@ -848,7 +966,12 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id,game
 						mods_data[modIde]["LAST_LOAD_" + file_id].lastVersion = latestVersion;
 						mods_data[modIde]["LAST_LOAD_" + file_id].changelog = CHANGELOG;
 						mods_data[modIde]["LAST_LOAD_" + file_id].description = DESCRIPTION;
-						mods_data[modIde]["LAST_LOAD_" + file_id].size = latestFile ? latestFile.size_in_bytes : 0;
+						if (latestFile.size_in_bytes) {
+							mods_data[modIde]["LAST_LOAD_" + file_id].size = latestFile.size_in_bytes;
+						} 
+						else if(latestFile.size_kb){
+							mods_data[modIde]["LAST_LOAD_" + file_id].size = latestFile.size_kb * 1024;
+						}
 						mods_data[modIde]["LAST_LOAD_" + file_id].last_FileID = latestFile ? latestFile.file_id : file_id;
 						await SAVE_MODDATA();
 					}
@@ -960,7 +1083,7 @@ async function UpdateStartUp() {
 	const lastModUpdateCheck = options.LAST_MOD_UPDATE_CHECK;
 	const currentTimeUnix = Math.floor(Date.now() / 1000);
 	const twentyFourHoursInSeconds = 2 * 60 * 60;
-	//const twentyFourHoursInSeconds = 20;
+	//const twentyFourHoursInSeconds = 10;
 	const isMoreThan5Hours = (currentTimeUnix - lastModUpdateCheck) >= twentyFourHoursInSeconds;
 	if (options['MemoryMode'] == true) {
 		console.error("Can't Update Mods: Memory Mode Option Enabled");
@@ -969,7 +1092,7 @@ async function UpdateStartUp() {
 		return;
 	}
 	if (options['NotifyUpdates'] == true && isMoreThan5Hours == true) {
-		
+		   console.warn("Verificando atualizações de mods...");
 			await loadMods();
 			await LOAD_MODDATA();
 			CheckModUpdates();
@@ -1132,7 +1255,6 @@ chrome.runtime.onStartup.addListener(async () => {
 	UpdateStartUp();
 
 });
-
 chrome.notifications.onClicked.addListener(notificationId => {
 	if (notificationId === 'ModUpdateCheck') {
 		chrome.windows.create({

@@ -3,7 +3,7 @@
   "name": "__MSG_extensionName__",
   "description": "__MSG_description__",
   "default_locale": "en",
-  "version": "0.26.8",
+  "version": "0.26.85",
   "permissions": [
     "activeTab",
     "tabs",
@@ -29,6 +29,7 @@
       "js": [
         "script/var.js",
         "script/utils.js",
+        "script/NexusMods_SearchOptions/NexusMods_SearchOptions.js",
         "script/ProfileOptionsOnHover/ProfileOptionsOnHover.js",
         "script/SearchOn_ModRequiringFile/SearchOn_ModRequiringFile.js",
         "script/Button_FavoriteMod/Button_FavoriteMod.js",
