@@ -5,6 +5,7 @@
 ## Credits to
 - Bapcules for translating the Extension into German
 - JMaxPlayZ for translating the Extension into Polish
+- lerenard1fr  for translating the Exension into French
 
 ## If you want to help with a new language, just translate the messages.json file you prefer and send it to me on [Discord: .caiota](discord://discordapp.com/users/606186579983335444)
 
