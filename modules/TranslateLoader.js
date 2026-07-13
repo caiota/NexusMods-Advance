@@ -1,4 +1,4 @@
-var MOD_VERSION = '0.26.8';
+var MOD_VERSION = '0.26.85';
 
 async function updateContent(messages) {
 	const elementsToUpdate = [
@@ -124,6 +124,11 @@ async function updateContent(messages) {
 		{ selector: "label[for='Enable_Keyboard_Shortcuts'] div#msgPopup", html: messages.Enable_Keyboard_Shortcuts.description },
 		
 
+		{ selector: "label[for='Hide_CurrentGame_Image'] span", text: messages.Hide_CurrentGame_Image.message },
+		{ selector: "label[for='Hide_CurrentGame_Image'] div#msgPopup", html: messages.Hide_CurrentGame_Image.description },
+		
+		//{ selector: "label[for='Save_SearchOptions'] span", text: messages.Save_SearchOptions.message },
+		//{ selector: "label[for='Save_SearchOptions'] div#msgPopup", html: messages.Save_SearchOptions.description },
 		
 		{ selector: "label[for='Prevent_TrackOnDownload'] span", text: messages.Prevent_TrackOnDownload.message },
 		{ selector: "label[for='Prevent_TrackOnDownload'] div#msgPopup", html: messages.Prevent_TrackOnDownload.description },
@@ -221,6 +226,7 @@ async function loadMessages(locale) {
 	if (locale === 'english') locale = 'en';
 	if (locale === 'alemao') locale = 'de';
 	if (locale === 'polones') locale = 'pl';
+	if (locale === 'frances') locale = 'fr';
 
 	const response = await fetch(`/_locales/${locale}/messages.json`);
         const messages = await response.json();

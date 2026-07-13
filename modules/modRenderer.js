@@ -54,7 +54,6 @@ async function CreateModTables(mods, title) {
 	tempMods = searchInObject(tempMods, title);
 	console.log("%cCarregando " + Object.entries(tempMods).length + " MODS", "padding:2px;background: yellowgreen;font-weight:bold;color:black");
 	console.log("%cRenderizando com " + options['TrackingMods_RenderBy'], "padding:2px;background: yellowgreen;font-weight:bold;color:black");
-
 	for (const [mod_name, modInfo] of Object.entries(tempMods)) {
 		const {
 			mod_id,
@@ -348,6 +347,7 @@ async function CreateModTables(mods, title) {
 		modTable.setAttribute("size", size);
 		modTable.setAttribute("mod_href", "https://www.nexusmods.com/" + game + "/mods/" + mod_id);
 		modTable.setAttribute("file_id", file_id);
+		console.log(mod_tempData[mod_id])
 		if (mod_tempData[mod_id] && mod_tempData[mod_id]["LAST_LOAD_" + file_id] && mod_tempData[mod_id]["LAST_LOAD_" + file_id]["Last_Load_Timestamp"]) {
 
 			//18000
@@ -795,7 +795,7 @@ async function GetFileInfo(modIde, file_id, gameId, version, sizeBytes, title, e
 		if (Number(update.file_id) === file_id) {
 			size = update.size_in_bytes;
 			if (update.category_name === "MAIN" || update.category_name === "OPTIONAL" || update.category_name === "MISCELLANEOUS" || update.category_name === "UPDATE") {
-				//console.log(title+" atualizado: " + update.version);
+				console.log(title+" atualizado: " + update.version);
 				if (update.description) {
 					DESCRIPTION = update.description.replaceAll("\n", "<br>-");
 				} else {
@@ -808,6 +808,7 @@ async function GetFileInfo(modIde, file_id, gameId, version, sizeBytes, title, e
 				}
 				VERSION = update.version;
 				MOD_STATUS = "updated";
+				console.log("mod atualizado?")
 				if (mode != "simple") {
 					element.querySelector("span.ModStatus").innerText = translate_strings.modStatus_updated.message;
 					element.querySelector("span.ModStatus").id = 'modUpdated'
@@ -832,8 +833,9 @@ async function GetFileInfo(modIde, file_id, gameId, version, sizeBytes, title, e
 					}
 					VERSION = version;
 					MOD_STATUS = "outdated";
-					// console.log("Versão mais recente disponível: " + latestVersion + " (" + latestFile.file_name + ")");
+					 console.log("Versão mais recente disponível: " + latestVersion + " (" + latestFile.file_name + ")");
 					if (mode != "simple") {
+						console.error("UE?")
 						element.querySelector("span.ModStatus").innerText = translate_strings.modStatus_outdated.message;
 						element.querySelector("span.ModStatus").id = 'modOutdated'
 						element.querySelector("span#size").innerText = translate_strings.size.message + formatBytes(update.size_in_bytes);
