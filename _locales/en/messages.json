@@ -172,7 +172,7 @@
   },
   "MODS_DELAY_MESSAGE": {
     "message": "Delay to Reload Mods: ",
-    "description": "Mod loading is limited to once every 2 hours, as the NexusMods API has a limit of 500 requests per hour. When you add a new mod, or modify an existing one in your list, it will be updated normally."
+    "description": "Mod loading is limited to once every 2 hours, as the NexusMods API has a limit of 2000 requests per hour. When you add a new mod, or modify an existing one in your list, it will be updated normally."
   },
   "MODS_DELAY_USAGE": {
     "message": " requests remaining per day.",
@@ -493,6 +493,11 @@
   "message": "Enable Extension Keyboard Shortcuts",
   "description": "Enables keyboard shortcuts added by the extension<br><br>Ctrl+F to focus the search box in a mod's comments section.<br>Alt + E to endorse the current mod on the page.<br>Alt + N to open the comment text box and start typing.<br>Also includes arrow key shortcuts to navigate between Description/Files/Images/Videos tabs on mod pages"
 },
+  "Hide_CurrentGame_Image": {
+    "message": "Hide Background Image at the Top of the Site",
+    "description": "Hides the background image of the site, making the site a bit darker"
+  },
+
   "Prevent_TrackOnDownload": {
     "message": "Do Not Add Files to Your Tracking List When Clicking Download Buttons",
     "description": "Prevents the Extension from Adding Files to Your List when clicking any Download button on the mods' Files page. Only the orange button to Add Files to NexusMods Advance will work."

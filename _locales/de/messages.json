@@ -178,7 +178,7 @@
   },
   "MODS_DELAY_MESSAGE": {
     "message": "Verzögerung beim Neuladen von Mods: ",
-    "description": "Das Laden von Mods ist auf einmal alle 2 Stunden begrenzt, da die NexusMods API ein Limit von 500 Anfragen pro Stunde hat. Wenn Du einen neuen Mod hinzufügst oder einen vorhandenen in Ihrer Liste änderst, wird dieser normal aktualisiert.."
+    "description": "Das Laden von Mods ist auf einmal alle 2 Stunden begrenzt, da die NexusMods API ein Limit von 2000 Anfragen pro Stunde hat. Wenn Du einen neuen Mod hinzufügst oder einen vorhandenen in Ihrer Liste änderst, wird dieser normal aktualisiert.."
   },
   "MODS_DELAY_USAGE": {
     "message": " Verbleibende Anfragen pro Tag.",
@@ -496,6 +496,11 @@
   "message": "Tastenkürzel der Erweiterung aktivieren",
   "description": "Aktiviert die von der Erweiterung hinzugefügten Tastenkürzel<br><br>Ctrl+F, um das Suchfeld im Kommentarbereich eines Mods zu fokussieren.<br>Alt + E, um den aktuellen Mod auf der Seite zu unterstützen (Endorse).<br>Alt + N, um das Kommentarfeld zu öffnen und mit dem Tippen zu beginnen.<br>Enthält außerdem Pfeiltasten zur Navigation zwischen Description/Files/Images/Videos auf Mod-Seiten"
 },
+  "Hide_CurrentGame_Image": {
+    "message": "Hintergrundbild am oberen Rand der Seite ausblenden",
+    "description": "Blendet das Hintergrundbild der Seite aus, wodurch die Seite etwas dunkler wirkt"
+  },
+
   "Prevent_TrackOnDownload": {
     "message": "Keine Dateien zu Ihrer Liste hinzufügen, wenn Sie auf Download-Schaltflächen klicken",
     "description": "Verhindert, dass die Erweiterung Dateien zu Ihrer Liste hinzufügt, wenn Sie auf eine der Download-Schaltflächen auf der Mod-Dateien-Seite klicken. Nur der orangefarbene Button zum Hinzufügen von Dateien zu NexusMods Advance wird funktionieren."

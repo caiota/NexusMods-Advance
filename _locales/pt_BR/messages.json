@@ -178,7 +178,7 @@
   },
   "MODS_DELAY_MESSAGE": {
     "message": "Delay para Recarregar os mods: ",
-    "description": "O carregamento dos mods é limitado a 1 vez a cada 2 horas, pois a API do NexusMods tem um limite de 500 solicitações por hora. Ao adicionar um mod novo, ou modificar algum existente na sua lista, ele irá ser atualizado normalmente"
+    "description": "O carregamento dos mods é limitado a 1 vez a cada 2 horas, pois a API do NexusMods tem um limite de 2000 solicitações por hora. Ao adicionar um mod novo, ou modificar algum existente na sua lista, ele irá ser atualizado normalmente"
   },
   "MODS_DELAY_USAGE": {
     "message": " solicitações restantes por dia.",
@@ -490,7 +490,17 @@
   },
   "Enable_Keyboard_Shortcuts": {
     "message": "Ativar Atalho de Teclado da Extensão",
-    "description": "Ativa atalhos de teclado sobrepostos pela extensão<br><br>Ctrl+F para focar na caixa de pesquisa da sessão de comentários de um mod.<br> Alt + E para Endossar o mod atual da página.<br>Alt + N para abrir a caixa de texto de comentários e começar digitar.<br>e também os Atalhos das Setas do teclado para navegar entre Description/Files/Images/Videos... nas páginas dos mods"
+    "description": "Ativa atalhos de teclado sobrepostos pela extensão<br><br>Ctrl + F para focar na caixa de pesquisa da sessão de comentários de um mod.<br> Alt + E para Endossar o mod atual da página.<br>Alt + N para abrir a caixa de texto de comentários e começar digitar.<br>e também os Atalhos das Setas do teclado para navegar entre Description/Files/Images/Videos... nas páginas dos mods"
+  },
+  "Hide_CurrentGame_Image": {
+    "message": "Ocultar Imagem de Fundo do Topo do Site",
+    "description": "Oculta a Imagem do fundo do site, deixando o site um pouco mais escuro"
+  },
+
+  
+  "Save_SearchOptions": {
+    "message": "Salvar Estado dos Filtros de Pesquisa do NexusMods",
+    "description": "Na Página de Pesquisa do NexusMods, salva o estado das opções de Pesquisa como Idioma, Tags, CheckBoxes como Tradução ou Idioams específicos."
   },
 
   "Prevent_TrackOnDownload": {

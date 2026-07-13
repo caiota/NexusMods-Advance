@@ -175,7 +175,7 @@
   },
   "MODS_DELAY_MESSAGE": {
     "message": "Opóźnienie Przeładownia Modów: ",
-    "description": "Wczytywanie Modów jest ograniczone do jednego na 2 godzin, gdyż NexusMods API ma limit 500 próźb na godzinę. Kiedy dodasz nowy mod lub zmodyfikujesz już istniejący na liście, zostanie on normalnie zaktualizowany."
+    "description": "Wczytywanie Modów jest ograniczone do jednego na 2 godzin, gdyż NexusMods API ma limit 2000 próźb na godzinę. Kiedy dodasz nowy mod lub zmodyfikujesz już istniejący na liście, zostanie on normalnie zaktualizowany."
   },
   "MODS_DELAY_USAGE": {
     "message": " pozostałe proźby na dzień.",
@@ -492,6 +492,10 @@
   "message": "Włącz skróty klawiaturowe rozszerzenia",
   "description": "Włącza skróty klawiaturowe dodane przez rozszerzenie<br><br>Ctrl+F, aby skupić się na polu wyszukiwania w sekcji komentarzy moda.<br>Alt + E, aby wesprzeć (endorse) aktualny mod na stronie.<br>Alt + N, aby otworzyć pole komentarza i zacząć pisać.<br>Zawiera także skróty klawiszy strzałek do nawigacji między zakładkami Description/Files/Images/Videos na stronach modów"
 },
+  "Hide_CurrentGame_Image": {
+    "message": "Ukryj obraz tła na górze strony",
+    "description": "Ukrywa obraz tła strony, sprawiając, że strona jest nieco ciemniejsza"
+  },
   "Prevent_TrackOnDownload": {
     "message": "Nie dodawaj plików do swojej listy po kliknięciu przycisków pobierania",
     "description": "Zapobiega dodawaniu plików do Twojej listy przez rozszerzenie po kliknięciu dowolnego przycisku pobierania na stronie plików modów. Tylko pomarańczowy przycisk dodawania plików do NexusMods Advance będzie działać."
