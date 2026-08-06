@@ -56,6 +56,7 @@ async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
     await FETCH_MOD_DESCRIPTION(game_id, modId, tipo);
 
   }
+          var firstFile_URL=null;
   var iframe;
   async function CreateIframe_Worker(){
     if(!document.querySelector("iframe#youtubeIframeNMX")){
@@ -156,6 +157,7 @@ async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
       if (tipo !== 'translateMod') {
         selectors.push('div.accordionitems');
       } else {
+        firstFile_URL=null;
         doc.querySelectorAll("div.accordionitems").forEach((accordionItem) => {
           accordionItem.querySelectorAll("a").forEach((item) => {
             item.href = item.href.replaceAll(
@@ -168,12 +170,36 @@ async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
               "Core/Libs/Common/Widgets/DownloadPopUp?id=",
               gameId + "/mods/" + modId + "?tab=files&file_id="
             );
-
           });
-        });
+          if(accordionItem.querySelector("mod-download-modal")) {
+              const element = accordionItem.querySelector("mod-download-modal");
 
+// Pega o atributo
+const fileAttr = element.getAttribute("file");
+
+// Converte as entidades HTML
+const decoded = new DOMParser()
+    .parseFromString(fileAttr, "text/html")
+    .documentElement.textContent;
+
+// Transforma em objeto
+const file = JSON.parse(decoded);
+
+firstFile_URL=file.downloadUrl
+        setTimeout(() => {
+          IgnoreRequeriments(true);
+        }, 1000);
+            
+          }
+        });
         if (doc.querySelectorAll("div.accordionitems dt").length <= 1) {
+          if(doc.querySelector("div.accordionitems ul.accordion-downloads a")){
           window.open(doc.querySelector("div.accordionitems ul.accordion-downloads a").href+"&popup=true");
+          }else{
+            if(firstFile_URL){
+              window.open(firstFile_URL+"?popup=true");
+            }
+          }
           modPopup_element.style.display = "none";
           return;
       }else{
@@ -221,6 +247,7 @@ async function CREATE_MOD_DESCRIPTION(game_id, modId, tipo){
       await YoutubeEnlarger();
 
     } catch (error) {
+      throw error;
       console.error('Erro ao buscar o HTML:', error);
     }
   }

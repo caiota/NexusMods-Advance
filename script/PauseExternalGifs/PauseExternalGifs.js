@@ -1,7 +1,7 @@
 async function PAUSE_GIFS() {
     if ((current_modTab == "posts" || current_modTab == "description") && options['PauseExternalGifs'] == true && !PAUSE_GIFS_BUSY) {
       PAUSE_GIFS_BUSY = true;
-      const gifElements = document.querySelectorAll('img[src$=".gif"]:not([GIF_PAUSED])');
+      const gifElements = document.querySelectorAll('img[src$=".gif"]:not([GIF_PAUSED]),img[src$="animated=true"]:not([GIF_PAUSED])');
   
       gifElements.forEach((gifElement) => {
         if (gifElement.complete) {

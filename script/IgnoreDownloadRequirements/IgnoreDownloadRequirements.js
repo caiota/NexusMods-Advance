@@ -2,6 +2,7 @@ const originalAdd = EventTarget.prototype.addEventListener;
 EventTarget.prototype.addEventListener = function (type, listener, opts) {
   if (type === "click" && this.matches?.("a.btn")) {
     const wrapped = function (ev) {
+      console.log("MICROTASK")
       queueMicrotask(IgnoreRequeriments);
       return listener.call(this, ev);
     };
@@ -10,14 +11,12 @@ EventTarget.prototype.addEventListener = function (type, listener, opts) {
   return originalAdd.call(this, type, listener, opts);
 };
 
-async function IgnoreRequeriments() {
+async function IgnoreRequeriments(scanMode=false) {
   var requerimentsPopUp = document.querySelector(
     'div.widget-mod-requirements, div.popup-download'
   )
   if(!requerimentsPopUp) {
-    console.warn("requerimentsPopUp not found, chamando callback")
  requerimentsPopUp=document.querySelector("div#next-shadow-root").shadowRoot.querySelector("div.nxm-modal-content");
- console.log(requerimentsPopUp)
   }
   if (requerimentsPopUp) {
     console.warn('Ignorando Requerimentos')
@@ -47,15 +46,27 @@ async function IgnoreRequeriments() {
       rightPremiumPanel.appendChild(testButton)
     }
     if (options['FastDownloadModManager'] == true) {
+      if(!scanMode){
       Ignore_Requirements_maxTry = 90
+      }else{
+        Ignore_Requirements_maxTry=200;
+      }
       const downloadButton = requerimentsPopUp.querySelector('a.btn,a.nxm-button')
       if(downloadButton.querySelector("path[d='M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z']")){
         
+        if(!scanMode){
         downloadButton.click()
+        }else{
+          window.open(downloadButton.href+"?NMA_closeAfterDownload=1")
+        }
         requerimentsPopUp.querySelector('button.mfp-close,button.nxm-modal-close-button').click()
       }
       else if (downloadButton.getAttribute('onclick') == 'download_file();') {
+          if(!scanMode){
         downloadButton.click()
+        }else{
+          window.open(downloadButton.href+"?NMA_closeAfterDownload=1")
+        }
         requerimentsPopUp.querySelector('button.mfp-close,button.nxm-modal-close-button').click()
       }
       const DownloadDetectButton = downloadButton.href
@@ -112,8 +123,14 @@ async function IgnoreRequeriments() {
   } else {
     if (Ignore_Requirements_maxTry > 0) {
       Ignore_Requirements_maxTry--
+      if(!scanMode){
       requestAnimationFrame(IgnoreRequeriments);
       console.log("NADA PARA IGNORAR D:")
+      }else{
+        setTimeout(() => {
+          IgnoreRequeriments(true);
+        }, 1000);
+      }
     } else {
       Ignore_Requirements_maxTry = 90
     }

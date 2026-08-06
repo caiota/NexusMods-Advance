@@ -559,7 +559,12 @@ async function loadMessages (locale) {
   if (locale == 'frances') {
     locale = 'fr'
   }
-
+  if (locale == 'russo') {
+    locale = 'ru'
+  }
+if(!locale){
+	locale = 'en';
+ }
   chrome.runtime.sendMessage(
     {
       action: 'Load_Messages',
@@ -666,14 +671,24 @@ setTimeout(revealSite,2000);
 });
 
 }
+var unfadeInterval=setInterval(revealCheck,100);
+function revealCheck(){
+  if(document.readyState=="complete" && document.getElementById('nexus-fade-overlay')){
+    revealSite();
+    clearInterval(unfadeInterval);
+  }
+}
 function revealSite() {
-  const overlay = document.getElementById('nexus-fade-overlay');
+   overlay = document.getElementById('nexus-fade-overlay');
   if (!overlay) return;
 
   overlay.style.opacity = '0';
 
   setTimeout(() => {
-    overlay.remove();
+    clearInterval(unfadeInterval);
+    if(overlay){
+      overlay.remove();
+    }
   }, 400);
 }
 
