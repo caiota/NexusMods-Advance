@@ -29,7 +29,7 @@
   },
   "hiddenMods_field": {
     "message": "Versteckte Mods",
-    "description": "Versteckte Mods von der NexusMods-Website. Klicken Sie auf den Namen, um ihn aus der Ignorierliste zu löschen."
+    "description": "Versteckte Mods von der NexusMods-Website. Klicken Sie auf den Namen, um ihn aus der Ignorierliste zu löschen. Verwenden Sie die Option 'Alle Versteckten Mods Löschen', um sie alle auf einmal zu entfernen."
   },
   "themeLight_title": {
     "message": "Pink Helles Theme"
@@ -297,6 +297,39 @@
   },
   "more_DonatePls": {
     "message": "<i class='fa-solid fa-hand-holding-heart' aria-hidden='true'></i> Spenden Sie über PayPal"
+  },
+  "more_Export_Config": {
+    "message": "<i class='fa-solid fa-download' aria-hidden='true'></i> Konfiguration exportieren"
+  },
+  "more_Import_Config": {
+    "message": "<i class='fa-solid fa-upload' aria-hidden='true'></i> Konfiguration importieren"
+  },
+  "import_title": {
+    "message": "Konfiguration importieren"
+  },
+  "import_msg": {
+    "message": "Hier können Sie Mods und Konfigurationen aus anderen Browsern importieren, wodurch Ihre aktuellen Einstellungen wie versteckte Wörter, alle in der Registerkarte 'Meine Dateien' verfolgten Dateien und versteckte Mods überschrieben werden<br><br>Wählen Sie eine JSON-Konfigurationsdatei zum Importieren aus."
+  },
+  "import_SelectFile": {
+    "message": "JSON-Datei auswählen"
+  },
+  "ImportResults_Success": {
+    "message": "Konfiguratioinen, verfolgte Dateien, versteckte Mods und versteckte Wörter erfolgreich importiert!"
+  },
+  "ImportResults_Failure": {
+    "message": "Fehler beim Import der Konfiguration, bitte überprüfen Sie, ob die JSON-Datei korrekt ist."
+  },
+  "Import_ExtensionLabel": {
+    "message": "Erweiterungsversion:"
+  },
+  "Import_BrowserLabel": {
+    "message": "Browser-Typ:"
+  },
+  "Import_ExportedLabel": {
+    "message": "Backup-Datum:"
+  },
+  "DeleteAll_HiddenMods": {
+    "message": "Alle Versteckten Mods Löschen"
   },
   "modViewPopup_changelog": {
     "message": "Beschreibung"

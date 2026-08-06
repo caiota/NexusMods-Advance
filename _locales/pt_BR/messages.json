@@ -58,7 +58,7 @@
   },
   "hiddenMods_field": {
     "message": "Mods Ocultos",
-    "description": "Seus Mods Ocultos do site da NexusMods, clique no Nome para Remover da Lista de Ignorados."
+    "description": "Seus Mods Ocultos do site da NexusMods, clique no Nome para Remover da Lista de Ignorados ou use a opção 'Excluir Todos os Mods da Lista' para remover todos de uma vez."
   },
   "button_showGallery": {
     "message": "Mostrar Botão para o Popup de Galeria de Imagens nos Blocos dos Mods",
@@ -294,6 +294,39 @@
   },
   "more_DonatePls": {
     "message": "<i class='fa-solid fa-hand-holding-heart' aria-hidden='true'></i> Doar usando LivePix"
+  },
+  "more_Export_Config": {
+    "message": "<i class='fa-solid fa-download' aria-hidden='true'></i> Exportar Configurações"
+  },
+  "more_Import_Config": {
+    "message": "<i class='fa-solid fa-upload' aria-hidden='true'></i> Importar Configurações"
+  },
+  "import_title": {
+    "message": "Importar Configurações"
+  },
+  "import_msg": {
+    "message": "Aqui você pode importar Mods e Configurações de outros navegadores, isso irá sobreescrever suas configurações atuais como palavras ocultas, todos os arquivos seguidos na aba Meus Arquivos e Mods Ocultos<br><br>Selecione um arquivo de configuração JSON para importar."
+  },
+  "import_SelectFile": {
+    "message": "Selecionar Arquivo JSON"
+  },
+  "ImportResults_Success": {
+    "message": "Configurações, Mods Seguidos, Mods Ocultos e Palavras Ocultas importadas com sucesso!"
+  },
+  "ImportResults_Failure": {
+    "message": "Falha ao importar configuração, verifique se o arquivo JSON está correto."
+  },
+  "Import_ExtensionLabel":{
+    "message": "Versão da Extensão Exportada:"
+  },
+  "Import_BrowserLabel":{
+    "message": "Tipo de Navegador:"
+  },
+  "Import_ExportedLabel":{
+    "message": "Data do Backup:"
+  },
+  "DeleteAll_HiddenMods": {
+    "message": "Excluir Todos os Mods da Lista"
   },
   "modViewPopup_changelog": {
     "message": "Descrição"

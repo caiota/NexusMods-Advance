@@ -26,7 +26,7 @@
   },
   "hiddenMods_field": {
     "message": "Ukryte mody",
-    "description": "Ukryte mody ze strony NexusMods, kliknij nazwę, aby usunąć ją z listy ignorowanych."
+    "description": "Ukryte mody ze strony NexusMods, kliknij nazwę, aby usunąć ją z listy ignorowanych. Użyj opcji 'Usuń wszystkie mody z listy', aby usunąć je wszystkie jednocześnie."
   },
   "themeLight_title": {
     "message": "Motyw Jasno Różowy"
@@ -294,6 +294,39 @@
   },
   "more_DonatePls": {
     "message": "<i class='fa-solid fa-hand-holding-heart' aria-hidden='true'></i> Przekaż darowiznę za pośrednictwem PayPal"
+  },
+  "more_Export_Config": {
+    "message": "<i class='fa-solid fa-download' aria-hidden='true'></i> Eksport Konfiguracji"
+  },
+  "more_Import_Config": {
+    "message": "<i class='fa-solid fa-upload' aria-hidden='true'></i> Import Konfiguracji"
+  },
+  "import_title": {
+    "message": "Import Konfiguracji"
+  },
+  "import_msg": {
+    "message": "A tu możesz importować Mods i Configurations z innych przeglądarków, to spowoduje nadpisanie twoich obecnych ustawień, takich jak ukryte słowa, wszystkie pliki śledzone na karcie 'Moje pliki' i ukryte mody<br><br>Wybierz plik konfiguracji JSON do importu."
+  },
+  "import_SelectFile": {
+    "message": "Wybierz Plik JSON"
+  },
+  "ImportResults_Success": {
+    "message": "Konfiguracje, Mody Śledzone, Ukryte Mody i Ukryte Słowa zostały pomyślnie zaimportowane!"
+  },
+  "ImportResults_Failure": {
+    "message": "Błąd podczas importu konfiguracji, sprawdź czy plik JSON jest poprawny."
+  },
+  "Import_ExtensionLabel": {
+    "message": "Wersja Rozszerzenia:"
+  },
+  "Import_BrowserLabel": {
+    "message": "Typ Przeglądarki:"
+  },
+  "Import_ExportedLabel": {
+    "message": "Data Kopii Zapasowej:"
+  },
+  "DeleteAll_HiddenMods": {
+    "message": "Usuń wszystkie mody z listy"
   },
   "modViewPopup_changelog": {
     "message": "Opis"

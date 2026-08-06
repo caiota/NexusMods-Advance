@@ -23,7 +23,7 @@
   },
   "hiddenMods_field": {
     "message": "Hidden Mods",
-    "description": "Hidden Mods from NexusMods Website, click the name to Delete from Ignore List."
+    "description": "Hidden Mods from NexusMods Website, click the name to Delete from Ignore List. Use the 'Delete All Hidden Mods' option to remove them all at once."
   },
   "themeLight_title": {
     "message": "Pink Light Theme"
@@ -295,6 +295,39 @@
   },
   "more_DonatePls": {
     "message": "<i class='fa-solid fa-hand-holding-heart' aria-hidden='true'></i> Donate via PayPal"
+  },
+  "more_Export_Config": {
+    "message": "<i class='fa-solid fa-download' aria-hidden='true'></i> Export Configuration"
+  },
+  "more_Import_Config": {
+    "message": "<i class='fa-solid fa-upload' aria-hidden='true'></i> Import Configuration"
+  },
+  "import_title": {
+    "message": "Import Configuration"
+  },
+  "import_msg": {
+    "message": "Here you can import Mods and Configurations from other browsers, this will overwrite your current settings such as hidden words, all files tracked in the 'My Files' tab and Hidden Mods<br><br>Select a JSON configuration file to import."
+  },
+  "import_SelectFile": {
+    "message": "Select JSON File"
+  },
+  "ImportResults_Success": {
+    "message": "Configurations, Tracked Files, Hidden Mods and Hidden Words imported successfully!"
+  },
+  "ImportResults_Failure": {
+    "message": "Failed to import configuration, please check that the JSON file is correct."
+  },
+  "Import_ExtensionLabel": {
+    "message": "Extension Version:"
+  },
+  "Import_BrowserLabel": {
+    "message": "Browser Type:"
+  },
+  "Import_ExportedLabel": {
+    "message": "Backup Date:"
+  },
+  "DeleteAll_HiddenMods": {
+    "message": "Delete All Hidden Mods"
   },
   "modViewPopup_changelog": {
     "message": "Description"

@@ -23,7 +23,7 @@
   },
   "hiddenMods_field": {
     "message": "Mods masqués",
-    "description": "Mods masqués du site NexusMods, cliquez sur le nom pour supprimer de la liste."
+    "description": "Mods masqués du site NexusMods, cliquez sur le nom pour supprimer de la liste. Utilisez l'option 'Supprimer tous les mods cachés' pour les supprimer tous en une seule fois."
   },
   "themeLight_title": {
     "message": "Thème clair rose"
@@ -294,6 +294,39 @@
   },
   "more_DonatePls": {
     "message": "<i class='fa-solid fa-hand-holding-heart' aria-hidden='true'></i> Faire un don via PayPal"
+  },
+  "more_Export_Config": {
+    "message": "<i class='fa-solid fa-download' aria-hidden='true'></i> Exporter la Configuration"
+  },
+  "more_Import_Config": {
+    "message": "<i class='fa-solid fa-upload' aria-hidden='true'></i> Importer la Configuration"
+  },
+  "import_title": {
+    "message": "Importation de la Configuration"
+  },
+  "import_msg": {
+    "message": "Ici, vous pouvez importer des Mods et des Configurations depuis d'autres navigateurs, cela remplacera vos paramètres actuels tels que les mots cachés, tous les fichiers suivis dans l'onglet 'Mes Fichiers' et les Mods Cachés<br><br>Choisissez un fichier de configuration JSON à importer."
+  },
+  "import_SelectFile": {
+    "message": "Sélectionner le Fichier JSON"
+  },
+  "ImportResults_Success": {
+    "message": "Les configurations, mods suivis, mods cachés et mots cachés ont été importés avec succès !"
+  },
+  "ImportResults_Failure": {
+    "message": "Erreur lors de l'importation de la configuration, veuillez vérifier que le fichier JSON est correct."
+    },
+    "Import_ExtensionLabel": {
+    "message": "Version de l'Extension:"
+  },
+  "Import_BrowserLabel": {
+    "message": "Type de Navigateur:"
+  },
+  "Import_ExportedLabel": {
+    "message": "Date de la Sauvegarde:"
+  },
+  "DeleteAll_HiddenMods": {
+    "message": "Supprimer tous les mods cachés"
   },
   "modViewPopup_changelog": {
     "message": "Description"
