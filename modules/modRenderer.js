@@ -66,7 +66,6 @@ async function CreateModTables(mods, title) {
 			file_id,
 			full_name,
 		} = modInfo;
-		console.log(modInfo)
 		if (lineOutdated == 3) {
 			lineOutdated = 0;
 			lineElement_Outdated = document.createElement("div");
@@ -347,7 +346,6 @@ async function CreateModTables(mods, title) {
 		modTable.setAttribute("size", size);
 		modTable.setAttribute("mod_href", "https://www.nexusmods.com/" + game + "/mods/" + mod_id);
 		modTable.setAttribute("file_id", file_id);
-		console.log(mod_tempData[mod_id])
 		if (mod_tempData[mod_id] && mod_tempData[mod_id]["LAST_LOAD_" + file_id] && mod_tempData[mod_id]["LAST_LOAD_" + file_id]["Last_Load_Timestamp"]) {
 
 			//18000

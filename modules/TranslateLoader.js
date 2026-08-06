@@ -1,4 +1,4 @@
-var MOD_VERSION = '0.26.85';
+var MOD_VERSION = '0.26.86';
 
 async function updateContent(messages) {
 	const elementsToUpdate = [
@@ -25,8 +25,13 @@ async function updateContent(messages) {
 		{ selector: "label[for='JustBlur_IgnoredMods'] div#msgPopup", html: messages.button_ignoreMod_BLUR.description },
 		{ selector: "label[for='Hide_BluredContent'] span", text: messages.HideContent_Enable_FULLHIDE.message },
 		{ selector: "label[for='Hide_BluredContent'] div#msgPopup", html: messages.HideContent_Enable_FULLHIDE.description },
-
-		
+		{selector: "div#ImportConfig_Panel legend", text: messages.import_title.message},
+		{selector: "div#ImportConfig_Panel div#ImportMsg", html: messages.import_msg.message},
+		{selector: "div#ImportConfig_Panel div#SelectFile", text: messages.import_SelectFile.message},
+        //{selector: "div#ImportConfig_Panel div#ImportResults", html: messages.ImportResults_Success.message},
+		{selector: "div#ImportConfig_Panel div#ExtensionLabel b", text: messages.Import_ExtensionLabel.message},
+		{selector: "div#ImportConfig_Panel div#BrowserLabel  b", text: messages.Import_BrowserLabel.message},
+		{selector: "div#ImportConfig_Panel div#ExportedLabel b", text: messages.Import_ExportedLabel.message},
 		{ selector: "label[for='InfiniteScroll'] span", text: messages.button_infiniteScroll.message },
 		{ selector: "label[for='InfiniteScroll'] div#msgPopup", html: messages.button_infiniteScroll.description },
 		{ selector: "label[for='AutoTrackDownloaded'] span", text: messages.button_AutoTrackDownloaded.message },
@@ -122,6 +127,7 @@ async function updateContent(messages) {
 		{ selector: "label[for='NexusMenus_MouseHover'] div#msgPopup", html: messages.NexusMenus_MouseHover.description },
 		{ selector: "label[for='Enable_Keyboard_Shortcuts'] span", text: messages.Enable_Keyboard_Shortcuts.message },
 		{ selector: "label[for='Enable_Keyboard_Shortcuts'] div#msgPopup", html: messages.Enable_Keyboard_Shortcuts.description },
+		{ selector: "div#DeleteAll_HiddenMods", html: messages.DeleteAll_HiddenMods.message },
 		
 
 		{ selector: "label[for='Hide_CurrentGame_Image'] span", text: messages.Hide_CurrentGame_Image.message },
@@ -154,6 +160,8 @@ async function updateContent(messages) {
 		{ selector: "span#translatedBy", text: translate_strings.translateBy.message },
 		{ selector: "span#more_OfficialPost", html: translate_strings.more_OfficialPost.message },
 		{ selector: "span#more_DonatePls", html: translate_strings.more_DonatePls.message },
+		{ selector: "span#more_Export_Config", html: translate_strings.more_Export_Config.message },
+		{ selector: "span#more_Import_Config", html: translate_strings.more_Import_Config.message },
 		{ selector: "div#viewDescription", html: translate_strings.modViewPopup_changelog.message },
 		{ selector: "div#viewPosts", html: translate_strings.modViewPopup_posts.message },
 		{ selector: "div#viewBugs", html: translate_strings.modViewPopup_bugs.message },
@@ -227,7 +235,10 @@ async function loadMessages(locale) {
 	if (locale === 'alemao') locale = 'de';
 	if (locale === 'polones') locale = 'pl';
 	if (locale === 'frances') locale = 'fr';
-
+	if (locale === 'russo') locale = 'ru';
+ if(!locale){
+	locale = 'en';
+ }
 	const response = await fetch(`/_locales/${locale}/messages.json`);
         const messages = await response.json();
 
