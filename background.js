@@ -1,3 +1,4 @@
+var EXTENSION_VERSION=chrome.runtime.getManifest().version;
 var options = {
 	"LAST_MOD_UPDATE_CHECK": 0,
 	"language": "english",
@@ -139,7 +140,7 @@ var YOUTUBE_STATUS = 'lock';
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	(async () => {
 		try {
-			const { action, item, lang, modsData, modId, mod_id, fileId, game, mod_name, gameId,gameNumber,ModCategory,thumbnail,game_Name,modLink,option } = message;
+			const { action, item, lang, modsData, modId, mod_id, fileId, game, mod_name, gameId,gameNumber,ModCategory,thumbnail,game_Name,modLink,option,backupItems } = message;
 			
 			switch (action) {
 				case "SaveBox":
@@ -151,6 +152,12 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 					break;
 				case "LoadCustomCSS":
 					await LoadCustomCSS(sendResponse);
+					break;
+				case "ExportConfig":
+					await ExportConfig(sendResponse);
+					break;
+				case "ImportConfig":
+					await ImportConfig(backupItems, sendResponse);
 					break;
 
 					
@@ -198,6 +205,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 				case "Remove_HiddenMod":
 					await delete_HiddenMod(game, message.mod, sendResponse);
+					break;
+				case "Delete_HiddenMods":
+					await delete_HiddenMods(sendResponse);
 					break;
 
 				case "PopupConfig":
@@ -274,6 +284,92 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 	})();
 	return true;
 });
+var ExportConfig_Items={}
+async function ExportConfig(sendResponse) {
+	await LOAD_OPTIONS();
+	await LOAD_MODDATA();
+	await LOAD_HIDDEN_MODS();
+	await loadMods();
+	await loadHiddenContent_export();
+	options.LAST_MOD_UPDATE_CHECK=0;
+	resetCustom_ModDataItem(mods_data);
+	ExportConfig_Items = { 
+		extension_version: EXTENSION_VERSION,
+		browser: navigator.userAgent.includes("Firefox") ? "Firefox" : "Chromium",
+        exportedAt: new Date().toISOString(),
+		data:{
+		options, mods,mods_data,hiddenMods,hiddenContent
+		}
+	};
+	sendResponse({ success: true, data: ExportConfig_Items });
+}
+async function ImportConfig(backupItems, sendResponse) {
+	
+	   if (!backupItems || typeof backupItems !== "object") {
+        sendResponse({
+            success: false,
+            message: "Invalid backup."
+        });
+        return;
+    }
+
+
+await LOAD_MODDATA();
+await loadMods();
+
+const importedOptions = backupItems.options ?? {};
+
+for (const key in importedOptions) {
+
+    if (!(key in options))
+        continue;
+
+    if (typeof importedOptions[key] !== typeof options[key])
+        continue;
+
+    options[key] = importedOptions[key];
+}
+
+
+    mods = backupItems.mods ?? {};
+    mods_data = backupItems.mods_data ?? {};
+    hiddenMods = backupItems.hiddenMods ?? {};
+    hiddenContent = backupItems.hiddenContent ?? [];
+
+	
+
+	saveHiddenContent(hiddenContent,nullFunc)
+	SAVE_HIDDEN_MOD();
+	SAVE_MODDATA();
+	saveMods();
+	SAVE_OPTIONS();
+
+	sendResponse({ success: true, message: "Resposta Recebida "+ JSON.stringify(backupItems) });
+}
+function nullFunc(){
+
+}
+function resetCustom_ModDataItem(obj) {
+    if (!obj || typeof obj !== "object") return;
+
+    for (const key in obj) {
+        if (key.startsWith("LAST_LOAD_") && obj[key]?.Last_Load_Timestamp !== undefined) {
+            obj[key].Last_Load_Timestamp = 0;
+            obj[key].description = '';
+        }
+
+        if (typeof obj[key] === "object") {
+            resetCustom_ModDataItem(obj[key]);
+        }
+    }
+}
+async function loadHiddenContent_export(){
+	chrome.storage.local.get('hiddenContent', (result) => {
+			if (result.hiddenContent) {
+				hiddenContent=result.hiddenContent
+			}
+		});
+	}
 async function handleSaveBox(item, checado, sendResponse) {
 	if (item === 'NEXUS_API') {
 		await chrome.storage.local.set({ "nexususer": checado });
@@ -289,7 +385,6 @@ async function handleSaveBox(item, checado, sendResponse) {
 	}
 	sendResponse({ success: true, message: `Opção ${item} Salvo` });
 }
-setInterval(UpdateStartUp, 10000);
 async function handleLoadMessages(lang, sendResponse) {
 	const response = await fetch(`/_locales/${lang}/messages.json`);
 	const messages = await response.json();
@@ -352,7 +447,15 @@ async function handleLoadHiddenMods(sendResponse) {
 	await LOAD_HIDDEN_MODS();
 	sendResponse({ success: true, data: hiddenMods });
 }
+async function delete_HiddenMods(sendResponse) {
+	await LOAD_HIDDEN_MODS();
+	hiddenMods={}
 
+	await SAVE_HIDDEN_MOD();
+
+	sendResponse({ success: true, message: "Mods Ocultos deletados!" });
+		
+}
 async function handlePopupConfig(type, sendResponse) {
 	if (popupWindowId !== null) {
 		chrome.windows.get(popupWindowId, { populate: true }, (window) => {
@@ -794,6 +897,17 @@ async function loadHiddenContent(sendResponse) {
 	});
 }
 async function saveHiddenContent(word, sendResponse) {
+	if(!word || !Array.isArray(word)) {
+		chrome.storage.local.set({
+				"hiddenContent": ''
+			});
+
+		sendResponse({
+			success: true,
+			message: "No Hidden Words Provided"
+		});
+		return;
+	}
 	return new Promise((resolve, reject) => {
 		const dadosUnicos = [...new Set(word.filter(value => value.trim() !== ""))];
 		const dadosFormatados = [dadosUnicos.join("#-#")];
@@ -920,7 +1034,6 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id,game
 
 			}
 		}
-      console.log(DATA.files)
 		DATA.files.forEach(update => {
 			if ((update.category_name === "MAIN" || update.category_name === "OPTIONAL" || update.category_name === "MISCELLANEOUS" || update.category_name === "UPDATE") && update.name === title) {
 				if (!latestVersion || update.version > latestVersion) {
@@ -931,7 +1044,6 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id,game
 		});
 
 		DATA.files.forEach(async (update) => {
-			console.log(file_id, update.file_id)
 			if (Number(update.file_id) === file_id) {
 				if (update.category_name === "MAIN" || update.category_name === "OPTIONAL" || update.category_name === "MISCELLANEOUS" || update.category_name === "UPDATE") {
 					mods_data[modIde]["LAST_LOAD_" + file_id].update_state = 'updated';
@@ -949,7 +1061,6 @@ async function GetFileInfo(modIde, gameId, version, updated, title, file_id,game
 					}
 				}
 				if (mods_data[modIde]) {
-					console.log("ATUALIZADO?")
 					if (mods_data[modIde]["LAST_LOAD_" + file_id]) {
 						mods_data[modIde]["LAST_LOAD_" + file_id].Last_Load_Timestamp = Math.floor(Date.now() / 1000);
 						
@@ -1227,6 +1338,12 @@ chrome.runtime.onInstalled.addListener(async (details) => {
 				break;
 			case 'pl':
 				options['language'] = 'polones';
+				break;
+			case 'fr':
+				options['language'] = 'frances';
+				break;
+			case 'ru':
+				options['language'] = 'russo';
 				break;
 			default:
 				userLanguage="en"
