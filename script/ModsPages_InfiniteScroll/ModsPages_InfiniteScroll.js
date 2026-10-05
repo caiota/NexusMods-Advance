@@ -61,8 +61,8 @@ function LOAD_URL_MOD_PARAMS (count = 20) {
   var gameName = gameNameRaw
     ? decodeURIComponent(gameNameRaw.replace(/\+/g, ' '))
     : null
-    console.error(gameName)
   if (gameName) {
+    console.error("gameName "+gameName)
     gameName = gameName.toLowerCase().trim().replaceAll(' ', '')
     checkFromGames=findBySimilarDomain(GAMES,gameName);
     if(checkFromGames){
@@ -71,13 +71,13 @@ function LOAD_URL_MOD_PARAMS (count = 20) {
     }
   }else{
     gameName=gameId;
-    console.error("SETANDO GAME NAME MANUAL")
+    console.error("SETANDO GAME NAME MANUAL "+gameName)
   }
 
   if (gameName == 'moddingtools') {
     gameName = 'site'
   }
-  const rawTimeRange = params.get('timeRange')
+  const rawTimeRange = params.get('timeRange') || "allTime"
   let timeRange = parseTimeRange(rawTimeRange)
   if(!timeRange.days){
   if (isNaN(timeRange) == true || timeRange == 'NaN') {
@@ -86,14 +86,15 @@ function LOAD_URL_MOD_PARAMS (count = 20) {
     history.replaceState(null, '', url.toString())
   }
 }else{
-    timeRange = timeRange.days
     params.set('timeRange', rawTimeRange)
     history.replaceState(null, '', url.toString())
 }
 
   const sort = params.get('sort') || 'downloads'
   const sortDirection = params.get('sortDirection') || 'DESC'
-  const ShowAdultContent = params.get('showAdultContent') || null
+const ShowAdultContent = 
+  params.get('showAdultContent') || 
+  (document.querySelector("button[data-e2eid='remove-filter-hide-adult-content']") ? "false" : "true");
   const OnlyAdultContent = params.get('adultContent') || null
   const vortexSupport = params.get('supportsVortex') || null
   const onlyUpdatedMods = params.get('hasUpdated') || null
@@ -152,7 +153,7 @@ function parseTimeRange (timeRange) {
   }
 
   // intervalo relativo (1, 7, 30…)
-  const days = timeRangeToTimestamp(timeRange)
+  const days = Number(timeRange)
   if (!isNaN(days)) {
     return {
       type: 'relative',
@@ -212,7 +213,7 @@ var timeRange2
 
 let adultContentFilter = []
 
-var BLOCK_REMOVE_INTERVAL;
+var BLOCK_REMOVE_TIMEOUT;
 var lastUrlNormalized = null;
 function normalizeUrl(url) {
   const u = new URL(url);
@@ -220,21 +221,22 @@ function normalizeUrl(url) {
   return u.pathname + "?" + u.searchParams.toString();
 }
 
-async function REMOVE_MODS() {
+ function REMOVE_MODS() {
+  const modGrid = document.querySelector("div.mods-grid");
+  if (!modGrid) return;
+
   const currentNormalized = normalizeUrl(window.location.href);
 
   if (!lastUrlNormalized) {
+    
     lastUrlNormalized = currentNormalized;
     return;
   }
 
-  const modGrid = document.querySelector("div.mods-grid");
-  if (!modGrid) return;
-
-  const mods = modGrid.querySelectorAll("div[INFINTE_SCROLL_ITEM]");
 
   if (currentNormalized !== lastUrlNormalized) {
 
+  const mods = modGrid.querySelectorAll("div[INFINTE_SCROLL_ITEM]");
     mods.forEach((mod, index) => {
         mod.style.display = "none";
         mod.remove();
@@ -242,7 +244,8 @@ async function REMOVE_MODS() {
     });
 
     lastUrlNormalized = currentNormalized;
-  }
+  
+}
 }
 
 
@@ -282,8 +285,8 @@ async function GENERATE_INFINITE_SCROLL_MODS () {
       FETCH_BUSY = false
       return
     }
-    clearInterval(BLOCK_REMOVE_INTERVAL)
-BLOCK_REMOVE_INTERVAL=setInterval(async ()=>{await REMOVE_MODS();},20);
+    clearTimeout(BLOCK_REMOVE_TIMEOUT)
+BLOCK_REMOVE_TIMEOUT=setInterval(  ()=>{ REMOVE_MODS();},100);
     console.warn(
       `CARREGANDO PÁGINA ${currentPage} | OFFSET ${offset} | MaxPage ${maxPage} | gameName ${gameName} | timeRange ${timeRange} | sortDirection ${sortDirection} | Categories ${categories}`
     )
@@ -293,12 +296,17 @@ BLOCK_REMOVE_INTERVAL=setInterval(async ()=>{await REMOVE_MODS();},20);
 
     if (OnlyAdultContent == false || OnlyAdultContent == 'false') {
       adultContentFilter = [{ op: 'EQUALS', value: false }]
-    } else if (ShowAdultContent == true || ShowAdultContent == 'true') {
+    }else if(OnlyAdultContent == true || OnlyAdultContent == 'true') {
+      adultContentFilter = [{ op: 'EQUALS', value: true }]
+    } 
+    
+     if (ShowAdultContent == false || ShowAdultContent == 'false') {
+      adultContentFilter = [{ op: 'EQUALS', value: false }]
+    } else if(ShowAdultContent == true || ShowAdultContent == 'true') {
       adultContentFilter = [{ op: 'EQUALS', value: true }]
     } else {
       adultContentFilter = []
     }
-
     const variables = {
       count: 20,
       offset,
@@ -404,7 +412,6 @@ BLOCK_REMOVE_INTERVAL=setInterval(async ()=>{await REMOVE_MODS();},20);
         }
       ]
     }
-
     const response = await fetch('https://api-router.nexusmods.com/graphql', {
       method: 'POST',
       headers: {

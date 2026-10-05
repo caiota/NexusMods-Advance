@@ -1,4 +1,4 @@
-async function SELECTED_TAB() {
+ function SELECTED_TAB() {
     try {
         if (document.querySelector("ul.modtabs li a.selected") && last_modTab != document.querySelector("ul.modtabs li a.selected").closest("li").id.replace("mod-page-tab-", "")) {
             current_modTab = document.querySelector("ul.modtabs li a.selected").closest("li").querySelector("a span").textContent.toLocaleLowerCase();

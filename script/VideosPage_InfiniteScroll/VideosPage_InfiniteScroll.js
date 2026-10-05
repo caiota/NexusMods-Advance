@@ -118,7 +118,7 @@ function normalizeUrl(url) {
   return u.pathname + "?" + u.searchParams.toString();
 }
 
-async function REMOVE_VIDEO() {
+ function REMOVE_VIDEO() {
   const currentNormalized = normalizeUrl(window.location.href);
 
   if (!lastUrlNormalized) {
@@ -174,7 +174,7 @@ async function GENERATE_INFINITE_SCROLL_VIDEOS () {
       return
     }
      clearInterval(BLOCK_REMOVE_INTERVAL)
-BLOCK_REMOVE_INTERVAL=setInterval(async ()=>{await REMOVE_VIDEO();},20);
+BLOCK_REMOVE_INTERVAL=setInterval( ()=>{ REMOVE_VIDEO();},20);
 
     if(currentPage==2&&offset==20){
       offset=40;

@@ -68,14 +68,68 @@ function findGameById(gameIDE) {
     }
     return null; // Retorna null se não encontrar o URL alvo
 }
+function GET_GAME_FROM_IMAGE_URL(url) {
+
+    try {
+
+        const parsedUrl = new URL(url);
+
+        const parts = parsedUrl.pathname
+            .split('/')
+            .filter(Boolean);
+
+        const imagesIndex = parts.indexOf('images');
+
+        if (imagesIndex === -1 || !parts[imagesIndex + 1]) {
+            return null;
+        }
+
+        return parts[imagesIndex - 1];
+
+    } catch (e) {
+
+        console.error("Erro ao extrair jogo da URL:", e);
+        return null;
+
+    }
+}
+
+
+function GET_IMAGE_ID_FROM_URL(url) {
+
+    try {
+
+        const parsedUrl = new URL(url);
+
+        const parts = parsedUrl.pathname
+            .split('/')
+            .filter(Boolean);
+
+        const imagesIndex = parts.indexOf('images');
+
+        if (
+            imagesIndex === -1 ||
+            !parts[imagesIndex + 1]
+        ) {
+            return null;
+        }
+
+        return parts[imagesIndex + 1];
+
+    } catch (e) {
+
+        console.error("Erro ao extrair ID da imagem:", e);
+        return null;
+
+    }
+}
 function findGameIdByName(GameName) {
-    console.log("PROCURANDO POR " + GameName)
     if(GameName=="site"){
         GameName="Modding Tools"
     }
     if (GAMES.length > 0) {
         for (let i = 0; i < GAMES.length; i++) {
-            if (GameName == GAMES[i].name) {
+            if (GameName == GAMES[i].name || GameName == GAMES[i].domainName) {
                 return GAMES[i].id;
             }
         }
@@ -91,11 +145,10 @@ function css(selector, styles) {
   Object.assign(el.style, styles)
 }
 function fingGameIDBy_DomainName(gameIDE) {
-    console.log(GAMES.length, gameIDE)
     if (GAMES.length > 0) {
         for (let i = 0; i < GAMES.length; i++) {
-            if (gameIDE == GAMES[i].domain_name) {
-                console.log(GAMES[i]);
+            if (   gameIDE == GAMES[i].domain_name ||
+                gameIDE == GAMES[i].domainName) {
                 return GAMES[i].id;
             }
         }
@@ -109,7 +162,7 @@ function fingGameNameByID(gameIDE) {
     if (GAMES.length > 0) {
         for (let i = 0; i < GAMES.length; i++) {
             if (gameIDE == GAMES[i].id) {
-                return GAMES[i].domain_name;
+                return GAMES[i].domain_name ?? GAMES[i].domainName;
             }
         }
     } else {
@@ -272,9 +325,9 @@ function findIdBydomainName() {
 }
 
 
-function getGameId(SITE_URL) {
+function getGameId(SITE_URLz) {
     try {
-        const url = new URL(SITE_URL);
+        const url = new URL(SITE_URLz);
         const parts = url.pathname.split('/').filter(Boolean);
 
         // Esperado: ["games", "finalfantasy14", "mods"]
@@ -309,7 +362,7 @@ function findNameByDomainName(targetUrl) {
     return null; // Retorna null se não encontrar o URL alvo
 }
 
-async function extrairID(url) {
+ function extrairID(url) {
     const urlSemParametros = url.split('?')[0];
     const regex = /\/(\d+)(\/|$)/;
     const match = urlSemParametros.match(regex);
@@ -317,6 +370,13 @@ async function extrairID(url) {
         return null;
     }
     return match ? match[1] : null;
+}
+ function extrairIDColecao(url) {
+    const urlSemParametros = url.split('?')[0];
+    const regex = /\/collections\/([^/]+)(\/|$)/;
+    const match = urlSemParametros.match(regex);
+
+    return match ? match[1] : "0";
 }
 async function EXEC_ONCE(key, fn, delay) {
     if (timeoutMap[key]) {
@@ -333,7 +393,7 @@ async function MOD_ID_FROMURL(url) {
     const match = urlSemParametros.match(regex);
     return match ? match[1] : null;
 }
-async function ON_MOD_PAGES(url) {
+ function ON_MOD_PAGES(url) {
     const modPagePatterns = [
         "/mods/updated",
         "/mods/trending",
@@ -401,6 +461,7 @@ function startDragging(e) {
       if (modPreview_element) {
         modPreview_element.style.left = (e.clientX - offsetX) + 'px';
         modPreview_element.style.top = (e.clientY - offsetY) + 'px';
+        SYNC_THUMB_STRIP_POSITION();
       }
       if (modFiles_element) {
         modFiles_element.style.left = (e.clientX - offsetX) + 'px';
@@ -413,6 +474,26 @@ function startDragging(e) {
     isDragging = false;
   }
   
+ function QUERY_ALL_WITH_SHADOW_ROOTS(selector, root = document) {
+  const results = [];
+
+  function scan(currentRoot) {
+
+    results.push(...currentRoot.querySelectorAll(selector));
+
+    const elements = currentRoot.querySelectorAll("*");
+
+    for (const element of elements) {
+      if (element.shadowRoot) {
+        scan(element.shadowRoot);
+      }
+    }
+  }
+
+  scan(root);
+
+  return results;
+}
   function isTextField(element) {
     if(!element){
         return false;
@@ -452,7 +533,6 @@ chrome.runtime.sendMessage(
           function (response) {
             if (response && response.success) {
             GAMES=response.data;
-            console.log(GAMES)
             console.log("Loaded "+GAMES.length+" Games from NexusMods")
             }
             else if(response.success==false){
@@ -461,4 +541,51 @@ chrome.runtime.sendMessage(
             }
           }
         );
+}
+function GET_GAME_FROM_NEXUS_URL(url) {
+    try {
+
+        const parsedUrl = new URL(url);
+        const parts = parsedUrl.pathname.split('/').filter(Boolean);
+
+        const typeIndex =
+            parts.indexOf('images') !== -1
+                ? parts.indexOf('images')
+                : parts.indexOf('videos');
+
+        if (typeIndex === -1 || !parts[typeIndex - 1]) {
+            return null;
+        }
+
+        return parts[typeIndex - 1];
+
+    } catch (e) {
+
+        console.error("Erro ao extrair jogo da URL:", e);
+        return null;
+    }
+}
+
+function GET_ID_FROM_NEXUS_URL(url) {
+    try {
+
+        const parsedUrl = new URL(url);
+        const parts = parsedUrl.pathname.split('/').filter(Boolean);
+
+        const typeIndex =
+            parts.indexOf('images') !== -1
+                ? parts.indexOf('images')
+                : parts.indexOf('videos');
+
+        if (typeIndex === -1 || !parts[typeIndex + 1]) {
+            return null;
+        }
+
+        return parts[typeIndex + 1];
+
+    } catch (e) {
+
+        console.error("Erro ao extrair ID da URL:", e);
+        return null;
+    }
 }

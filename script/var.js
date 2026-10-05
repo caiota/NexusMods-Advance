@@ -36,7 +36,6 @@ var maxPages1 = 1;
 var maxPages2 = 1
 var lastModPopID = 0;
 var hiddenInput;
-let Ignore_Requirements_maxTry = 90;
 
 var translate_strings = {};
 var options = [];

@@ -1,4 +1,4 @@
-async function YoutubeEnlarger() {
+ function YoutubeEnlarger() {
     if (options['largerYoutubeVideos'] == true) {
         const videos = document.querySelectorAll("div.youtube_container iframe:not([Enlarged])");
         for (let i = 0; i < videos.length; i++) {

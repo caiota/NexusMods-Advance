@@ -1,4 +1,4 @@
-async function FLOATING_COMMENT_OPTIONS() {
+ function FLOATING_COMMENT_OPTIONS() {
     try {
          const FLOATING_BOX = document.querySelector("div[class='wysibb-text-editor wysibb-body']:not([BIG_EDITOR])");
             if(FLOATING_BOX){

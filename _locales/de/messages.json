@@ -68,10 +68,10 @@
     "message": "Schaltfläche für Mod Dateien-Popup auf Mod Blöcken anzeigen",
     "description": "Zeigt eine Schaltfläche „Herunterladen“ in Mod-Blöcken auf den Hauptseiten der Site an, um die Mod-Dateien zum Download in einem Popup anzuzeigen. Verwende ESC, um das Popup zu schließen.."
   },
-  "button_infiniteScroll": {
-    "message": "Unendliches Scrollen Aktivieren",
-    "description": "Lädt automatisch den Inhalt der nächsten Seite, wenn Sie sich dem Ende der aktuellen Seite nähern, wodurch die Navigation unbegrenzt und schneller wird. Ersetzt die Site-Seite und funktioniert auf fast allen Seiten!"
-  },
+ "button_infiniteScroll": {
+"message": "Unendliches Scrollen aktivieren",
+"description": "Lädt automatisch den Inhalt der nächsten Seite, sobald Sie sich dem Ende der aktuellen Seite nähern. So können Sie weiterstöbern, ohne jede Seite einzeln anklicken zu müssen. Funktioniert auf den Seiten „Mods“, „Bilder“, „Videos“ und „Beiträge“ der Mods-Seite."
+},
   "remove_RequerimentsTab": {
     "message": "Registerkarte „Anforderungen“ in Mod Beschreibungen entfernen (nicht empfohlen))",
     "description": "Entfernt die Registerkarte „Anforderungen“ aus der Beschreibungsregisterkarte beim Anzeigen eines Mods. Es wird nicht empfohlen, diese Option zu verwenden, da Mods ohne ordnungsgemäß installierte Anforderungen nicht ordnungsgemäß funktionieren.."
@@ -95,6 +95,14 @@
   "remove_HideModCollections": {
     "message": "Entferne den Reiter „Sammlungen“ aus der Mod-Beschreibung.",
     "description": "Beim Anzeigen eines Mods sollte der Reiter „Sammlungen“ aus dem Beschreibungsreiter entfernt werden."
+  },
+  "remove_HideModsUsingThisModTab": {
+    "message": "Entferne den Reiter „Mods, die diesen Mod verwenden“ aus der Mod-Beschreibung.",
+    "description": "Beim Anzeigen eines Mods sollte der Reiter „Mods, die diesen Mod verwenden“ aus dem Beschreibungsreiter entfernt werden."
+  },
+  "OutdatedModWarning": {
+    "message": "Dieser Mod wurde seit Deinem letzten Download aktualisiert!",
+    "description":"Dieser Mod wurde seit über 5 Monaten nicht mehr aktualisiert!"
   },
   "hide_StickyPosts": {
     "message": "Angeheftete Beiträge im Beiträge Tab der Mods automatisch ausblenden",
@@ -136,6 +144,10 @@
     "message": "Umgehe das Popup mit den Mod Anforderungen und klicke automatisch auf die Schaltfläche „Langsamer Download“ des Mods",
     "description": "Diese Funktion überspringt das Mod-Anforderungs-Popup und klickt automatisch auf die Schaltfläche „Langsamer Download“. Anschließend geht es basierend auf dem Verlauf eine Seite zurück, was Zeit spart. Diese Funktion funktioniert auch für Premium-Benutzer!"
   },
+  "autoclick_SlowDownload_Alert": {
+    "message":"Automatisches Klicken auf die Download-Schaltfläche: Um zu verhindern, dass die Erweiterung den Download und das Mod Organizer/Vortex-Popup unterbricht, klicken Sie diesmal manuell auf die Schaltfläche „Langsamer Download“, damit Mod Organizer/Vortex korrekt funktioniert.",
+    "description":"Vielen Dank! Ab sofort funktioniert die Funktion korrekt und automatisch."
+  },
   "mousePopup": {
     "message": "Beschreibung in einem Popup anzeigen, wenn der Mauszeiger über einen Mod-Link fährt",
     "description": "Lädt und zeigt die Beschreibung des Mods, über den Sie mit der Maus fahren, in einem Popup an. Verwenden Sie ESC, um das Popup zu schließen, und Strg+Mausrad, um die Größe zu vergrößern oder zu verkleinern."
@@ -144,6 +156,16 @@
     "message": "Artikel in einem Popup anzeigen, wenn der Mauszeiger über einen Artikel-Link fährt",
     "description": "Lädt und zeigt den Artikel des Links in einem Popup an. Verwenden Sie ESC, um das Popup zu schließen, und Strg+Mausrad, um die Größe zu vergrößern oder zu verkleinern."
   },
+  "CollectionsPopup": {
+    "message": "Sammlungen in einem Popup anzeigen, wenn der Mauszeiger über einen Sammlungs-Link fährt",
+    "description": "Lädt und zeigt die Sammlung des Links in einem Popup an. Verwenden Sie ESC, um das Popup zu schließen."
+  },
+  "modLoading_Message":{
+    "message":"Deine Dateien werden gerade aktualisiert, sie werden hier in ein paar Sekunden erscheinen :D"
+  },
+  "popUpClose_Notification":{
+  "message":"Sie können die ESC-Taste verwenden, um dieses Fenster zu schließen"
+},
   "mouseProfilePopup": {
     "message": "Profile in einem Popup anzeigen, wenn der Mauszeiger über einen Benutzerprofil Link bewegt wird",
     "description": "Wird geladen und zeigt das Benutzerprofil in einem Popup an, über das Du mit der Maus fährst."
@@ -390,8 +412,11 @@
   "description": "Blendet externe Bilder und Videos im 'Description'-Tab sowie im 'Files'-Tab von Mods aus."
 },
 "EndorseAndVote": {
-  "message": "Gefällt dir die Erweiterung?",
-  "description": "Wenn dir die Erweiterung gefällt, vergiss nicht, sie auch zu <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>unterstützen</a>! Das hilft dabei, die Erweiterung bekannter zu machen und motiviert mich, weiter daran zu arbeiten! Danke :D"
+    "message": "Gefällt dir NexusMods Advance?",
+    "description": "Wenn es dir gefällt, vergiss nicht, es zu <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Endorsen</a>! Das hilft anderen, das Projekt zu finden, und motiviert mich, weiter daran zu arbeiten. Wenn du es zusätzlich unterstützen möchtest, hilft auch eine <a id='donateEndorseLink' href='#' target='blank_'>kleine Spende</a> sehr. Danke :D"
+},
+"firstRunWelcome": {
+    "message": "<div class=\"nma-first-run\"><h2>Willkommen bei NexusMods Advance!</h2><p>NexusMods Advance ist eine umfassende Erweiterung, die entwickelt wurde, um deine Erfahrung auf der NexusMods-Website zu personalisieren und zu verbessern!</p><div class=\"nma-first-run-features\"><span>Verbesserte Downloads</span><span>Benachrichtigungen für deine Mods</span><span>Einfachere Navigation</span><span>Und viele weitere Anpassungsmöglichkeiten!</span></div><br><button id=\"nma-first-run-ready\">Weiter</button></div>"
 },
   "fastDownloadTranslate_tip": {
     "message": "Klicken Sie, um diese Übersetzung schnell herunterzuladen"
@@ -518,8 +543,8 @@
 
 },
 "transformTextLinks": {
-  "message": "Aktiviere die Umwandlung von Text in Links in Mod-Kommentaren",
-  "description": "Auf den Mod-Seiten, im Beitragsbereich, werden Texte, die Links sind, automatisch in anklickbare Links umgewandelt."
+  "message": "Umwandlung von Text-URLs in anklickbare Links aktivieren",
+  "description": "Wandelt Text-URLs automatisch in anklickbare Links um. Nützlich, wenn jemand einen Link von einer anderen Seite als Text postet — er wird dann in einen anklickbaren Link umgewandelt."
 },
 "NexusMenus_MouseHover": {
   "message": "Oberes Seitenmenü ohne Klick aktivieren",
@@ -533,7 +558,14 @@
     "message": "Hintergrundbild am oberen Rand der Seite ausblenden",
     "description": "Blendet das Hintergrundbild der Seite aus, wodurch die Seite etwas dunkler wirkt"
   },
-
+"ShowDateOnImages":{
+    "message":"Upload-Datum in Bildblöcken anzeigen",
+    "description":"Zeigt das Upload-Datum des Beitrags in Bildblöcken auf der gesamten Website neben der Anzahl der Aufrufe an (Format TT/MM/JJJJ - HH:MM:SS im 24-Stunden-Format)"
+  },
+  "ShowModSearch_Bar":{
+  "message":"Suchleiste auf Mod-Seiten anzeigen",
+  "description":"Fügt eine Suchleiste nach Titel auf den Mod-Seiten der Spiele hinzu, sie aktualisiert den Inhalt automatisch während der Eingabe"
+  },
   "Prevent_TrackOnDownload": {
     "message": "Keine Dateien zu Ihrer Liste hinzufügen, wenn Sie auf Download-Schaltflächen klicken",
     "description": "Verhindert, dass die Erweiterung Dateien zu Ihrer Liste hinzufügt, wenn Sie auf eine der Download-Schaltflächen auf der Mod-Dateien-Seite klicken. Nur der orangefarbene Button zum Hinzufügen von Dateien zu NexusMods Advance wird funktionieren."

@@ -1,6 +1,7 @@
 body {
     background-color:#3a3939!important;
-    color:#dddada!important
+    color:#dddada!important;
+    background: radial-gradient(62.11% 62.11% at 50.52% 22.16%, rgb(0 0 0 / 48%) 0%, rgb(211 44 44 / 0%) 100%);
     }
     
     a {

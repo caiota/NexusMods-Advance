@@ -3,10 +3,10 @@ var MESSENGER_HANDLED=false;
 const msgwidth = 510;
 const msgheight = 800;
 var leftPop,topPop;
-async function NEW_TAB_MESSENGER_HANDLER(){
+ function NEW_TAB_MESSENGER_HANDLER(){
     if(MESSENGER_HANDLED==false&&options['NewTab_Messenger']==true){
         MESSENGER_HANDLED=true
-const anchor = document.querySelector("div.nav-interact-buttons, button#profile-menu").parentElement.querySelector("a[aria-label='View messages'],a[class='nav-interact rj-messages']");
+const anchor = document.querySelector("div.nav-interact-buttons, button#profile-menu")?.parentElement.querySelector("a[aria-label='View messages'],a[class='nav-interact rj-messages']");
 if(anchor){
     anchor.addEventListener("click",(e)=>{MessengerClick(e)})
 }

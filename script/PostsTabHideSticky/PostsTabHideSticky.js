@@ -1,4 +1,4 @@
-async function STICKY_POSTS(){
+ function STICKY_POSTS(){
     try {
       if (options['HideStickyPosts'] === true && current_modTab === "posts") {
         const stickys = document.querySelectorAll("li.comment-sticky");
@@ -17,6 +17,6 @@ async function STICKY_POSTS(){
       }
     } catch (e) {
       console.error("Erro ao processar posts fixos:", e);
-      console.error("NexusMods Advance Error:" + E);
+      console.error("NexusMods Advance Error:" + e);
     }
   }

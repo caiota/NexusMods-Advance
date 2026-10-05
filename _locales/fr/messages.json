@@ -62,10 +62,10 @@
     "message": "Afficher le bouton Fichiers dans les blocs de mods",
     "description": "Affiche un bouton 'Télécharger' dans les blocs de mods pour voir les fichiers en popup. Utilisez ESC pour fermer."
   },
-  "button_infiniteScroll": {
-    "message": "Activer la navigation infinie",
-    "description": "Charge automatiquement le contenu de la page suivante en approchant de la fin de la page actuelle, rendant la navigation infinie et plus rapide. Remplace la pagination du site !"
-  },
+ "button_infiniteScroll": {
+"message": "Activer le défilement infini",
+"description": "Charge automatiquement le contenu de la page suivante lorsque vous approchez de la fin de la page actuelle, vous permettant ainsi de continuer à naviguer sans avoir à cliquer manuellement sur chaque page. Fonctionne sur les pages Mods, Images, Vidéos et Publications de la page Mods."
+},
   "remove_RequerimentsTab": {
     "message": "Supprimer l'onglet Prérequis dans les descriptions de mods (Déconseillé)",
     "description": "Supprime l'onglet Prérequis de la description d'un mod. Non recommandé car les mods sans prérequis installés ne fonctionneront pas correctement."
@@ -89,6 +89,14 @@
   "remove_HideModCollections": {
     "message": "Supprimer l'onglet Collections dans les descriptions de mods",
     "description": "Supprime l'onglet Collections de la description d'un mod."
+  },
+  "remove_HideModsUsingThisModTab": {
+    "message": "Supprimer l'onglet 'Mods utilisant ce mod' dans les descriptions de mods",
+    "description": "Supprime l'onglet 'Mods utilisant ce mod' de la description d'un mod."
+  },
+  "OutdatedModWarning": {
+    "message": "Ce mod a été mis à jour depuis votre dernier téléchargement !",
+    "description":"Ce mod n'a pas été mis à jour depuis plus de 5 mois !"
   },
   "hide_StickyPosts": {
     "message": "Masquer automatiquement les posts épinglés dans l'onglet Posts",
@@ -130,6 +138,10 @@
     "message": "Ignorer la popup de prérequis et cliquer automatiquement sur 'Téléchargement lent'",
     "description": "Passe la popup de prérequis et clique automatiquement sur le bouton 'Téléchargement lent', vous faisant gagner du temps."
   },
+  "autoClick_SlowDownload_Alert": {
+    "message":"Auto Click Download Button: Pour éviter que l'extension n'interrompe le téléchargement et la popup de Mod Organizer/Vortex, cliquez manuellement sur le bouton 'Téléchargement lent' cette fois-ci afin que Mod Organizer/Vortex fonctionne correctement.", 
+    "description":"Merci ! À partir de maintenant, la fonction fonctionnera correctement et automatiquement."
+  },
   "mousePopup": {
     "message": "Afficher la description en popup au survol d'un lien de mod",
     "description": "Charge et affiche la description du mod en popup lorsque vous survolez un lien. Utilisez ESC pour fermer."
@@ -138,6 +150,16 @@
     "message": "Afficher les articles en popup au survol d'un lien d'article",
     "description": "Charge et affiche l'article en popup lorsque vous survolez un lien. Utilisez ESC pour fermer."
   },
+  "CollectionsPopup": {
+    "message": "Afficher les collections en popup au survol d'un lien de collection",
+    "description": "Charge et affiche la collection en popup lorsque vous survolez un lien. Utilisez ESC pour fermer."
+  },
+  "modLoading_Message":{
+    "message":"Vos fichiers sont en cours de mise à jour, ils apparaîtront ici dans quelques secondes :D"
+  },
+  "popUpClose_Notification":{
+  "message":"Vous pouvez utiliser la touche ÉCHAP pour fermer cette fenêtre"
+},
   "mouseProfilePopup": {
     "message": "Afficher les profils en popup au survol d'un lien de profil",
     "description": "Charge et affiche le profil utilisateur en popup lorsque vous survolez un lien de profil."
@@ -386,10 +408,13 @@
     "message": "Masquer les images et vidéos dans les onglets Description et Fichiers",
     "description": "Masque les images et vidéos externes dans les onglets 'Description' et 'Fichiers' des mods."
   },
-  "EndorseAndVote": {
-    "message": "Vous aimez l'extension ?",
-    "description": "Si vous aimez l'extension, n'oubliez pas de l'<a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Approuver</a> ! Cela aide à la faire connaître et me motive à continuer. Merci :D"
-  },
+"EndorseAndVote": {
+    "message": "Vous aimez NexusMods Advance ?",
+    "description": "Si vous l'appréciez, n'oubliez pas de l'<a href='https://www.nexusmods.com/site/mods/1018?NMA_Endorse=true' target='blank_'>Approuver !</a> Cela aide d'autres personnes à découvrir le projet et me motive à continuer à travailler dessus. Si vous souhaitez le soutenir davantage, même un <a id='donateEndorseLink' href='#' target='blank_'>Petit Don</a> aide beaucoup. Merci :D"
+},
+"firstRunWelcome": {
+    "message": "<div class=\"nma-first-run\"><h2>Bienvenue sur NexusMods Advance !</h2><p>NexusMods Advance est une extension complète conçue pour personnaliser et améliorer votre expérience sur le site NexusMods !</p><div class=\"nma-first-run-features\"><span>Téléchargements améliorés</span><span>Notifications pour vos mods</span><span>Navigation simplifiée</span><span>Et bien plus de personnalisations !</span></div><br><button id=\"nma-first-run-ready\">Continuer</button></div>"
+},
   "fastDownloadTranslate_tip": {
     "message": "Cliquer pour télécharger rapidement cette traduction"
   },
@@ -512,10 +537,10 @@
     "message": "Activer l'effet de fondu sur le site",
     "description": "Applique un léger effet de fondu lors du chargement et de la navigation entre les pages."
   },
-  "transformTextLinks": {
-    "message": "Convertir les textes en liens dans les commentaires de mods",
-    "description": "Dans les posts des mods, convertit automatiquement les textes qui sont des liens en liens cliquables."
-  },
+"transformTextLinks": {
+  "message": "Activer la conversion des URL textuelles en liens cliquables",
+  "description": "Convertit automatiquement les URL textuelles en liens cliquables. Utile lorsqu'une personne publie le lien d'un autre site sous forme de texte — il sera transformé en lien cliquable."
+},
   "NexusMenus_MouseHover": {
     "message": "Activer les menus de navigation au survol",
     "description": "Active les menus NexusMods en haut de page sans avoir à cliquer, juste en survolant avec la souris."
@@ -527,6 +552,14 @@
   "Hide_CurrentGame_Image": {
     "message": "Masquer l'image de fond en haut du site",
     "description": "Masque l'image de fond du site, le rendant un peu plus sombre."
+  },
+  "ShowDateOnImages":{
+    "message":"Afficher la date de téléversement dans les blocs d'images",
+    "description":"Affiche la date de téléversement de la publication dans les blocs d'images sur tout le site à côté du nombre de vues (format JJ/MM/AAAA - HH:MM:SS au format 24 heures)"
+  },
+  "ShowModSearch_Bar":{
+  "message":"Afficher la barre de recherche sur les pages de mods",
+  "description":"Ajoute une barre de recherche par titre sur les pages de mods des jeux, elle met à jour le contenu automatiquement au fur et à mesure de la saisie"
   },
   "Prevent_TrackOnDownload": {
     "message": "Ne pas ajouter les fichiers à la liste de suivi lors du clic sur Télécharger",

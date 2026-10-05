@@ -1,3 +1,4 @@
+
 #Background_Close_Clickable {
     width: 100%;
     height: 100%;
@@ -8,7 +9,6 @@
     left: 0;
     display: flex;
     justify-content: center;
-    /* Centraliza horizontalmente */
     align-items: center;
 }
 
@@ -426,13 +426,6 @@ letter-spacing: var(--tracking-wide);
         transform: rotate(360deg);
     }
 }
-.noPadding {
-    padding: 0 !important;
-    max-width: 98vw !important;
-    width: 98vw !important;
-    margin-left: auto;
-    margin-right: auto;
-}
 #ImageView {
     width: 100%;
     height: 100%;
@@ -479,14 +472,13 @@ letter-spacing: var(--tracking-wide);
     -webkit-box-direction: normal;
     -webkit-box-orient: horizontal;
     -webkit-box-pack: center;
-    border-bottom-right-radius: 0;
-    border-radius: 20px;
-    border-top-right-radius: 0;
     cursor: -webkit-grab;
     cursor: grab;
     left: 0;
     resize: both;
     top: 60%;
+    border-radius: 20px 20px 0px 0px;
+    border-bottom: 0px;
 }
 
 #divDesc {
@@ -603,12 +595,31 @@ max-height: 100% !important;
     overflow-y: auto !important;
 }
 
+#modPopup #descriptionContent div.modhistory,#modPopup #descriptionContent a {
+
+    color: #ff894e;
+    font-weight: bold;
+
+
+}
 #modPopup>#descriptionContent>iframe {
     display: block;
     overflow: hidden;
     width: 100%;
     height: 100%;
     padding-top: 30px;
+}
+
+
+#modPopup #descriptionContent div.img-wrapper, a.inline-gallery div.img-wrapper {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+canvas.gif-canvas{
+    clear: both;
+    margin-left: auto;
+    margin-right: auto;
 }
 #modPopup .info-content{
     background:rgb(221, 81, 0);
@@ -702,7 +713,7 @@ div.viewMoreContainer:hover .popupBox_Extension {
     text-align: center;
     color: #fff;
     font-size: .875rem;
-    background-color: var(--color-zinc-800);
+    background-color:rgb(36, 123, 182);
     border-radius: 5px;
     max-width: 240px;
 }
@@ -876,6 +887,92 @@ div.viewMoreContainer:hover .popupBox_Extension {
     #FavoritesPanel.active {
       right: 0;
     }
+
+#nma-better-search {
+    width: 100%;
+    box-sizing: border-box;
+
+    margin: 32px 0;
+
+    position: sticky;
+    z-index: 50;
+
+    transition:
+        background-color 0.2s ease,
+        width 0.2s ease;
+}
+
+#nma-better-search.nma-better-search-sticky {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  margin-top: 0;
+    margin-bottom: 0;
+     
+    background: rgb(15, 15, 16) !important;
+    border:0;
+    border-bottom: 2px #494545 solid;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#nma-better-search.nma-better-search-sticky .nma-better-search-input {
+    
+    background: rgb(15, 15, 16) !important;
+    border:0;
+    border-bottom: 2px #494545 solid;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.nma-better-search-input {
+    width: 100%;
+    min-height: 72px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 32px;
+    background: #1d1d21;
+    border: 1px solid #3a3a40;
+
+    border-radius: 8px;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.nma-better-search-input:focus-within {
+    border-color: #1568ff;
+    background: #101f31;
+}
+
+.nma-better-search-input input {
+    width: 100%;
+    max-width: 900px;
+
+    border: 0;
+    outline: 0;
+    background: transparent;
+
+    color: #ffffff;
+
+    font-size: 22px;
+    font-weight: 500;
+
+    text-align: center;
+}
+
+.nma-better-search-input input::placeholder {
+    color: #ffffff99;
+}
+
+
+
 #modTable {
     height: 60px;
     padding: 10px;
@@ -895,10 +992,15 @@ div.viewMoreContainer:hover .popupBox_Extension {
 #imgPopupView {
     position: fixed;
     z-index: 999999;
+
     border: 5px solid red;
     background-color: #3f3e3e;
+
     max-height: 60%;
     max-width: 40%;
+
+    opacity: 1;
+    transition: opacity 0.15s ease-in-out;
 }
 
 #imgPopupView:hover {
@@ -910,7 +1012,13 @@ div.viewMoreContainer:hover .popupBox_Extension {
     left: 0 !important;
     top: 20px !important;
 }
+.MediaDate_Element{
+    margin-left: 5px;
+}
 
+.MediaDate_Element i{
+margin-right: 5px;
+}
 .mfp-content>.col-1-1 .clearfix:first-of-type,
 .mfp-content>.popup-mod-requirements:first-of-type {
     max-height: 95vh;
@@ -942,8 +1050,16 @@ div.viewMoreContainer:hover .popupBox_Extension {
     margin-right: 5px;
     transform: rotate(-45deg);
 }
+#InjectChangelog {
+    opacity: 0;
+    transition: opacity 0.9s ease;
+}
 
-#InjectChangelog>div {
+#InjectChangelog.fade-in {
+    opacity: 1;
+}
+
+#InjectChangelog > div {
     margin-top: 2%;
     max-width: 100% !important;
 }
@@ -964,6 +1080,53 @@ li.nexusAdvance_PostLI i {
     font-size: 16px;
     margin-right: 3px;
 }
+#modPreviewThumbs {
+    position: absolute;
+    display: none;
+    gap: 6px;
+    padding: 8px;
+    background-color: #444;
+    border: 3px solid;
+    border-top: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 99998;
+    overflow-y: hidden;
+    overflow-x:auto;
+    scrollbar-width: thin;
+    box-sizing: border-box;
+}
+
+#modPreviewThumbs::-webkit-scrollbar {
+    height: 6px;
+}
+
+#modPreviewThumbs::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.modPreviewThumb {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.15s ease, border-color 0.15s ease;
+}
+
+.modPreviewThumb:hover {
+    opacity: 1;
+}
+
+.modPreviewThumb-active {
+    border-color: #da8e35;
+    opacity: 1;
+}
+
 
 li.nexusAdvance_PostLI div {
     display: -webkit-box;
@@ -1161,6 +1324,7 @@ div.Advance_gameDetails span {
     display: -ms-flexbox;
     display: flex;
     position: fixed;
+    max-width: 60%;
     z-index: 9999;
     padding: 10px 15px;
     font-size: 16px;

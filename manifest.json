@@ -3,13 +3,15 @@
   "name": "__MSG_extensionName__",
   "description": "__MSG_description__",
   "default_locale": "en",
-  "version": "0.26.86",
+  "version": "0.27.2",
   "permissions": [
     "activeTab",
     "tabs",
     "storage",
     "notifications",
     "webNavigation",
+    "alarms",
+    "downloads",
     "declarativeNetRequest",
     "declarativeNetRequestWithHostAccess"
   ],
@@ -29,7 +31,7 @@
       "js": [
         "script/var.js",
         "script/utils.js",
-        "script/NexusMods_SearchOptions/NexusMods_SearchOptions.js",
+        "script/BetterSearch/BetterSearch.js",
         "script/ProfileOptionsOnHover/ProfileOptionsOnHover.js",
         "script/SearchOn_ModRequiringFile/SearchOn_ModRequiringFile.js",
         "script/Button_FavoriteMod/Button_FavoriteMod.js",
@@ -53,11 +55,13 @@
         "script/PostsTabWatcher/PostsTabWatcher.js",
         "script/AutoClickDownloadButton/AutoClickDownloadButton.js",
         "script/GenerateTrackButton/GenerateTrackButton.js",
+        "script/OutdatedModWarning/OutdatedModWarning.js",
         "script/OriginalImageLoader/OriginalImageLoader.js",
         "script/DescriptionTagHideItens/DescriptionTagHideItens.js",
         "script/ScrollToUpdate/ScrollToUpdate.js",
         "script/ChangelogsOnFiles/ChangelogsOnFiles.js",
         "script/MouseArticlePopup/MouseArticlePopup.js",
+        "script/MouseCollectionPopup/MouseCollectionPopup.js",
         "script/FastModTranslates/FastModTranslates.js",
         "script/ViewProfileOnMouse/ViewProfileOnMouse.js",
         "script/MouseDescriptionPopup/MouseDescriptionPopup.js",
@@ -68,6 +72,7 @@
         "script/WiderWebsite/WiderWebsite.js",
         "script/CheckYoutubeFrames/CheckYoutubeFrames.js",
         "script/CustomBlockSize/CustomBlockSize.js",
+        "script/ShowDateOnImages/ShowDateOnImages.js",
         "script/MouseVideoPopup/MouseVideoPopup.js",
         "script/HideMyMods/HideMyMods.js",
         "script/MouseImagePopup/MouseImagePopup.js",
@@ -80,9 +85,7 @@
         "script/RemakeAddModsTab/RemakeAddModsTabList.js",
         "script/PauseExternalGifs/PauseExternalGifs.js",
         "script/FixYoutubeThumbnails/FixYoutubeThumbnails.js",
-        "script/FixArticleEditLink/FixArticleEditLink.js",
         "script/FloatingEditMenu/FloatingEditMenu.js",
-        "script/StickyEditButtons/StickyEditButtons.js",
         "script/nexusmods.js"
       ]
     }

@@ -1,6 +1,8 @@
 body {
     background-color: #070707 !important;
-    color: #dddada !important
+    background:radial-gradient(62.11% 62.11% at 50.52% 22.16%, rgba(0, 68, 255, 0.322) 0%, rgb(211 44 44 / 0%) 100%);
+    color: #dddada !important;
+    
 }
 
 a {
@@ -125,7 +127,8 @@ li.comment {
 
 #Posts time,
 #Bugs time {
-    color: #828585
+    
+        color:white
 }
 
 ol.comment-kids {

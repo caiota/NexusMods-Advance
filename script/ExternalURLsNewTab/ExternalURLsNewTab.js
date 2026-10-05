@@ -1,4 +1,4 @@
-async function EXTERNAL_LINKS_NEWTAB() {
+ function EXTERNAL_LINKS_NEWTAB() {
     try {
         if (options['NewTab_ExternalURL'] === true) {
             const EXTERNAL_LINKS = Array.from(document.querySelectorAll("div#mainContent a:not([NEW_TAB])"))

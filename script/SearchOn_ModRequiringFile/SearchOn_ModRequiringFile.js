@@ -6,23 +6,31 @@ let currentSearchId = 0; // ID para controlar buscas
 let activeChunkTimeout = null; // Para cancelar timeouts ativos
 
 // Otimização: Indexar os dados para busca mais rápida
-async function buildSearchIndex() {
+ function buildSearchIndex() {
     console.log("Processando chunks")
+
     const items = document.querySelectorAll(
         'dl.accordion table.desc-table td.table-require-name'
     );
     
     if (!items.length) return null;
-    
-    return Array.from(items).map(item => ({
+
+   const result = Array.from(items).map(item => {
+
+    const text = item.innerText.toLowerCase();
+
+    return {
         element: item,
-        row: item.closest('tr'),
-        text: item.innerText.toLowerCase(),
-        words: item.innerText.toLowerCase().split(/\s+/).filter(w => w)
-    }));
+        row: item.closest("tr"),
+        text,
+        words: text.split(/\s+/).filter(Boolean)
+    };
+});
+
+return result;
 }
 
-async function Search_RequiringFileTab() {
+ function Search_RequiringFileTab() {
     try {
     let inicio2 = performance.now()
         if (
@@ -40,7 +48,7 @@ async function Search_RequiringFileTab() {
             
             clearSearchCache();
             // Pré-construir o índice quando a aba é carregada
-            requirementsCache = await buildSearchIndex();
+            requirementsCache =  buildSearchIndex();
             
             var Search_1 = document.createElement('input');
             Search_1.setAttribute('type', 'text');

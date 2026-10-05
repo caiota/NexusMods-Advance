@@ -1,4 +1,4 @@
-async function HideMyMods() {
+ function HideMyMods() {
     if (options['HideHiddenMods'] == true && (SITE_URL.indexOf('/users/myaccount?tab=my+files') != -1 || SITE_URL.indexOf('/users/myaccount?tab=files') != -1 || SITE_URL.indexOf('/users/myaccount?tab=other+files') != -1|| SITE_URL.indexOf('/users/myaccount?tab=mods') != -1)) {
         const files = document.querySelectorAll("li.mod-tile");
         if (files.length > 0) {

@@ -1,8 +1,9 @@
+
+var Ignore_Requirements_maxTry = 90;
 const originalAdd = EventTarget.prototype.addEventListener;
 EventTarget.prototype.addEventListener = function (type, listener, opts) {
   if (type === "click" && this.matches?.("a.btn")) {
     const wrapped = function (ev) {
-      console.log("MICROTASK")
       queueMicrotask(IgnoreRequeriments);
       return listener.call(this, ev);
     };
@@ -12,6 +13,7 @@ EventTarget.prototype.addEventListener = function (type, listener, opts) {
 };
 
 async function IgnoreRequeriments(scanMode=false) {
+  
   var requerimentsPopUp = document.querySelector(
     'div.widget-mod-requirements, div.popup-download'
   )
@@ -74,6 +76,7 @@ async function IgnoreRequeriments(scanMode=false) {
         tempWindow = window.open(
           DownloadDetectButton + '&NMA_closeAfterDownload=1'
         )
+        console.warn('DownloadDetectButton', DownloadDetectButton)
         requerimentsPopUp.querySelector('button.mfp-close,button.nxm-modal-close-button').click()
         WindowCloseTimer = setInterval(() => {
           if (!tempWindow || tempWindow.closed) {
@@ -82,19 +85,22 @@ async function IgnoreRequeriments(scanMode=false) {
           }
 
           try {
-            if (tempWindow.location.href.includes('canClose=')) {
+            if (tempWindow.location.href.includes('NMA_closeAfterDownload=')) {
+     alert("TENTANDO FECHAR ABA :D")
               clearInterval(WindowCloseTimer)
               tempWindow.close()
             }
           } catch (e) {}
-        }, 200);
+        }, 2000);
         setTimeout(() => {
-    if (tempWindow && !tempWindow.closed) {
+    if (tempWindow && !tempWindow.closed  && tempWindow.location.href.includes('NMA_closeAfterDownload=')) {
+     alert("TENTANDO FECHAR ABA :D")
         tempWindow.close();
     }
-}, 15000);
+}, 2000);
 
       } else if (DownloadDetectButton.indexOf('tab=files&file_id=') != -1) {
+        console.warn('DownloadDetectButton', DownloadDetectButton)
         tempWindow = window.open(
           DownloadDetectButton + '&NMA_closeAfterDownload=1'
         )
@@ -106,17 +112,19 @@ async function IgnoreRequeriments(scanMode=false) {
           }
 
           try {
-            if (tempWindow.location.href.includes('canClose=')) {
+            if (tempWindow.location.href.includes('NMA_closeAfterDownload=')) {
               clearInterval(WindowCloseTimer)
+     alert("TENTANDO FECHAR ABA :D")
               tempWindow.close()
             }
           } catch (e) {}
-        }, 200)
+        }, 2000)
         setTimeout(() => {
-    if (tempWindow && !tempWindow.closed) {
+    if (tempWindow && !tempWindow.closed && tempWindow.location.href.includes('NMA_closeAfterDownload=')) {
+     alert("TENTANDO FECHAR ABA :D")
         tempWindow.close();
     }
-}, 15000);
+}, 2000);
 
       }
     }
@@ -125,11 +133,11 @@ async function IgnoreRequeriments(scanMode=false) {
       Ignore_Requirements_maxTry--
       if(!scanMode){
       requestAnimationFrame(IgnoreRequeriments);
-      console.log("NADA PARA IGNORAR D:")
+     alert("NADA PARA IGNORAR D:")
       }else{
         setTimeout(() => {
           IgnoreRequeriments(true);
-        }, 1000);
+        }, 100);
       }
     } else {
       Ignore_Requirements_maxTry = 90

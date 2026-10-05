@@ -7,7 +7,7 @@ async function CHECK_YOUTUBEIFRAMES() {
         // Filtra os iframes que contêm 'youtube.com' na URL e têm o parâmetro unlock=1
         const youtubeIframes = Array.from(frames).filter(frame => {
             const url = new URL(frame.src, window.location.href); // Cria um objeto URL com a URL do iframe
-            return url.hostname.includes('youtube.com') && url.searchParams.has('unlock');
+            return (url.hostname.includes('youtube.com')||url.hostname.includes('youtube-nocookie.com')) && url.searchParams.has('unlock');
 
         });
         if (youtubeIframes.length > 0) {
@@ -46,7 +46,7 @@ async function YOUTUBE_IFRAME_LOADER() {
         const iframes = Array.from(document.querySelectorAll('iframe:not([LOADED])'));
 
         for (const iframeContainer of iframes) {
-            if (iframeContainer.src.includes('youtube.com')) {
+            if (iframeContainer.src.includes('youtube.com')||iframeContainer.src.includes('youtube-nocookie.com')) {
                 const frameParent = iframeContainer.closest("div");
 
                 if (frameParent && isVisible(frameParent) && frameParent.style.display!='none') {

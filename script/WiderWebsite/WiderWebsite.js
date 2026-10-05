@@ -1,48 +1,50 @@
-async function WIDER_WEBSITE() {
-    try {
-        if (!options || typeof options.WideWebsite !== 'boolean') return
-mainContent=document.querySelector("div#mainContent div[class*='relative next-container']")
-      || document.querySelector("div#mainContent");
-      
-   BackTopButton=document.querySelector("div#rj-back-to-top");
-  watchMainContent(mainContent => {
-   APPLY_WIDER_TOGGLE(mainContent)
-  })
-    } catch (e) {
-        console.error("NexusMods Advance Error:" + e);
-    }
-}
 var BackTopButton;
-function APPLY_WIDER_TOGGLE(mainContent){
-        if (mainContent) {
-            if (options['WideWebsite']==true&&!mainContent.classList.contains("noPadding")) {
-             
-                mainContent.classList.add("noPadding");
-                console.log("ADICIONANDO")
-            } 
-            else if (options['WideWebsite']==false&&mainContent.classList.contains("noPadding")) {
-             
-                mainContent.classList.remove("noPadding");
-                console.log("REMOVENDO")
+var WIDE_WEBSITE_STYLE = null;
+
+function WIDER_WEBSITE() {
+    try {
+
+        if (!options || typeof options['WideWebsite'] !== 'boolean') {
+            return;
+        }
+        if (options['WideWebsite'] === true) {
+
+            if (!WIDE_WEBSITE_STYLE) {
+
+                WIDE_WEBSITE_STYLE = document.createElement('style');
+                WIDE_WEBSITE_STYLE.id = 'NMA_WideWebsite_CSS';
+
+                WIDE_WEBSITE_STYLE.textContent = `
+                    div#mainContent div[class*='relative next-container'],div#mainContent {
+                        padding: 0 !important;
+                        max-width: 100vw !important;
+                        width: 100% !important;
+                        margin-left: auto;
+                        margin-right: auto;
+                    }
+                `;
+
+                document.documentElement.appendChild(WIDE_WEBSITE_STYLE);
+
+            }
+
+if (/\/mods\/\d+\/edit\//.test(location.pathname)) {
+ const editPanel = document.querySelector("div#mainContent div[style*='--mod-form-width:']");
+if (editPanel) {
+  editPanel.style.removeProperty('--mod-form-width');
+}
+}
+        } else {
+
+            if (WIDE_WEBSITE_STYLE) {
+                WIDE_WEBSITE_STYLE.remove();
+                WIDE_WEBSITE_STYLE = null;
             }
         }
 
-}
-var observer33;
-function watchMainContent(callback) {
-   observer33 = new MutationObserver(() => {
-    const el =
-      document.querySelector("div#mainContent div[class*='relative next-container']")
-      || document.querySelector("div#mainContent")
+        BackTopButton = document.querySelector("div#rj-back-to-top");
 
-    if (el) {
-      observer33.disconnect()
-      callback(el)
+    } catch (e) {
+        console.error("NexusMods Advance Error:", e);
     }
-  })
-
-  observer33.observe(document.documentElement, {
-    childList: true,
-    subtree: true
-  })
 }

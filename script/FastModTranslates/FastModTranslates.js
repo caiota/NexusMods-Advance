@@ -10,7 +10,7 @@ async function FAST_TRANSLATES() {
                     link.style.position = "relative";
                     link.setAttribute("TRANSLATE_MARK", true);
 
-                    const fromMod = await extrairID(link.querySelector("a").href);
+                    const fromMod = extrairID(link.querySelector("a").href);
                     fastTranslateDownload(fromMod, link);
                 }
             }

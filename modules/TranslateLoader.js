@@ -1,4 +1,4 @@
-var MOD_VERSION = '0.26.86';
+var MOD_VERSION = '0.27.2';
 
 async function updateContent(messages) {
 	const elementsToUpdate = [
@@ -46,6 +46,10 @@ async function updateContent(messages) {
 		{ selector: "label[for='DescriptionOnMouse'] div#msgPopup", text: messages.mousePopup.description },
 		{ selector: "label[for='ArticlesOnMouse'] span", text: messages.ArticlesPopup.message },
 		{ selector: "label[for='ArticlesOnMouse'] div#msgPopup", text: messages.ArticlesPopup.description },
+		{ selector: "label[for='CollectionsOnMouse'] span", text: messages.CollectionsPopup.message },
+		{ selector: "label[for='CollectionsOnMouse'] div#msgPopup", text: messages.CollectionsPopup.description },
+		{ selector: "div#modLoading div#modLoading_Message", text: messages.modLoading_Message.message },
+		
 		{ selector: "label[for='ProfileOnMouse'] span", text: messages.mouseProfilePopup.message },
 		{ selector: "label[for='ProfileOnMouse'] div#msgPopup", text: messages.mouseProfilePopup.description },
 		{ selector: "label[for='largerYoutubeVideos'] span", text: messages.LargerYoutube.message },
@@ -70,6 +74,8 @@ async function updateContent(messages) {
 		{ selector: "label[for='HideDonationsTab'] div#msgPopup", text: messages.remove_DonationsTab.description },
 		{ selector: "label[for='HideModCollections'] span", text: messages.remove_HideModCollections.message },
 		{ selector: "label[for='HideModCollections'] div#msgPopup", text: messages.remove_HideModCollections.description },
+		{ selector: "label[for='HideModsUsingThisModTab'] span", text: messages.remove_HideModsUsingThisModTab.message },
+		{ selector: "label[for='HideModsUsingThisModTab'] div#msgPopup", text: messages.remove_HideModsUsingThisModTab.description },
 
 		
 		{ selector: "label[for='HideStickyPosts'] span", text: messages.hide_StickyPosts.message },
@@ -132,9 +138,13 @@ async function updateContent(messages) {
 
 		{ selector: "label[for='Hide_CurrentGame_Image'] span", text: messages.Hide_CurrentGame_Image.message },
 		{ selector: "label[for='Hide_CurrentGame_Image'] div#msgPopup", html: messages.Hide_CurrentGame_Image.description },
+
+		{ selector: "label[for='ShowModSearch_Bar'] span", text: messages.ShowModSearch_Bar.message },
+		{ selector: "label[for='ShowModSearch_Bar'] div#msgPopup", html: messages.ShowModSearch_Bar.description },
 		
-		//{ selector: "label[for='Save_SearchOptions'] span", text: messages.Save_SearchOptions.message },
-		//{ selector: "label[for='Save_SearchOptions'] div#msgPopup", html: messages.Save_SearchOptions.description },
+		{ selector: "label[for='ShowDateOnImages'] span", text: messages.ShowDateOnImages.message },
+		{ selector: "label[for='ShowDateOnImages'] div#msgPopup", html: messages.ShowDateOnImages.description },
+		
 		
 		{ selector: "label[for='Prevent_TrackOnDownload'] span", text: messages.Prevent_TrackOnDownload.message },
 		{ selector: "label[for='Prevent_TrackOnDownload'] div#msgPopup", html: messages.Prevent_TrackOnDownload.description },
@@ -188,18 +198,52 @@ async function updateContent(messages) {
 		}
 	});
 
+	if(options&&options['FIRST_RUN']==false){
+const firstRunPopup = document.getElementById("nma-first-run");
+
+firstRunPopup.innerHTML = translate_strings.firstRunWelcome.message;
+
+firstRunPopup.style.display = "block";
+document.querySelector("div#overflow").style.display = "block";
+
+document.querySelector("button#nma-first-run-ready").addEventListener("click", function () {
+
+chrome.runtime.sendMessage(
+        {
+          action: "SaveBox",
+          item: "FIRST_RUN",
+          checado: true,
+        },
+        function () {
+          window.location.reload();
+        },
+      );
+
+});
+	}
+
+
+
+
+const donateEndorseLink = document.querySelector(
+    "#donateEndorseLink"
+);
+
+if (donateEndorseLink) {
+    donateEndorseLink.href = donateLink;
+}
 	if (document.querySelector("fieldset#modTips")) {
 		document.querySelector("legend#nexusTitle").innerText = messages.modTab_title.message;
 		document.querySelector("div#modTips").innerHTML = messages.modTab_title.description;
 	}
-
+    document.querySelector("div#loadTimeout").innerText = translate_strings.MODS_DELAY_MESSAGE.message + "02:00:00";
 	document.querySelector("div#timeoutPanel div.message span#usageWarning").innerText = translate_strings.MODS_DELAY_MESSAGE.description;
 	document.querySelector("div#timeoutPanel div.message span#dailyUsage").innerText = RestanteDiario + translate_strings.MODS_DELAY_USAGE.message;
 	document.querySelector("div#timeoutPanel div.message span#hourUsage").innerText = RestanteHorario + translate_strings.MODS_DELAY_USAGE.description;
 	document.querySelector("input#modFilter").value = '';
 	document.querySelector("h2#notLoggedDesc a").addEventListener("click", connect);
 	LoadHiddenWords();
-	LoadMods();
+	GET_GAMES();
 }
 
 async function LoadHiddenWords() {
@@ -223,9 +267,9 @@ async function LoadHiddenWords() {
 		}
 	});
 }
-
+let donateLink = 'https://www.paypal.com/donate/?hosted_button_id=ZCJ7S9ZK42ZS2';
 async function loadMessages(locale) {
-	let donateLink = 'https://www.paypal.com/donate/?hosted_button_id=ZCJ7S9ZK42ZS2';
+	
 
 	if (locale === 'portuguese') {
 		locale = 'pt_BR';

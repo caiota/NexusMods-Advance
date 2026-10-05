@@ -1,7 +1,7 @@
 function HIDE_IMAGES() {
+if(options['HideExternalImages_ModPage']==true&&current_page=="only_mod_page"&&(current_modTab=="files"||current_modTab=="description")){
 var filesImgs=document.querySelectorAll("div#mod_files div.img-wrapper img")||null;
 var descriptionImgs=document.querySelectorAll("div.mod_description_container div.img-wrapper")||null;
-if(options['HideExternalImages_ModPage']==true&&current_page=="only_mod_page"&&(current_modTab=="files"||current_modTab=="description")){
 if(filesImgs){
   filesImgs.forEach((item)=>{
     item.style.display='none';
@@ -34,7 +34,7 @@ function HIDE_YOUTUBE_FRAMES(style){
    const iframes = Array.from(document.querySelectorAll('iframe'));
 
         for (const iframeContainer of iframes) {
-            if (iframeContainer.src.includes('youtube.com')) {
+            if (iframeContainer.src.includes('youtube.com')||iframeContainer.src.includes('youtube-nocookie.com')) {
                 const frameParent = iframeContainer.closest("div");
 
   if(style=="HIDE_IT"){

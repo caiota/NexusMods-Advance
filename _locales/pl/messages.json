@@ -65,10 +65,10 @@
     "message": "Pokaż Przycisk dla Plików Moda",
     "description": "Wyświetla przycisk 'Pobierz' w blokach modów na głownych stronach strony do przeglądania i pobierania plików danego moda w Wyskakującym Okienku. Użyj ESC aby zamknąć to wyskakujące okienko."
   },
-  "button_infiniteScroll": {
-    "message": "Włącz Nieskończone Przewijanie",
-    "description": "Automatycznie ładuje zawartość następnej strony, gdy zbliża się koniec bieżącej strony, dzięki czemu nawigacja jest nieskończona i szybsza. Zastępuje stronę witryny i działa na prawie wszystkich stronach!"
-  },
+"button_infiniteScroll": {
+"message": "Włącz nieskończone przewijanie",
+"description": "Automatycznie ładuje zawartość następnej strony, gdy zbliżasz się do końca bieżącej, umożliwiając kontynuowanie przeglądania bez konieczności ręcznego klikania każdej strony. Działa na stronach Modyfikacje, Obrazy, Filmy i Posty na stronie Modyfikacje"
+},
   "remove_RequerimentsTab": {
     "message": "Usuń Kartę Wymaganych w Opisie Moda (Nie Zalecane)",
     "description": "Usuwa Kartę Wymaganych z opisu przeglądanego Moda. Nie jest zalecane używanie tej opcji, ponieważ mody bez prawidłowo zainstalowanymi wymaganiami nie będą poprawnie działać."
@@ -92,6 +92,14 @@
   "remove_HideModCollections": {
     "message": "Usuń zakładkę Kolekcje z opisu modów",
     "description": "Usuń zakładkę Kolekcje z zakładki Opis podczas przeglądania moda."
+  },
+  "remove_HideModsUsingThisModTab": {
+    "message": "Usuń zakładkę 'Mody używające tego moda' z opisu modów",
+    "description": "Usuń zakładkę 'Mody używające tego moda' z zakładki Opis podczas przeglądania moda."
+  },
+  "OutdatedModWarning": {
+    "message": "Ten mod został zaktualizowany od czasu ostatniego pobrania!",
+    "description":"Ten mod nie był aktualizowany od ponad 5 miesięcy!"
   },
   "hide_StickyPosts": {
     "message": "Automatycznie Chowaj Przypięte Posty z Karty Postów Moda",
@@ -133,6 +141,11 @@
     "message": "Pomiń Wyskakujące Okieno z Wymaganiami Moda i Automatycznie naciśnij przycisk 'Wolne Pobieranie'",
     "description": "TTa funkcja pominie wyskakujące okienko z wymaganiami modyfikacji i automatycznie kliknie przycisk „Powolne pobieranie”, a następnie cofnie się o 1 stronę w oparciu o historię, oszczędzając czas. Ta funkcja działa również dla użytkowników Premium!"
   },
+"autoClick_SlowDownload_Alert": {
+    "message":"Automatyczne Kliknięcie przycisku Pobierania: Aby zapobiec przerwaniu pobierania i wyskakującego okienka Mod Organizer/Vortex przez rozszerzenie, kliknij ręcznie przycisk „Wolne pobieranie” tym razem, aby Mod Organizer/Vortex działał poprawnie.",
+    "description":"Dziękujemy! Od teraz funkcja będzie działać poprawnie i automatycznie."
+  },
+
   "mousePopup": {
     "message": "Pokaż opisy w wyskakującym oknie po najechaniu kursorem na link do moda",
     "description": "Załaduje i wyświetli opis moda w wyskakującym oknie, gdy najedziesz kursorem na link do moda. Użyj ESC, aby zamknąć okno, oraz Ctrl+przewijanie myszką, aby zwiększyć lub zmniejszyć rozmiar."
@@ -140,6 +153,16 @@
   "ArticlesPopup": {
     "message": "Pokaż artykuły w wyskakującym oknie po najechaniu kursorem na link do artykułu",
     "description": "Załaduje i wyświetli artykuł z linku w wyskakującym oknie. Użyj ESC, aby zamknąć okno, oraz Ctrl+przewijanie myszką, aby zwiększyć lub zmniejszyć rozmiar."
+  },
+  "CollectionsPopup": {
+    "message": "Pokaż kolekcje w wyskakującym oknie po najechaniu kursorem na link do kolekcji",
+    "description": "Załaduje i wyświetli kolekcję z linku w wyskakującym oknie. Użyj ESC, aby zamknąć okno."
+  },
+  "popUpClose_Notification":{
+  "message":"Możesz użyć klawisza ESC, aby zamknąć to okno"
+},
+"modLoading_Message":{
+    "message":"Twoje pliki są w tej chwili aktualizowane, pojawią się tutaj za kilka sekund :D"
   },
   "mouseProfilePopup": {
     "message": "Pokaż Profil Użytkownika w Wyskakującym Okienku po najechaniu myszką na link profilu użytkownika",
@@ -387,8 +410,11 @@
   "description": "Ukrywa zewnętrzne obrazy i filmy w zakładce 'Description' oraz w zakładce 'Files' modów."
 },
 "EndorseAndVote": {
-  "message": "Podoba Ci się rozszerzenie?",
-  "description": "Jeśli podoba Ci się to rozszerzenie, nie zapomnij również go <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>zaakceptować</a>! To pomaga rozpowszechnić rozszerzenie wśród osób, które go potrzebują, i motywuje mnie do dalszej pracy! Dzięki :D"
+    "message": "Podoba Ci się NexusMods Advance?",
+    "description": "Jeśli Ci się podoba, nie zapomnij go <a href='https://www.nexusmods.com/site/mods/1018?NMA_Endorse=true' target='blank_'>Polecić!</a> Pomaga to innym znaleźć projekt i motywuje mnie do dalszej pracy nad nim. Jeśli chcesz dodatkowo wesprzeć projekt, nawet <a id='donateEndorseLink' href='#' target='blank_'>Mała Darowizna</a> bardzo pomaga. Dzięki :D"
+},
+"firstRunWelcome": {
+    "message": "<div class=\"nma-first-run\"><h2>Witamy w NexusMods Advance!</h2><p>NexusMods Advance to kompleksowe rozszerzenie stworzone, aby personalizować i ulepszać korzystanie z witryny NexusMods!</p><div class=\"nma-first-run-features\"><span>Ulepszone pobieranie</span><span>Powiadomienia o Twoich modach</span><span>Łatwiejsza nawigacja</span><span>I wiele więcej możliwości personalizacji!</span></div><br><button id=\"nma-first-run-ready\">Kontynuuj</button></div>"
 },
   "fastDownloadTranslate_tip": {
     "message": "Kliknij, aby szybko pobrać to tłumaczenie"
@@ -514,8 +540,8 @@
 
 },
 "transformTextLinks": {
-  "message": "Włącz konwersję tekstu na linki w komentarzach modów",
-  "description": "Na stronach modów, w sekcji postów, automatycznie konwertuje teksty będące linkami na klikalne odnośniki."
+  "message": "Włącz konwersję adresów URL w tekście na klikalne linki",
+  "description": "Automatycznie konwertuje adresy URL w tekście na klikalne linki. Przydatne, gdy ktoś wstawia link z innej strony jako tekst — zostanie on zamieniony w klikalny link."
 },
 "NexusMenus_MouseHover": {
   "message": "Włącz menu górne strony bez klikania",
@@ -528,6 +554,14 @@
   "Hide_CurrentGame_Image": {
     "message": "Ukryj obraz tła na górze strony",
     "description": "Ukrywa obraz tła strony, sprawiając, że strona jest nieco ciemniejsza"
+  },
+  "ShowDateOnImages":{
+    "message":"Pokaż datę przesłania w blokach obrazów",
+    "description":"Pokazuje datę przesłania posta w blokach obrazów w całej witrynie obok liczby wyświetleń (format DD/MM/YYYY - HH:MM:SS w formacie 24-godzinnym)"
+  },
+  "ShowModSearch_Bar":{
+  "message":"Pokaż pasek wyszukiwania na stronach modów",
+  "description":"Dodaje pasek wyszukiwania według tytułu na stronach modów gier, aktualizuje zawartość automatycznie podczas wpisywania"
   },
   "Prevent_TrackOnDownload": {
     "message": "Nie dodawaj plików do swojej listy po kliknięciu przycisków pobierania",

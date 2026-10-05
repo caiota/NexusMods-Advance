@@ -96,15 +96,73 @@
         font-size: large;
       }
 
-      #tabItens {
-        cursor: pointer;
-        display: -webkit-inline-box;
-        display: -ms-inline-flexbox;
-        display: inline-flex;
-        font-size: large;
-        padding: 20px;
-      }
+    #tabItens {
+    cursor: pointer;
+    display: inline-flex;
+    font-size: large;
+    padding: 20px;
+}
 
+.modsTabWrapper {
+    position: relative;
+    display: flex;
+}
+
+.mods {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#outdatedModsBadge {
+    display: none;
+
+    position: absolute;
+    top: -10px;
+    right: -10px;
+
+    min-width: 22px;
+    height: 22px;
+
+    padding: 0 5px;
+    box-sizing: border-box;
+
+    border-radius: 50%;
+
+    background: #d62828;
+    color: white;
+
+    border: 2px solid white;
+
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 18px;
+    text-align: center;
+
+    z-index: 10;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+
+#outdatedModsBadge.hasNewUpdates {
+    animation: badgePop 0.5s ease-out;
+}
+
+@keyframes badgePop {
+
+    0% {
+        transform: scale(0);
+    }
+
+    70% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
       #mods {
         -o-transition: height 0.2s ease-out;
         -o-transition: width 0.2s ease-out;
@@ -445,7 +503,7 @@
 
       #title3 {
         color: #f5deb3;
-        font-size: large;
+        font-size: 28px;
         font-weight: bolder;
       }
 
@@ -562,10 +620,9 @@
         border-top-left-radius: 5px;
       }
 
-      .mods {
-        border-bottom-right-radius: 5px;
-        border-top-right-radius: 5px;
-      }
+     
+
+
 
       #modSettings {
         display: inline-block;
@@ -841,8 +898,8 @@
 
       #msgPopup {
         background: #b8860b;
-        border-radius: 15px;
-        bottom: 150%;
+        border-radius: 5px;
+        bottom: 250%;
         display: none;
         height: auto;
         padding: 10px;
@@ -859,7 +916,96 @@
       .msgPopup_fieldSet {
         bottom: 120% !important;
       }
+      #nma-first-run {
+    background: #07111c;
+    border: 2px solid #1568ff;
+    border-radius: 10px;
+    box-shadow:
+        0 0 20px #1568ff55,
+        0 8px 30px #000000aa;
 
+    box-sizing: border-box;
+    color: #e1e1e1;
+
+    display: none;
+
+    left: 50%;
+    padding: 30px;
+    position: fixed;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+
+    z-index: 100000;
+}
+
+#nma-first-run h2 {
+    color: #87cefa;
+    font-size: 28px;
+    margin: 0 0 15px;
+}
+
+#nma-first-run p {
+    color: #d5d5d5;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+.nma-first-run-features {
+    display: flex;
+    flex-direction: column;
+    margin: 25px auto;
+}
+
+.nma-first-run-features span {
+    background: #0d1b2a;
+    border: 1px solid #1568ff55;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #f5deb3;
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 10px 14px;
+    text-align: left;
+    width: 100%;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+.nma-first-run-features span:hover {
+    background: #112b45;
+    border-color: #1568ff;
+    transform: translateX(3px);
+}
+
+#nma-first-run-ready {
+    background: #eb8e4b;
+    border: 0;
+    border-radius: 6px;
+    color: #111;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 12px 30px;
+    transition:
+        background-color 0.2s ease,
+        transform 0.15s ease;
+}
+
+#nma-first-run-ready:hover {
+    background: #ffb120;
+    transform: translateY(-1px);
+}
+
+#nma-first-run-ready:active {
+    transform: translateY(0);
+}
       #overflow {
         background-color: #000000a6;
         display: none;
@@ -964,6 +1110,7 @@
         border-radius: 10px;
         display: none;
         height: auto;
+        z-index: 9999;
         left: 90px;
         max-width: 90%;
         padding: 10px;
@@ -1012,15 +1159,17 @@
 
       #Logs {
         background: #0000004d;
-        padding-left: 10px;
+        padding-left: 25px;
         text-align: left;
       }
 
-      #Logs > h3 {
+      #Logs  h3{
         font-size: large;
         text-align: left;
       }
-
+     #Logs li {
+    margin-bottom: 10px;
+     }
       thead {
         background: #4169e1 !important;
       }
@@ -1157,8 +1306,8 @@
       #Posts time {
         display: block;
         margin-bottom: 10px;
+        color:white
       }
-
       #Posts div.comment-content-text {
         color: #fff;
         font-size: 16px;
@@ -1309,35 +1458,33 @@
         cursor: pointer;
       }
 
-      #PleaseEndorse {
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 350px;
-        z-index: 999;
-        padding: 5px;
-      }
+     #PleaseEndorse {
+    display: none;
+    position: relative;
+    width: 500px;
+    z-index: 999;
+    padding: 5px;
+    margin-bottom: 5px;
+}
 
-      #PleaseEndorse legend {
-        text-align: center;
-        font-size: large;
-      }
+#PleaseEndorse legend {
+    text-align: center;
+    font-size: large;
+}
 
-      #PleaseEndorse #endorseMsg {
-        font-size: 15px;
-      }
+#PleaseEndorse #endorseMsg {
+    font-size: 15px;
+}
 
-      #PleaseEndorse #closeMe {
-        position: absolute;
-        top: 0;
-        right: 2px;
-        font-size: 20px;
-        z-index: 9999;
-        color: #ff5a5a;
-        cursor: pointer;
-      }
-
+#PleaseEndorse #closeMe {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    font-size: 20px;
+    z-index: 9999;
+    color: #ff5a5a;
+    cursor: pointer;
+}
       #settings #BlockSize_input,
       #settings #GameBlockSize_input {
         width: 60px;
@@ -1463,12 +1610,23 @@
         border-radius: 4px;
         background-color: #ff4400 !important;
       }
+      #modLoading_Message{
+        
+    padding: 20px;
+    background: sienna;
+    color: white;
+    font-size: large;
+    font-weight: 600;
+    margin-top: 20px;
+      }
     </style>
   </head>
 
   <body>
     <div id="content" style="display: none">
       <div id="overflow"></div>
+
+<div id="nma-first-run"></div>
       <div id="CDN_speed_PopUp">
         <fieldset>
           <legend>CDN Speed Test</legend>
@@ -1503,22 +1661,6 @@
           <div id="DownloadTip"></div>
         </fieldset>
       </div>
-      <div id="PleaseEndorse">
-        <div id="closeMe">
-          <i class="fa-solid fa-rectangle-xmark" aria-hidden="true"></i>
-        </div>
-        <fieldset>
-          <legend>Gostando da Extensão?</legend>
-          <span id="endorseMsg"
-            >Se você gosta da Extensão, por favor
-            <a href="https://www.nexusmods.com/site/mods/1018" target="blank_">Vote</a>
-            nela no NexusMods e não se esqueça de
-            <a href="https://www.nexusmods.com/site/mods/1018" target="blank_">Endossar</a>
-            também! Isso ajuda a divulgar a extensão para quem precisa, e me motiva a continuar trabalhando nela! Obrigado :D</span
-          >
-        </fieldset>
-      </div>
-
       <div id="profile">
         <img id="profileImg" draggable="false" />
         <br />
@@ -1549,10 +1691,32 @@
         <br />
         <div id="tabItens">
           <div class="tabItem settings" id="selected">Settings</div>
-          <div class="tabItem mods">Mods Updates</div>
+          
+    <div class="modsTabWrapper">
+        <div class="tabItem mods">Mods Updates</div>
+        <span id="outdatedModsBadge">0</span>
+    </div>
         </div>
 
         <br />
+
+        <div id="PleaseEndorse">
+        <div id="closeMe">
+          <i class="fa-solid fa-rectangle-xmark" aria-hidden="true"></i>
+        </div>
+        <fieldset>
+          <legend>Gostando da Extensão?</legend>
+          <span id="endorseMsg"
+            >Se você gosta da Extensão, por favor
+            <a href="https://www.nexusmods.com/site/mods/1018" target="blank_">Vote</a>
+            nela no NexusMods e não se esqueça de
+            <a href="https://www.nexusmods.com/site/mods/1018" target="blank_">Endossar</a>
+            também! Isso ajuda a divulgar a extensão para quem precisa, e me motiva a continuar trabalhando nela! Obrigado :D</span
+          >
+        </fieldset>
+      </div>
+
+        <br>
         <select id="language" name="language">
           <option value="english">English</option>
           <option value="portuguese">Português - Brasil</option>
@@ -1698,6 +1862,13 @@
             <div id="msgPopup"></div>
           </label>
           <br />
+          <label for="CollectionsOnMouse">
+            <input type="checkbox" id="CollectionsOnMouse" />
+            <div class="custom-checkbox"></div>
+            <span></span>
+            <div id="msgPopup"></div>
+          </label>
+          <br />
           <label for="WideWebsite">
             <input type="checkbox" id="WideWebsite" />
             <div class="custom-checkbox"></div>
@@ -1804,12 +1975,20 @@
             <div id="msgPopup"></div>
           </label>
           <br />
-          <label for="Save_SearchOptions" style="display: none">
-            <input type="checkbox" id="Save_SearchOptions" />
+          <label for="ShowModSearch_Bar">
+            <input type="checkbox" id="ShowModSearch_Bar" />
             <div class="custom-checkbox"></div>
             <span></span>
             <div id="msgPopup"></div>
           </label>
+          <br />
+          <label for="ShowDateOnImages">
+            <input type="checkbox" id="ShowDateOnImages" />
+            <div class="custom-checkbox"></div>
+            <span></span>
+            <div id="msgPopup"></div>
+          </label>
+          <br />
         </fieldset>
         <br />
 
@@ -1870,6 +2049,13 @@
           <br />
           <label for="HideModCollections">
             <input type="checkbox" id="HideModCollections" />
+            <div class="custom-checkbox"></div>
+            <span></span>
+            <div id="msgPopup"></div>
+          </label>
+          <br />
+          <label for="HideModsUsingThisModTab">
+            <input type="checkbox" id="HideModsUsingThisModTab" />
             <div class="custom-checkbox"></div>
             <span></span>
             <div id="msgPopup"></div>
@@ -2030,6 +2216,7 @@
           <br />
           <div id="modLoading">
             <img id="loadingImg" src="imgs/nexusLobby.png" />
+            <div id="modLoading_Message">Seus Mods estão sendo atualizados no momento, nós iremos recarregar esta aba quando terminar.</div>
           </div>
           <div id="mod_content">
             <fieldset id="modTips" style="text-align: center; font-size: x-large; contain: inline-size">

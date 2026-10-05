@@ -69,9 +69,9 @@
     "description": "Mostra um botão de 'Download' nos blocos de mods nas páginas iniciais do site para ver os Arquivos do Mod para download em um popup. Use ESC para fechar o popup."
   },
   "button_infiniteScroll": {
-    "message": "Ativar Navegação Infinita",
-    "description": "Carrega automáticamente o conteúdo da próxima página ao se aproximar do fim da página atual, tornando a navegação infinita e mais rápida. Substitui a Páginação do Site e Funciona em Quase Todas as Páginas!"
-  },
+  "message": "Ativar Navegação Infinita",
+  "description": "Carrega automaticamente o conteúdo da próxima página ao se aproximar do fim da página atual, permitindo continuar navegando sem precisar clicar manualmente em cada página. Funciona na página de Mods, Imagens, Vídeos e Posts na Página de Mods"
+},
   "remove_RequerimentsTab": {
     "message": "Remover Aba de Requerimentos na Descrição dos Mods (Não Recomendado)",
     "description": "Remove a Aba de Requerimentos na aba descrição quando estiver vendo algum mod. Não é recomendado usar esta opção, pois mods sem requerimentos devidamente instalados não funcionam corretamente."
@@ -95,6 +95,14 @@
   "remove_HideModCollections": {
     "message": "Remover Aba de Coleções na Descrição dos Mods",
     "description": "Remove a Aba de Coleções na aba descrição quando estiver vendo algum mod."
+  },
+  "remove_HideModsUsingThisModTab": {
+    "message": "Remover Aba de 'Mods Usando Este Mod' na Descrição dos Mods",
+    "description": "Remove a Aba de 'Mods Usando Este Mod' na aba descrição quando estiver vendo algum mod."
+  },
+  "OutdatedModWarning": { 
+    "message": "Este mod foi atualizado desde o seu último download!",
+    "description":"Este mod não foi atualizado há mais de 5 meses!"
   },
   "BetterModBlocks": {
     "message": "Melhorar a Renderização Blocos de Mods das Páginas Iniciais",
@@ -136,6 +144,10 @@
     "message": "Ignorar Requerimentos do Mod e Clicar Automáticamente no Botão 'Slow Download'",
     "description": "Esta função irá Ignorar o Popup de Requerimentos do Mod e clicar automáticamente no Botão 'Slow Download', depois, irá voltar 1 páginas baseado no histórico, economizando tempo. Esta função também funciona para usuários Premium!"
   },
+  "autoClick_SlowDownload_Alert": {
+    "message":"Auto Click Download Button: Para evitar que a extensão interrompa o download e o popup do Mod Organizer/Vortex, clique manualmente no botão 'Slow Download' desta vez para que o Mod Organizer/Vortex funcione corretamente.",
+    "description":"Obrigado! A partir de agora, a função funcionará corretamente e automaticamente."
+  },
   "mousePopup": {
     "message": "Mostrar Descrições em um Popup ao passar o mouse por um Link de Mod",
     "description": "Irá carregar e mostrar em um Popup, a descrição do mod em que você passar o mouse por cima. Use ESC para fechar o popup e Ctrl+Scroll do Mouse para aumentar ou reduzir o tamanho."
@@ -143,6 +155,16 @@
   "ArticlesPopup": {
     "message": "Mostrar Artigos em um Popup ao passar o mouse por um Link de Artigo",
     "description": "Irá carregar e mostrar em um Popup, o Artigo do Link. Use ESC para fechar o popup e Ctrl+Scroll do Mouse para aumentar ou reduzir o tamanho."
+  },
+  "CollectionsPopup": {
+    "message": "Mostrar Coleções em um Popup ao passar o mouse por um Link de Coleção",
+    "description": "Irá carregar e mostrar em uma Janela Separada, a Coleção do Link. Use ESC para fechar o popup."
+  },
+  "modLoading_Message":{
+    "message":"Seus Arquivos estão sendo atualizados no momento, eles aparecerão aqui em alguns segundos :D"
+  },
+  "popUpClose_Notification":{
+    "message":"Você pode usar a tecla ESC para fechar esta Janela"
   },
   "mouseProfilePopup": {
     "message": "Mostrar Perfís em um Popup ao passar o mouse por um Link de Perfil de Usuário",
@@ -386,10 +408,13 @@
     "message":"Ocultar Imagens e Vídeos da Descrição e Aba Files dos mods",
     "description":"Oculta imagens e vídeos externos na Aba 'Descrição' e na Aba 'Files' dos mods."
   },
-  "EndorseAndVote": {
-    "message": "Gostando da Extensão?",
-    "description": "Se você gosta da Extensão, por favor não se esqueça de <a href='https://www.nexusmods.com/site/mods/1018' target='blank_'>Endossar</a>! Isso ajuda a divulgar a extensão para quem precisa, e me motiva a continuar trabalhando nela! Obrigado :D"
-  },
+"EndorseAndVote": {
+    "message": "Está gostando do NexusMods Advance?",
+    "description": "Se você está gostando, não se esqueça de <a href='https://www.nexusmods.com/site/mods/1018?NMA_Endorse=true' target='blank_'>Endossar!</a> Isso ajuda outras pessoas a encontrar o projeto e me motiva a continuar trabalhando nele. Se quiser apoiar ainda mais, até uma <a id='donateEndorseLink' href='#' target='blank_'>Pequena Doação</a> ajuda muito. Obrigado :D"
+},
+"firstRunWelcome": {
+    "message": "<div class=\"nma-first-run\"><h2>Bem-vindo ao NexusMods Advance!</h2><p>NexusMods Advance é uma extensão completa feita para personalizar e melhorar sua experiência no site NexusMods!</p><div class=\"nma-first-run-features\"><span>Downloads Aprimorados</span><span>Notificações dos seus Mods</span><span>Facilidade de Navegação</span><span>E muito mais personalizações!</span></div><br><button id=\"nma-first-run-ready\">Continuar</button></div>"
+},
   "fastDownloadTranslate_tip": {
     "message": "Clique para Baixar essa Tradução Rápidamente"
   },
@@ -514,8 +539,8 @@
     "description": "ao carregar o site, aplica um efeito leve de fade-in no site para suavizar a sensação de renderização, também aplica um efeito de fade-out quando o site está carregando outra página, ajuda na sensação de leveza do site"
   },
   "transformTextLinks": {
-    "message": "Ativar Conversão de Texto para Links em comentários dos mods",
-    "description": "na página dos mods, na sessão de posts, converte automáticamente textos que são links em links clicáveis autmáticamente."
+    "message": "Ativar Conversão de URLs de Texto para Links Clicáveis",
+    "description": "Converte automáticamente URLs de texto para links clicáveis, útil para quando alguém posta um link de outro site como texto, ele será convertido em um link clicável."
   },
   "NexusMenus_MouseHover": {
     "message": "Ativar Menus do Topo da Página do Site sem clicar",
@@ -529,13 +554,14 @@
     "message": "Ocultar Imagem de Fundo do Topo do Site",
     "description": "Oculta a Imagem do fundo do site, deixando o site um pouco mais escuro"
   },
-
-  
-  "Save_SearchOptions": {
-    "message": "Salvar Estado dos Filtros de Pesquisa do NexusMods",
-    "description": "Na Página de Pesquisa do NexusMods, salva o estado das opções de Pesquisa como Idioma, Tags, CheckBoxes como Tradução ou Idioams específicos."
+  "ShowDateOnImages":{
+    "message":"Mostrar a Data de Upload nos Blocos de Imagens",
+    "description":"Mostra a data de upload da postagem em blocos de imagens em todo o site do lado do número de visualizações (formato DD/MM/YYYY - HH:MM:SS com formato 24horas)"
   },
-
+  "ShowModSearch_Bar":{
+  "message":"Mostrar Barra de Pesquisa nas Páginas de Mods",
+  "description":"Adiciona uma barra de pesquisa por Titulo nas páginas de mods dos jogos, ela atualiza o conteúdo automáticamente conforme você digita"
+  },
   "Prevent_TrackOnDownload": {
     "message": "Não Adicionar Arquivos á Sua Lista Quando clicar em Botões de Download",
     "description": "Previne a Extensão de Adicionar Arquivos á Sua Lista ao clicar em algum botão de Download na página de Arquivos dos mods, apenas o botão laranja de Adicionar Arquivos ao NexusMods Advance irá funcionar."

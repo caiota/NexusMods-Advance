@@ -1,39 +1,49 @@
-async function PROFILE_ONMOUSE(){
-    try {
+let PROFILE_ONMOUSE_TIMEOUT = null;
 
-      if (options['ProfileOnMouse'] == true&&SITE_URL.indexOf("/profile/")==-1) {
-        const profileAndUserUrls_mainContent = Array.from(document.querySelectorAll("div#mainContent a:not([PROFILE_ONMOUSE]),div[aria-label='Search Nexus mods'][role='dialog'] a:not([PROFILE_ONMOUSE])")).filter(function (link) {
-          return /\/(profile|users)\//.test(link.href) && !/about-me/.test(link.href) && !/myaccount/.test(link.href);
-        });
-        const profileAndUserUrls_endorsePopup = Array.from(document.querySelectorAll("div#mod-endorsers-popup a:not([PROFILE_ONMOUSE])")).filter(function (link) {
-          return /\/(profile|users)\//.test(link.href) && !/about-me/.test(link.href) && !/myaccount/.test(link.href);
-        });
-        const profileAndUserUrls = profileAndUserUrls_mainContent.concat(profileAndUserUrls_endorsePopup);
-        let profileTimeout;
-        for (let i = 0; i < profileAndUserUrls.length; i++) {
-          const link = profileAndUserUrls[i];
-          link.setAttribute("PROFILE_ONMOUSE", true);
-          if (link.href.indexOf("?tab=") != -1 || !link.href) {
-            return;
+function PROFILE_ONMOUSE() {
+  try {
+    if (options['ProfileOnMouse'] == true && SITE_URL.indexOf("/profile/") == -1) {
+      if (PROFILE_ONMOUSE_TIMEOUT) {
+        clearTimeout(PROFILE_ONMOUSE_TIMEOUT);
+      }
+      PROFILE_ONMOUSE_TIMEOUT = setTimeout(() => {
+        PROFILE_ONMOUSE_TIMEOUT = null;
+        for (const link of VISIBLE_ELEMENTS) {
+          // Se o elemento saiu do DOM, remove do Set
+          if (!link.isConnected) {
+            VISIBLE_ELEMENTS.delete(link);
+            continue;
           }
-          link.setAttribute("target", '_blank')
-          link.addEventListener("mouseenter", function (ev) {
-            if (options['ProfileOnMouse'] == true && lastDescriptionID != ev.target.href) {
+          // Só interessa <a> de perfil/usuário
+          if (!link.matches || !link.matches("a:is([href*='/profile/'], [href*='/users/']):not([PROFILE_ONMOUSE])")) {
+            continue;
+          }
+          // Ignora links indesejados
+          if (!link.href || link.href.indexOf("?tab=") != -1 || /about-me|myaccount/.test(link.href)) {
+            continue;
+          }
+          link.setAttribute("PROFILE_ONMOUSE", true);
+          link.setAttribute("target", "_blank");
+          let profileTimeout;
+          link.addEventListener("mouseenter", function(ev) {
+            const href = ev.currentTarget.href;
+            if (options['ProfileOnMouse'] == true && lastDescriptionID != href) {
               clearTimeout(profileTimeout);
-              profileTimeout = setTimeout(function () {
-                lastDescriptionID = ev.target.href;
-                openPopupAtMousePosition(ev.target.href + "?popup=true", 'Popup', 600, 900, ev);
+              profileTimeout = setTimeout(function() {
+                lastDescriptionID = href;
+                openPopupAtMousePosition(href + "?popup=true", 'Popup', 600, 900, ev);
               }, 800);
             }
           });
-
-          link.addEventListener("mouseleave", function (ev) {
-            lastDescriptionID = 0;
+          link.addEventListener("mouseleave", function() {
+            lastDescriptionID = -1;
             clearTimeout(profileTimeout);
           });
-        };
-      }
-    } catch (e) {
-      console.error("NexusMods Advance Error:" + e);
+        }
+      
+      }, 1000);
     }
+  } catch (e) {
+    console.error("NexusMods Advance Error:" + e);
   }
+}

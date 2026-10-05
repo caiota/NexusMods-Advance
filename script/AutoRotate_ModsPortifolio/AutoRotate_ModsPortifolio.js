@@ -1,10 +1,14 @@
 var isRotating = false;
 
-async function AutoRotate_ModsPortifolio() {
+ function AutoRotate_ModsPortifolio() {
   if (options['AutoRotate_ModPictures'] === true && current_page === "only_mod_page" && !isRotating) {
     const UL_GALLERY = document.querySelector("ul.thumbgallery");
+    if (UL_GALLERY&&UL_GALLERY.querySelectorAll("li.thumb").length>6) {
+      document.querySelector("div#sidebargallery div.btnprev")?.addEventListener("mouseover",()=>{CAN_ROTATE=false;});
+      document.querySelector("div#sidebargallery div.btnprev")?.addEventListener("mouseout",()=>{CAN_ROTATE=true;});
+      document.querySelector("div#sidebargallery div.btnnext")?.addEventListener("mouseover",()=>{CAN_ROTATE=false;});
+      document.querySelector("div#sidebargallery div.btnnext")?.addEventListener("mouseout",()=>{CAN_ROTATE=true;});
 
-    if (UL_GALLERY&&UL_GALLERY.querySelectorAll("li.thumb").length>8) {
       UL_GALLERY.addEventListener("mouseover",()=>{CAN_ROTATE=false});
       UL_GALLERY.addEventListener("mouseout",()=>{CAN_ROTATE=true});
       setInterval(scrollGalleryStep, interval);

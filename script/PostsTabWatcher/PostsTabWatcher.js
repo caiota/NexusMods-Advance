@@ -1,6 +1,6 @@
-const TAB_POSTS_OBSERVER = async () => {
+const TAB_POSTS_OBSERVER = () => {
     if (!bodyObserver) {
-    bodyObserver = new MutationObserver(async (mutationsList) => {
+    bodyObserver = new MutationObserver( (mutationsList) => {
       for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
           const newTargetNode = document.querySelector('div#comment-container');
@@ -11,7 +11,7 @@ const TAB_POSTS_OBSERVER = async () => {
             PROFILE_ONMOUSE();
             CREATE_POSTS_BUTTONS();
             YoutubeEnlarger();
-            await PAUSE_GIFS();
+             PAUSE_GIFS();
             currentTargetNode = newTargetNode;
           }
         }
@@ -21,5 +21,7 @@ const TAB_POSTS_OBSERVER = async () => {
     bodyObserver.observe(document.body, { childList: true, subtree: true });
     console.log("Criando Observer");
     currentTargetNode = document.querySelector('div#comment-container');
+    }else{
+      setTimeout(TAB_POSTS_OBSERVER,100)
     }
   };

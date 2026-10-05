@@ -1,4 +1,4 @@
-async function FloatingMenu() {
+ function FloatingMenu() {
     if (options['FixedModMenu'] == true) {
         const modtabs = document.querySelectorAll('ul.modtabs:not([floating])');
 
@@ -36,7 +36,7 @@ let menuLength = 0;
 let indexGo = 0;
 let menuItems;
 const Clickevents = ['mousedown', 'mouseup', 'click'];
-async function MOVE_SHORTCUT(dir) {
+ function MOVE_SHORTCUT(dir) {
 
     if (!closestMenu||textFieldFocused==true||!CanGoShortcut()) {
         return;
@@ -85,7 +85,7 @@ function DispatchClick(type) {
     });
 }
 let ShortCut_Availability_Running=false;
-async function ShortCut_Availability() {
+ function ShortCut_Availability() {
     if (lastClickedElement != document.activeElement) {
         if (isTextField(document.activeElement) == true) {
             textFieldFocused = true;
@@ -101,7 +101,7 @@ async function ShortCut_Availability() {
 
 }
 let closestMenu = null;
-async function FLOATING_MENU_SHORTCUTS() {
+ function FLOATING_MENU_SHORTCUTS() {
     const elements = document.querySelectorAll('ul.modtabs');
 
     let closestElement = null;
